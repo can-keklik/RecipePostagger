@@ -1,4 +1,5 @@
-import os, sys
+import os, sys, shutil
+import csv
 
 
 def readFiles(fileName):
@@ -22,8 +23,8 @@ def getFileList():
     reload(sys)
     sys.setdefaultencoding('utf8')
     # TODO: the directories should be checked.
-    inputFolder = "/Users/ibrahimardic/Documents/RecipesLearning/DataSetOUT"
-    outputFolder = "/Users/ibrahimardic/Documents/RecipesLearning/DataSetOUTFreq"
+    inputFolder = "/Users/Ozgen/Desktop/RecipeGit/DataSetOUT"
+    outputFolder = "/Users/Ozgen/Desktop/RecipeGit/cvs"
     # check output directory if not exist, then create it
     if not os.path.exists(outputFolder):
         os.makedirs(outputFolder)
@@ -42,3 +43,39 @@ def getFileList():
         files.append(inputFolder + '/' + file)  # append fileNames with path info
 
     return files
+
+
+def getDataFromPath(filepath):
+    returnArr = []
+    pathArray = filepath.split('/')
+    fileName = pathArray[len(pathArray) - 1]
+    splittedFileNameArray = fileName.split('_')
+    if (splittedFileNameArray[len(splittedFileNameArray) - 1].isdigit()):
+        data = readFiles(filepath)
+        output = data.split('\n')
+        if (len(output) > 0):
+            title = output[0];
+            dataToParse = output[2:]
+            dataToParse = dataToParse[:len(dataToParse) - 1]
+            ingredients = dataToParse[: len(dataToParse) - 1]
+            directions = dataToParse[len(dataToParse) - 1]
+            returnArr = [title, ingredients, directions]
+    return returnArr
+
+
+def writeWholeDataToCvsFile():
+    with open("output.csv", 'wb') as resultFile:
+        writer = csv.DictWriter(resultFile, fieldnames=["index", "title", "ingredients", "directions"])
+        writer.writeheader()
+        wr = csv.writer(resultFile)
+        fileList = getFileList()
+        if len(fileList) > 0:
+            data=[]
+            for i in xrange(len(fileList)):
+                dataToWrite = getDataFromPath(fileList[i])
+                if len(dataToWrite) > 2:
+                    data.append([i, dataToWrite[0], dataToWrite[1], dataToWrite[2]])
+            wr.writerows(data)
+
+
+writeWholeDataToCvsFile()
