@@ -1,5 +1,6 @@
 import os, sys, shutil
-import csv
+import unicodecsv as csv
+import pandas as pd
 
 
 def readFiles(fileName):
@@ -24,7 +25,7 @@ def getFileList():
     sys.setdefaultencoding('utf8')
     # TODO: the directories should be checked.
     inputFolder = "/Users/Ozgen/Desktop/RecipeGit/DataSetOUT"
-    outputFolder = "/Users/Ozgen/Desktop/RecipeGit/cvs"
+    outputFolder = "/Users/Ozgen/Desktop/RecipeGit/csv"
     # check output directory if not exist, then create it
     if not os.path.exists(outputFolder):
         os.makedirs(outputFolder)
@@ -70,7 +71,7 @@ def writeWholeDataToCvsFile():
         wr = csv.writer(resultFile)
         fileList = getFileList()
         if len(fileList) > 0:
-            data=[]
+            data = []
             for i in xrange(len(fileList)):
                 dataToWrite = getDataFromPath(fileList[i])
                 if len(dataToWrite) > 2:
@@ -78,4 +79,3 @@ def writeWholeDataToCvsFile():
             wr.writerows(data)
 
 
-writeWholeDataToCvsFile()

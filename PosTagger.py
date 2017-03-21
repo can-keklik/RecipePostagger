@@ -1,4 +1,7 @@
 from __future__ import print_function
+
+import pandas as pd
+
 from Models import Action
 from Models import Ingredient
 from Models import Tool
@@ -21,6 +24,7 @@ import UtilsIO
 
 from nltk.corpus import wordnet as wn
 from nltk.corpus import brown
+
 
 # todo open comment to run vord2vec
 # initialize the model
@@ -86,7 +90,7 @@ stopwords = nltk.corpus.stopwords.words('english')
 
 
 def tokenize(sentence):
-    removedPunctiationsData = sentence.translate(None, string.punctuation).lower()
+    removedPunctiationsData = sentence.translate(string.punctuation).lower()
     # lemma = []
     try:
         titleTokens = nltk.word_tokenize(removedPunctiationsData)
@@ -218,6 +222,9 @@ def giveTheMostCommonTag(tokenizedWords):
 
 
 def updateVerbTagIfVerbIsEmpty(sentence, taggedWord):
+    if len(taggedWord) == 0:
+        return sentence
+
     (word, newTag) = taggedWord[0]
     arr = []
     for (wt, _) in sentence:
@@ -229,67 +236,59 @@ def updateVerbTagIfVerbIsEmpty(sentence, taggedWord):
     return arr
 
 
-def getDataFromPath(filepath):
-    pathArray = filepath.split('/')
-    fileName = pathArray[len(pathArray) - 1]
-    splittedFileNameArray = fileName.split('_')
-    if (splittedFileNameArray[len(splittedFileNameArray) - 1].isdigit()):
-        data = UtilsIO.readFiles(filepath)
-        output = data.split('\n')
-        if (len(output) > 0):
-            title = output[0];
-            titleTokens = tokenize(title)
-
-            recipe = Recipe(title, output[len(output) - 1])
-            recipe.addTitleArray(titleTokens)
-
-            dataToParse = output[2:]
-            dataToParse = dataToParse[:len(dataToParse) - 1]
-            ingredients = dataToParse[: len(dataToParse) - 1]
-            directions = dataToParse[len(dataToParse) - 1]
-            arr = posTaggText(directions)
-            ingre = [posTaggSent(w) for w in ingredients]
-            dire = tokenizeText(directions)
-            ingreWithNewTAG = parse_ingredientForCRF(ingredients)
-            # parsData = getNameEntityInIngre(ingreWithNewTAG)
-            direWithNewTAG = updateDireTagsAfterCRF(arr, ingreWithNewTAG)
-
-            print("----------------------")
-            #  print(getCosineSimilarityIngreAndDire(dire, parsData, makeFeatureVectorsForDire(dire)))
-            print()
-            print(ingreWithNewTAG)
-            print(direWithNewTAG)
-            print(arr)
-
-            print("----------------------")
-
-            for i in xrange(len(direWithNewTAG)):
-                a = [wt for (wt, _) in direWithNewTAG[i] if 'VERB' == _]
-                if (len(a) == 0):
-                    direWithNewTAG[i] = updateVerbTagIfVerbIsEmpty(direWithNewTAG[i], giveTheMostCommonTag(
-                        [wt for (wt, _) in direWithNewTAG[i]]))
-                print("actions")
-                print([wt for (wt, _) in direWithNewTAG[i] if 'VERB' == _])
-                print("nouns")
-                print([wt for (wt, _) in direWithNewTAG[i] if 'NOUN' == _])
-                print("ingredients")
-                print([wt for (wt, _) in direWithNewTAG[i] if 'NAME' == _])
-
-                print("units")
-                print([wt for (wt, _) in direWithNewTAG[i] if 'UNIT' == _])
-
-                print("comments")
-                print([wt for (wt, _) in direWithNewTAG[i] if 'COMMENT' == _])
-
-                print("quantity")
-                print([wt for (wt, _) in direWithNewTAG[i] if 'QTY' == _])
-
-                print("----------------------")
-
-                # TODO: we get postagged data array = arr and we will fill actions , ingredients and tool list
 
 
-getDataFromPath("/Users/Ozgen/Desktop/RecipeGit/DataSetOUT/6770")
+    # TODO: we get postagged data array = arr and we will fill actions , ingredients and tool list
+
+
+def readData():
+    df = pd.read_csv("/Users/Ozgen/Desktop/RecipeGit/csv/output.csv", encoding='utf8')
+    # names=["index", "title", "ingredients", "directions"])
+
+    ingredients = df.ix[1, :].ingredients
+    directions = df.ix[1, :].directions
+    print(directions)
+    arr = posTaggText(directions)
+    ingre = [posTaggSent(w) for w in ingredients]
+    dire = tokenizeText(directions)
+    ingreWithNewTAG = parse_ingredientForCRF(ingredients)
+    # parsData = getNameEntityInIngre(ingreWithNewTAG)
+    direWithNewTAG = updateDireTagsAfterCRF(arr, ingreWithNewTAG)
+
+    print("----------------------")
+    #  print(getCosineSimilarityIngreAndDire(dire, parsData, makeFeatureVectorsForDire(dire)))
+    print()
+    print(ingreWithNewTAG)
+    print(direWithNewTAG)
+    print(arr)
+
+    print("----------------------")
+
+    for i in xrange(len(direWithNewTAG)):
+        a = [wt for (wt, _) in direWithNewTAG[i] if 'VERB' == _]
+        if (len(a) == 0):
+            direWithNewTAG[i] = updateVerbTagIfVerbIsEmpty(direWithNewTAG[i], giveTheMostCommonTag(
+                [wt for (wt, _) in direWithNewTAG[i]]))
+        print("actions")
+        print([wt for (wt, _) in direWithNewTAG[i] if 'VERB' == _])
+        print("nouns")
+        print([wt for (wt, _) in direWithNewTAG[i] if 'NOUN' == _])
+        print("ingredients")
+        print([wt for (wt, _) in direWithNewTAG[i] if 'NAME' == _])
+
+        print("units")
+        print([wt for (wt, _) in direWithNewTAG[i] if 'UNIT' == _])
+
+        print("comments")
+        print([wt for (wt, _) in direWithNewTAG[i] if 'COMMENT' == _])
+
+        print("quantity")
+        print([wt for (wt, _) in direWithNewTAG[i] if 'QTY' == _])
+
+        print("----------------------")
+
+
+readData()
 
 
 
