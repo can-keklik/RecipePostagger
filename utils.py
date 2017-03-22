@@ -22,8 +22,10 @@ def tokenize(s):
 
     return filter(None, re.split(r'([,\(\)])?\s*', clumpFractions(s)))
 
+
 def joinLine(columns):
     return "\t".join(columns)
+
 
 def clumpFractions(s):
     """
@@ -35,6 +37,7 @@ def clumpFractions(s):
         # => "aaa 1$2/3 bbb"
     """
     return re.sub(r'(\d+)\s+(\d)/(\d)', r'\1$\2/\3', s)
+
 
 def cleanUnicodeFractions(s):
     """
@@ -67,11 +70,13 @@ def cleanUnicodeFractions(s):
 
     return s
 
+
 def unclump(s):
     """
     Replacess $'s with spaces. The reverse of clumpFractions.
     """
     return re.sub(r'\$', " ", s)
+
 
 def normalizeToken(s):
     """
@@ -80,6 +85,7 @@ def normalizeToken(s):
     point.
     """
     return singularize(s)
+
 
 def getFeatures(token, index, tokens):
     """
@@ -93,6 +99,7 @@ def getFeatures(token, index, tokens):
         ("Yes" if isCapitalized(token) else "No") + "CAP",
         ("Yes" if insideParenthesis(token, tokens) else "No") + "PAREN"
     ]
+
 
 def singularize(word):
     """
@@ -132,11 +139,13 @@ def singularize(word):
     else:
         return word
 
+
 def isCapitalized(token):
     """
     Returns true if a given token starts with a capital letter.
     """
     return re.match(r'^[A-Z]', token) is not None
+
 
 def lengthGroup(actualLength):
     """
@@ -148,6 +157,7 @@ def lengthGroup(actualLength):
 
     return "X"
 
+
 def insideParenthesis(token, tokens):
     """
     Returns true if the word is inside parenthesis in the phrase.
@@ -156,7 +166,8 @@ def insideParenthesis(token, tokens):
         return True
     else:
         line = " ".join(tokens)
-        return re.match(r'.*\(.*'+re.escape(token)+'.*\).*',  line) is not None
+        return re.match(r'.*\(.*' + re.escape(token) + '.*\).*', line) is not None
+
 
 def displayIngredient(ingredient):
     """
@@ -167,9 +178,10 @@ def displayIngredient(ingredient):
     """
 
     return "".join([
-        "<span class='%s'>%s</span>" % (tag, " ".join(tokens))
-        for tag, tokens in ingredient
-    ])
+                       "<span class='%s'>%s</span>" % (tag, " ".join(tokens))
+                       for tag, tokens in ingredient
+                       ])
+
 
 # HACK: fix this
 def smartJoin(words):
@@ -296,11 +308,189 @@ def export_data(lines):
     """ Parse "raw" ingredient lines into CRF-ready output """
     output = []
     for line in lines:
+        line = line.encode('utf8')
         line_clean = re.sub('<[^<]+?>', '', line)
         tokens = tokenize(line_clean)
 
         for i, token in enumerate(tokens):
-            features = getFeatures(token, i+1, tokens)
+            features = getFeatures(token, i + 1, tokens)
             output.append(joinLine([token] + features))
         output.append('')
     return '\n'.join(output)
+
+
+def convertArrayToPureStr(str):
+    str = str.replace("[", "")
+    str = str.replace("]", "")
+    a = str.replace("\', \'", "***")
+    a = a.replace("\", \"", "***")
+    a = a.replace("\', \"", "***")
+    a = a.replace("\", \'", "***")
+    return a.split("***")
+
+
+def checkToolList(word):
+    tools = [
+
+        "apron"
+
+        "baking pan"
+        , "baking sheet"
+        , "barbecue grill"
+        , "baster"
+        , "basting brush"
+        , "blender"
+        , "bread basket"
+        , "bread knife"
+        , "bundt pan"
+        , "butcher block"
+        , "cake pan"
+        , "can opener"
+        , "carafe"
+        , "casserole pan"
+        , "charcoal grill"
+        , "cheese cloth"
+        , "coffee maker"
+        , "coffee pot"
+        , "colander"
+        , "convection oven"
+        , "cookbook"
+        , "cookie cutter"
+        , "cookie press"
+        , "cookie sheet"
+        , "cooling rack"
+        , "corer"
+        , "crepe pan"
+        , "crock"
+        , "crock pot"
+        , "cupcake pan"
+        , "custard cup"
+        , "cutlery"
+        , "cutting boar"
+        , "Dutch oven"
+        , "egg beater"
+        , "egg poacher"
+        , "egg timer"
+        , "espresso machine"
+        , "fondue pot"
+        , "food processor"
+        , "fork"
+        , "frying pan"
+        , "garlic press"
+        , "gelatine mold"
+        , "grater"
+        , "griddle"
+        , "grill pan"
+        , "grinder"
+        , "hamburger press"
+        , "hand mixer"
+        , "honey pot"
+        , "ice bucket"
+        , "ice cream scoop"
+        , "icing spatula"
+        , "infuser"
+        , "jar opener"
+        , "jellyroll pan"
+        , "juicer"
+        , "kettle"
+        , "knife"
+        , "ladle"
+        , "lasagne pan"
+        , "lid"
+        , "mandolin"
+        , "measuring cup"
+        , "measuring spoon"
+        , "microwave oven"
+        , "mixing bowl"
+        , "mold"
+        , "mortar and pestle"
+        , "muffin pan"
+        , "nut cracker"
+        , "oven"
+        , "oven mitts"
+        , "pan"
+        , "parchment paper"
+        , "paring knife"
+        , "pastry bag"
+        , "peeler"
+        , "pepper mill"
+        , "percolator"
+        , "pie pan"
+        , "pitcher"
+        , "pizza cutter"
+        , "pizza stone"
+        , "platter"
+        , "poacher"
+        , "popcorn popper"
+        , "pot"
+        , "pot holder"
+        , "poultry shears"
+        , "pressure cooker"
+        , "quiche pan"
+        , "raclette grill"
+        , "ramekin"
+        , "refrigerator"
+        , "rice cooker"
+        , "ricer"
+        , "roaster"
+        , "roasting pan"
+        , "rolling pin"
+        , "salad bowl"
+        , "salad spinner"
+        , "salt shaker"
+        , "sauce pan"
+        , "scissors"
+        , "sharpening steel"
+        , "shears"
+        , "sieve"
+        , "skewer"
+        , "skillet"
+        , "slicer"
+        , "slow cooker"
+        , "souffle dish"
+        , "spice rack"
+        , "spoon"
+        , "steak knife"
+        , "steamer"
+        , "stockpot"
+        , "stove"
+        , "strainer"
+        , "quiche pan"
+        , "raclette grill"
+        , "ramekin"
+        , "refrigerator"
+        , "rice cooker"
+        , "ricer"
+        , "roaster"
+        , "roasting pan"
+        , "rolling pin"
+        , "salad bowl"
+        , "salad spinner"
+        , "salt shaker"
+        , "sauce pan"
+        , "scissors"
+        , "sharpening steel"
+        , "shears"
+        , "sieve"
+        , "skewer"
+        , "skillet"
+        , "slicer"
+        , "slow cooker"
+        , "souffle dish"
+        , "spice rack"
+        , "spoon"
+        , "steak knife"
+        , "steamer"
+        , "stockpot"
+        , "stove"
+        , "strainer"
+
+
+
+    ]
+    isTool = False
+    for w in tools:
+        if word in w:
+            isTool= True
+    return isTool
+

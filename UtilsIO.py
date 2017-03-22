@@ -24,8 +24,8 @@ def getFileList():
     reload(sys)
     sys.setdefaultencoding('utf8')
     # TODO: the directories should be checked.
-    inputFolder = "/Users/Ozgen/Desktop/RecipeGit/DataSetOUT"
-    outputFolder = "/Users/Ozgen/Desktop/RecipeGit/csv"
+    inputFolder = "/Users/Ozgen/Desktop/RecipesLearning2/DataSetOUT"
+    outputFolder = "/Users/Ozgen/Desktop/RecipesLearning2/DataSetOUTFreq"
     # check output directory if not exist, then create it
     if not os.path.exists(outputFolder):
         os.makedirs(outputFolder)
@@ -78,4 +78,4 @@ def writeWholeDataToCvsFile():
                     data.append([i, dataToWrite[0], dataToWrite[1], dataToWrite[2]])
             wr.writerows(data)
 
-
+writeWholeDataToCvsFile()

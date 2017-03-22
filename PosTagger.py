@@ -1,5 +1,7 @@
 from __future__ import print_function
 
+from operator import itemgetter
+
 import pandas as pd
 
 from Models import Action
@@ -25,12 +27,16 @@ import UtilsIO
 from nltk.corpus import wordnet as wn
 from nltk.corpus import brown
 
-
 # todo open comment to run vord2vec
 # initialize the model
-# model = gensim.models.Word2Vec.load('SmallerFile', mmap='r')
-# type(model.syn0)
-# model.syn0.shape
+
+model = gensim.models.Word2Vec.load('SmallerFile', mmap='r')
+type(model.syn0)
+model.syn0.shape
+
+# nltk.download()
+lemmatizer = WordNetLemmatizer()
+stopwords = nltk.corpus.stopwords.words('english')
 
 
 def makeFeatureVec(words, model, num_features):
@@ -74,23 +80,22 @@ def updateDireTagsAfterCRF(dire, ingre):
             counter = counter + 1
             for j in xrange(len(ingre)):
                 for (ingredient, TAG) in ingre[j]:
-                    if direcWord == ingredient:
+                    ingredientLemma = lemmatizer.lemmatize(ingredient)
+                    if direcWord == ingredient or direcWord == ingredientLemma:
                         if len(eachSent) < counter:
                             eachSent.append((direcWord, TAG))
             if len(eachSent) < counter:
-                eachSent.append((direcWord, _))
+                eachSent.append((direcWord, _))  # todo oven pan cup to update tool
 
         updatedArr.append(eachSent)
     return updatedArr
 
 
-# nltk.download()
-lemmatizer = WordNetLemmatizer()
-stopwords = nltk.corpus.stopwords.words('english')
+
 
 
 def tokenize(sentence):
-    removedPunctiationsData = sentence.translate(string.punctuation).lower()
+    removedPunctiationsData = re.sub('<[^<]+?>', '', sentence)
     # lemma = []
     try:
         titleTokens = nltk.word_tokenize(removedPunctiationsData)
@@ -123,6 +128,10 @@ def posTaggSent(sent):
     return imperative_pos_tag(tokenize(sent))  # , tagset='universal')
 
 
+def posTagIngre(sent):
+    return nltk.pos_tag(tokenize(sent), tagset='universal')
+
+
 def posTaggText(text):
     returnArray = []
     arr = tokenizeText(text)
@@ -133,8 +142,8 @@ def posTaggText(text):
     for i in xrange(len(returnArray)):
         for (wt, _) in returnArray[i]:
             if returnArray[i][0] == (wt, _):
-                if _ == 'NN':
-                    returnArray[i][0] = (wt, 'VB')
+                if _ == 'NOUN':
+                    returnArray[i][0] = (wt, 'VERB')
 
     return returnArray
 
@@ -200,13 +209,20 @@ def getNameEntityInIngre(data):
 
 def getCosineSimilarityIngreAndDire(dire, ingre, direVec):
     retArr = []
+    a = []
     for i in xrange(len(ingre)):
         ingreVec = model[ingre[i]]
         for j in xrange(len(direVec)):
             cosSim = 1 - spatial.distance.cosine(ingreVec, direVec[j])
             a = [ingre[i], dire[j], cosSim]
             retArr.append(a)
-    return retArr
+    if (len(retArr) > 0):
+        maxVal = max(retArr, key=itemgetter(1))[1]
+        minVal = min(retArr, key=itemgetter(1))[1]
+        for (word, p) in retArr:
+            newP = (p - minVal) / (maxVal - minVal)
+            a.append((word, newP))
+    return a
 
 
 def giveTheMostCommonTag(tokenizedWords):
@@ -222,6 +238,7 @@ def giveTheMostCommonTag(tokenizedWords):
 
 
 def updateVerbTagIfVerbIsEmpty(sentence, taggedWord):
+    # todo configur e more than one verb can be in the tagged word
     if len(taggedWord) == 0:
         return sentence
 
@@ -236,6 +253,14 @@ def updateVerbTagIfVerbIsEmpty(sentence, taggedWord):
     return arr
 
 
+def isTool(words):
+    arr = []
+    tools = ["tool", "util", "utensil"]
+    if (len(words) > 0):
+        for i in xrange(len(words)):
+            isToo = utils.checkToolList(word=words[i])
+            arr.append((words[i], isToo))
+    return arr
 
 
     # TODO: we get postagged data array = arr and we will fill actions , ingredients and tool list
@@ -245,11 +270,12 @@ def readData():
     df = pd.read_csv("/Users/Ozgen/Desktop/RecipeGit/csv/output.csv", encoding='utf8')
     # names=["index", "title", "ingredients", "directions"])
 
-    ingredients = df.ix[1, :].ingredients
-    directions = df.ix[1, :].directions
-    print(directions)
+    ingredients = df.ix[3, :].ingredients.encode('utf8')
+    ingredients = (utils.convertArrayToPureStr(ingredients))
+    directions = df.ix[3, :].directions
+    print(type(ingredients), ingredients)
+    ingre = [posTagIngre(w) for w in ingredients]
     arr = posTaggText(directions)
-    ingre = [posTaggSent(w) for w in ingredients]
     dire = tokenizeText(directions)
     ingreWithNewTAG = parse_ingredientForCRF(ingredients)
     # parsData = getNameEntityInIngre(ingreWithNewTAG)
@@ -272,7 +298,7 @@ def readData():
         print("actions")
         print([wt for (wt, _) in direWithNewTAG[i] if 'VERB' == _])
         print("nouns")
-        print([wt for (wt, _) in direWithNewTAG[i] if 'NOUN' == _])
+        print(isTool([wt for (wt, _) in direWithNewTAG[i] if 'NOUN' == _]))
         print("ingredients")
         print([wt for (wt, _) in direWithNewTAG[i] if 'NAME' == _])
 
