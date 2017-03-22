@@ -329,6 +329,7 @@ def convertArrayToPureStr(str):
     return a.split("***")
 
 
+# http://www.enchantedlearning.com/wordlist/cookingtools.shtml
 def checkToolList(word):
     tools = [
 
@@ -485,12 +486,9 @@ def checkToolList(word):
         , "stove"
         , "strainer"
 
-
-
     ]
     isTool = False
     for w in tools:
         if word in w:
-            isTool= True
+            isTool = True
     return isTool
-

@@ -91,11 +91,8 @@ def updateDireTagsAfterCRF(dire, ingre):
     return updatedArr
 
 
-
-
-
 def tokenize(sentence):
-    removedPunctiationsData = re.sub('<[^<]+?>', '', sentence)
+    removedPunctiationsData = sentence.translate(None, string.punctuation)
     # lemma = []
     try:
         titleTokens = nltk.word_tokenize(removedPunctiationsData)
@@ -208,21 +205,45 @@ def getNameEntityInIngre(data):
 
 
 def getCosineSimilarityIngreAndDire(dire, ingre, direVec):
+    retarr = []
+    for j in xrange(len(direVec)):
+        retarr.append((createCosSim(dire[j], ingre, direVec[j]), dire[j]))
+    return retarr
+
+
+def checkDireIfIngredientHasNot(direSent, ingre):
+    isTrue = True
+    for i in xrange(len(direSent)):
+        for j in xrange(len(ingre)):
+            if direSent[i] == ingre[j]:
+                isTrue = False
+    return isTrue
+
+
+def createCosSim(direSent, ingre, direVec):
+    arry = []
+    if (checkDireIfIngredientHasNot(direSent, ingre)):
+        for j in xrange(len(ingre)):
+
+            try:
+                ingreVec = model[ingre[j]]
+                cosSim = 1 - spatial.distance.cosine(ingreVec, direVec)
+                a = [ingre[j], direSent, cosSim]
+                arry.append(a)
+            except KeyError:
+                pass
     retArr = []
-    a = []
-    for i in xrange(len(ingre)):
-        ingreVec = model[ingre[i]]
-        for j in xrange(len(direVec)):
-            cosSim = 1 - spatial.distance.cosine(ingreVec, direVec[j])
-            a = [ingre[i], dire[j], cosSim]
-            retArr.append(a)
-    if (len(retArr) > 0):
-        maxVal = max(retArr, key=itemgetter(1))[1]
-        minVal = min(retArr, key=itemgetter(1))[1]
-        for (word, p) in retArr:
-            newP = (p - minVal) / (maxVal - minVal)
-            a.append((word, newP))
-    return a
+    if len(arry) > 0:
+        maxVal = max(arry, key=itemgetter(2))[2]
+        minVal = min(arry, key=itemgetter(2))[2]
+
+    for i in xrange(len(arry)):
+        data = arry[i]
+        p = (data[2] - minVal) / maxVal - minVal;
+        if p > 0.2:
+            retArr.append((data[0]))
+
+    return retArr
 
 
 def giveTheMostCommonTag(tokenizedWords):
@@ -272,35 +293,39 @@ def readData():
 
     ingredients = df.ix[3, :].ingredients.encode('utf8')
     ingredients = (utils.convertArrayToPureStr(ingredients))
-    directions = df.ix[3, :].directions
-    print(type(ingredients), ingredients)
+    directions = df.ix[3, :].directions.encode('utf8')
     ingre = [posTagIngre(w) for w in ingredients]
     arr = posTaggText(directions)
     dire = tokenizeText(directions)
     ingreWithNewTAG = parse_ingredientForCRF(ingredients)
-    # parsData = getNameEntityInIngre(ingreWithNewTAG)
+    parsData = getNameEntityInIngre(ingreWithNewTAG)
     direWithNewTAG = updateDireTagsAfterCRF(arr, ingreWithNewTAG)
 
+    print(ingreWithNewTAG)
     print("----------------------")
-    #  print(getCosineSimilarityIngreAndDire(dire, parsData, makeFeatureVectorsForDire(dire)))
-    print()
+
+    print("----------------------")
+    print(getCosineSimilarityIngreAndDire(dire, parsData, makeFeatureVectorsForDire(dire)))
+    """
     print(ingreWithNewTAG)
     print(direWithNewTAG)
     print(arr)
+"""
 
     print("----------------------")
 
     for i in xrange(len(direWithNewTAG)):
         a = [wt for (wt, _) in direWithNewTAG[i] if 'VERB' == _]
         if (len(a) == 0):
-            direWithNewTAG[i] = updateVerbTagIfVerbIsEmpty(direWithNewTAG[i], giveTheMostCommonTag(
-                [wt for (wt, _) in direWithNewTAG[i]]))
+            direWithNewTAG[i] = updateVerbTagIfVerbIsEmpty(direWithNewTAG[i],
+                                                           giveTheMostCommonTag([wt for (wt, _) in direWithNewTAG[i]]))
         print("actions")
         print([wt for (wt, _) in direWithNewTAG[i] if 'VERB' == _])
         print("nouns")
         print(isTool([wt for (wt, _) in direWithNewTAG[i] if 'NOUN' == _]))
         print("ingredients")
         print([wt for (wt, _) in direWithNewTAG[i] if 'NAME' == _])
+        print(checkDireIfIngredientHasNot(dire[i], parsData))
 
         print("units")
         print([wt for (wt, _) in direWithNewTAG[i] if 'UNIT' == _])
