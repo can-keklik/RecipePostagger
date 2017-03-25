@@ -204,6 +204,7 @@ def getNameEntityInIngre(data):
     return returnArr
 
 
+# todo this function needs to refactor, not work properly
 def getCosineSimilarityIngreAndDire(dire, ingre, direVec):
     retarr = []
     for j in xrange(len(direVec)):
@@ -224,7 +225,6 @@ def createCosSim(direSent, ingre, direVec):
     arry = []
     if (checkDireIfIngredientHasNot(direSent, ingre)):
         for j in xrange(len(ingre)):
-
             try:
                 ingreVec = model[ingre[j]]
                 cosSim = 1 - spatial.distance.cosine(ingreVec, direVec)
@@ -240,7 +240,7 @@ def createCosSim(direSent, ingre, direVec):
     for i in xrange(len(arry)):
         data = arry[i]
         p = (data[2] - minVal) / maxVal - minVal;
-        if p > 0.2:
+        if p > 0.3:
             retArr.append((data[0]))
 
     return retArr
@@ -276,15 +276,34 @@ def updateVerbTagIfVerbIsEmpty(sentence, taggedWord):
 
 def isTool(words):
     arr = []
-    tools = ["tool", "util", "utensil"]
     if (len(words) > 0):
         for i in xrange(len(words)):
-            isToo = utils.checkToolList(word=words[i])
-            arr.append((words[i], isToo))
+            lemma = lemmatizer.lemmatize(word=words[i])
+            isToo = utils.checkToolList(lemma)
+            if isToo:
+                arr.append(words[i])
     return arr
 
 
     # TODO: we get postagged data array = arr and we will fill actions , ingredients and tool list
+
+
+def updateForTools(direSent, toolList):
+    returnArr = []
+
+    if len(toolList) > 0:
+        for (direW, TAG) in direSent:
+            a = None
+            for w in xrange(len(toolList)):
+                if direW == toolList[w]:
+                    a = (direW, "TOOL")
+            if a != None:
+                returnArr.append(a)
+            else:
+                returnArr.append((direW, TAG))
+        return returnArr
+    else:
+        return direSent
 
 
 def readData():
@@ -305,7 +324,7 @@ def readData():
     print("----------------------")
 
     print("----------------------")
-    print(getCosineSimilarityIngreAndDire(dire, parsData, makeFeatureVectorsForDire(dire)))
+
     """
     print(ingreWithNewTAG)
     print(direWithNewTAG)
@@ -313,19 +332,22 @@ def readData():
 """
 
     print("----------------------")
-
     for i in xrange(len(direWithNewTAG)):
         a = [wt for (wt, _) in direWithNewTAG[i] if 'VERB' == _]
-        if (len(a) == 0):
-            direWithNewTAG[i] = updateVerbTagIfVerbIsEmpty(direWithNewTAG[i],
-                                                           giveTheMostCommonTag([wt for (wt, _) in direWithNewTAG[i]]))
+        if (len(a) == 0): direWithNewTAG[i] = updateVerbTagIfVerbIsEmpty(direWithNewTAG[i], giveTheMostCommonTag(
+            [wt for (wt, _) in direWithNewTAG[i]]))
         print("actions")
         print([wt for (wt, _) in direWithNewTAG[i] if 'VERB' == _])
-        print("nouns")
-        print(isTool([wt for (wt, _) in direWithNewTAG[i] if 'NOUN' == _]))
+        print("tools")
+        toolList = isTool([wt for (wt, _) in direWithNewTAG[i] if 'NOUN' == _ or 'ADV' == _])
+        direWithNewTAG[i] = updateForTools(direWithNewTAG[i], toolList)
+        print([wt for (wt, _) in direWithNewTAG[i] if 'TOOL' == _])
         print("ingredients")
         print([wt for (wt, _) in direWithNewTAG[i] if 'NAME' == _])
-        print(checkDireIfIngredientHasNot(dire[i], parsData))
+        if checkDireIfIngredientHasNot(dire[i], parsData):
+            print("probable ingedients")
+            ingres = createCosSim(dire[i], parsData, makeFeatureVec(dire[i], model, 300))
+            print(ingres)
 
         print("units")
         print([wt for (wt, _) in direWithNewTAG[i] if 'UNIT' == _])
@@ -336,6 +358,7 @@ def readData():
         print("quantity")
         print([wt for (wt, _) in direWithNewTAG[i] if 'QTY' == _])
 
+        print(direWithNewTAG[i])
         print("----------------------")
 
 
