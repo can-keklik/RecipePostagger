@@ -1,4 +1,6 @@
 import os, sys, shutil
+
+import pydot
 import unicodecsv as csv
 import pandas as pd
 
@@ -78,4 +80,12 @@ def writeWholeDataToCvsFile():
                     data.append([i, dataToWrite[0], dataToWrite[1], dataToWrite[2]])
             wr.writerows(data)
 
-writeWholeDataToCvsFile()
+def createPngFromDotFile(path,pngName):
+    if path==None:
+        path = '/Users/Ozgen/Desktop/RecipeGit/es_graph.dot'
+    if pngName==None:
+        pngName="graph.png"
+    (graph,) = pydot.graph_from_dot_file(path)
+    graph.write_png(pngName)
+
+createPngFromDotFile(None, None)

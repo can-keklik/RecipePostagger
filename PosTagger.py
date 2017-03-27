@@ -4,6 +4,7 @@ from operator import itemgetter
 
 import pandas as pd
 
+import GraphGenerator
 from Models import Action
 from Models import Ingredient
 from Models import Tool
@@ -306,6 +307,15 @@ def updateForTools(direSent, toolList):
         return direSent
 
 
+def getNameEntityInIngres(taggedRecipe):
+    returnArr = []
+    for i in xrange(len(taggedRecipe)):
+        arr = [wt for (wt, _) in taggedRecipe[i] if 'NAME' in _]
+        if (len(arr) > 0):
+            newW = " ".join(arr)
+            returnArr.append(newW)
+    return returnArr
+
 def readData():
     df = pd.read_csv("/Users/Ozgen/Desktop/RecipeGit/csv/output.csv", encoding='utf8')
     # names=["index", "title", "ingredients", "directions"])
@@ -320,7 +330,7 @@ def readData():
     parsData = getNameEntityInIngre(ingreWithNewTAG)
     direWithNewTAG = updateDireTagsAfterCRF(arr, ingreWithNewTAG)
 
-    print(ingreWithNewTAG)
+    print(getNameEntityInIngres(ingreWithNewTAG))
     print("----------------------")
 
     print("----------------------")
@@ -360,7 +370,7 @@ def readData():
 
         print(direWithNewTAG[i])
         print("----------------------")
-
+    GraphGenerator.GraphGenerator(direWithNewTAG, ingreWithNewTAG).createGraph()
 
 readData()
 
