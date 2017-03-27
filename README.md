@@ -32,5 +32,5 @@ Version 1.0
 * Other community or team contact
 
 
-###Example Graph###
+### Example Graph ###
 ![alt tag](https://github.com/ozgen/RecipePostagger/blob/master/graph.png)
