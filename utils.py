@@ -489,6 +489,15 @@ def checkToolList(word):
     ]
     isTool = False
     for w in tools:
-        if word in w:
+        if word in w and len(word) > 2:
             isTool = True
     return isTool
+
+
+def checkVerbRemovePrep(sentence):
+    prepList = ["don39t", "doesn39t", "didn39t"]
+    for i, (w, T) in enumerate(sentence):
+        for prep in prepList:
+            if prep == w:
+                sentence[i] = (w, "PREP")
+    return sentence

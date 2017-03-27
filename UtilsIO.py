@@ -88,4 +88,6 @@ def createPngFromDotFile(path,pngName):
     (graph,) = pydot.graph_from_dot_file(path)
     graph.write_png(pngName)
 
-createPngFromDotFile(None, None)
+path = os.getcwd()
+path = path+"/"+"result121.dot"
+createPngFromDotFile(path=path, pngName="result121.png")

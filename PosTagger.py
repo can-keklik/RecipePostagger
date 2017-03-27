@@ -340,9 +340,9 @@ def readData():
     df = pd.read_csv("/Users/Ozgen/Desktop/RecipeGit/csv/output.csv", encoding='utf8')
     # names=["index", "title", "ingredients", "directions"])
 
-    ingredients = df.ix[3, :].ingredients.encode('utf8')
+    ingredients = df.ix[121, :].ingredients.encode('utf8')
     ingredients = (utils.convertArrayToPureStr(ingredients))
-    directions = df.ix[3, :].directions.encode('utf8')
+    directions = df.ix[121, :].directions.encode('utf8')
     ingre = [posTagIngre(w) for w in ingredients]
     arr = posTaggText(directions)
     dire = tokenizeText(directions)
@@ -363,6 +363,7 @@ def readData():
 
     print("----------------------")
     for i in xrange(len(direWithNewTAG)):
+        direWithNewTAG[i] = utils.checkVerbRemovePrep(direWithNewTAG[i])
         a = [wt for (wt, _) in direWithNewTAG[i] if 'VERB' == _]
         if (len(a) == 0): direWithNewTAG[i] = updateVerbTagIfVerbIsEmpty(direWithNewTAG[i], giveTheMostCommonTag(
             [wt for (wt, _) in direWithNewTAG[i]]))
@@ -399,12 +400,12 @@ def readData():
 
         print(direWithNewTAG[i])
         print("----------------------")
-    GraphGenerator.GraphGenerator(direWithNewTAG, ingreWithNewTAG).createGraph("deneme.dot")
+    GraphGenerator.GraphGenerator(direWithNewTAG, ingreWithNewTAG).createGraph("result121.dot")
 
 readData()
 path = os.getcwd()
-path = path+"/"+"deneme.dot"
-UtilsIO.createPngFromDotFile(path=path, pngName="Deneme.png")
+path = path+"/"+"result121.dot"
+UtilsIO.createPngFromDotFile(path=path, pngName="result121.png")
 
 
 
