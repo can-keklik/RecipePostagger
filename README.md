@@ -33,4 +33,4 @@ Version 1.0
 
 
 ### Example Graph ###
-![alt tag](https://github.com/ozgen/RecipePostagger/blob/master/graph.png)
+![alt tag](https://github.com/ozgen/RecipePostagger/blob/master/Deneme.png)
