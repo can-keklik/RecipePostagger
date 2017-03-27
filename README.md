@@ -30,3 +30,7 @@ Version 1.0
 
 * Repo owner or admin
 * Other community or team contact
+
+
+###Example Graph###
+![alt tag](https://github.com/ozgen/RecipePostagger/blob/master/graph.png)
