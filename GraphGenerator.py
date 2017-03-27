@@ -13,7 +13,7 @@ class GraphGenerator:
         return pydot.Node(word, style="filled", fillcolor="red")
 
     def createIngredientNode(self, word):
-        return pydot.Node(word, style="filled", fillcolor="blue")
+        return pydot.Node(word, style="filled", fillcolor="green")
 
     def createToolNode(self, word):
         return pydot.Node(word, style="filled", fillcolor="#0000ff")
