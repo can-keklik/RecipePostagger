@@ -38,6 +38,8 @@ class GraphGenerator:
             return self.createIngredientNode(word)
         elif TAG == "COMMENT":
             return self.createCommentNode(word)
+        elif TAG == "PROBABLE":
+            return self.createProbableIngreNode(word)
             # todo implement probable ingredients here
 
     def createNODES(self):
@@ -45,7 +47,7 @@ class GraphGenerator:
         recipeNode = RecipeNode()
         for j in xrange(len(tagRecipes)):
             unions = self.unionWordAndTag(tagRecipes[j])
-            print unions
+
             for i, (w, T) in enumerate(unions):
                 node = self.createNode(T, w)
                 if node:
@@ -61,10 +63,12 @@ class GraphGenerator:
                     elif T == "COMMENT":
                         recipeNode.addCommentNode(j, node)
                         self.graph.add_node(node)
-
+                    elif T == "PROBABLE":
+                        recipeNode.addProbableIngreNode(j, node)
+                        self.graph.add_node(node)
         return recipeNode
 
-    def createGraph(self):
+    def createGraph(self, dotFileName):
         recipeNode = self.createNODES()
 
         if len(recipeNode.actionNodeList) > 0:
@@ -83,9 +87,13 @@ class GraphGenerator:
                 for k, (l, nodeTool) in enumerate(recipeNode.toolNodeList):
                     if i == l:
                         self.graph.add_edge(pydot.Edge(nodeTool, nodeAc))
-        self.graph.write('es_graph.dot')
+            for j, (i, nodeAc) in enumerate(recipeNode.actionNodeList):
+                for k, (l, nodeProbable) in enumerate(recipeNode.probableIngreList):
+                    if i == l:
+                        self.addHiddenEdge(nodeProbable, nodeAc)
+        self.graph.write(dotFileName)
 
-    def getNameEntityInIngre(self):
+    def getNameEntityInIngres(self):
         returnArr = []
         for i in xrange(len(self.taggedRecipe)):
             arr = [wt for (wt, _) in self.taggedRecipe[i] if 'NAME' in _]
@@ -95,7 +103,7 @@ class GraphGenerator:
         return returnArr
 
     def getSpecificIngredient(self, word):
-        ingList = self.getNameEntityInIngre()
+        ingList = self.getNameEntityInIngres()
         retIngre = ""
         for w in ingList:
             if word in w:
@@ -139,13 +147,12 @@ class GraphGenerator:
             return sentence
 
 
-
-
 class RecipeNode:
     actionNodeList = []
     ingredientNodeList = []
     toolNodeList = []
     commentToolList = []
+    probableIngreList = []
 
     def __init__(self):
         pass
@@ -161,3 +168,6 @@ class RecipeNode:
 
     def addCommentNode(self, i, node):
         self.commentToolList.append((i, node))
+
+    def addProbableIngreNode(self, i, node):
+        self.probableIngreList.append((i, node))

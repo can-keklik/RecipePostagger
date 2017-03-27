@@ -316,6 +316,26 @@ def getNameEntityInIngres(taggedRecipe):
             returnArr.append(newW)
     return returnArr
 
+
+def getNameEntityInIng(taggedRecipe):
+    returnArr = []
+    for i in xrange(len(taggedRecipe)):
+        arr = [wt for (wt, _) in taggedRecipe[i] if 'NAME' in _]
+        if (len(arr) > 0):
+            newW = " ".join(arr)
+            returnArr.append(newW)
+    return returnArr
+
+
+def getSpecificIngredient(word, taggedRecipe):
+    ingList = getNameEntityInIng(taggedRecipe)
+    retIngre = ""
+    for w in ingList:
+        if word in w:
+            retIngre = w
+
+    return retIngre
+
 def readData():
     df = pd.read_csv("/Users/Ozgen/Desktop/RecipeGit/csv/output.csv", encoding='utf8')
     # names=["index", "title", "ingredients", "directions"])
@@ -356,8 +376,17 @@ def readData():
         print([wt for (wt, _) in direWithNewTAG[i] if 'NAME' == _])
         if checkDireIfIngredientHasNot(dire[i], parsData):
             print("probable ingedients")
+            # add probable ingredient to the newIngres
             ingres = createCosSim(dire[i], parsData, makeFeatureVec(dire[i], model, 300))
-            print(ingres)
+            newIngres = []
+            if len(ingres)>0:
+                for w in ingres:
+                    ing = getSpecificIngredient(w, ingreWithNewTAG)
+                    if ing not in newIngres:
+                        newIngres.append(ing)
+            print (newIngres)
+            probablableIngre = " ".join(newIngres)
+            direWithNewTAG[i].append((probablableIngre,"PROBABLE"))
 
         print("units")
         print([wt for (wt, _) in direWithNewTAG[i] if 'UNIT' == _])
@@ -370,10 +399,12 @@ def readData():
 
         print(direWithNewTAG[i])
         print("----------------------")
-    GraphGenerator.GraphGenerator(direWithNewTAG, ingreWithNewTAG).createGraph()
+    GraphGenerator.GraphGenerator(direWithNewTAG, ingreWithNewTAG).createGraph("deneme.dot")
 
 readData()
-
+path = os.getcwd()
+path = path+"/"+"deneme.dot"
+UtilsIO.createPngFromDotFile(path=path, pngName="Deneme.png")
 
 
 
