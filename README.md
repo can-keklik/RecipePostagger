@@ -7,13 +7,11 @@ This project is built for the Thesis Project Research in Hacettepe University
 Version 1.0
 
 * Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+* Version 1.0
 
 ### How do I get set up? ###
 
 * Summary of set up
-* [TortoiseHG](https://bitbucket.org/hacettepegraduate/recipeslearning/wiki/TortoiseHG)
 * Configuration
 * Dependencies
 * Database configuration
