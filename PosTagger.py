@@ -280,13 +280,14 @@ def isTool(words):
     if (len(words) > 0):
         for i in xrange(len(words)):
             lemma = lemmatizer.lemmatize(word=words[i])
-            isToo = utils.checkToolList(lemma)
-            if isToo:
-                arr.append(words[i])
-    return arr
+            arr.append(lemma)
+
+    sentence = " ".join(arr)
+
+    return utils.checkToolList(sentence)
 
 
-    # TODO: we get postagged data array = arr and we will fill actions , ingredients and tool list
+# TODO: we get postagged data array = arr and we will fill actions , ingredients and tool list
 
 
 def updateForTools(direSent, toolList):
@@ -294,14 +295,13 @@ def updateForTools(direSent, toolList):
 
     if len(toolList) > 0:
         for (direW, TAG) in direSent:
-            a = None
-            for w in xrange(len(toolList)):
-                if direW == toolList[w]:
-                    a = (direW, "TOOL")
-            if a != None:
-                returnArr.append(a)
-            else:
-                returnArr.append((direW, TAG))
+            lemma = lemmatizer.lemmatize(direW)
+            for w in toolList:
+                if lemma in w:
+                    if (w, "TOOL") not in returnArr:
+                        returnArr.append((w, "TOOL"))
+                else:
+                    returnArr.append((direW, TAG))
         return returnArr
     else:
         return direSent
@@ -336,6 +336,7 @@ def getSpecificIngredient(word, taggedRecipe):
 
     return retIngre
 
+
 def readData():
     df = pd.read_csv("/Users/Ozgen/Desktop/RecipeGit/csv/output.csv", encoding='utf8')
     # names=["index", "title", "ingredients", "directions"])
@@ -369,7 +370,7 @@ def readData():
             [wt for (wt, _) in direWithNewTAG[i]]))
         print("actions")
         print([wt for (wt, _) in direWithNewTAG[i] if 'VERB' == _])
-        print("tools")
+        print("tools ---", [wt for (wt, _) in direWithNewTAG[i] if 'NOUN' == _ or 'ADV' == _])
         toolList = isTool([wt for (wt, _) in direWithNewTAG[i] if 'NOUN' == _ or 'ADV' == _])
         direWithNewTAG[i] = updateForTools(direWithNewTAG[i], toolList)
         print([wt for (wt, _) in direWithNewTAG[i] if 'TOOL' == _])
@@ -380,14 +381,14 @@ def readData():
             # add probable ingredient to the newIngres
             ingres = createCosSim(dire[i], parsData, makeFeatureVec(dire[i], model, 300))
             newIngres = []
-            if len(ingres)>0:
+            if len(ingres) > 0:
                 for w in ingres:
                     ing = getSpecificIngredient(w, ingreWithNewTAG)
                     if ing not in newIngres:
                         newIngres.append(ing)
-            print (newIngres)
+            print(newIngres)
             probablableIngre = " ".join(newIngres)
-            direWithNewTAG[i].append((probablableIngre,"PROBABLE"))
+            direWithNewTAG[i].append((probablableIngre, "PROBABLE"))
 
         print("units")
         print([wt for (wt, _) in direWithNewTAG[i] if 'UNIT' == _])
@@ -402,10 +403,9 @@ def readData():
         print("----------------------")
     GraphGenerator.GraphGenerator(direWithNewTAG, ingreWithNewTAG).createGraph("result121.dot")
 
+
 readData()
-path = os.getcwd()
-path = path+"/"+"result121.dot"
-UtilsIO.createPngFromDotFile(path=path, pngName="result121.png")
+UtilsIO.createPngFromDotFile("result121.dot", "result121.png")
 
 
 

@@ -330,7 +330,7 @@ def convertArrayToPureStr(str):
 
 
 # http://www.enchantedlearning.com/wordlist/cookingtools.shtml
-def checkToolList(word):
+def checkToolList(sentence):
     tools = [
 
         "apron"
@@ -343,6 +343,7 @@ def checkToolList(word):
         , "blender"
         , "bread basket"
         , "bread knife"
+        , "bowl"
         , "bundt pan"
         , "butcher block"
         , "cake pan"
@@ -478,20 +479,38 @@ def checkToolList(word):
         , "slicer"
         , "slow cooker"
         , "souffle dish"
-        , "spice rack"
         , "spoon"
         , "steak knife"
         , "steamer"
         , "stockpot"
         , "stove"
         , "strainer"
+        , "tablespoon"
+        , "tart pan"
+        , "tea infuser"
+        , "teakettle"
+        , "teaspoon"
+        , "thermometer"
+        , "toaster"
+        , "toaster oven"
+        , "tongs"
+        , "trivet"
+        , "utensil"
+        , "vegetable bin"
+        , "vegetable peeler"
+        , "waffle iron"
+        , "water filter"
+        , "whisk"
+        , "wok"
+        , "yogurt maker"
+        , "zester"
 
     ]
-    isTool = False
+    returnWord = []
     for w in tools:
-        if word in w and len(word) > 2:
-            isTool = True
-    return isTool
+        if w in sentence:
+            returnWord.append(w)
+    return returnWord
 
 
 def checkVerbRemovePrep(sentence):

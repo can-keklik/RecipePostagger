@@ -1,3 +1,5 @@
+import os
+
 import pydot
 
 
@@ -91,7 +93,11 @@ class GraphGenerator:
                 for k, (l, nodeProbable) in enumerate(recipeNode.probableIngreList):
                     if i == l:
                         self.addHiddenEdge(nodeProbable, nodeAc)
-        self.graph.write(dotFileName)
+
+        path = os.getcwd()
+        if dotFileName:
+            path = path + "/results/"
+            self.graph.write(path + dotFileName)
 
     def getNameEntityInIngres(self):
         returnArr = []

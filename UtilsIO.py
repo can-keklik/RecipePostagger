@@ -80,14 +80,13 @@ def writeWholeDataToCvsFile():
                     data.append([i, dataToWrite[0], dataToWrite[1], dataToWrite[2]])
             wr.writerows(data)
 
-def createPngFromDotFile(path,pngName):
-    if path==None:
-        path = '/Users/Ozgen/Desktop/RecipeGit/es_graph.dot'
-    if pngName==None:
-        pngName="graph.png"
-    (graph,) = pydot.graph_from_dot_file(path)
-    graph.write_png(pngName)
 
-path = os.getcwd()
-path = path+"/"+"result121.dot"
-createPngFromDotFile(path=path, pngName="result121.png")
+def createPngFromDotFile(dotFileName, pngName):
+    path = os.getcwd()
+    if dotFileName:
+        path = path + "/results/"
+        (graph,) = pydot.graph_from_dot_file(path + dotFileName)
+        graph.write_png(path + pngName)
+
+
+
