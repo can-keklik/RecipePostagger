@@ -240,8 +240,8 @@ def createCosSim(direSent, ingre, direVec):
 
     for i in xrange(len(arry)):
         data = arry[i]
-        p = (data[2] - minVal) / maxVal - minVal;
-        if p > 0.3:
+        p = (data[2] - minVal) / (maxVal - minVal);
+        if p > 0.65: #todo check min max value
             retArr.append((data[0]))
 
     return retArr
@@ -341,9 +341,9 @@ def readData():
     df = pd.read_csv("/Users/Ozgen/Desktop/RecipeGit/csv/output.csv", encoding='utf8')
     # names=["index", "title", "ingredients", "directions"])
 
-    ingredients = df.ix[121, :].ingredients.encode('utf8')
+    ingredients = df.ix[232, :].ingredients.encode('utf8')
     ingredients = (utils.convertArrayToPureStr(ingredients))
-    directions = df.ix[121, :].directions.encode('utf8')
+    directions = df.ix[232, :].directions.encode('utf8')
     ingre = [posTagIngre(w) for w in ingredients]
     arr = posTaggText(directions)
     dire = tokenizeText(directions)
@@ -401,11 +401,11 @@ def readData():
 
         print(direWithNewTAG[i])
         print("----------------------")
-    GraphGenerator.GraphGenerator(direWithNewTAG, ingreWithNewTAG).createGraph("result121.dot")
+    GraphGenerator.GraphGenerator(direWithNewTAG, ingreWithNewTAG).createGraph("result232.dot")
 
 
 readData()
-UtilsIO.createPngFromDotFile("result121.dot", "result121.png")
+UtilsIO.createPngFromDotFile("result232.dot", "result232.png")
 
 
 

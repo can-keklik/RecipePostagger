@@ -31,6 +31,15 @@ class GraphGenerator:
             pydot.Edge(node1, node2, label="Probable Ingredients", labelfontcolor="#009933", fontsize="10.0",
                        color="blue"))
 
+    def createDirectionNode(self):
+        arr = [w for (w ,T) in self.taggedRecipe]
+        directionWhole = " ".join(arr)
+        return pydot.Node(directionWhole, style="filled", fillcolor="#ffffff")
+    def createIngreWholeNode(self):
+        arr = [w for (w, T) in self.taggedIngredient]
+        ingWhole = " ".join(arr)
+        return pydot.Node(ingWhole, style="filled", fillcolor="#ccf5ff")
+
     def createNode(self, TAG, word):
         if TAG == "VERB":
             return self.createActionNode(word)
@@ -47,6 +56,8 @@ class GraphGenerator:
     def createNODES(self):
         tagRecipes = self.taggedRecipe
         recipeNode = RecipeNode()
+        #self.graph.add_node(self.createDirectionNode())
+        #self.graph.add_node(self.createIngreWholeNode())
         for j in xrange(len(tagRecipes)):
             unions = self.unionWordAndTag(tagRecipes[j])
 
