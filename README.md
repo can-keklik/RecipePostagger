@@ -24,6 +24,18 @@ Version 1.0
 * Code review
 * Other guidelines
 
+## Development
+
+On OSX:
+
+    brew install crf++
+    python setup.py install
+    
+    More information about
+    CRFs can be found [here][crf_tut] and [here][nytimes].
+
+
+
 ### Who do I talk to? ###
 
 * Repo owner or admin
@@ -32,3 +44,8 @@ Version 1.0
 
 ### Example Graph ###
 ![alt tag](https://github.com/ozgen/RecipePostagger/blob/master/results/result121.png)
+
+
+[crf_tut]:  http://people.cs.umass.edu/~mccallum/papers/crf-tutorial.pdf
+[nytimes]: https://github.com/NYTimes/ingredient-phrase-tagger
+
