@@ -31,8 +31,8 @@ On OSX:
     brew install crf++
     python setup.py install
     
-    More information about
-    CRFs can be found [here][crf_tut] and [here][nytimes].
+  More information about
+  CRFs can be found [here][crf_tut] and [here][nytimes].
 
 
 
