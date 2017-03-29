@@ -74,10 +74,12 @@ def writeWholeDataToCvsFile():
         fileList = getFileList()
         if len(fileList) > 0:
             data = []
+            cnt = 0;
             for i in xrange(len(fileList)):
                 dataToWrite = getDataFromPath(fileList[i])
                 if len(dataToWrite) > 2:
-                    data.append([i, dataToWrite[0], dataToWrite[1], dataToWrite[2]])
+                    cnt = cnt + 1
+                    data.append([cnt, dataToWrite[0], dataToWrite[1], dataToWrite[2]])
             wr.writerows(data)
 
 
@@ -87,6 +89,4 @@ def createPngFromDotFile(dotFileName, pngName):
         path = path + "/results/"
         (graph,) = pydot.graph_from_dot_file(path + dotFileName)
         graph.write_png(path + pngName)
-
-
 
