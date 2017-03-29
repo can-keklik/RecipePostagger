@@ -46,6 +46,14 @@ On OSX:
 ![alt tag](https://github.com/ozgen/RecipePostagger/blob/master/results/result121.png)
 
 
+## Authors
+
+* [Mehmet ÖZGEN][mo]
+* [İbrahim ARDIÇ][ia]
+
+
 [crf_tut]:  http://people.cs.umass.edu/~mccallum/papers/crf-tutorial.pdf
 [nytimes]: https://github.com/NYTimes/ingredient-phrase-tagger
+[ia]: https://github.com/ardicib
+[mo]: mailto:ozgenmehmett@gmail.com
 
