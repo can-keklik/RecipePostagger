@@ -41,6 +41,11 @@ On OSX:
 * Repo owner or admin
 * Other community or team contact
 
+### DataSet Tagger WebSite
+ * In order to generate precise dataset for evaluation we developed a website which repository is [here][recipePosMean] 
+ * If you want to tag our dataset you can reach our website from [here][web] 
+
+
 
 ### Example Graph ###
 ![alt tag](https://github.com/ozgen/RecipePostagger/blob/master/results/result121.png)
@@ -54,6 +59,8 @@ On OSX:
 
 [crf_tut]:  http://people.cs.umass.edu/~mccallum/papers/crf-tutorial.pdf
 [nytimes]: https://github.com/NYTimes/ingredient-phrase-tagger
+[recipePosMean]: https://github.com/ozgen/recipePostaggerMEAN
+[web]: http://104.236.30.39:3000
 [ia]: https://github.com/ardicib
 [mo]: mailto:ozgenmehmett@gmail.com
 
