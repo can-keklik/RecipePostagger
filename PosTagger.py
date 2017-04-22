@@ -1,32 +1,22 @@
 from __future__ import print_function
 
+import os
+import string
+import tempfile
 from operator import itemgetter
 
-import pandas as pd
-
-import GraphGenerator
-from Models import Action
-from Models import Ingredient
-from Models import Tool
-from Models import Recipe
-import nltk
-from nltk.stem.wordnet import WordNetLemmatizer
-import os, shutil
-import sys
-import string
-import cli
-import utils
-
-import tempfile
 import gensim
-import re, math
+import nltk
 import numpy as np
+import pandas as pd
+from nltk.corpus import brown
+from nltk.stem.wordnet import WordNetLemmatizer
 from scipy import spatial
 
+import GraphGenerator
 import UtilsIO
-
-from nltk.corpus import wordnet as wn
-from nltk.corpus import brown
+import utils
+import CollocationFinder
 
 # todo open comment to run vord2vec
 # initialize the model
@@ -241,7 +231,7 @@ def createCosSim(direSent, ingre, direVec):
     for i in xrange(len(arry)):
         data = arry[i]
         p = (data[2] - minVal) / (maxVal - minVal);
-        if p > 0.65: #todo check min max value
+        if p > 0.65:  # todo check min max value
             retArr.append((data[0]))
 
     return retArr
@@ -337,6 +327,34 @@ def getSpecificIngredient(word, taggedRecipe):
     return retIngre
 
 
+def optimizeTagWithCollocation(param):
+    toolList = [wt for (wt, _) in param if 'TOOL' == _]
+    actionList = [wt for (wt, _) in param if 'VERB' == _]
+    toRemove = []
+    retArr = []
+    if len(toolList) > 0:
+        for tool in toolList:
+            collList = CollocationFinder.calculateCollocation(tool)
+            if len(collList) > 0 and len(actionList) > 1:
+                for colW in collList:
+                    for verb in actionList:
+                        if verb == colW:
+                            if (tool, verb) not in toRemove:
+                                toRemove.append((tool, verb))
+
+        if len(toRemove) > 0:
+            print('toremove ', toRemove)
+            for (w, T) in param:
+                for t, rmovalWord in toRemove:
+                    if (w != rmovalWord) and (w, T) not in retArr:
+                        retArr.append((w, T))
+
+
+        return retArr
+    else:
+        return param
+
+
 def readData():
     df = pd.read_csv("/Users/Ozgen/Desktop/RecipeGit/csv/output.csv", encoding='utf8')
     # names=["index", "title", "ingredients", "directions"])
@@ -373,6 +391,8 @@ def readData():
         print("tools ---", [wt for (wt, _) in direWithNewTAG[i] if 'NOUN' == _ or 'ADV' == _])
         toolList = isTool([wt for (wt, _) in direWithNewTAG[i] if 'NOUN' == _ or 'ADV' == _])
         direWithNewTAG[i] = updateForTools(direWithNewTAG[i], toolList)
+        direWithNewTAG[i] = optimizeTagWithCollocation(direWithNewTAG[i])
+        print(direWithNewTAG[i])
         print([wt for (wt, _) in direWithNewTAG[i] if 'TOOL' == _])
         print("ingredients")
         print([wt for (wt, _) in direWithNewTAG[i] if 'NAME' == _])
@@ -401,11 +421,11 @@ def readData():
 
         print(direWithNewTAG[i])
         print("----------------------")
-    GraphGenerator.GraphGenerator(direWithNewTAG, ingreWithNewTAG).createGraph("result232.dot")
+    GraphGenerator.GraphGenerator(direWithNewTAG, ingreWithNewTAG).createGraph("result232-2.dot")
 
 
 readData()
-UtilsIO.createPngFromDotFile("result232.dot", "result232.png")
+UtilsIO.createPngFromDotFile("result232-2.dot", "result232-2.png")
 
 
 
