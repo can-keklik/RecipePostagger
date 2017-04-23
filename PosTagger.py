@@ -105,6 +105,7 @@ def tokenize(sentence):
 def tokenizeText(text):
     arr = []
     sents = nltk.sent_tokenize(text)
+    print("sentem-nceasd", sents)
     for i in xrange(len(sents)):
         tokenizedSentence = tokenize(sents[i])
         arr.append(tokenizedSentence)
@@ -240,28 +241,38 @@ def createCosSim(direSent, ingre, direVec):
 def giveTheMostCommonTag(tokenizedWords):
     retArr = [];
     for i in xrange(len(tokenizedWords)):
-        lem = lemmatizer.lemmatize(tokenizedWords[i], 'v')
-        table = nltk.FreqDist(t for w, t in brown.tagged_words() if w.lower() == lem)
+        (word, Tag) = tokenizedWords[i]
+        if (i == 0 and Tag == u'VERB'):
+            retArr.append((word, Tag))
+        lem = lemmatizer.lemmatize(word, 'v')
+
+        table = nltk.FreqDist(t for w, t in brown.tagged_words() if w.lower() == lem.lower())
         if len(table.most_common()) > 0:
             (tag, count) = table.most_common()[0]
             if (tag == 'VB'):
-                retArr.append((tokenizedWords[i], tag))
+                if (word, tag) not in retArr:
+                    retArr.append((word, tag))
+    print("verbMostCommon", retArr)
     return retArr
 
 
 def updateVerbTagIfVerbIsEmpty(sentence, taggedWord):
-    # todo configur e more than one verb can be in the tagged word
     if len(taggedWord) == 0:
         return sentence
 
-    (word, newTag) = taggedWord[0]
+    # (word, newTag) = taggedWord[0]
     arr = []
+    tag = u'VERB'
     for (wt, _) in sentence:
-        if (wt == word):
-            tag = u'VERB'
-            arr.append((wt, tag))
-        else:
-            arr.append((wt, _))
+        for (word, newTag) in taggedWord:
+            if (wt == word):
+                if (wt, tag) not in arr:
+                    arr.append((wt, tag))
+            elif _ == tag:
+                pass
+            else:
+                if (wt, _) not in arr:
+                    arr.append((wt, _))
     return arr
 
 
@@ -328,7 +339,7 @@ def getSpecificIngredient(word, taggedRecipe):
 
 
 def optimizeTagWithCollocation(param):
-    toolList = [wt for (wt, _) in param if 'TOOL' == _]
+    toolList = [wt.replace(" ", "_") for (wt, _) in param if 'TOOL' == _]
     actionList = [wt for (wt, _) in param if 'VERB' == _]
     toRemove = []
     retArr = []
@@ -349,7 +360,6 @@ def optimizeTagWithCollocation(param):
                     if (w != rmovalWord) and (w, T) not in retArr:
                         retArr.append((w, T))
 
-
         return retArr
     else:
         return param
@@ -359,9 +369,9 @@ def readData():
     df = pd.read_csv("/Users/Ozgen/Desktop/RecipeGit/csv/output.csv", encoding='utf8')
     # names=["index", "title", "ingredients", "directions"])
 
-    ingredients = df.ix[232, :].ingredients.encode('utf8')
+    ingredients = df.ix[121, :].ingredients.encode('utf8')
     ingredients = (utils.convertArrayToPureStr(ingredients))
-    directions = df.ix[232, :].directions.encode('utf8')
+    directions = df.ix[121, :].directions.encode('utf8')
     ingre = [posTagIngre(w) for w in ingredients]
     arr = posTaggText(directions)
     dire = tokenizeText(directions)
@@ -383,16 +393,18 @@ def readData():
     print("----------------------")
     for i in xrange(len(direWithNewTAG)):
         direWithNewTAG[i] = utils.checkVerbRemovePrep(direWithNewTAG[i])
+        print(direWithNewTAG[i])
         a = [wt for (wt, _) in direWithNewTAG[i] if 'VERB' == _]
-        if (len(a) == 0): direWithNewTAG[i] = updateVerbTagIfVerbIsEmpty(direWithNewTAG[i], giveTheMostCommonTag(
-            [wt for (wt, _) in direWithNewTAG[i]]))
+        direWithNewTAG[i] = updateVerbTagIfVerbIsEmpty(direWithNewTAG[i], giveTheMostCommonTag(direWithNewTAG[i]))
+
         print("actions")
         print([wt for (wt, _) in direWithNewTAG[i] if 'VERB' == _])
         print("tools ---", [wt for (wt, _) in direWithNewTAG[i] if 'NOUN' == _ or 'ADV' == _])
         toolList = isTool([wt for (wt, _) in direWithNewTAG[i] if 'NOUN' == _ or 'ADV' == _])
         direWithNewTAG[i] = updateForTools(direWithNewTAG[i], toolList)
-        direWithNewTAG[i] = optimizeTagWithCollocation(direWithNewTAG[i])
-        print(direWithNewTAG[i])
+        if len([wt for (wt, _) in direWithNewTAG[i] if 'VERB' == _]) > 1:
+            direWithNewTAG[i] = optimizeTagWithCollocation(direWithNewTAG[i])
+
         print([wt for (wt, _) in direWithNewTAG[i] if 'TOOL' == _])
         print("ingredients")
         print([wt for (wt, _) in direWithNewTAG[i] if 'NAME' == _])
@@ -421,11 +433,11 @@ def readData():
 
         print(direWithNewTAG[i])
         print("----------------------")
-    GraphGenerator.GraphGenerator(direWithNewTAG, ingreWithNewTAG).createGraph("result232-2.dot")
+    GraphGenerator.GraphGenerator(direWithNewTAG, ingreWithNewTAG).createGraph("result121-3.dot")
 
 
 readData()
-UtilsIO.createPngFromDotFile("result232-2.dot", "result232-2.png")
+UtilsIO.createPngFromDotFile("result121-3.dot", "result121-3.png")
 
 
 
