@@ -48,7 +48,18 @@ On OSX:
 
 
 ### Example Graph ###
+Old code result:
+![alt tag](https://github.com/ozgen/RecipePostagger/blob/master/results/result232.png)
+
+After domain adaptation:
+
+![alt tag](https://github.com/ozgen/RecipePostagger/blob/master/results/result232-2.png)
+
+
+Other Result with Hidden Igredients:
+
 ![alt tag](https://github.com/ozgen/RecipePostagger/blob/master/results/result121.png)
+
 
 
 ## Authors
