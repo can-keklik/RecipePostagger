@@ -56,9 +56,19 @@ After domain adaptation:
 ![alt tag](https://github.com/ozgen/RecipePostagger/blob/master/results/result232-2.png)
 
 
+After optimization:
+
+![alt tag](https://github.com/ozgen/RecipePostagger/blob/master/results/result232-3.png)
+
+
 Other Result with Hidden Igredients:
 
 ![alt tag](https://github.com/ozgen/RecipePostagger/blob/master/results/result121.png)
+
+After Domain Adaptaion:
+
+![alt tag](https://github.com/ozgen/RecipePostagger/blob/master/results/result121-3.png)
+
 
 
 
