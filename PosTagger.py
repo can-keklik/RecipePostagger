@@ -263,10 +263,11 @@ def updateVerbTagIfVerbIsEmpty(sentence, taggedWord):
     # (word, newTag) = taggedWord[0]
     arr = []
     tag = u'VERB'
+    commentTag = 'COMMENT'
     for (wt, _) in sentence:
         for (word, newTag) in taggedWord:
             if (wt == word):
-                if (wt, tag) not in arr:
+                if (wt, tag) not in arr and _ != commentTag:
                     arr.append((wt, tag))
             elif _ == tag:
                 pass
