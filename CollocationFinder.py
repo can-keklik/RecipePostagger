@@ -95,7 +95,7 @@ def giveTheMostCommonTag(tokenizedWords):
         table = nltk.FreqDist(t for w, t in brown.tagged_words() if w.lower() == lem)
         if len(table.most_common()) > 0:
             (tag, count) = table.most_common()[0]
-            if (tag == 'VB'):
-                retArr.append((tokenizedWords[i], tag))
+            retArr.append(table.most_common())
     return retArr
 
+print giveTheMostCommonTag(["cream"])

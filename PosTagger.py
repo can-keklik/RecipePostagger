@@ -366,13 +366,13 @@ def optimizeTagWithCollocation(param):
         return param
 
 
-def readData():
+def readData(index):
     df = pd.read_csv("/Users/Ozgen/Desktop/RecipeGit/csv/output.csv", encoding='utf8')
     # names=["index", "title", "ingredients", "directions"])
 
-    ingredients = df.ix[121, :].ingredients.encode('utf8')
+    ingredients = df.ix[index, :].ingredients.encode('utf8')
     ingredients = (utils.convertArrayToPureStr(ingredients))
-    directions = df.ix[121, :].directions.encode('utf8')
+    directions = df.ix[index, :].directions.encode('utf8')
     ingre = [posTagIngre(w) for w in ingredients]
     arr = posTaggText(directions)
     dire = tokenizeText(directions)
@@ -434,11 +434,11 @@ def readData():
 
         print(direWithNewTAG[i])
         print("----------------------")
-    GraphGenerator.GraphGenerator(direWithNewTAG, ingreWithNewTAG).createGraph("result121-3.dot")
+    GraphGenerator.GraphGenerator(direWithNewTAG, ingreWithNewTAG).createGraph("result"+str(index)+".dot")
 
 
-readData()
-UtilsIO.createPngFromDotFile("result121-3.dot", "result121-3.png")
+#readData()
+#UtilsIO.createPngFromDotFile("result121-3.dot", "result121-3.png")
 
 
 
