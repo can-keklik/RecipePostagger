@@ -7,4 +7,10 @@ def createGrapWithIndex(index):
     UtilsIO.createPngFromDotFile("result" + str(index) + ".dot", "result" + str(index) + ".png")
 
 
-createGrapWithIndex(20)
+def createGrapWithIndexForPaper(index):
+    PosTagger.readPaperData(index=index)
+    UtilsIO.createPngFromDotFile("result" + str(index) + ".dot", "result" + str(index) + ".png")
+
+
+
+createGrapWithIndexForPaper(0)
