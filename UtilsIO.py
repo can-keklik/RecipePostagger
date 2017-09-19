@@ -2,8 +2,11 @@ import os
 import shutil
 import sys
 
+import pandas as pd
 import pydot
 import unicodecsv as csv
+
+import utils
 
 
 def readFiles(fileName):
@@ -125,15 +128,16 @@ def getPaperDataFromPath(filepath):
     directionStartPoint ="Steps"
     ingredientStartPoint ="Ingredients"
     ingredientEndPoint = "Data Parsed from this"
-    #dummyPath = "/Users/Ozgen/Desktop/dataset/AnnotationSession/AnnotationSession-fulltext/amish-meatloaf.txt"
+    #dummyPath = "/Users/Ozgen/Desktop/dataset/AnnotationSession/AnnotationSession-fulltext/beer-and-bourbon-pulled-pork-sandwiches.txt"
     returnArr = []
     data = readFiles(filepath)
     output = data.split('\n')
-    output = [w for w in output if len(w)>0]
+    #output = [w for w in output if len(w)>0]
     startPointOfDirection = 0
     startPointOfIngre = 0
     endPointOfIngre = 0
     for i in xrange(len(output)):
+        #print i,output[i]
         if output[i] == directionStartPoint:
             startPointOfDirection = i
         elif output[i]== ingredientStartPoint:
@@ -143,13 +147,32 @@ def getPaperDataFromPath(filepath):
 
     title = output[0]
     directions = output[startPointOfDirection+1:startPointOfIngre]
+    newDirection = ""
+    newWord = ""
+    for w in directions :
+        if len(w)>0:
+            newWord = newWord +w+" "
+        elif len(w)==0:
+            newDirection = newDirection + newWord
+            newWord =""
     ingredients = output[startPointOfIngre+1:endPointOfIngre]
-    returnArr = [title, ingredients, directions]
+    ingredients =  [w for w in ingredients if len(w)>0]
+    returnArr = [title, ingredients, newDirection]
     return returnArr
 
+def readPaperData(index):
+    df = pd.read_csv("/Users/Ozgen/Desktop/RecipeGit/csv/paper.csv", encoding='utf8')
+    # names=["index", "title", "ingredients", "directions"])
 
+    ingredients = df.ix[index, :].ingredients.encode('utf8')
+    ingredients = (utils.convertArrayToPureStr(ingredients))
+    directions = df.ix[index, :].directions.encode('utf8')
 
+    print directions
+
+#readPaperData(13)
 #writePaperDataToCvsFile()
+#getPaperDataFromPath("")
 #print getFileList("/Users/Ozgen/Desktop/dataset/AnnotationSession","fulltext")[0]
 
 #print readMisleaDataFromPath("/Users/Ozgen/Desktop/dataset/BananaMuffins/BananaMuffins-steps/vegan-banana-muffins.txt")

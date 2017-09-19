@@ -1,5 +1,6 @@
 import PosTagger
 import UtilsIO
+import MisleaDataParser
 
 
 def createGrapWithIndex(index):
@@ -8,9 +9,10 @@ def createGrapWithIndex(index):
 
 
 def createGrapWithIndexForPaper(index):
-    PosTagger.readPaperData(index=index)
-    UtilsIO.createPngFromDotFile("result" + str(index) + ".dot", "result" + str(index) + ".png")
+    MisleaDataParser.readPaperData(index=index)
+    #UtilsIO.createPngFromDotFile("papers/result" + str(index) + ".dot", "papers/result" + str(index) + ".png")
 
 
-
-createGrapWithIndexForPaper(0)
+createGrapWithIndexForPaper(18)
+#for i in range(4,33,1):
+ #   createGrapWithIndexForPaper(i)

@@ -99,13 +99,12 @@ def tokenize(sentence):
         for w in xrange(len(stops)):
             lem = lemmatizer.lemmatize(stops[w], 'v')
             lemma.append(lem)
-    return stops  # todo change stops to lemma and configure ingredients for lemma
+    return stops  # todo change stops to lemma and configure ingredients for lemma, change titletokens
 
 
 def tokenizeText(text):
     arr = []
     sents = nltk.sent_tokenize(text)
-    print("sentem-nceasd", sents)
     for i in xrange(len(sents)):
         tokenizedSentence = tokenize(sents[i])
         arr.append(tokenizedSentence)
@@ -253,7 +252,6 @@ def giveTheMostCommonTag(tokenizedWords):
             if (tag == 'VB'):
                 if (word, tag) not in retArr:
                     retArr.append((word, tag))
-    print("verbMostCommon", retArr)
     return retArr
 
 
@@ -397,7 +395,8 @@ def readData(index):
         direWithNewTAG[i] = utils.checkVerbRemovePrep(direWithNewTAG[i])
         print(direWithNewTAG[i])
         a = [wt for (wt, _) in direWithNewTAG[i] if 'VERB' == _]
-        direWithNewTAG[i] = updateVerbTagIfVerbIsEmpty(direWithNewTAG[i], giveTheMostCommonTag(direWithNewTAG[i]))
+        if a == 0:
+            direWithNewTAG[i] = updateVerbTagIfVerbIsEmpty(direWithNewTAG[i], giveTheMostCommonTag(direWithNewTAG[i]))
 
         print("actions")
         print([wt for (wt, _) in direWithNewTAG[i] if 'VERB' == _])
@@ -438,75 +437,6 @@ def readData(index):
     GraphGenerator.GraphGenerator(direWithNewTAG, ingreWithNewTAG).createGraph("result"+str(index)+".dot")
 
 
-def readPaperData(index):
-    df = pd.read_csv("/Users/Ozgen/Desktop/RecipeGit/csv/paper.csv", encoding='utf8')
-    # names=["index", "title", "ingredients", "directions"])
-
-    ingredients = df.ix[index, :].ingredients.encode('utf8')
-    ingredients = (utils.convertArrayToPureStr(ingredients))
-    directions = df.ix[index, :].directions.encode('utf8')
-    ingre = [posTagIngre(w) for w in ingredients]
-    arr = posTaggText(directions)
-    dire = tokenizeText(directions)
-    ingreWithNewTAG = parse_ingredientForCRF(ingredients)
-    parsData = getNameEntityInIngre(ingreWithNewTAG)
-    direWithNewTAG = updateDireTagsAfterCRF(arr, ingreWithNewTAG)
-
-    print(getNameEntityInIngres(ingreWithNewTAG))
-    print("----------------------")
-
-    print("----------------------")
-
-    """
-    print(ingreWithNewTAG)
-    print(direWithNewTAG)
-    print(arr)
-"""
-
-    print("----------------------")
-    for i in xrange(len(direWithNewTAG)):
-        direWithNewTAG[i] = utils.checkVerbRemovePrep(direWithNewTAG[i])
-        print(direWithNewTAG[i])
-        a = [wt for (wt, _) in direWithNewTAG[i] if 'VERB' == _]
-        direWithNewTAG[i] = updateVerbTagIfVerbIsEmpty(direWithNewTAG[i], giveTheMostCommonTag(direWithNewTAG[i]))
-
-        print("actions")
-        print([wt for (wt, _) in direWithNewTAG[i] if 'VERB' == _])
-        print("tools ---", [wt for (wt, _) in direWithNewTAG[i] if 'NOUN' == _ or 'ADV' == _])
-        toolList = isTool([wt for (wt, _) in direWithNewTAG[i] if 'NOUN' == _ or 'ADV' == _])
-        direWithNewTAG[i] = updateForTools(direWithNewTAG[i], toolList)
-        if len([wt for (wt, _) in direWithNewTAG[i] if 'VERB' == _]) > 1:
-            direWithNewTAG[i] = optimizeTagWithCollocation(direWithNewTAG[i])
-
-        print([wt for (wt, _) in direWithNewTAG[i] if 'TOOL' == _])
-        print("ingredients")
-        print([wt for (wt, _) in direWithNewTAG[i] if 'NAME' == _])
-        if checkDireIfIngredientHasNot(dire[i], parsData):
-            print("probable ingedients")
-            # add probable ingredient to the newIngres
-            ingres = createCosSim(dire[i], parsData, makeFeatureVec(dire[i], model, 300))
-            newIngres = []
-            if len(ingres) > 0:
-                for w in ingres:
-                    ing = getSpecificIngredient(w, ingreWithNewTAG)
-                    if ing not in newIngres:
-                        newIngres.append(ing)
-            print(newIngres)
-            probablableIngre = " ".join(newIngres)
-            direWithNewTAG[i].append((probablableIngre, "PROBABLE"))
-
-        print("units")
-        print([wt for (wt, _) in direWithNewTAG[i] if 'UNIT' == _])
-
-        print("comments")
-        print([wt for (wt, _) in direWithNewTAG[i] if 'COMMENT' == _])
-
-        print("quantity")
-        print([wt for (wt, _) in direWithNewTAG[i] if 'QTY' == _])
-
-        print(direWithNewTAG[i])
-        print("----------------------")
-    GraphGenerator.GraphGenerator(direWithNewTAG, ingreWithNewTAG).createGraph("result"+str(index)+".dot")
 #readData()
 #UtilsIO.createPngFromDotFile("result121-3.dot", "result121-3.png")
 
