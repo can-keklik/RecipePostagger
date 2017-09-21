@@ -13,7 +13,6 @@ lemmatizer = WordNetLemmatizer()
 # this function is used for tagging ingredient
 
 def parse_ingredientForCRF(ingredients):
-
     returnArr = []
     eachIngre = []
     _, tmpFile = tempfile.mkstemp()
@@ -65,7 +64,7 @@ def updateDireTagsAfterCRF(dire, ingre):
                     ingredientLemma = lemmatizer.lemmatize(ingredient)
                     if direcWord == ingredient or direcWord == ingredientLemma:
                         if len(eachSent) < counter:
-                            eachSent.append((direcWord, TAG, j))
+                            eachSent.append((direcWord, TAG, j + 1))
             if len(eachSent) < counter:
                 eachSent.append((direcWord, _, 0))
         updatedArr.append(eachSent)

@@ -16,6 +16,7 @@ FALSE_VERB = "FV"
 INGRE_TAGS = ["NAME", "UNIT"]
 NEW_INGRE_TAG = "INGREDIENT"
 ACTION_TAGS = ["VERB", "ADP"]
+NEAR_ING_WHOLE_TAGS = ["UNIT", "ADP", "QTY", "COMMENT", "NUM"]
 
 
 def updateActionsForGraphGenearation(directions):
@@ -194,17 +195,14 @@ def updateIngreTagInSent2(sentence, sentIngreList):
     stringre = " ".join(str(ing) for ing in ingreList)
     for i in xrange(len(sentence)):
         (ws, ts, idxs) = sentence[i]
-        if str(ts) in str(INGRE_TAGS_STR) and str(ws) in str(stringre):
-            for j in xrange(len(sentIngreList)):
-                (wi, ti, idxi) = sentIngreList[j]
-                if str(ws) in str(wi) and (wi, ti, idxi) not in ingreUpdatedSentence:
-                    ingreUpdatedSentence.append((wi, ti, idxi))
+        if str(ws) in str(stringre):
+            if str(ts) in str(INGRE_TAGS_STR):
+                for j in xrange(len(sentIngreList)):
+                    (wi, ti, idxi) = sentIngreList[j]
+                    if str(ws) in str(wi) and (wi, ti, idxi) not in ingreUpdatedSentence:
+                        ingreUpdatedSentence.append((wi, ti, idxi))
         else:
             ingreUpdatedSentence.append((ws, ts, idxs))
-
-    updatedSentence = []
-    word = ""
-    ACTION_TAGS_STR = " ".join(str(ACTION) for ACTION in ACTION_TAGS)
 
     updatedSentence = []
     word = ""
@@ -242,29 +240,44 @@ def updateIngreTagInSent2(sentence, sentIngreList):
 
 def unionWordAndUpdateTags(sentence):
     idxes = [idx for (w, t, idx) in sentence if idx != 0]
+    names = [w for (w, t, idx) in sentence if t == "NAME"]
     # first union the ingredients
     idxes = list(set(idxes))
     sentIngreList = []
-    if len(idxes) > 0:
-        word = ""
-        tag = "INGREDIENT"
-        for i in xrange(len(idxes)):
+    if len(names) > 0:
+        indexes = []
+        indexAndId = []
+        for i in xrange(len(sentence)):
+            (w, t, idi) = sentence[i]
+            for name in names:
+                if w == name:
+                    indexes.append(i)
+                    indexAndId.append((i, idi))
+        if len(indexes) > 0:
+            sizeOfSent = len(sentence)
+            addingWord = ""
+            for i in xrange(len(indexAndId)):
+                (index, idy) = indexAndId[i]
+                (word, tag, ix) = sentence[index]
+                addingWord = word
+                if index > 1 and index < sizeOfSent - 1:
+                    x = int(index) - 1
+                    stn_tmp = sentence
+                    while x >= 0:
+                        (w_tpm, t_tmp, i_tmp) = stn_tmp[x]
+                        if t_tmp not in NEAR_ING_WHOLE_TAGS:
+                            break
+                        if t_tmp in NEAR_ING_WHOLE_TAGS:
+                            addingWord = w_tpm + " " + addingWord + " "
+                        x -= 1
+                    (w_f, t_f, i_f) = sentence[index + 1]
+                    if t_f == "NAME" and i_f == ix:
+                        addingWord = addingWord + w_f
 
-            for j in xrange(len(sentence)):
-                (w, t, idx) = sentence[j]
-                if idx == idxes[i]:
-                    if t == 'UNIT' and j > 1:
-                        (w_b, t_b, idx_b) = sentence[j - 1]
-                        if t_b == u'NUM':
-                            word = word + w_b + " " + w + " "
-                    else:
-                        word = word + w + " "
 
-            if len(word) > 0:
-                sentIngreList.append((word, tag, idxes[i]))
-                word = ""
-    return updateIngreTagInSent2(sentence=sentence, sentIngreList=sentIngreList)
-
+                    sentIngreList.append((addingWord, "INGREDIENT", ix))
+                    addingWord = ""
+            return updateIngreTagInSent2(sentence=sentence, sentIngreList=sentIngreList)
 
 
 def readPaperData(index):
@@ -289,6 +302,7 @@ def readPaperData(index):
         print("-------------------------------------")
         print(unionWordAndUpdateTags(direWithNewTAG[i]))
         ingArr = [w for (w, t, ix) in direWithNewTAG[i] if t == "INGREDIENT"]
+        print("-------------------------------------")
         print("-------------------------------------")
 
 
