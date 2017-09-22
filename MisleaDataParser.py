@@ -6,6 +6,7 @@ import pandas as pd
 
 import CollocationFinder
 import POSTaggerFuncs
+import WordToVecFunctions
 import utils
 from nltk.stem import WordNetLemmatizer
 
@@ -203,7 +204,10 @@ def updateIngreTagInSent2(sentence, sentIngreList):
                         ingreUpdatedSentence.append((wi, ti, idxi))
         else:
             ingreUpdatedSentence.append((ws, ts, idxs))
+    return ingreUpdatedSentence
 
+
+def updateVerbTagInSent(ingreUpdatedSentence):
     updatedSentence = []
     word = ""
     for i in xrange(len(ingreUpdatedSentence)):
@@ -221,18 +225,18 @@ def updateIngreTagInSent2(sentence, sentIngreList):
                     updatedSentence.append((word, tg, idx))
                     word = ""
                 else:
-                    tmp = [wa for (wa, ta, ix) in updatedSentence]
-                    str1 = ' '.join(str(e) for e in tmp)
+                    tmp1 = [wa for (wa, ta, ix) in updatedSentence]
+                    str1 = ' '.join(str(e) for e in tmp1)
                     if str(wg) not in str(str1) and (wg, tg, idx) not in updatedSentence:
                         updatedSentence.append((wg, tg, idx))
             else:
-                tmp = [wa for (wa, ta, ix) in updatedSentence]
-                str1 = ' '.join(str(e) for e in tmp)
+                tmp2 = [wa for (wa, ta, ix) in updatedSentence]
+                str1 = ' '.join(str(e) for e in tmp2)
                 if str(wg) not in str(str1) and (wg, tg, idx) not in updatedSentence:
                     updatedSentence.append((wg, tg, idx))
         else:
-            tmp = [wa for (wa, t, ix) in updatedSentence]
-            str1 = ' '.join(str(e) for e in tmp)
+            tmp3 = [wa for (wa, t, ix) in updatedSentence]
+            str1 = ' '.join(str(e) for e in tmp3)
             if str(wg) not in str(str1) and (wg, tg, idx) not in updatedSentence:
                 updatedSentence.append((wg, tg, idx))
     return updatedSentence
@@ -274,10 +278,9 @@ def unionWordAndUpdateTags(sentence):
                     if t_f == "NAME" and i_f == ix:
                         addingWord = addingWord + w_f
 
-
                     sentIngreList.append((addingWord, "INGREDIENT", ix))
                     addingWord = ""
-            return updateIngreTagInSent2(sentence=sentence, sentIngreList=sentIngreList)
+    return updateIngreTagInSent2(sentence=sentence, sentIngreList=sentIngreList)
 
 
 def readPaperData(index):
@@ -293,17 +296,23 @@ def readPaperData(index):
     ingreWithNewTAG = POSTaggerFuncs.parse_ingredientForCRF(ingredients)
     parsData = POSTaggerFuncs.getNameEntityInIngre(ingreWithNewTAG)
     direWithNewTAG = POSTaggerFuncs.updateDireTagsAfterCRF(arr, ingreWithNewTAG)
-
+    verbArr = []
     for i in xrange(len(direWithNewTAG)):
         toolList = isTool([wt for (wt, _, idx) in direWithNewTAG[i] if 'NOUN' == _ or 'ADV' == _])
 
         direWithNewTAG[i] = updateForTools(direWithNewTAG[i], toolList)
         print(direWithNewTAG[i])
         print("-------------------------------------")
-        print(unionWordAndUpdateTags(direWithNewTAG[i]))
-        ingArr = [w for (w, t, ix) in direWithNewTAG[i] if t == "INGREDIENT"]
+        ingeUpdate = unionWordAndUpdateTags(direWithNewTAG[i])
+        newTaggedDirection = updateVerbTagInSent(ingreUpdatedSentence=ingeUpdate)
+        print(newTaggedDirection)
+        ingArr = [w2 for (w2, t2, ix2) in newTaggedDirection if t2 == "INGREDIENT"]
+        tmp = [w for (w, t, ix) in newTaggedDirection if t == "VERB"]
+        if len(ingArr) == 0:
+            verbArr.append(tmp[0])
         print("-------------------------------------")
         print("-------------------------------------")
+    WordToVecFunctions.createCosSim(verbArray=verbArr)
 
 
 readPaperData(0)
