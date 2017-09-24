@@ -34,7 +34,7 @@ def updateActionsForGraphGenearation(directions):
                 if chechVerbHasIngSuffix(w):
                     w_new = w
                 else:
-                    w_new = FALSE_VERB
+                    w_new = w  # FALSE_VERB
             elif w in seen and t == "VERB":
                 num = addUp(w)
                 w_new = w + "_" + str(num)
@@ -317,16 +317,19 @@ def readPaperData(index):
         print("-------------------------------------")
         print("-------------------------------------")
         taggedNewDire.append(newTaggedDirection)
+    print("whole verbs", wholeVerbs)
+    print("Array verbs", verbArr)
     relatedVerbs = WordToVecFunctions.createCosSim(verbArray=verbArr, wholeVerbs=wholeVerbs)
     print(relatedVerbs)
     directionNew = updateActionsForGraphGenearation(taggedNewDire)
     for i in xrange(len(directionNew)):
         print(directionNew[i])
-    PaperGraphGenerator(directionNew, relatedVerbs).createGraph("result" + str(index) + ".dot")
+    PaperGraphGenerator(taggedNewDire, relatedVerbs).createGraph("result" + str(index) + ".dot")
 
 
 def createGrapWithIndexForPaper(index):
     readPaperData(index=index)
     UtilsIO.createPngFromDotFile("paper/result" + str(index) + ".dot", "paper/result" + str(index) + ".png")
+
 
 createGrapWithIndexForPaper(0)

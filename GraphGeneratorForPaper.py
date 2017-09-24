@@ -2,16 +2,171 @@ import os
 
 import pydot
 
+subVerb_tag = "SUBVERB"
+subIngre_Tag = "SUB_INGREIDENT"
+
 
 class PaperGraphGenerator:
     graph = pydot.Dot(graph_type='digraph')
-    listOfNodes = []
 
-    #todo generate a graph like the paper'
+    # todo generate a graph like the papers'
 
-    def __init__(self, taggedRecipe, taggedIngreDient):
+    def __init__(self, taggedRecipe, relatedVerbs):
         self.taggedRecipe = taggedRecipe
-        self.taggedIngredient = taggedIngreDient
+        self.relatedVerbs = relatedVerbs
+
+    def addHiddenEdge(self, node1, node2):
+        self.graph.add_edge(
+            pydot.Edge(node1, node2, label="Probable Ingredients", labelfontcolor="#009933", fontsize="10.0",
+                       color="blue"))
+
+    # return object     (word, tag, actionNode, indx, ingre_is)
+    def createEdgesToSentence(self, sentence, indx):
+        sentenceNodeArray = self.createSentenceNodes(sentence=sentence, indx=indx)
+        actionNodeWhole = [(word, tag, node, indx) for (word, tag, node, indx) in sentenceNodeArray if tag == "VERB"]
+        actionNodes = [node for (word, tag, node, indx) in sentenceNodeArray if tag == "VERB"]
+        subActionNodes = [node for (word, tag, node, indx) in sentenceNodeArray if tag == subVerb_tag]
+        subIngreNodes = [node for (word, tag, node, indx) in sentenceNodeArray if tag == subIngre_Tag]
+        ingredientNodes = [node for (word, tag, node, indx) in sentenceNodeArray if tag == "INGREDIENT"]
+        toolNodes = [node for (word, tag, node, indx) in sentenceNodeArray if tag == "TOOL"]
+        actionNode = actionNodes[0]
+        ingre_is = False
+        if len(ingredientNodes) > 0:
+            ingre_is = True
+            for node in ingredientNodes:
+                self.addEdge(node, actionNode)
+        if len(toolNodes) > 0:
+            for node in toolNodes:
+                self.addEdge(node, actionNode)
+        if len(subIngreNodes) > 0:
+            if len(subActionNodes) > 0:
+                for node in subIngreNodes:
+                    self.addEdge(node, subActionNodes[0])
+            else:
+                for node in subIngreNodes:
+                    self.addEdge(node, actionNode)
+        if len(subActionNodes) > 0:
+            for node in subActionNodes:
+                self.addEdge(node, actionNode)
+
+        (word, tag, node, indx) = actionNodeWhole[0]
+
+        return (word, tag, actionNode, indx, ingre_is)
+
+    # return array data type : (word, tag, node, indx)
+    def createSentenceNodes(self, sentence, indx):
+        tmp = [w for (w, t, ix) in sentence if t == "VERB"]
+        tmp_idx_array = []
+        sentenceNodes = []
+        if len(tmp) > 0:
+            for i in xrange(len(sentence)):
+                (word, tag, index) = sentence[i]
+                if tag == "VERB":
+                    if word == tmp[0]:
+                        nodeAction = self.createNode(tag, word)
+                        sentenceNodes.append((word, tag, nodeAction, indx))
+                    else:
+                        node = self.createNode(subVerb_tag, word)
+                        sentenceNodes.append((word, subVerb_tag, node, indx))
+                        tmp_idx_array.append(i)
+                elif tag == "INGREDIENT":
+                    if self.checkIndex(i, tmp_idx_array):
+                        node = self.createNode(tag, word)
+                        sentenceNodes.append((word, subIngre_Tag, node, indx))
+                    else:
+                        node = self.createNode(tag, word)
+                        sentenceNodes.append((word, tag, node, indx))
+
+                elif tag == "TOOL":
+                    node = self.createNode(tag, word)
+                    sentenceNodes.append((word, tag, node, indx))
+
+        return sentenceNodes
+
+    def addEdge(self, node1, nodeAction):
+        self.graph.add_edge(pydot.Edge(node1, nodeAction))
+
+    def createGraph(self, dotFileName):
+        tagRecipes = self.taggedRecipe
+        sentenceActionNodes = []
+        for i in xrange(len(tagRecipes)):
+            sentenceActionNodes.append(self.createEdgesToSentence(sentence=tagRecipes[i], indx=i))
+        for i in xrange(len(sentenceActionNodes)):
+            self.addNodeToTheGraph(node_detailed=sentenceActionNodes[i], nodeArray=sentenceActionNodes)
+
+        path = os.getcwd()
+        if dotFileName:
+            path = path + "/results/paper/"
+            self.graph.write(path + dotFileName)
+
+    def addNodeToTheGraph(self, node_detailed, nodeArray):
+        (word, tag, actionNode, indx, ingre_is) = node_detailed
+        last_node = self.getLastNode(nodeArray)
+
+        if actionNode == self.getFistIngreActionNode(nodeArray):
+            next_node = self.getNextNode(actionNode, nodeArray)
+            if next_node:
+                self.addEdge(actionNode, next_node)
+        elif actionNode == last_node:
+            pass
+        else:
+            if ingre_is:
+                next_node = self.getNextNode(actionNode, nodeArray)
+                if next_node:
+                    self.addEdge(actionNode, next_node)
+            else:
+                node_forNonIngeAction = self.getNodeForNoneIngeNode(node_detailed, nodeArray)
+                if node_forNonIngeAction:
+                    self.addEdge(actionNode, node_forNonIngeAction)
+
+    def getNodeForNoneIngeNode(self, node, arr):
+        (word, tag, action, indx, ingre_is) = node
+        word_to_Link = self.get_word_to_link(node)
+        prevNode = self.getPrevNode(action, arr)
+        for (word, tag, actionNode, indx, ingre_is) in arr:
+            if word_to_Link == word:
+                if actionNode != prevNode:
+                    return actionNode
+                else:
+                    nextNode = self.getNextNode(action, arr)
+                    if nextNode:
+                        return nextNode
+
+    def get_word_to_link(self, sentenceNode):
+        (word, tag, actionNode, indx, ingre_is) = sentenceNode
+        w_to_link = ""
+        w_p = 0
+        for (word_we_search, word_we_link_to, p) in self.relatedVerbs:
+            if word == word_we_search:
+                if len(w_to_link) == 0:
+                    w_to_link = word_we_link_to
+                    w_p = p
+                elif p > w_p:
+                    w_to_link = word_we_link_to
+        return w_to_link
+
+    def createNode(self, TAG, word):
+        if TAG == "VERB":
+            node = self.createActionNode(word)
+            self.graph.add_node(node)
+            return node
+        elif TAG == "TOOL":
+            node = self.createToolNode(word)
+            self.graph.add_node(node)
+            return node
+        elif TAG == "INGREDIENT":
+            node = self.createIngredientNode(word)
+            self.graph.add_node(node)
+            return node
+        elif TAG == "SUBVERB":
+            node = self.createSubActionNode(word)
+            self.graph.add_node(node)
+            return node
+        elif TAG == "PROBABLE":
+            node = self.createProbableIngreNode(word)
+            self.graph.add_node(node)
+            return node
+            # todo implement probable ingredients here
 
     def createActionNode(self, word):
         return pydot.Node(word, style="filled", fillcolor="red")
@@ -28,168 +183,39 @@ class PaperGraphGenerator:
     def createProbableIngreNode(self, words):
         return pydot.Node(words, style="filled", fillcolor="#ffff66")
 
-    def addHiddenEdge(self, node1, node2):
-        self.graph.add_edge(
-            pydot.Edge(node1, node2, label="Probable Ingredients", labelfontcolor="#009933", fontsize="10.0",
-                       color="blue"))
+    def createSubActionNode(self, word):
+        return pydot.Node(word, style="filled", fillcolor="#42e2f4")
 
-    def createDirectionNode(self):
-        arr = [w for (w, T) in self.taggedRecipe]
-        directionWhole = " ".join(arr)
-        return pydot.Node(directionWhole, style="filled", fillcolor="#ffffff")
+    def checkIndex(self, i, i_arr):
 
-    def createIngreWholeNode(self):
-        arr = [w for (w, T) in self.taggedIngredient]
-        ingWhole = " ".join(arr)
-        return pydot.Node(ingWhole, style="filled", fillcolor="#ccf5ff")
+        isTrue = False
+        for ix in i_arr:
+            if i > ix:
+                isTrue = True
 
-    def createNode(self, TAG, word):
-        if TAG == "VERB":
-            return self.createActionNode(word)
-        elif TAG == "TOOL":
-            return self.createToolNode(word)
-        elif TAG == "NAME":
-            return self.createIngredientNode(word)
-        elif TAG == "COMMENT":
-            return self.createCommentNode(word)
-        elif TAG == "PROBABLE":
-            return self.createProbableIngreNode(word)
-            # todo implement probable ingredients here
+        return isTrue
 
-    def createNODES(self):
-        tagRecipes = self.taggedRecipe
-        recipeNode = RecipeNode()
-        # self.graph.add_node(self.createDirectionNode())
-        # self.graph.add_node(self.createIngreWholeNode())
-        for j in xrange(len(tagRecipes)):
-            unions = self.unionWordAndTag(tagRecipes[j])
+    def getFistIngreActionNode(self, arr):
 
-            for i, (w, T) in enumerate(unions):
-                node = self.createNode(T, w)
-                if node:
-                    if T == "VERB":
-                        recipeNode.addActionNode(j, node)
-                        self.graph.add_node(node)
-                    elif T == "TOOL":
-                        recipeNode.addToolNode(j, node)
-                        self.graph.add_node(node)
-                    elif T == "NAME":
-                        recipeNode.addIngredientNode(j, node)
-                        self.graph.add_node(node)
-                    elif T == "COMMENT":
-                        recipeNode.addCommentNode(j, node)
-                        self.graph.add_node(node)
-                    elif T == "PROBABLE":
-                        recipeNode.addProbableIngreNode(j, node)
-                        self.graph.add_node(node)
-        return recipeNode
+        for i in xrange(len(arr)):
+            (word, tag, actionNode, indx, ingre_is) = arr[i]
+            if ingre_is:
+                return actionNode
 
-    def createGraph(self, dotFileName):
-        recipeNode = self.createNODES()
+    def getNextNode(self, node, arr):
+        for i, (w, t, n, idx, isIngre) in enumerate(arr):
+            if i < len(arr) - 1:
+                if node == n:
+                    (w_f, t_f, n_f, idx_f, isIngre_f) = arr[i + 1]
+                    return n_f
 
-        if len(recipeNode.actionNodeList) > 0:
-            for j, (i, node) in enumerate(recipeNode.actionNodeList):
-                if j < len(recipeNode.actionNodeList) - 1:
-                    (index1, node1) = recipeNode.actionNodeList[j]
-                    (index2, node2) = recipeNode.actionNodeList[j + 1]
-                    self.graph.add_edge(pydot.Edge(node1, node2))
-                    # action Nodes are added
+    def getLastNode(self, arr):
+        (w, t, n, idx, isIngre) = arr[len(arr) - 1]
+        return n
 
-            for j, (i, nodeAc) in enumerate(recipeNode.actionNodeList):
-                for k, (l, nodeIngre) in enumerate(recipeNode.ingredientNodeList):
-                    if i == l:
-                        self.graph.add_edge(pydot.Edge(nodeIngre, nodeAc))
-            for j, (i, nodeAc) in enumerate(recipeNode.actionNodeList):
-                for k, (l, nodeTool) in enumerate(recipeNode.toolNodeList):
-                    if i == l:
-                        self.graph.add_edge(pydot.Edge(nodeTool, nodeAc))
-            for j, (i, nodeAc) in enumerate(recipeNode.actionNodeList):
-                for k, (l, nodeProbable) in enumerate(recipeNode.probableIngreList):
-                    if i == l:
-                        self.addHiddenEdge(nodeProbable, nodeAc)
-
-        path = os.getcwd()
-        if dotFileName:
-            path = path + "/results/papers/"
-            self.graph.write(path + dotFileName)
-
-    def getNameEntityInIngres(self):
-        returnArr = []
-        for i in xrange(len(self.taggedRecipe)):
-            arr = [wt for (wt, _) in self.taggedRecipe[i] if 'NAME' in _]
-            if (len(arr) > 0):
-                newW = " ".join(arr)
-                returnArr.append(newW)
-        return returnArr
-
-    def getSpecificIngredient(self, word):
-        ingList = self.getNameEntityInIngres()
-        retIngre = ""
-        for w in ingList:
-            if word in w:
-                retIngre = w
-
-        return retIngre
-
-    def unionWordAndTag(self, sentence):
-        nameTagList = [wt for (wt, _) in sentence if ('NAME' == _)]
-        allList = [wt for (wt, _) in sentence if ('NAME' == _ or 'QTY' == _ or "UNIT" == _)]
-        unionList = []
-        tmp = 1000
-        if len(allList) > 0 and len(nameTagList) > 0:
-            oldIndex = 0
-            newSplitedList = []
-            for i in xrange(len(nameTagList)):
-
-                for j in xrange(len(allList)):
-                    if nameTagList[i] == allList[j]:
-                        a = allList[oldIndex:j + 1]
-                        oldIndex = j + 1
-                        newW = " ".join(a)
-                        newSplitedList.append(newW)
-            for i, (w, T) in enumerate(sentence):
-                if T != "QTY" and T != "UNIT" and T != "NAME":
-                    unionList.append((w, T))
-                elif T == "NAME":
-                    for j in xrange(len(newSplitedList)):
-                        if w in newSplitedList[j]:
-                            if tmp == 1000:
-                                tmp = j
-                                unionList.append((newSplitedList[j], "NAME"))
-                            if (j == tmp):
-                                break
-                            else:
-                                unionList.append((newSplitedList[j], "NAME"))
-                                tmp = j
-
-            return unionList
-        else:
-            return sentence
-
-
-class RecipeNode:
-    actionNodeList = []
-    ingredientNodeList = []
-    toolNodeList = []
-    commentToolList = []
-    probableIngreList = []
-
-    def __init__(self):
-        pass
-
-    def addActionNode(self, i, node):
-        self.actionNodeList.append((i, node))
-
-    def addIngredientNode(self, i, node):
-        self.ingredientNodeList.append((i, node))
-
-    def addToolNode(self, i, node):
-        self.toolNodeList.append((i, node))
-
-    def addCommentNode(self, i, node):
-        self.commentToolList.append((i, node))
-
-    def addProbableIngreNode(self, i, node):
-        self.probableIngreList.append((i, node))
-
-    
+    def getPrevNode(self, node, arr):
+        for i, (w, t, n, idx, isIngre) in enumerate(arr):
+            if i > 1:
+                if node == n:
+                    (w_f, t_f, n_f, idx_f, isIngre_f) = arr[i - 1]
+                    return n_f

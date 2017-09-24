@@ -13,6 +13,6 @@ def createGrapWithIndexForPaper(index):
     #UtilsIO.createPngFromDotFile("papers/result" + str(index) + ".dot", "papers/result" + str(index) + ".png")
 
 
-createGrapWithIndexForPaper(18)
+createGrapWithIndex(18)
 #for i in range(4,33,1):
  #   createGrapWithIndexForPaper(i)
