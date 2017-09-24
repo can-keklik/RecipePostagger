@@ -411,7 +411,7 @@ tools = [
     , "oven"
     , "oven mitts"
     , "pan"
-    , "parchment paper"
+    , "parchment papers"
     , "paring knife"
     , "pastry bag"
     , "peeler"

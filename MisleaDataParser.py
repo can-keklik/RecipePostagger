@@ -6,6 +6,7 @@ import pandas as pd
 
 import CollocationFinder
 import POSTaggerFuncs
+import UtilsIO
 import WordToVecFunctions
 import utils
 from nltk.stem import WordNetLemmatizer
@@ -26,7 +27,7 @@ def updateActionsForGraphGenearation(directions):
     for i in xrange(len(directions)):
         direction = directions[i]
         retArr = []
-        for (w, t) in direction:
+        for (w, t, idx) in direction:
             w_new = ""
             if w not in seen and t == "VERB":
                 seen.add(w)
@@ -42,7 +43,7 @@ def updateActionsForGraphGenearation(directions):
                 if w_new != FALSE_VERB:
                     w_new = w
             if w_new != FALSE_VERB:
-                retArr.append((w_new, t))
+                retArr.append((w_new, t, idx))
 
         retArrAll.append(retArr)
 
@@ -297,6 +298,8 @@ def readPaperData(index):
     parsData = POSTaggerFuncs.getNameEntityInIngre(ingreWithNewTAG)
     direWithNewTAG = POSTaggerFuncs.updateDireTagsAfterCRF(arr, ingreWithNewTAG)
     verbArr = []
+    wholeVerbs = []
+    taggedNewDire = []
     for i in xrange(len(direWithNewTAG)):
         toolList = isTool([wt for (wt, _, idx) in direWithNewTAG[i] if 'NOUN' == _ or 'ADV' == _])
 
@@ -308,11 +311,22 @@ def readPaperData(index):
         print(newTaggedDirection)
         ingArr = [w2 for (w2, t2, ix2) in newTaggedDirection if t2 == "INGREDIENT"]
         tmp = [w for (w, t, ix) in newTaggedDirection if t == "VERB"]
+        wholeVerbs.append(tmp[0])
         if len(ingArr) == 0:
             verbArr.append(tmp[0])
         print("-------------------------------------")
         print("-------------------------------------")
-    WordToVecFunctions.createCosSim(verbArray=verbArr)
+        taggedNewDire.append(newTaggedDirection)
+    relatedVerbs = WordToVecFunctions.createCosSim(verbArray=verbArr, wholeVerbs=wholeVerbs)
+    print(relatedVerbs)
+    directionNew = updateActionsForGraphGenearation(taggedNewDire)
+    for i in xrange(len(directionNew)):
+        print(directionNew[i])
+    PaperGraphGenerator(directionNew, relatedVerbs).createGraph("result" + str(index) + ".dot")
 
 
-readPaperData(0)
+def createGrapWithIndexForPaper(index):
+    readPaperData(index=index)
+    UtilsIO.createPngFromDotFile("paper/result" + str(index) + ".dot", "paper/result" + str(index) + ".png")
+
+createGrapWithIndexForPaper(0)

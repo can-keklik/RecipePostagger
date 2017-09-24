@@ -34,11 +34,11 @@ def makeFeatureVec(words, model, num_features):
     return featureVec
 
 
-def createCosSim(verbArray):
+def createCosSim(verbArray, wholeVerbs):
     cosSimArr = []
     for vr in verbArray:
         arry = []
-        secondVerbArr = [v for v in verbArray if v != vr]
+        secondVerbArr = [v for v in wholeVerbs if v != vr]
         vrArr = str(vr).split(" ")
         if len(vrArr) > 1:
             verb1 = makeFeatureVec(vrArr, model=model, num_features=300)
@@ -65,6 +65,6 @@ def createCosSim(verbArray):
             data = arry[i]
             p = (data[2] - minVal) / (maxVal - minVal);
             if p > 0.90:  # todo check min max value
-                if (data[0], data[1]) not in cosSimArr:
+                if (data[0], data[1], p) not in cosSimArr:
                     cosSimArr.append((data[0], data[1], p))
-    print(cosSimArr)
+    return cosSimArr

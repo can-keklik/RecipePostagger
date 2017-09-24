@@ -69,7 +69,7 @@ def readWholeDirections():
     return wholeData
 
 def readWholeDirectionsFromPaper():
-    df = pd.read_csv("/Users/Ozgen/Desktop/RecipeGit/csv/paper.csv", encoding='utf8')
+    df = pd.read_csv("/Users/Ozgen/Desktop/RecipeGit/csv/papers.csv", encoding='utf8')
     for i in xrange(1, 33):
         directions = df.ix[i, :].directions.encode('utf8')
         removedPunctiationsData = directions.translate(None, string.punctuation)
