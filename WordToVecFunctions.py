@@ -64,7 +64,7 @@ def createCosSim(verbArray, wholeVerbs):
         for i in xrange(len(arry)):
             data = arry[i]
             p = (data[2] - minVal) / (maxVal - minVal);
-            if p > 0.80:  # todo check min max value
+            if p > 0.90:  # todo check min max value
                 if (data[0], data[1], p) not in cosSimArr and (data[1], data[0], p) not in cosSimArr:
                     cosSimArr.append((data[0], data[1], p))
     return cosSimArr

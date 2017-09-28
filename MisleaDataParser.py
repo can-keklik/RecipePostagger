@@ -94,8 +94,14 @@ def isTool(words):
     arr = []
     if (len(words) > 0):
         for i in xrange(len(words)):
-            lemma = POSTaggerFuncs.lemmatizer.lemmatize(word=words[i])
-            arr.append(lemma)
+            lemma = ""
+            if len(str(words[i])) > 2:
+                try:
+                    lemma = POSTaggerFuncs.lemmatizer.lemmatize(word=words[i])
+                except:
+                    lemma = ""
+                    pass
+                arr.append(lemma)
 
     sentence = " ".join(arr)
 
@@ -110,7 +116,12 @@ def updateForTools(direSent, toolList):
 
     if len(toolList) > 0:
         for (direW, TAG, idx) in direSent:
-            lemma = POSTaggerFuncs.lemmatizer.lemmatize(direW)
+            lemma = ""
+            try:
+                lemma = POSTaggerFuncs.lemmatizer.lemmatize(direW)
+            except:
+                lemma = ""
+
             for w in toolList:
                 if lemma in w:
                     if (w, "TOOL") not in returnArr:
@@ -311,8 +322,9 @@ def readPaperData(index):
         print(newTaggedDirection)
         ingArr = [w2 for (w2, t2, ix2) in newTaggedDirection if t2 == "INGREDIENT"]
         tmp = [w for (w, t, ix) in newTaggedDirection if t == "VERB"]
-        wholeVerbs.append(tmp[0])
-        if len(ingArr) == 0:
+        if len(tmp) > 0:
+            wholeVerbs.append(tmp[0])
+        if len(ingArr) == 0 and len(tmp) > 0:
             verbArr.append(tmp[0])
         print("-------------------------------------")
         print("-------------------------------------")
@@ -324,7 +336,7 @@ def readPaperData(index):
     directionNew = updateActionsForGraphGenearation(taggedNewDire)
     for i in xrange(len(directionNew)):
         print(directionNew[i])
-    PaperGraphGenerator(taggedNewDire, relatedVerbs).createGraph("result" + str(index) + ".dot")
+    PaperGraphGenerator(directionNew, relatedVerbs).createGraph("result" + str(index) + ".dot")
 
 
 def createGrapWithIndexForPaper(index):
@@ -332,4 +344,4 @@ def createGrapWithIndexForPaper(index):
     UtilsIO.createPngFromDotFile("paper/result" + str(index) + ".dot", "paper/result" + str(index) + ".png")
 
 
-createGrapWithIndexForPaper(0)
+createGrapWithIndexForPaper(1)

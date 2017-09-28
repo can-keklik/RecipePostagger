@@ -25,6 +25,8 @@ class PaperGraphGenerator:
         sentenceNodeArray = self.createSentenceNodes(sentence=sentence, indx=indx)
         actionNodeWhole = [(word, tag, node, indx) for (word, tag, node, indx) in sentenceNodeArray if tag == "VERB"]
         actionNodes = [node for (word, tag, node, indx) in sentenceNodeArray if tag == "VERB"]
+        if len(actionNodes) == 0:
+            return
         subActionNodes = [node for (word, tag, node, indx) in sentenceNodeArray if tag == subVerb_tag]
         subIngreNodes = [node for (word, tag, node, indx) in sentenceNodeArray if tag == subIngre_Tag]
         ingredientNodes = [node for (word, tag, node, indx) in sentenceNodeArray if tag == "INGREDIENT"]
@@ -102,26 +104,31 @@ class PaperGraphGenerator:
     def addNodeToTheGraph(self, node_detailed, nodeArray):
         (word, tag, actionNode, indx, ingre_is) = node_detailed
         last_node = self.getLastNode(nodeArray)
-
-        if actionNode == self.getFistIngreActionNode(nodeArray):
-            next_node = self.getNextNode(actionNode, nodeArray)
-            if next_node:
-                self.addEdge(actionNode, next_node)
-        elif actionNode == last_node:
-            pass
-        else:
-            if ingre_is:
+        fist_node = self.getFistIngreActionNode(nodeArray)
+        if fist_node:
+            if actionNode == fist_node:
                 next_node = self.getNextNode(actionNode, nodeArray)
                 if next_node:
                     self.addEdge(actionNode, next_node)
+            elif actionNode == last_node:
+                pass
             else:
-                node_forNonIngeAction = self.getNodeForNoneIngeNode(node_detailed, nodeArray)
-                if node_forNonIngeAction:
-                    self.addEdge(actionNode, node_forNonIngeAction)
+                if ingre_is:
+                    next_node = self.getNextNode(actionNode, nodeArray)
+                    if next_node:
+                        self.addEdge(actionNode, next_node)
+                else:
+                    node_forNonIngeAction = self.getNodeForNoneIngeNode(node_detailed, nodeArray)
+                    if node_forNonIngeAction:
+                        self.addEdge(actionNode, node_forNonIngeAction)
+                    else:
+                        next_node = self.getNextNode(actionNode, nodeArray)
+                        if next_node:
+                            self.addEdge(actionNode, next_node)
 
     def getNodeForNoneIngeNode(self, node, arr):
         (word, tag, action, indx, ingre_is) = node
-        word_to_Link = self.get_word_to_link(node)
+        word_to_Link = self.get_word_to_link(node, arr)
         prevNode = self.getPrevNode(action, arr)
         for (word, tag, actionNode, indx, ingre_is) in arr:
             if word_to_Link == word:
@@ -132,17 +139,27 @@ class PaperGraphGenerator:
                     if nextNode:
                         return nextNode
 
-    def get_word_to_link(self, sentenceNode):
+    def get_word_to_link(self, sentenceNode, arr):
         (word, tag, actionNode, indx, ingre_is) = sentenceNode
         w_to_link = ""
         w_p = 0
+        next_node = self.getNexTuple(actionNode, arr)
+        next_word = ""
         for (word_we_search, word_we_link_to, p) in self.relatedVerbs:
             if word == word_we_search:
                 if len(w_to_link) == 0:
                     w_to_link = word_we_link_to
                     w_p = p
+                    if next_node:
+                        (w_f, t_f, n_f, idx_f, isIngre_f) = next_node
+                        next_word = w_f
+                        if str(w_to_link) in str(next_word):
+                            w_to_link = next_word
+
                 elif p > w_p:
-                    w_to_link = word_we_link_to
+                    if not str(w_to_link) in str(next_word):
+                        w_to_link = word_we_link_to
+
         return w_to_link
 
     def createNode(self, TAG, word):
@@ -196,7 +213,8 @@ class PaperGraphGenerator:
         return isTrue
 
     def getFistIngreActionNode(self, arr):
-
+        if arr == None:
+            return
         for i in xrange(len(arr)):
             (word, tag, actionNode, indx, ingre_is) = arr[i]
             if ingre_is:
@@ -208,6 +226,12 @@ class PaperGraphGenerator:
                 if node == n:
                     (w_f, t_f, n_f, idx_f, isIngre_f) = arr[i + 1]
                     return n_f
+
+    def getNexTuple(self, node, arr):
+        for i, (w, t, n, idx, isIngre) in enumerate(arr):
+            if i < len(arr) - 1:
+                if node == n:
+                    return arr[i + 1]
 
     def getLastNode(self, arr):
         (w, t, n, idx, isIngre) = arr[len(arr) - 1]
