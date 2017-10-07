@@ -73,7 +73,7 @@ class GraphGeneratorForPaper:
         word_to_Link = self.get_word_to_link(node)
         prevNode = self.getPrevNode(action)
         for (actionNode, word, ingre_is) in self.action_nodes:
-            if word_to_Link == word and len(word_to_Link) > 0:
+            if str(word_to_Link) in str(word) and len(word_to_Link) > 0:
                 if actionNode != prevNode:
                     return actionNode
                 else:
@@ -85,6 +85,7 @@ class GraphGeneratorForPaper:
         (actionNode, word, ingre_is) = sentenceNode
         w_to_link = ""
         w_p = 0
+        word = str(word).split("-")[0]
         next_node = self.getNexTuple(actionNode)
         next_word = ""
         for (word_we_search, word_we_link_to, p) in self.relatedVerbs:
@@ -132,7 +133,7 @@ class GraphGeneratorForPaper:
                     if node:
                         self.addEdge(node1=node, nodeAction=action_node)
 
-        return (action_node, word_return + " " + str(idx), is_Ingre)
+        return (action_node, word_return + "-" + str(idx), is_Ingre)
 
     def createNode(self, TAG, word, idx):
         if TAG == self.PRED or TAG == self.PRED_PREP:
