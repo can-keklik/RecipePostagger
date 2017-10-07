@@ -8,8 +8,6 @@ import utils
 from nltk.stem.wordnet import WordNetLemmatizer
 from nltk.corpus import brown
 
-
-
 ignored_words = nltk.corpus.stopwords.words('english')
 bigram_measures = nltk.collocations.BigramAssocMeasures()
 trigram_measures = nltk.collocations.TrigramAssocMeasures()
@@ -38,6 +36,7 @@ def calculateCollocation(word):
 
     return retArr
 
+
 def calculateCollocationFromPaper(word):
     retArr = []
     global wholeData
@@ -58,6 +57,7 @@ def calculateCollocationFromPaper(word):
 
     return retArr
 
+
 def readWholeDirections():
     df = pd.read_csv("/Users/Ozgen/Desktop/RecipeGit/csv/output.csv", encoding='utf8')
     for i in xrange(1, 10426):
@@ -68,6 +68,7 @@ def readWholeDirections():
         wholeData.extend(unionToolWords(stops))
     return wholeData
 
+
 def readWholeDirectionsFromPaper():
     df = pd.read_csv("/Users/Ozgen/Desktop/RecipeGit/csv/papers.csv", encoding='utf8')
     for i in xrange(1, 33):
@@ -77,6 +78,7 @@ def readWholeDirectionsFromPaper():
         stops = [w.lower() for w in titleTokens if w not in ignored_words and len(w) > 2]
         wholeData.extend(unionToolWords(stops))
     return wholeData
+
 
 def convertTools_fromcsv():
     df = pd.read_csv("/Users/Ozgen/Desktop/RecipeGit/csv/output.csv", encoding='utf8')
@@ -113,8 +115,8 @@ def unionToolWords(directionToken):
     return retArr
 
 
-#convertTools_fromcsv()
-#print calculateCollocation("cookie_sheet")
+# convertTools_fromcsv()
+# print calculateCollocation("cookie_sheet")
 
 def giveTheMostCommonTag(tokenizedWords):
     retArr = [];
@@ -123,7 +125,27 @@ def giveTheMostCommonTag(tokenizedWords):
         table = nltk.FreqDist(t for w, t in brown.tagged_words() if w.lower() == lem)
         if len(table.most_common()) > 0:
             (tag, count) = table.most_common()[0]
-            retArr.append(table.most_common())
+            retArr.extend(table.most_common())
     return retArr
 
-#print giveTheMostCommonTag(["cream"])
+
+def giveTheMostCommonTagg(array):
+    tmpArr = []
+    retNoun = ""
+    cnt = 0
+    for noun in array:
+        a = [(noun, t, c) for (t, c) in giveTheMostCommonTag([noun]) if t == "VB" or t == "VDB"]
+        if len(a) > 0:
+            tmpArr.extend(a)
+    if len(tmpArr) > 0:
+        for i, (n, t, c) in enumerate(tmpArr):
+            if len(retNoun) == 0:
+                retNoun = n
+                cnt = c
+            else:
+                if c > cnt:
+                    retNoun = n
+    return retNoun
+
+
+#print(giveTheMostCommonTagg(["beat", "medium"]))

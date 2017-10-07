@@ -168,7 +168,7 @@ class PaperGraphGenerator:
             self.graph.add_node(node)
             return node
         elif TAG == "TOOL":
-            node = self.createToolNode(word)
+            node = self.createToolNode(word+" ")
             self.graph.add_node(node)
             return node
         elif TAG == "INGREDIENT":
