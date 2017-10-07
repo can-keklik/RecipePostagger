@@ -568,4 +568,4 @@ def createGrapWithIndexForPaper2(index):
     UtilsIO.createPngFromDotFile("paper/result" + str(index) + ".dot", "paper/result" + str(index) + ".png")
 
 
-createGrapWithIndexForPaper2(0)
+createGrapWithIndexForPaper2(20)
