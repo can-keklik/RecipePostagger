@@ -69,6 +69,14 @@ After Domain Adaptaion:
 
 ![alt tag](https://github.com/ozgen/RecipePostagger/blob/master/results/result121-3.png)
 
+latest results:
+![alt tag](https://github.com/ozgen/RecipePostagger/blob/master/results/paper/result0.png)
+![alt tag](https://github.com/ozgen/RecipePostagger/blob/master/results/paper/result20.png)
+
+
+
+
+
 
 
 
