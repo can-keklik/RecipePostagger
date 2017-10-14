@@ -1,0 +1,116 @@
+title : amish-meatloaf
+
+SENT_ID :0
+PRED : cook
+NON_INGREDIENT_SPAN_VERB : cook
+NON_INGREDIENT_SPAN_VERB : cook
+INGREDIENTS : beef
+INGREDIENTS : oil
+INGREDIENT_SPAN : with with with oil
+INGREDIENTS : salt
+PARG : pan
+NON_INGREDIENT_SPAN : in pan
+PARG : skillet
+NON_INGREDIENT_SPAN : a skillet
+DOBJ : with with with oil
+
+SENT_ID :1
+PRED : smooth
+INGREDIENTS : onion soup
+PARG : blender
+NON_INGREDIENT_SPAN : in a blender
+
+SENT_ID :2
+PRED : drain
+
+SENT_ID :3
+PRED : stir
+NON_INGREDIENT_SPAN_VERB : pureed
+NON_INGREDIENT_SPAN_VERB : into reduce
+INGREDIENTS : soup
+
+SENT_ID :4
+PRED : stir
+PRED_PREP : stir in
+NON_INGREDIENT_SPAN_VERB : until combined
+INGREDIENTS : chili powder
+INGREDIENT_SPAN : in chili powder
+INGREDIENTS : cumin
+INGREDIENTS : pepper
+INGREDIENTS : tomato paste tomato
+INGREDIENTS : sauce
+INGREDIENTS : beans
+DOBJ : in chili powder
+
+SENT_ID :5
+PRED : stir
+PRED_PREP : stir in
+INGREDIENTS : cocoa
+INGREDIENT_SPAN : in cocoa
+DOBJ : in cocoa
+
+SENT_ID :6
+PRED : heat
+PRED_PREP : heat through
+NON_INGREDIENT_SPAN_VERB : through serve
+
+SENT_ID :7
+PRED : preheat
+PARG : oven
+NON_INGREDIENT_SPAN : the oven
+
+SENT_ID :8
+PRED : mix
+PRED_PREP : mix together
+NON_INGREDIENT_SPAN_VERB : until blended
+INGREDIENTS : beef
+INGREDIENT_SPAN : ground beef
+INGREDIENTS : crackers
+INGREDIENT_SPAN : crushed crackers
+INGREDIENTS : onion
+INGREDIENTS : eggs
+INGREDIENTS : ketchup
+INGREDIENT_SPAN : 3/4 cup ketchup
+INGREDIENTS : brown sugar
+INGREDIENT_SPAN : 1/4 cup brown sugar
+PARG : bowl
+NON_INGREDIENT_SPAN : in a medium bowl
+DOBJ : ground beef - crushed crackers - 3/4 cup ketchup - 1/4 cup brown sugar
+
+SENT_ID :9
+PRED : press
+PRED_PREP : press into
+PARG : pan
+NON_INGREDIENT_SPAN : into pan
+NON_INGREDIENT_SPAN : 9x5 inch loaf pan
+
+SENT_ID :10
+PRED : lay
+INGREDIENTS : bacon
+INGREDIENT_SPAN : the two slices of bacon
+DOBJ : the two slices of bacon
+
+SENT_ID :11
+PRED : bake
+PRED_PREP : bake for
+NON_INGREDIENT_SPAN_VERB : until cooked
+PARG : oven
+NON_INGREDIENT_SPAN : for hour in the oven
+
+SENT_ID :12
+PRED : mix
+PRED_PREP : mix together
+NON_INGREDIENT_SPAN_VERB : the remaining
+INGREDIENTS : ketchup
+INGREDIENT_SPAN : 1 cup ketchup
+INGREDIENTS : vinegar
+INGREDIENTS : salt
+INGREDIENTS : mustard
+INGREDIENTS : brown sugar
+INGREDIENT_SPAN : 1/2 cup brown sugar
+DOBJ : 1 cup ketchup - 1/2 cup brown sugar
+
+SENT_ID :13
+PRED : spread
+PRED_PREP : spread over
+

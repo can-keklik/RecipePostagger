@@ -1,0 +1,135 @@
+title : baked-potato-salad
+
+SENT_ID :0
+PRED : cook
+NON_INGREDIENT_SPAN_VERB : cook
+NON_INGREDIENT_SPAN_VERB : cook
+INGREDIENTS : beef
+INGREDIENTS : oil
+INGREDIENT_SPAN : with with with oil
+INGREDIENTS : salt
+PARG : pan
+NON_INGREDIENT_SPAN : in pan
+PARG : skillet
+NON_INGREDIENT_SPAN : a skillet
+DOBJ : with with with oil
+
+SENT_ID :1
+PRED : smooth
+INGREDIENTS : onion soup
+PARG : blender
+NON_INGREDIENT_SPAN : in a blender
+
+SENT_ID :2
+PRED : drain
+
+SENT_ID :3
+PRED : stir
+NON_INGREDIENT_SPAN_VERB : pureed
+NON_INGREDIENT_SPAN_VERB : into reduce
+INGREDIENTS : soup
+
+SENT_ID :4
+PRED : stir
+PRED_PREP : stir in
+NON_INGREDIENT_SPAN_VERB : until combined
+INGREDIENTS : chili powder
+INGREDIENT_SPAN : in chili powder
+INGREDIENTS : cumin
+INGREDIENTS : pepper
+INGREDIENTS : tomato paste tomato
+INGREDIENTS : sauce
+INGREDIENTS : beans
+DOBJ : in chili powder
+
+SENT_ID :5
+PRED : stir
+PRED_PREP : stir in
+INGREDIENTS : cocoa
+INGREDIENT_SPAN : in cocoa
+DOBJ : in cocoa
+
+SENT_ID :6
+PRED : heat
+PRED_PREP : heat through
+NON_INGREDIENT_SPAN_VERB : through serve
+
+SENT_ID :7
+PRED : place
+NON_INGREDIENT_SPAN_VERB : with salted
+INGREDIENTS : potatoes
+INGREDIENT_SPAN : the potatoes
+PARG : pot
+NON_INGREDIENT_SPAN : into a pot
+DOBJ : the potatoes
+
+SENT_ID :8
+PRED : bring
+PRED_PREP : bring to
+NON_INGREDIENT_SPAN_VERB : a over reduce
+
+SENT_ID :9
+PRED : drain
+NON_INGREDIENT_SPAN_VERB : allow
+NON_INGREDIENT_SPAN_VERB : cool
+INGREDIENTS : potatoes
+INGREDIENT_SPAN : the potatoes
+DOBJ : the potatoes
+
+SENT_ID :10
+PRED : dice
+PRED_PREP : dice once
+NON_INGREDIENT_SPAN_VERB : cooled
+
+SENT_ID :11
+PRED : place
+NON_INGREDIENT_SPAN_VERB : place
+NON_INGREDIENT_SPAN_VERB : over turning
+NON_INGREDIENT_SPAN_VERB : turning
+NON_INGREDIENT_SPAN_VERB : until browned
+NON_INGREDIENT_SPAN_VERB : browned
+INGREDIENTS : bacon
+INGREDIENT_SPAN : the the bacon
+PARG : skillet
+NON_INGREDIENT_SPAN : in a skillet
+DOBJ : the the bacon
+
+SENT_ID :12
+PRED : drain
+INGREDIENTS : bacon
+INGREDIENT_SPAN : the bacon
+DOBJ : the bacon
+
+SENT_ID :13
+PRED : allow
+PRED_PREP : allow to
+NON_INGREDIENT_SPAN_VERB : cool
+NON_INGREDIENT_SPAN_VERB : crumble
+INGREDIENTS : bacon
+INGREDIENT_SPAN : the bacon
+PARG : bowl
+NON_INGREDIENT_SPAN : into a bowl
+DOBJ : the bacon
+
+SENT_ID :14
+PRED : place
+NON_INGREDIENT_SPAN_VERB : the cooled
+INGREDIENTS : potatoes
+INGREDIENTS : bacon
+INGREDIENT_SPAN : with the bacon
+INGREDIENTS : sour cream
+INGREDIENT_SPAN : in the sour cream
+INGREDIENTS : mayonnaise
+INGREDIENTS : cheddar cheese
+INGREDIENTS : chives
+INGREDIENTS : salt
+INGREDIENTS : pepper
+PARG : bowl
+NON_INGREDIENT_SPAN : into the bowl
+DOBJ : with the bacon - in the sour cream
+
+SENT_ID :15
+PRED : refrigerate
+PRED_PREP : refrigerate overnight
+NON_INGREDIENT_SPAN_VERB : before serving
+

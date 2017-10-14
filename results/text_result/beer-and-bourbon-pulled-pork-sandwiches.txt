@@ -1,0 +1,102 @@
+title : beer-and-bourbon-pulled-pork-sandwiches
+
+SENT_ID :0
+PRED : combine
+INGREDIENTS : paprika
+INGREDIENTS : onion powder powder
+INGREDIENTS : garlic
+INGREDIENTS : oregano
+INGREDIENTS : thyme
+INGREDIENTS : salt
+INGREDIENTS : black pepper
+INGREDIENT_SPAN : with black pepper
+PARG : bowl
+NON_INGREDIENT_SPAN : in a bowl
+DOBJ : with black pepper
+
+SENT_ID :1
+PRED : blot
+NON_INGREDIENT_SPAN_VERB : with rub
+INGREDIENTS : pork
+INGREDIENTS : paprika
+INGREDIENT_SPAN : with paprika
+DOBJ : with paprika
+
+SENT_ID :2
+PRED : heat
+NON_INGREDIENT_SPAN_VERB : heat
+INGREDIENTS : canola canola oil oil
+INGREDIENT_SPAN : about about 2 2 tablespoons tablespoons canola canola oil oil
+PARG : skillet
+NON_INGREDIENT_SPAN : in a skillet
+DOBJ : about about 2 2 tablespoons tablespoons canola canola oil oil
+
+SENT_ID :3
+PRED : fry
+NON_INGREDIENT_SPAN_VERB : in until browned
+INGREDIENTS : pork
+
+SENT_ID :4
+PRED : transfer
+NON_INGREDIENT_SPAN_VERB : browned
+INGREDIENTS : pork
+
+SENT_ID :5
+PRED : remaining
+NON_INGREDIENT_SPAN_VERB : remaining
+NON_INGREDIENT_SPAN_VERB : is
+NON_INGREDIENT_SPAN_VERB : is
+NON_INGREDIENT_SPAN_VERB : browned
+NON_INGREDIENT_SPAN_VERB : browned
+INGREDIENTS : canola canola oil oil
+INGREDIENT_SPAN : 1 1 1/2 1/2 teaspoon teaspoon canola canola oil oil
+INGREDIENTS : butter
+INGREDIENTS : onions
+INGREDIENT_SPAN : over over onions
+INGREDIENTS : beer
+INGREDIENT_SPAN : 1/2 1/2 bottle bottle beer
+INGREDIENTS : salt
+INGREDIENT_SPAN : a a pinch pinch of of salt
+INGREDIENTS : onion
+INGREDIENT_SPAN : until until onion
+PARG : skillet
+DOBJ : 1 1 1/2 1/2 teaspoon teaspoon canola canola oil oil - over over onions - 1/2 1/2 bottle bottle beer - a a pinch pinch of of salt - until until onion
+
+SENT_ID :6
+PRED : add
+INGREDIENTS : liquid smoke
+
+SENT_ID :7
+PRED : spread
+INGREDIENTS : onions
+INGREDIENTS : pork
+INGREDIENT_SPAN : over pork
+DOBJ : over pork
+
+SENT_ID :8
+PRED : mix
+NON_INGREDIENT_SPAN_VERB : remaining
+INGREDIENTS : barbeque sauce sauce sauce
+INGREDIENTS : beer
+INGREDIENTS : worcestershire
+INGREDIENTS : garlic
+INGREDIENTS : bourbon
+INGREDIENTS : hot
+INGREDIENTS : pork
+INGREDIENT_SPAN : over pork
+PARG : bowl
+NON_INGREDIENT_SPAN : in a bowl
+DOBJ : over pork
+
+SENT_ID :9
+PRED : cook
+INGREDIENTS : pork
+
+SENT_ID :10
+PRED : shred
+NON_INGREDIENT_SPAN_VERB : make
+INGREDIENTS : pork
+INGREDIENTS : rolls
+INGREDIENT_SPAN : over rolls
+DOBJ : over rolls
+

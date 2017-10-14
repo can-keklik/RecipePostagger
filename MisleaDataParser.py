@@ -3,6 +3,7 @@ from __future__ import print_function
 from __future__ import print_function
 from __future__ import print_function
 
+import os
 from operator import itemgetter
 
 import pandas as pd
@@ -504,6 +505,8 @@ def readData2(index):
     ingredients = df.ix[index, :].ingredients.encode('utf8').lower()
     ingredients = (utils.convertArrayToPureStr(ingredients))
 
+    title = df.ix[index, :].title.encode('utf8').lower()
+
     directions = df.ix[index, :].directions.encode('utf8').lower()
     arr = POSTaggerFuncs.posTaggText(directions)
     dire = POSTaggerFuncs.tokenizeText(directions)
@@ -526,7 +529,7 @@ def readData2(index):
         if len(ingArr) == 0 and len(tmp) > 0:
             verbArr.append(tmp[0])
         taggedNewDire.append(direWithNewTAG[i])
-    return (ParsedDirection(direWithNewTAG).convertTagsAccordingToPaper())
+    return (ParsedDirection(direWithNewTAG).convertTagsAccordingToPaper(), title)
 
 
 def createGrapWithIndexForPaper(index):
@@ -557,15 +560,30 @@ def getRelatedVerbs(data):
 
 
 def createGrapWithIndexForPaper2(index):
-    data = readData2(index=index)
+    (data, title) = readData2(index=index)
     relatedVerbs = getRelatedVerbs(data)
-    file_name = "result" + str(index) + ".dot"
+    file_name = title + ".dot"
     print(relatedVerbs)
     print("---------------------------------")
     for i in xrange(len(data)):
         print(data[i])
     GraphGeneratorForPaper(data, relatedVerbs).createGraph(file_name)
-    UtilsIO.createPngFromDotFile("paper/result" + str(index) + ".dot", "paper/result" + str(index) + ".png")
+    UtilsIO.createPngFromDotFile("paper/" + file_name, "paper/" + title + ".png")
+    str_value = "title : " + title + "\n" + "\n"
+
+    for i in xrange(len(data)):
+        str_value = str_value + "SENT_ID :" + str(i) + "\n"
+        for (word, tag, idx) in data[i]:
+            str_value = str_value + str(tag) + " : " + str(word) + "\n"
+
+        str_value = str_value + "\n"
+    completeName = os.path.join(os.getcwd() + "/results/text_result/", title + ".txt")
+    outFile = open(completeName, 'w')
+    # print fileName
+    outFile.truncate()
+    outFile.write(str_value.encode('utf8'))
+    outFile.close()
 
 
-createGrapWithIndexForPaper2(20)
+createGrapWithIndexForPaper2(4)
+# todo check 9. recipe for noningredient sentence...

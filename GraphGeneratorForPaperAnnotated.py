@@ -102,6 +102,9 @@ class GraphGeneratorForPaper:
                 elif p > w_p:
                     if not str(w_to_link) in str(next_word):
                         w_to_link = word_we_link_to
+                elif p < w_p:
+                    if str(word) in str(next_word):
+                        w_to_link = next_word
 
         return w_to_link
 
