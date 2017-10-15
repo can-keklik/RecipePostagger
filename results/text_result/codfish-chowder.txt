@@ -1,0 +1,92 @@
+title : codfish-chowder
+
+SENT_ID :0
+SENTENCE : cook bacon in a soup pot over medium heat until crisp and brown , about 10 minutes .
+PRED : cook
+INGREDIENTS : bacon
+PARG : pot
+NON_INGREDIENT_SPAN : in a soup pot
+
+SENT_ID :1
+SENTENCE : remove bacon with a slotted spoon , leaving drippings in the pot .
+PRED : remove
+NON_INGREDIENT_SPAN_VERB : remove
+NON_INGREDIENT_SPAN_VERB : remove
+NON_INGREDIENT_SPAN_VERB : leaving
+NON_INGREDIENT_SPAN_VERB : leaving
+NON_INGREDIENT_SPAN_VERB : leaving
+INGREDIENTS : bacon
+PARG : spoon
+NON_INGREDIENT_SPAN : with a slotted spoon
+PARG : pot
+NON_INGREDIENT_SPAN : drippings in the pot
+
+SENT_ID :2
+SENTENCE : cook and stir onion and red bell pepper until softened , about 5 minutes ; season with salt and pepper .
+PRED : cook
+NON_INGREDIENT_SPAN_VERB : until softened
+INGREDIENTS : onion
+INGREDIENT_SPAN : and stir onion
+INGREDIENTS : red bell pepper pepper
+INGREDIENT_SPAN : and red bell pepper pepper
+INGREDIENTS : salt
+INGREDIENT_SPAN : about 5 with salt
+DOBJ : and stir onion - and red bell pepper pepper - about 5 with salt
+
+SENT_ID :3
+SENTENCE : stir in garlic and seafood seasoning and cook and stir 2 more minutes .
+PRED : stir
+PRED_PREP : stir in
+NON_INGREDIENT_SPAN_VERB : stir
+INGREDIENTS : garlic
+INGREDIENT_SPAN : in garlic
+INGREDIENTS : seafood seasoning
+INGREDIENT_SPAN : and seafood seasoning
+DOBJ : in garlic - and seafood seasoning
+
+SENT_ID :4
+SENTENCE : pour in chicken broth and stir in potatoes and corn ; add water if needed to cover vegetables .
+PRED : pour
+PRED_PREP : pour in
+NON_INGREDIENT_SPAN_VERB : add
+INGREDIENTS : chicken broth
+INGREDIENT_SPAN : in chicken broth
+INGREDIENTS : potatoes
+INGREDIENT_SPAN : and in potatoes
+INGREDIENTS : corn
+INGREDIENT_SPAN : and corn
+INGREDIENTS : water
+DOBJ : in chicken broth - and in potatoes - and corn
+
+SENT_ID :5
+SENTENCE : bring to a boil and reduce heat to low ; simmer until potatoes are tender , about 15 minutes .
+PRED : bring
+NON_INGREDIENT_SPAN_VERB : reduce
+NON_INGREDIENT_SPAN_VERB : are
+INGREDIENTS : potatoes
+INGREDIENT_SPAN : to low until potatoes
+DOBJ : to low until potatoes
+
+SENT_ID :6
+SENTENCE : stir in milk and butter until butter has melted ; mix in reserved bacon .
+PRED : stir
+PRED_PREP : stir in
+NON_INGREDIENT_SPAN_VERB : has
+NON_INGREDIENT_SPAN_VERB : melted
+INGREDIENTS : milk
+INGREDIENT_SPAN : in milk
+INGREDIENTS : butter
+INGREDIENT_SPAN : and butter
+INGREDIENT_SPAN : until butter
+INGREDIENTS : bacon
+INGREDIENT_SPAN : in reserved bacon
+DOBJ : in milk - and butter - until butter - in reserved bacon
+
+SENT_ID :7
+SENTENCE : bring the soup just to the boiling point and stir in cod and parsley ; cook , stirring occasionally , until fish flakes easily , 5 to 8 minutes .
+PRED : bring
+NON_INGREDIENT_SPAN_VERB : stirring
+INGREDIENTS : parsley
+INGREDIENT_SPAN : the to the and in cod and parsley
+DOBJ : the to the and in cod and parsley
+

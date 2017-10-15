@@ -1,0 +1,44 @@
+title : chocolate-french-toast-2
+
+SENT_ID :0
+SENTENCE : beat together milk , eggs , sugar , cocoa powder , baking powder , and salt .
+PRED : beat
+PRED_PREP : beat together
+INGREDIENTS : milk
+INGREDIENTS : eggs
+INGREDIENTS : sugar
+INGREDIENTS : cocoa powder powder
+INGREDIENTS : baking
+INGREDIENTS : salt
+
+SENT_ID :1
+SENTENCE : heat a lightly buttered skillet or griddle over medium heat .
+PRED : heat
+NON_INGREDIENT_SPAN_VERB : heat
+NON_INGREDIENT_SPAN_VERB : heat
+NON_INGREDIENT_SPAN_VERB : a buttered
+NON_INGREDIENT_SPAN_VERB : buttered
+NON_INGREDIENT_SPAN_VERB : buttered
+PARG : skillet
+PARG : griddle
+
+SENT_ID :2
+SENTENCE : dip each slice of bread into egg mixture until well soaked , about 20 seconds per side .
+PRED : dip
+NON_INGREDIENT_SPAN_VERB : until soaked
+INGREDIENTS : bread
+INGREDIENT_SPAN : each slice of bread
+INGREDIENTS : egg
+INGREDIENT_SPAN : into egg
+DOBJ : each slice of bread - into egg
+
+SENT_ID :3
+SENTENCE : place in pan , and cook on both sides until they are no longer gooey or shiny in the middle when cut in half , about 3 to 4 minutes per side .
+PRED : place
+PRED_PREP : place in
+NON_INGREDIENT_SPAN_VERB : on both until are
+NON_INGREDIENT_SPAN_VERB : gooey
+NON_INGREDIENT_SPAN_VERB : shiny
+PARG : pan
+NON_INGREDIENT_SPAN : in pan
+

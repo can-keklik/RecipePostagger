@@ -156,6 +156,7 @@ class ParsedDirection:
         return self.newDirection
 
 
+"""
 def updateActionsForGraphGenearation(directions):
     seen = set()
     retArrAll = []
@@ -224,6 +225,8 @@ def optimizeTagWithCollocation(param):
     else:
         return param
 
+"""
+
 
 def isTool(words):
     arr = []
@@ -268,6 +271,7 @@ def updateForTools(direSent, toolList):
         return direSent
 
 
+"""
 def updateIngreTagInSent(sentence, sentIngreList):
     if len(sentIngreList) == 0:
         return sentence
@@ -333,7 +337,6 @@ def updateIngreTagInSent(sentence, sentIngreList):
 
     return updatedSentence
 
-
 def updateIngreTagInSent2(sentence, sentIngreList):
     if len(sentIngreList) == 0:
         return sentence
@@ -352,7 +355,6 @@ def updateIngreTagInSent2(sentence, sentIngreList):
         else:
             ingreUpdatedSentence.append((ws, ts, idxs))
     return ingreUpdatedSentence
-
 
 def updateVerbTagInSent(ingreUpdatedSentence):
     updatedSentence = []
@@ -428,6 +430,7 @@ def unionWordAndUpdateTags(sentence):
                     sentIngreList.append((addingWord, "INGREDIENT", ix))
                     addingWord = ""
     return updateIngreTagInSent2(sentence=sentence, sentIngreList=sentIngreList)
+"""
 
 
 def updateNounToVerb(noun, sentence):
@@ -442,10 +445,10 @@ def updateNounToVerb(noun, sentence):
 
 
 def findAndUpdateVerbTagInSent(sentence):
-    nouns = [wt for (wt, _, idx) in sentence if 'NOUN' == _]
+    nouns_adj = [wt for (wt, _, idx) in sentence if 'NOUN' == _ or "ADJ" == _]
 
-    if len(nouns) > 0:
-        noun = CollocationFinder.giveTheMostCommonTagg(nouns)
+    if len(nouns_adj) > 0:
+        noun = CollocationFinder.giveTheMostCommonTagg(nouns_adj)
         return updateNounToVerb(noun, sentence)
 
 
@@ -586,5 +589,5 @@ def createGrapWithIndexForPaper2(index):
     outFile.close()
 
 
-createGrapWithIndexForPaper2(7)
+createGrapWithIndexForPaper2(16)
 # todo check 9. recipe for noningredient sentence...
