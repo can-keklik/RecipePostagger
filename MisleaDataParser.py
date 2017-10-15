@@ -445,7 +445,7 @@ def updateNounToVerb(noun, sentence):
 
 
 def findAndUpdateVerbTagInSent(sentence):
-    nouns_adj = [wt for (wt, _, idx) in sentence if 'NOUN' == _ or "ADJ" == _]
+    nouns_adj = [wt for (wt, _, idx) in sentence if 'NOUN' == _ or "ADJ" == _ or "ADV" == _]
 
     if len(nouns_adj) > 0:
         noun = CollocationFinder.giveTheMostCommonTagg(nouns_adj)
@@ -552,8 +552,8 @@ def getRelatedVerbs(data):
         ingres = [w for (w, t, idx) in sentence if t == INGREDIENTS]
         if len(verbs) == 0:
             verbs = [w for (w, t, idx) in sentence if t == PRED]
-
-        wholeVerbs.add(verbs[0])
+        if len(verbs) > 0:
+            wholeVerbs.add(verbs[0])
         if len(ingres) == 0:
             tmp.add(verbs[0])
 
@@ -589,5 +589,5 @@ def createGrapWithIndexForPaper2(index):
     outFile.close()
 
 
-createGrapWithIndexForPaper2(16)
+createGrapWithIndexForPaper2(23)
 # todo check 9. recipe for noningredient sentence...

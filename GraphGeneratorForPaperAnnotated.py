@@ -135,7 +135,6 @@ class GraphGeneratorForPaper:
                     node = self.createNode(word=word, TAG=tag, idx=idx)
                     if node:
                         self.addEdge(node1=node, nodeAction=action_node)
-
         return (action_node, word_return + "-" + str(idx), is_Ingre)
 
     def createNode(self, TAG, word, idx):

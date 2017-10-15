@@ -1,0 +1,69 @@
+title : lazy-lasagna-ii
+
+SENT_ID :0
+SENTENCE : preheat oven to 375 degrees f ( 190 degrees c ) .
+PRED : preheat
+PARG : oven
+
+SENT_ID :1
+SENTENCE : in a skillet over medium heat , brown ground beef with onion ; drain grease .
+PRED : drain
+NON_INGREDIENT_SPAN_VERB : drain
+INGREDIENTS : beef
+INGREDIENT_SPAN : over over brown brown ground ground beef
+INGREDIENTS : onion
+INGREDIENT_SPAN : with with onion
+PARG : skillet
+NON_INGREDIENT_SPAN : in a skillet
+DOBJ : over over brown brown ground ground beef - with with onion
+
+SENT_ID :2
+SENTENCE : pour in spaghetti sauce and simmer 5 minutes .
+PRED : pour
+PRED_PREP : pour in
+INGREDIENTS : spaghetti sauce
+INGREDIENT_SPAN : in spaghetti sauce
+DOBJ : in spaghetti sauce
+
+SENT_ID :3
+SENTENCE : in a 9x13 inch baking dish , spread enough sauce and beef to cover bottom and put a layer of ravioli down end to end .
+PRED : baking
+NON_INGREDIENT_SPAN_VERB : spread
+NON_INGREDIENT_SPAN_VERB : cover
+NON_INGREDIENT_SPAN_VERB : put
+NON_INGREDIENT_SPAN_VERB : end
+INGREDIENTS : sauce
+INGREDIENT_SPAN : enough sauce
+INGREDIENTS : beef
+INGREDIENTS : ravioli
+INGREDIENT_SPAN : a of ravioli
+DOBJ : enough sauce - a of ravioli
+
+SENT_ID :4
+SENTENCE : spread a layer of sauce and cheese just like you would with regular lasagna .
+PRED : spread
+NON_INGREDIENT_SPAN_VERB : like would
+INGREDIENTS : sauce
+INGREDIENT_SPAN : a of sauce
+INGREDIENTS : cheese
+DOBJ : a of sauce
+
+SENT_ID :5
+SENTENCE : keep layering and finish with sauce on top .
+PRED : keep
+INGREDIENTS : sauce
+INGREDIENT_SPAN : finish with sauce
+DOBJ : finish with sauce
+
+SENT_ID :6
+SENTENCE : bake uncovered in a preheated oven for 1 hour .
+PRED : bake
+NON_INGREDIENT_SPAN_VERB : uncovered
+PARG : oven
+NON_INGREDIENT_SPAN : in preheated oven
+
+SENT_ID :7
+SENTENCE : let sit for 5 minutes before serving .
+PRED : let
+NON_INGREDIENT_SPAN_VERB : before serving
+

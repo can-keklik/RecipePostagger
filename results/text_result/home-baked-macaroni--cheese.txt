@@ -1,0 +1,47 @@
+title : home-baked-macaroni--cheese
+
+SENT_ID :0
+SENTENCE : heat oven to 375 degrees ( f. ) .
+PRED : heat
+PARG : oven
+
+SENT_ID :1
+SENTENCE : prepare dinner as directed on package .
+PRED : prepare
+NON_INGREDIENT_SPAN_VERB : as directed
+
+SENT_ID :2
+SENTENCE : stir in 1/4 cup shredded cheese , sour cream and pepper .
+PRED : stir
+PRED_PREP : stir in
+INGREDIENTS : shredded cheese
+INGREDIENT_SPAN : in 1/4 cup shredded cheese
+INGREDIENTS : sour cream
+INGREDIENTS : pepper
+DOBJ : in 1/4 cup shredded cheese
+
+SENT_ID :3
+SENTENCE : spoon into greased 1-1/2-l baking dish ; top with remaining shredded cheese , then combined cracker crumbs and margarine .
+PRED : spoon
+PRED_PREP : spoon into
+NON_INGREDIENT_SPAN_VERB : into with remaining
+NON_INGREDIENT_SPAN_VERB : combined
+INGREDIENTS : shredded cheese
+INGREDIENTS : cracker
+INGREDIENTS : margarine
+
+SENT_ID :4
+SENTENCE : bake 20 minutes let stand 5 minutes before serving .
+PRED : bake
+NON_INGREDIENT_SPAN_VERB : let
+NON_INGREDIENT_SPAN_VERB : stand
+NON_INGREDIENT_SPAN_VERB : before serving
+
+SENT_ID :5
+SENTENCE : serve with peas .
+PRED : serve
+PRED_PREP : serve with
+INGREDIENTS : peas
+INGREDIENT_SPAN : with peas
+DOBJ : with peas
+
