@@ -1,6 +1,7 @@
 title : beer-and-bourbon-pulled-pork-sandwiches
 
 SENT_ID :0
+SENTENCE : combine paprika , onion powder , garlic powder , oregano , thyme , and salt in a small bowl ; season with black pepper .
 PRED : combine
 INGREDIENTS : paprika
 INGREDIENTS : onion powder powder
@@ -15,6 +16,7 @@ NON_INGREDIENT_SPAN : in a bowl
 DOBJ : with black pepper
 
 SENT_ID :1
+SENTENCE : blot pork chops dry with paper towels , then rub with paprika mixture .
 PRED : blot
 NON_INGREDIENT_SPAN_VERB : with rub
 INGREDIENTS : pork
@@ -23,6 +25,7 @@ INGREDIENT_SPAN : with paprika
 DOBJ : with paprika
 
 SENT_ID :2
+SENTENCE : heat about 2 tablespoons canola oil in a non-stick skillet over medium-high heat .
 PRED : heat
 NON_INGREDIENT_SPAN_VERB : heat
 INGREDIENTS : canola canola oil oil
@@ -32,16 +35,19 @@ NON_INGREDIENT_SPAN : in a skillet
 DOBJ : about about 2 2 tablespoons tablespoons canola canola oil oil
 
 SENT_ID :3
+SENTENCE : fry pork chops in batches until browned , about 5 minutes per side .
 PRED : fry
 NON_INGREDIENT_SPAN_VERB : in until browned
 INGREDIENTS : pork
 
 SENT_ID :4
+SENTENCE : transfer browned pork chops to a slow cooker .
 PRED : transfer
 NON_INGREDIENT_SPAN_VERB : browned
 INGREDIENTS : pork
 
 SENT_ID :5
+SENTENCE : wipe skillet clean and heat remaining 1 1/2 teaspoon canola oil and butter over medium heat ; cook and stir onions , 1/2 bottle beer , and a pinch of salt until onion is tender and slightly browned , about 10 minutes .
 PRED : remaining
 NON_INGREDIENT_SPAN_VERB : remaining
 NON_INGREDIENT_SPAN_VERB : is
@@ -63,10 +69,12 @@ PARG : skillet
 DOBJ : 1 1 1/2 1/2 teaspoon teaspoon canola canola oil oil - over over onions - 1/2 1/2 bottle bottle beer - a a pinch pinch of of salt - until until onion
 
 SENT_ID :6
+SENTENCE : add liquid smoke .
 PRED : add
 INGREDIENTS : liquid smoke
 
 SENT_ID :7
+SENTENCE : spread onions over pork .
 PRED : spread
 INGREDIENTS : onions
 INGREDIENTS : pork
@@ -74,6 +82,7 @@ INGREDIENT_SPAN : over pork
 DOBJ : over pork
 
 SENT_ID :8
+SENTENCE : mix barbeque sauce , remaining beer , worcestershire sauce , garlic , bourbon , and hot sauce in a bowl ; pour over pork .
 PRED : mix
 NON_INGREDIENT_SPAN_VERB : remaining
 INGREDIENTS : barbeque sauce sauce sauce
@@ -89,10 +98,12 @@ NON_INGREDIENT_SPAN : in a bowl
 DOBJ : over pork
 
 SENT_ID :9
+SENTENCE : cook pork on low until very tender , about 8 hours .
 PRED : cook
 INGREDIENTS : pork
 
 SENT_ID :10
+SENTENCE : shred and divide pork over rolls to make sandwiches .
 PRED : shred
 NON_INGREDIENT_SPAN_VERB : make
 INGREDIENTS : pork

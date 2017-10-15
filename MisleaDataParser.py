@@ -14,9 +14,6 @@ import UtilsIO
 import WordToVecFunctions
 import utils
 from nltk.stem import WordNetLemmatizer
-from itertools import groupby
-
-from GraphGeneratorForPaper import PaperGraphGenerator
 from GraphGeneratorForPaperAnnotated import GraphGeneratorForPaper
 
 lemmatiser = WordNetLemmatizer()
@@ -50,8 +47,8 @@ class ParsedDirection:
     PARG = "PARG"  # tool
     PREP = "PREP"  # preposition
     PREDID = "PREDID"  # this id is realed with action's order
-    INGREDIENT_TAGS = ["NUM", "COMMENT", "QTY", "ADP", "DET", "UNIT"]
-    TOOL_TAGS = ["ADP", "DET", "NOUN", "NUM"]
+    INGREDIENT_TAGS = ["NUM", "COMMENT", "QTY", "ADP", "DET", "UNIT", "ADJ"]
+    TOOL_TAGS = ["ADP", "DET", "NOUN", "NUM", "ADJ", "COMMENT"]
     VERB_TAG = ["ADP", "DET"]
 
     def __init__(self, direction):
@@ -452,6 +449,7 @@ def findAndUpdateVerbTagInSent(sentence):
         return updateNounToVerb(noun, sentence)
 
 
+"""
 def readPaperData(index):
     df = pd.read_csv("/Users/Ozgen/Desktop/RecipeGit/csv/paper.csv", encoding='utf8')
     # names=["index", "title", "ingredients", "directions"])
@@ -496,6 +494,15 @@ def readPaperData(index):
     for i in xrange(len(directionNew)):
         print(directionNew[i])
     return ParsedDirection(directionNew)
+"""
+
+
+def convertDirectionToSentenceArray(direction):
+    retArr = []
+    for i in xrange(len(direction)):
+        tmp = " ".join(str(word) for word in direction[i])
+        retArr.append(tmp)
+    return retArr
 
 
 def readData2(index):
@@ -510,6 +517,7 @@ def readData2(index):
     directions = df.ix[index, :].directions.encode('utf8').lower()
     arr = POSTaggerFuncs.posTaggText(directions)
     dire = POSTaggerFuncs.tokenizeText(directions)
+    sentences = convertDirectionToSentenceArray(direction=dire)
     ingreWithNewTAG = POSTaggerFuncs.parse_ingredientForCRF(ingredients)
     parsData = POSTaggerFuncs.getNameEntityInIngre(ingreWithNewTAG)
     direWithNewTAG = POSTaggerFuncs.updateDireTagsAfterCRF(arr, ingreWithNewTAG)
@@ -518,7 +526,6 @@ def readData2(index):
     taggedNewDire = []
     for i in xrange(len(direWithNewTAG)):
         toolList = isTool([wt for (wt, _, idx) in direWithNewTAG[i] if 'NOUN' == _ or 'ADV' == _])
-
         direWithNewTAG[i] = updateForTools(direWithNewTAG[i], toolList)
         ingArr = [w2 for (w2, t2, ix2) in direWithNewTAG[i] if t2 == "NAME"]
         tmp = [w for (w, t, ix) in direWithNewTAG[i] if t == "VERB"]
@@ -529,14 +536,7 @@ def readData2(index):
         if len(ingArr) == 0 and len(tmp) > 0:
             verbArr.append(tmp[0])
         taggedNewDire.append(direWithNewTAG[i])
-    return (ParsedDirection(direWithNewTAG).convertTagsAccordingToPaper(), title)
-
-
-def createGrapWithIndexForPaper(index):
-    data = readPaperData(index=index)
-    print(data.relatedVerbs)
-    PaperGraphGenerator(data.direction, data.relatedVerbs).createGraph("result" + str(index) + ".dot")
-    UtilsIO.createPngFromDotFile("paper/result" + str(index) + ".dot", "paper/result" + str(index) + ".png")
+    return (ParsedDirection(direWithNewTAG).convertTagsAccordingToPaper(), title, sentences)
 
 
 def getRelatedVerbs(data):
@@ -560,7 +560,7 @@ def getRelatedVerbs(data):
 
 
 def createGrapWithIndexForPaper2(index):
-    (data, title) = readData2(index=index)
+    (data, title, directionSentenceArray) = readData2(index=index)
     relatedVerbs = getRelatedVerbs(data)
     file_name = title + ".dot"
     print(relatedVerbs)
@@ -573,6 +573,7 @@ def createGrapWithIndexForPaper2(index):
 
     for i in xrange(len(data)):
         str_value = str_value + "SENT_ID :" + str(i) + "\n"
+        str_value = str_value + "SENTENCE : " + str(directionSentenceArray[i]) + "\n"
         for (word, tag, idx) in data[i]:
             str_value = str_value + str(tag) + " : " + str(word) + "\n"
 
@@ -585,5 +586,5 @@ def createGrapWithIndexForPaper2(index):
     outFile.close()
 
 
-createGrapWithIndexForPaper2(4)
+createGrapWithIndexForPaper2(7)
 # todo check 9. recipe for noningredient sentence...
