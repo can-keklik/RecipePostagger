@@ -156,76 +156,6 @@ class ParsedDirection:
         return self.newDirection
 
 
-"""
-def updateActionsForGraphGenearation(directions):
-    seen = set()
-    retArrAll = []
-    for i in xrange(len(directions)):
-        direction = directions[i]
-        retArr = []
-        for (w, t, idx) in direction:
-            w_new = ""
-            if w not in seen and t == "VERB":
-                seen.add(w)
-                if chechVerbHasIngSuffix(w):
-                    w_new = w
-                else:
-                    w_new = w  # FALSE_VERB
-            elif w in seen and t == "VERB":
-                num = addUp(w)
-                w_new = w + "_" + str(num)
-
-            else:
-                if w_new != FALSE_VERB:
-                    w_new = w
-            if w_new != FALSE_VERB:
-                retArr.append((w_new, t, idx))
-
-        retArrAll.append(retArr)
-
-    return retArrAll
-
-
-def addUp(word):
-    arr = word.split("_")
-    if len(arr) == 1:
-        return 1
-    else:
-        return int(arr[1]) + 1
-
-
-def chechVerbHasIngSuffix(verb):
-    lemma_verb = lemmatiser.lemmatize(verb, pos="v")
-    return len(lemma_verb) == len(verb)
-
-
-def optimizeTagWithCollocation(param):
-    toolList = [wt.replace(" ", "_") for (wt, _) in param if 'TOOL' == _]
-    actionList = [wt for (wt, _) in param if 'VERB' == _]
-    toRemove = []
-    retArr = []
-    if len(toolList) > 0:
-        for tool in toolList:
-            collList = CollocationFinder.calculateCollocationFromPaper(tool)
-            if len(collList) > 0 and len(actionList) > 1:
-                for colW in collList:
-                    for verb in actionList:
-                        if verb == colW:
-                            if (tool, verb) not in toRemove:
-                                toRemove.append((tool, verb))
-
-        if len(toRemove) > 0:
-            print('toremove ', toRemove)
-            for (w, T) in param:
-                for t, rmovalWord in toRemove:
-                    if (w != rmovalWord) and (w, T) not in retArr:
-                        retArr.append((w, T))
-
-        return retArr
-    else:
-        return param
-
-"""
 
 
 def isTool(words):
@@ -269,6 +199,123 @@ def updateForTools(direSent, toolList):
         return returnArr
     else:
         return direSent
+
+
+
+
+
+def updateNounToVerb(noun, sentence):
+    retArr = []
+    for (wt, _, idx) in sentence:
+        if wt == noun:
+            retArr.append((wt, "VERB", idx))
+        else:
+            retArr.append((wt, _, idx))
+
+    return retArr
+
+
+def findAndUpdateVerbTagInSent(sentence):
+    nouns_adj = [wt for (wt, _, idx) in sentence if 'NOUN' == _ or "ADJ" == _ or "ADV" == _]
+
+    if len(nouns_adj) > 0:
+        noun = CollocationFinder.giveTheMostCommonTagg(nouns_adj)
+        return updateNounToVerb(noun, sentence)
+
+
+
+
+def convertDirectionToSentenceArray(direction):
+    retArr = []
+    for i in xrange(len(direction)):
+        tmp = " ".join(str(word) for word in direction[i])
+        retArr.append(tmp)
+    return retArr
+
+
+def readData2(index):
+    df = pd.read_csv("/Users/Ozgen/Desktop/RecipeGit/csv/paper.csv", encoding='utf8')
+    # names=["index", "title", "ingredients", "directions"])
+
+    ingredients = df.ix[index, :].ingredients.encode('utf8').lower()
+    ingredients = (utils.convertArrayToPureStr(ingredients))
+
+    title = df.ix[index, :].title.encode('utf8').lower()
+
+    directions = df.ix[index, :].directions.encode('utf8').lower()
+    arr = POSTaggerFuncs.posTaggText(directions)
+    dire = POSTaggerFuncs.tokenizeText(directions)
+    sentences = convertDirectionToSentenceArray(direction=dire)
+    ingreWithNewTAG = POSTaggerFuncs.parse_ingredientForCRF(ingredients)
+    parsData = POSTaggerFuncs.getNameEntityInIngre(ingreWithNewTAG)
+    direWithNewTAG = POSTaggerFuncs.updateDireTagsAfterCRF(arr, ingreWithNewTAG)
+    verbArr = []
+    wholeVerbs = []
+    taggedNewDire = []
+    for i in xrange(len(direWithNewTAG)):
+        toolList = isTool([wt for (wt, _, idx) in direWithNewTAG[i] if 'NOUN' == _ or 'ADV' == _])
+        direWithNewTAG[i] = updateForTools(direWithNewTAG[i], toolList)
+        ingArr = [w2 for (w2, t2, ix2) in direWithNewTAG[i] if t2 == "NAME"]
+        tmp = [w for (w, t, ix) in direWithNewTAG[i] if t == "VERB"]
+        if len(tmp) == 0:
+            direWithNewTAG[i] = findAndUpdateVerbTagInSent(direWithNewTAG[i])
+        if len(tmp) > 0:
+            wholeVerbs.append(tmp[0])
+        if len(ingArr) == 0 and len(tmp) > 0:
+            verbArr.append(tmp[0])
+        taggedNewDire.append(direWithNewTAG[i])
+    return (ParsedDirection(direWithNewTAG).convertTagsAccordingToPaper(), title, sentences)
+
+
+def getRelatedVerbs(data):
+    wholeVerbs = set()
+    tmp = set()
+    relatedVerbs = []
+    for i in xrange(len(data)):
+        sentence = data[i]
+        verbs = [w for (w, t, idx) in sentence if t == PRED_PREP]
+        ingres = [w for (w, t, idx) in sentence if t == INGREDIENTS]
+        if len(verbs) == 0:
+            verbs = [w for (w, t, idx) in sentence if t == PRED]
+        if len(verbs) > 0:
+            wholeVerbs.add(verbs[0])
+        if len(ingres) == 0:
+            tmp.add(verbs[0])
+
+    if len(wholeVerbs) > 0 and len(tmp) > 0:
+        relatedVerbs = WordToVecFunctions.createCosSim(verbArray=tmp, wholeVerbs=wholeVerbs)
+    return relatedVerbs
+
+
+def createGrapWithIndexForPaper2(index):
+    (data, title, directionSentenceArray) = readData2(index=index)
+    relatedVerbs = getRelatedVerbs(data)
+    file_name = title + ".dot"
+    print(relatedVerbs)
+    print("---------------------------------")
+    for i in xrange(len(data)):
+        print(data[i])
+    GraphGeneratorForPaper(data, relatedVerbs).createGraph(file_name)
+    UtilsIO.createPngFromDotFile("paper/" + file_name, "paper/" + title + ".png")
+    str_value = "title : " + title + "\n" + "\n"
+
+    for i in xrange(len(data)):
+        str_value = str_value + "SENT_ID :" + str(i) + "\n"
+        str_value = str_value + "SENTENCE : " + str(directionSentenceArray[i]) + "\n"
+        for (word, tag, idx) in data[i]:
+            str_value = str_value + str(tag) + " : " + str(word) + "\n"
+
+        str_value = str_value + "\n"
+    completeName = os.path.join(os.getcwd() + "/results/text_result/", title + ".txt")
+    outFile = open(completeName, 'w')
+    # print fileName
+    outFile.truncate()
+    outFile.write(str_value.encode('utf8'))
+    outFile.close()
+
+
+createGrapWithIndexForPaper2(32)
+# todo check 9. recipe for noningredient sentence...
 
 
 """
@@ -432,26 +479,6 @@ def unionWordAndUpdateTags(sentence):
     return updateIngreTagInSent2(sentence=sentence, sentIngreList=sentIngreList)
 """
 
-
-def updateNounToVerb(noun, sentence):
-    retArr = []
-    for (wt, _, idx) in sentence:
-        if wt == noun:
-            retArr.append((wt, "VERB", idx))
-        else:
-            retArr.append((wt, _, idx))
-
-    return retArr
-
-
-def findAndUpdateVerbTagInSent(sentence):
-    nouns_adj = [wt for (wt, _, idx) in sentence if 'NOUN' == _ or "ADJ" == _ or "ADV" == _]
-
-    if len(nouns_adj) > 0:
-        noun = CollocationFinder.giveTheMostCommonTagg(nouns_adj)
-        return updateNounToVerb(noun, sentence)
-
-
 """
 def readPaperData(index):
     df = pd.read_csv("/Users/Ozgen/Desktop/RecipeGit/csv/paper.csv", encoding='utf8')
@@ -498,96 +525,73 @@ def readPaperData(index):
         print(directionNew[i])
     return ParsedDirection(directionNew)
 """
+"""
+def updateActionsForGraphGenearation(directions):
+    seen = set()
+    retArrAll = []
+    for i in xrange(len(directions)):
+        direction = directions[i]
+        retArr = []
+        for (w, t, idx) in direction:
+            w_new = ""
+            if w not in seen and t == "VERB":
+                seen.add(w)
+                if chechVerbHasIngSuffix(w):
+                    w_new = w
+                else:
+                    w_new = w  # FALSE_VERB
+            elif w in seen and t == "VERB":
+                num = addUp(w)
+                w_new = w + "_" + str(num)
+
+            else:
+                if w_new != FALSE_VERB:
+                    w_new = w
+            if w_new != FALSE_VERB:
+                retArr.append((w_new, t, idx))
+
+        retArrAll.append(retArr)
+
+    return retArrAll
 
 
-def convertDirectionToSentenceArray(direction):
+def addUp(word):
+    arr = word.split("_")
+    if len(arr) == 1:
+        return 1
+    else:
+        return int(arr[1]) + 1
+
+
+def chechVerbHasIngSuffix(verb):
+    lemma_verb = lemmatiser.lemmatize(verb, pos="v")
+    return len(lemma_verb) == len(verb)
+
+
+def optimizeTagWithCollocation(param):
+    toolList = [wt.replace(" ", "_") for (wt, _) in param if 'TOOL' == _]
+    actionList = [wt for (wt, _) in param if 'VERB' == _]
+    toRemove = []
     retArr = []
-    for i in xrange(len(direction)):
-        tmp = " ".join(str(word) for word in direction[i])
-        retArr.append(tmp)
-    return retArr
+    if len(toolList) > 0:
+        for tool in toolList:
+            collList = CollocationFinder.calculateCollocationFromPaper(tool)
+            if len(collList) > 0 and len(actionList) > 1:
+                for colW in collList:
+                    for verb in actionList:
+                        if verb == colW:
+                            if (tool, verb) not in toRemove:
+                                toRemove.append((tool, verb))
 
+        if len(toRemove) > 0:
+            print('toremove ', toRemove)
+            for (w, T) in param:
+                for t, rmovalWord in toRemove:
+                    if (w != rmovalWord) and (w, T) not in retArr:
+                        retArr.append((w, T))
 
-def readData2(index):
-    df = pd.read_csv("/Users/Ozgen/Desktop/RecipeGit/csv/paper.csv", encoding='utf8')
-    # names=["index", "title", "ingredients", "directions"])
+        return retArr
+    else:
+        return param
 
-    ingredients = df.ix[index, :].ingredients.encode('utf8').lower()
-    ingredients = (utils.convertArrayToPureStr(ingredients))
-
-    title = df.ix[index, :].title.encode('utf8').lower()
-
-    directions = df.ix[index, :].directions.encode('utf8').lower()
-    arr = POSTaggerFuncs.posTaggText(directions)
-    dire = POSTaggerFuncs.tokenizeText(directions)
-    sentences = convertDirectionToSentenceArray(direction=dire)
-    ingreWithNewTAG = POSTaggerFuncs.parse_ingredientForCRF(ingredients)
-    parsData = POSTaggerFuncs.getNameEntityInIngre(ingreWithNewTAG)
-    direWithNewTAG = POSTaggerFuncs.updateDireTagsAfterCRF(arr, ingreWithNewTAG)
-    verbArr = []
-    wholeVerbs = []
-    taggedNewDire = []
-    for i in xrange(len(direWithNewTAG)):
-        toolList = isTool([wt for (wt, _, idx) in direWithNewTAG[i] if 'NOUN' == _ or 'ADV' == _])
-        direWithNewTAG[i] = updateForTools(direWithNewTAG[i], toolList)
-        ingArr = [w2 for (w2, t2, ix2) in direWithNewTAG[i] if t2 == "NAME"]
-        tmp = [w for (w, t, ix) in direWithNewTAG[i] if t == "VERB"]
-        if len(tmp) == 0:
-            direWithNewTAG[i] = findAndUpdateVerbTagInSent(direWithNewTAG[i])
-        if len(tmp) > 0:
-            wholeVerbs.append(tmp[0])
-        if len(ingArr) == 0 and len(tmp) > 0:
-            verbArr.append(tmp[0])
-        taggedNewDire.append(direWithNewTAG[i])
-    return (ParsedDirection(direWithNewTAG).convertTagsAccordingToPaper(), title, sentences)
-
-
-def getRelatedVerbs(data):
-    wholeVerbs = set()
-    tmp = set()
-    relatedVerbs = []
-    for i in xrange(len(data)):
-        sentence = data[i]
-        verbs = [w for (w, t, idx) in sentence if t == PRED_PREP]
-        ingres = [w for (w, t, idx) in sentence if t == INGREDIENTS]
-        if len(verbs) == 0:
-            verbs = [w for (w, t, idx) in sentence if t == PRED]
-        if len(verbs) > 0:
-            wholeVerbs.add(verbs[0])
-        if len(ingres) == 0:
-            tmp.add(verbs[0])
-
-    if len(wholeVerbs) > 0 and len(tmp) > 0:
-        relatedVerbs = WordToVecFunctions.createCosSim(verbArray=tmp, wholeVerbs=wholeVerbs)
-    return relatedVerbs
-
-
-def createGrapWithIndexForPaper2(index):
-    (data, title, directionSentenceArray) = readData2(index=index)
-    relatedVerbs = getRelatedVerbs(data)
-    file_name = title + ".dot"
-    print(relatedVerbs)
-    print("---------------------------------")
-    for i in xrange(len(data)):
-        print(data[i])
-    GraphGeneratorForPaper(data, relatedVerbs).createGraph(file_name)
-    UtilsIO.createPngFromDotFile("paper/" + file_name, "paper/" + title + ".png")
-    str_value = "title : " + title + "\n" + "\n"
-
-    for i in xrange(len(data)):
-        str_value = str_value + "SENT_ID :" + str(i) + "\n"
-        str_value = str_value + "SENTENCE : " + str(directionSentenceArray[i]) + "\n"
-        for (word, tag, idx) in data[i]:
-            str_value = str_value + str(tag) + " : " + str(word) + "\n"
-
-        str_value = str_value + "\n"
-    completeName = os.path.join(os.getcwd() + "/results/text_result/", title + ".txt")
-    outFile = open(completeName, 'w')
-    # print fileName
-    outFile.truncate()
-    outFile.write(str_value.encode('utf8'))
-    outFile.close()
-
-
-createGrapWithIndexForPaper2(23)
-# todo check 9. recipe for noningredient sentence...
+"""

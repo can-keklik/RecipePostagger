@@ -1,0 +1,105 @@
+title : vegan-carrot-cake
+
+SENT_ID :0
+SENTENCE : preheat oven to 350 degrees f ( 175 degrees c ) .
+PRED : preheat
+PARG : oven
+
+SENT_ID :1
+SENTENCE : prepare a 9x13 inch baking pan with cooking spray .
+PRED : prepare
+INGREDIENTS : baking
+INGREDIENT_SPAN : 9x13 baking
+PARG : pan
+DOBJ : 9x13 baking
+
+SENT_ID :2
+SENTENCE : whisk together the whole wheat flour , soy flour , cinnamon , ground cloves , baking soda , tapioca starch , and salt in a bowl until blended ; set aside .
+PRED : whisk
+PRED_PREP : whisk together
+NON_INGREDIENT_SPAN_VERB : until blended
+NON_INGREDIENT_SPAN_VERB : set
+INGREDIENTS : wheat flour flour
+INGREDIENT_SPAN : the whole wheat flour flour
+INGREDIENTS : soy
+INGREDIENTS : cinnamon
+INGREDIENTS : cloves
+INGREDIENT_SPAN : ground cloves
+INGREDIENTS : baking soda
+INGREDIENTS : tapioca starch
+INGREDIENTS : salt
+PARG : bowl
+NON_INGREDIENT_SPAN : in a bowl
+DOBJ : the whole wheat flour flour - ground cloves
+
+SENT_ID :3
+SENTENCE : pour the hot water into a mixing bowl , and sprinkle with the flax meal .
+PRED : pour
+NON_INGREDIENT_SPAN_VERB : pour
+INGREDIENTS : water
+INGREDIENT_SPAN : the the hot hot water
+INGREDIENTS : flax flax meal meal
+INGREDIENT_SPAN : with with the the flax flax meal meal
+PARG : mixing bowl
+NON_INGREDIENT_SPAN : into a mixing bowl
+PARG : bowl
+DOBJ : the the hot hot water - with with the the flax flax meal meal
+
+SENT_ID :4
+SENTENCE : stir for a minute until the flax begins to absorb the water , and the mixture slightly thickens .
+PRED : stir
+PRED_PREP : stir for
+NON_INGREDIENT_SPAN_VERB : begins
+NON_INGREDIENT_SPAN_VERB : absorb
+NON_INGREDIENT_SPAN_VERB : the thickens
+INGREDIENTS : flax
+INGREDIENT_SPAN : for a until the flax
+INGREDIENTS : water
+INGREDIENT_SPAN : the water
+DOBJ : for a until the flax - the water
+
+SENT_ID :5
+SENTENCE : stir in the brown sugar and vanilla until the sugar has dissolved , then add the currants , carrots , and almonds .
+PRED : stir
+PRED_PREP : stir in
+NON_INGREDIENT_SPAN_VERB : has
+NON_INGREDIENT_SPAN_VERB : dissolved
+NON_INGREDIENT_SPAN_VERB : add
+INGREDIENTS : brown sugar sugar
+INGREDIENT_SPAN : in the brown sugar sugar
+INGREDIENTS : vanilla
+INGREDIENT_SPAN : until the brown sugar sugar
+INGREDIENTS : currants
+INGREDIENT_SPAN : the currants
+INGREDIENTS : carrots
+INGREDIENTS : almonds
+DOBJ : in the brown sugar sugar - until the brown sugar sugar - the currants
+
+SENT_ID :6
+SENTENCE : stir in the dry mixture until just moistened , then pour into the prepared pan .
+PRED : stir
+PRED_PREP : stir in
+NON_INGREDIENT_SPAN_VERB : in the until moistened
+NON_INGREDIENT_SPAN_VERB : pour
+PARG : pan
+NON_INGREDIENT_SPAN : into the prepared pan
+
+SENT_ID :7
+SENTENCE : bake in the preheated oven until a toothpick inserted into the center comes out clean , about 30 minutes .
+PRED : bake
+PRED_PREP : bake in
+NON_INGREDIENT_SPAN_VERB : until a inserted
+NON_INGREDIENT_SPAN_VERB : into the comes
+PARG : oven
+NON_INGREDIENT_SPAN : in the preheated oven
+
+SENT_ID :8
+SENTENCE : cool in the pan for 10 minutes before removing to cool completely on a wire rack .
+PRED : cool
+PRED_PREP : cool in
+NON_INGREDIENT_SPAN_VERB : before removing
+NON_INGREDIENT_SPAN_VERB : cool
+PARG : pan
+NON_INGREDIENT_SPAN : in the pan
+NON_INGREDIENT_SPAN : on pan
+
