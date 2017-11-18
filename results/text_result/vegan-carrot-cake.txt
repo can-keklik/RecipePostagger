@@ -19,8 +19,10 @@ PRED : whisk
 PRED_PREP : whisk together
 NON_INGREDIENT_SPAN_VERB : until blended
 NON_INGREDIENT_SPAN_VERB : set
-INGREDIENTS : wheat flour flour
-INGREDIENT_SPAN : the whole wheat flour flour
+INGREDIENTS : flour
+INGREDIENT_SPAN : the whole flour
+INGREDIENTS : wheat flour
+INGREDIENT_SPAN : the whole wheat flour
 INGREDIENTS : soy
 INGREDIENTS : cinnamon
 INGREDIENTS : cloves
@@ -30,20 +32,19 @@ INGREDIENTS : tapioca starch
 INGREDIENTS : salt
 PARG : bowl
 NON_INGREDIENT_SPAN : in a bowl
-DOBJ : the whole wheat flour flour - ground cloves
+DOBJ : the whole flour - the whole wheat flour - ground cloves
 
 SENT_ID :3
 SENTENCE : pour the hot water into a mixing bowl , and sprinkle with the flax meal .
 PRED : pour
-NON_INGREDIENT_SPAN_VERB : pour
 INGREDIENTS : water
-INGREDIENT_SPAN : the the hot hot water
-INGREDIENTS : flax flax meal meal
-INGREDIENT_SPAN : with with the the flax flax meal meal
+INGREDIENT_SPAN : the hot water
+INGREDIENTS : flax meal
+INGREDIENT_SPAN : with the flax meal
 PARG : mixing bowl
 NON_INGREDIENT_SPAN : into a mixing bowl
 PARG : bowl
-DOBJ : the the hot hot water - with with the the flax flax meal meal
+DOBJ : the hot water - with the flax meal
 
 SENT_ID :4
 SENTENCE : stir for a minute until the flax begins to absorb the water , and the mixture slightly thickens .
@@ -65,15 +66,18 @@ PRED_PREP : stir in
 NON_INGREDIENT_SPAN_VERB : has
 NON_INGREDIENT_SPAN_VERB : dissolved
 NON_INGREDIENT_SPAN_VERB : add
-INGREDIENTS : brown sugar sugar
-INGREDIENT_SPAN : in the brown sugar sugar
+INGREDIENTS : sugar
+INGREDIENT_SPAN : in the sugar
+INGREDIENTS : brown sugar
+INGREDIENT_SPAN : in the brown sugar
 INGREDIENTS : vanilla
-INGREDIENT_SPAN : until the brown sugar sugar
+INGREDIENT_SPAN : until the sugar
+INGREDIENT_SPAN : until the brown sugar
 INGREDIENTS : currants
 INGREDIENT_SPAN : the currants
 INGREDIENTS : carrots
 INGREDIENTS : almonds
-DOBJ : in the brown sugar sugar - until the brown sugar sugar - the currants
+DOBJ : in the sugar - in the brown sugar - until the sugar - until the brown sugar - the currants
 
 SENT_ID :6
 SENTENCE : stir in the dry mixture until just moistened , then pour into the prepared pan .

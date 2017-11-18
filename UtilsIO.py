@@ -212,7 +212,7 @@ def readPaperDataForGraph(full_path):
         arr.append(params)
     return arr
 
-print readPaperDataForGraph("")
+#print readPaperDataForGraph("")
 
 # readPaperData(13)
 # writePaperDataToCvsFile()

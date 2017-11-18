@@ -52,6 +52,9 @@ def parse_ingredientForCRF(ingredients):
     return returnArr
 
 
+"""old version of crf tag changer which has bugs"""
+
+
 def updateDireTagsAfterCRF(dire, ingre):
     updatedArr = []
     for i in xrange(len(dire)):
@@ -69,6 +72,23 @@ def updateDireTagsAfterCRF(dire, ingre):
                 eachSent.append((direcWord, _, 0))
         updatedArr.append(eachSent)
     return updatedArr
+
+
+def updateDireTagsAfterCRF2(dire, ingre):
+    retArr = []
+    for i in xrange(len(dire)):
+        eachSent = []
+        for j, (direWord, tag) in enumerate(dire[i]):
+            for k in xrange(len(ingre)):
+                for l, (ingredientWord, tag_ing) in enumerate(ingre[k]):
+                    ingredientLemma = lemmatizer.lemmatize(ingredientWord)
+                    if (direWord == ingredientWord or direWord == ingredientLemma) and len(eachSent) < int(j + 1):
+                        eachSent.append((direWord, tag_ing, k + 1))
+
+            if len(eachSent) < int(j + 1):
+                eachSent.append((direWord, tag, 0))
+        retArr.append(eachSent)
+    return retArr
 
 
 def tokenize(sentence):
