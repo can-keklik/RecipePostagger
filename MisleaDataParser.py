@@ -10,10 +10,11 @@ import pandas as pd
 import CollocationFinder
 import POSTaggerFuncs
 import UtilsIO
-# import WordToVecFunctions
+import WordToVecFunctions
 import utils
 from GraphGeneratorForPaperAnnotated import GraphGeneratorForPaper
 import math
+import time
 
 FALSE_VERB = "FV"
 INGRE_TAGS = ["NAME", "UNIT"]
@@ -58,44 +59,49 @@ class ParsedDirection:
     def convertTagsAccordingToPaper(self):
         for i in xrange(len(self.direction)):
             # each sentence
+            if (self.direction is None):
+                return
             sentence = []
             tmp = [(word, k, idx) for k, (word, tag, idx) in enumerate(self.direction[i]) if tag == "NAME"]
             ingredients = []
+            tools = []
+            verbs = []
             a = []
             b = []
-            for c, (word, k, idx) in enumerate(tmp):
-                a = [(word2, k2) for k2, (word2, tag2, idx2) in enumerate(tmp) if idx == idx2]
-                b = set([word2 for k2, (word2, tag2, idx2) in enumerate(tmp) if idx == idx2])
-                if len(a) > 0 and len(b) > 0:
-                    if len(b) == 1:
-                        ingredients.extend(a)
-                    else:
+            if (len(tmp)):
+                for c, (word, k, idx) in enumerate(tmp):
+                    a = [(word2, k2) for k3, (word2, k2, idx2) in enumerate(tmp) if idx == idx2]
+                    b = set([word2 for k3, (word2, k2, idx2) in enumerate(tmp) if idx == idx2])
+                    if len(a) > 0 and len(b) > 0:
+                        if len(b) == 1:
+                            ingredients.extend(a)
+                        else:
 
-                        w_tmp = ""
-                        tmp_arr = []
-                        w_k = 0
-                        for (wrd, k) in a:
-                            if len(w_tmp) == 0:
-                                w_tmp = wrd
-                                w_k = k
-                            else:
-                                if str(wrd) not in str(w_tmp) and self.checkTwoNubsIsConsecutive(w_k, k):
-                                    w_tmp = w_tmp + " " + wrd
+                            w_tmp = ""
+                            tmp_arr = []
+                            w_k = 0
+                            for (wrd, k) in a:
+                                if len(w_tmp) == 0:
+                                    w_tmp = wrd
+                                    w_k = k
                                 else:
-                                    tmp_arr.append((wrd, k))
+                                    if str(wrd) not in str(w_tmp) and self.checkTwoNubsIsConsecutive(w_k, k):
+                                        w_tmp = w_tmp + " " + wrd
+                                    else:
+                                        tmp_arr.append((wrd, k))
 
-                        if len(w_tmp) > 0 and (w_tmp, w_k) not in tmp_arr:
-                            tmp_arr.append((w_tmp, w_k))
-                        if len(tmp_arr) > 0:
-                            for i in xrange(len(tmp_arr)):
-                                if tmp_arr[i] not in ingredients:
-                                    ingredients.append(tmp_arr[i])
+                            if len(w_tmp) > 0 and (w_tmp, w_k) not in tmp_arr:
+                                tmp_arr.append((w_tmp, w_k))
+                            if len(tmp_arr) > 0:
+                                for o in xrange(len(tmp_arr)):
+                                    if tmp_arr[o] not in ingredients:
+                                        ingredients.append(tmp_arr[o])
             # ingredients = [(word, k) for k, (word, tag, idx) in enumerate(self.direction[i]) if tag == "NAME"]
-            print("ingredients", ingredients)
             tools = [(word, k) for k, (word, tag, idx) in enumerate(self.direction[i]) if tag == "TOOL"]
             verbs = [(word, k) for k, (word, tag, idx) in enumerate(self.direction[i]) if
                      tag == "VERB" and len(word) > 1]
             length_of_sent = len(self.direction[i])
+            print(self.direction[i])
             if len(verbs) > 0:
                 (word, k) = verbs[0]
                 sentence.append((word, self.PRED, i))
@@ -328,11 +334,21 @@ def createGrapWithIndexForPaper2(index):
     outFile = open(completeName, 'w')
     # print fileName
     outFile.truncate()
-    outFile.write(str_value.encode('utf8'))
+    outFile.write(str_value)
     outFile.close()
 
 
-# createGrapWithIndexForPaper2(32)
+def run2():
+    for i in range(0, 32, 1):
+        print("i", i)
+        try:
+            createGrapWithIndexForPaper2(i)
+        except:
+            pass
+        time.sleep(5)
+
+
+createGrapWithIndexForPaper2(31)
 # todo check 9. recipe for noningredient sentence...
 # bug occur in 32
-readData2(32)
+# readData2(0)

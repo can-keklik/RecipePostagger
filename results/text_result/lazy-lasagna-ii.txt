@@ -8,14 +8,13 @@ PARG : oven
 SENT_ID :1
 SENTENCE : in a skillet over medium heat , brown ground beef with onion ; drain grease .
 PRED : drain
-NON_INGREDIENT_SPAN_VERB : drain
 INGREDIENTS : beef
-INGREDIENT_SPAN : over over brown brown ground ground beef
+INGREDIENT_SPAN : brown ground beef
 INGREDIENTS : onion
-INGREDIENT_SPAN : with with onion
+INGREDIENT_SPAN : with onion
 PARG : skillet
 NON_INGREDIENT_SPAN : in a skillet
-DOBJ : over over brown brown ground ground beef - with with onion
+DOBJ : brown ground beef - with onion
 
 SENT_ID :2
 SENTENCE : pour in spaghetti sauce and simmer 5 minutes .

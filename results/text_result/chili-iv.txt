@@ -3,17 +3,15 @@ title : chili-iv
 SENT_ID :0
 SENTENCE : in a deep skillet or large saucepan , cook beef with oil and salt over medium heat until brown .
 PRED : cook
-NON_INGREDIENT_SPAN_VERB : cook
-NON_INGREDIENT_SPAN_VERB : cook
 INGREDIENTS : beef
 INGREDIENTS : oil
-INGREDIENT_SPAN : with with with oil
+INGREDIENT_SPAN : with oil
 INGREDIENTS : salt
 PARG : pan
 NON_INGREDIENT_SPAN : in pan
 PARG : skillet
-NON_INGREDIENT_SPAN : a deep skillet
-DOBJ : with with with oil
+NON_INGREDIENT_SPAN : deep skillet
+DOBJ : with oil
 
 SENT_ID :1
 SENTENCE : meanwhile , puree french onion soup in a blender until smooth .
@@ -42,7 +40,8 @@ INGREDIENTS : chili powder
 INGREDIENT_SPAN : in chili powder
 INGREDIENTS : cumin
 INGREDIENTS : pepper
-INGREDIENTS : tomato paste tomato
+INGREDIENTS : tomato
+INGREDIENTS : tomato paste
 INGREDIENTS : sauce
 INGREDIENTS : beans
 DOBJ : in chili powder

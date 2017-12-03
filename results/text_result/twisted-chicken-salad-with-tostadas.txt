@@ -3,7 +3,6 @@ title : twisted-chicken-salad-with-tostadas
 SENT_ID :0
 SENTENCE : heat oil in a large heavy skillet over medium-high heat .
 PRED : heat
-NON_INGREDIENT_SPAN_VERB : heat
 INGREDIENTS : oil
 PARG : skillet
 NON_INGREDIENT_SPAN : in large heavy skillet
@@ -41,14 +40,13 @@ INGREDIENTS : tortillas
 SENT_ID :5
 SENTENCE : place the chicken in a bowl , and separate with a fork .
 PRED : place
-NON_INGREDIENT_SPAN_VERB : place
 INGREDIENTS : chicken
-INGREDIENT_SPAN : the the chicken
+INGREDIENT_SPAN : the chicken
 PARG : bowl
 NON_INGREDIENT_SPAN : in a bowl
 PARG : fork
-NON_INGREDIENT_SPAN : bowl and separate with a fork
-DOBJ : the the chicken
+NON_INGREDIENT_SPAN : and separate with a fork
+DOBJ : the chicken
 
 SENT_ID :6
 SENTENCE : stir in the mayonnaise .
@@ -71,13 +69,14 @@ SENT_ID :8
 SENTENCE : pour in 1 tablespoon jalapeno juice , season with salt and pepper , and stir well .
 PRED : pour
 PRED_PREP : pour in
-INGREDIENTS : jalapeno pepper
-INGREDIENT_SPAN : in 1 tablespoon jalapeno pepper
+INGREDIENTS : pepper
+INGREDIENT_SPAN : and pepper
+INGREDIENTS : jalapeno
+INGREDIENT_SPAN : in 1 tablespoon jalapeno
 INGREDIENTS : juice
 INGREDIENTS : salt
 INGREDIENT_SPAN : with salt
-INGREDIENT_SPAN : and jalapeno pepper
-DOBJ : in 1 tablespoon jalapeno pepper - with salt - and jalapeno pepper
+DOBJ : and pepper - in 1 tablespoon jalapeno - with salt
 
 SENT_ID :9
 SENTENCE : to serve , spread the chicken salad on the tostadas .

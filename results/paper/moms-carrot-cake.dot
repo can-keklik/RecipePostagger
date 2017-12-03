@@ -9,8 +9,6 @@ pan -> "cover 0";
 "bring 1" [style=filled, fillcolor=red];
 "let cool 2" [style=filled, fillcolor=red];
 "beat 3" [style=filled, fillcolor=red];
-beat [style=filled, fillcolor="#42e2f4"];
-beat -> "beat 3";
 eggs [style=filled, fillcolor=green];
 eggs -> "beat 3";
 "mixing bowl" [style=filled, fillcolor="#0000ff"];

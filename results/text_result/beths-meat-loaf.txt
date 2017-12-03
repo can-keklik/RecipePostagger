@@ -64,13 +64,14 @@ NON_INGREDIENT_SPAN_VERB : has
 NON_INGREDIENT_SPAN_VERB : dissolved
 INGREDIENTS : ketchup
 INGREDIENT_SPAN : the ketchup
-INGREDIENTS : brown sugar sugar
+INGREDIENTS : sugar
+INGREDIENT_SPAN : until the sugar
+INGREDIENTS : brown sugar
 INGREDIENTS : dry
 INGREDIENTS : mustard powder
-INGREDIENT_SPAN : until the brown sugar sugar
 PARG : bowl
 NON_INGREDIENT_SPAN : in a bowl
-DOBJ : the ketchup - until the brown sugar sugar
+DOBJ : the ketchup - until the sugar
 
 SENT_ID :7
 SENTENCE : when loaf is done , pull from the oven , and spread topping over the loaf .

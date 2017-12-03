@@ -23,14 +23,11 @@ NON_INGREDIENT_SPAN_VERB : steam
 SENT_ID :3
 SENTENCE : place the potatoes into the refrigerator to cool .
 PRED : place
-NON_INGREDIENT_SPAN_VERB : place
-NON_INGREDIENT_SPAN_VERB : cool
-NON_INGREDIENT_SPAN_VERB : cool
 INGREDIENTS : potatoes
-INGREDIENT_SPAN : the the potatoes
+INGREDIENT_SPAN : the potatoes
 PARG : refrigerator
 NON_INGREDIENT_SPAN : into the refrigerator
-DOBJ : the the potatoes
+DOBJ : the potatoes
 
 SENT_ID :4
 SENTENCE : when the potatoes are cool , grate them into a large bowl .
@@ -100,14 +97,15 @@ PRED : place
 NON_INGREDIENT_SPAN_VERB : reserve
 INGREDIENTS : eggs
 INGREDIENT_SPAN : the eggs
-INGREDIENTS : dill pickles pickles
-INGREDIENT_SPAN : 2/3 of the dill pickles pickles
+INGREDIENTS : pickles
+INGREDIENT_SPAN : the of the pickles
+INGREDIENTS : dill pickles
+INGREDIENT_SPAN : 2/3 of the dill pickles
 INGREDIENTS : potatoes
 INGREDIENT_SPAN : with the potatoes
-INGREDIENT_SPAN : the of the dill pickles pickles
 PARG : bowl
 NON_INGREDIENT_SPAN : into the salad bowl
-DOBJ : the eggs - 2/3 of the dill pickles pickles - with the potatoes - the of the dill pickles pickles
+DOBJ : the eggs - the of the pickles - 2/3 of the dill pickles - with the potatoes
 
 SENT_ID :12
 SENTENCE : place 3/4 of the peas into the bowl , and reserve the rest .
@@ -122,11 +120,12 @@ DOBJ : 3/4 of the peas
 SENT_ID :13
 SENTENCE : place the chicken breast meat into the bowl .
 PRED : place
-INGREDIENTS : chicken breast meat
-INGREDIENT_SPAN : the chicken breast meat
+INGREDIENTS : meat
+INGREDIENTS : chicken breast
+INGREDIENT_SPAN : the chicken breast
 PARG : bowl
 NON_INGREDIENT_SPAN : into the bowl
-DOBJ : the chicken breast meat
+DOBJ : the chicken breast
 
 SENT_ID :14
 SENTENCE : add 1/2 cup of mayonnaise and black pepper , and very lightly stir the mixture together so that the ingredients are well coated , but the peas stay whole .

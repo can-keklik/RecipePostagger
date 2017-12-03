@@ -4,7 +4,8 @@ SENT_ID :0
 SENTENCE : combine paprika , onion powder , garlic powder , oregano , thyme , and salt in a small bowl ; season with black pepper .
 PRED : combine
 INGREDIENTS : paprika
-INGREDIENTS : onion powder powder
+INGREDIENTS : powder
+INGREDIENTS : onion powder
 INGREDIENTS : garlic
 INGREDIENTS : oregano
 INGREDIENTS : thyme
@@ -12,7 +13,7 @@ INGREDIENTS : salt
 INGREDIENTS : black pepper
 INGREDIENT_SPAN : with black pepper
 PARG : bowl
-NON_INGREDIENT_SPAN : in a bowl
+NON_INGREDIENT_SPAN : in small bowl
 DOBJ : with black pepper
 
 SENT_ID :1
@@ -27,12 +28,12 @@ DOBJ : with paprika
 SENT_ID :2
 SENTENCE : heat about 2 tablespoons canola oil in a non-stick skillet over medium-high heat .
 PRED : heat
-NON_INGREDIENT_SPAN_VERB : heat
-INGREDIENTS : canola canola oil oil
-INGREDIENT_SPAN : about about 2 2 tablespoons tablespoons canola canola oil oil
+PRED_PREP : heat about
+INGREDIENTS : canola oil
+INGREDIENT_SPAN : about 2 tablespoons canola oil
 PARG : skillet
-NON_INGREDIENT_SPAN : in a skillet
-DOBJ : about about 2 2 tablespoons tablespoons canola canola oil oil
+NON_INGREDIENT_SPAN : in a non-stick skillet
+DOBJ : about 2 tablespoons canola oil
 
 SENT_ID :3
 SENTENCE : fry pork chops in batches until browned , about 5 minutes per side .
@@ -49,24 +50,22 @@ INGREDIENTS : pork
 SENT_ID :5
 SENTENCE : wipe skillet clean and heat remaining 1 1/2 teaspoon canola oil and butter over medium heat ; cook and stir onions , 1/2 bottle beer , and a pinch of salt until onion is tender and slightly browned , about 10 minutes .
 PRED : remaining
-NON_INGREDIENT_SPAN_VERB : remaining
-NON_INGREDIENT_SPAN_VERB : is
 NON_INGREDIENT_SPAN_VERB : is
 NON_INGREDIENT_SPAN_VERB : browned
-NON_INGREDIENT_SPAN_VERB : browned
-INGREDIENTS : canola canola oil oil
-INGREDIENT_SPAN : 1 1 1/2 1/2 teaspoon teaspoon canola canola oil oil
+INGREDIENTS : canola oil
+INGREDIENT_SPAN : 1 1/2 teaspoon canola oil
 INGREDIENTS : butter
 INGREDIENTS : onions
-INGREDIENT_SPAN : over over onions
+INGREDIENT_SPAN : over stir onions
 INGREDIENTS : beer
-INGREDIENT_SPAN : 1/2 1/2 bottle bottle beer
+INGREDIENT_SPAN : 1/2 bottle beer
 INGREDIENTS : salt
-INGREDIENT_SPAN : a a pinch pinch of of salt
+INGREDIENT_SPAN : a pinch of salt
 INGREDIENTS : onion
-INGREDIENT_SPAN : until until onion
+INGREDIENT_SPAN : until onion
 PARG : skillet
-DOBJ : 1 1 1/2 1/2 teaspoon teaspoon canola canola oil oil - over over onions - 1/2 1/2 bottle bottle beer - a a pinch pinch of of salt - until until onion
+NON_INGREDIENT_SPAN : wipe skillet
+DOBJ : 1 1/2 teaspoon canola oil - over stir onions - 1/2 bottle beer - a pinch of salt - until onion
 
 SENT_ID :6
 SENTENCE : add liquid smoke .
@@ -85,7 +84,8 @@ SENT_ID :8
 SENTENCE : mix barbeque sauce , remaining beer , worcestershire sauce , garlic , bourbon , and hot sauce in a bowl ; pour over pork .
 PRED : mix
 NON_INGREDIENT_SPAN_VERB : remaining
-INGREDIENTS : barbeque sauce sauce sauce
+INGREDIENTS : sauce
+INGREDIENTS : barbeque sauce
 INGREDIENTS : beer
 INGREDIENTS : worcestershire
 INGREDIENTS : garlic
@@ -107,7 +107,8 @@ SENTENCE : shred and divide pork over rolls to make sandwiches .
 PRED : shred
 NON_INGREDIENT_SPAN_VERB : make
 INGREDIENTS : pork
+INGREDIENT_SPAN : divide pork
 INGREDIENTS : rolls
 INGREDIENT_SPAN : over rolls
-DOBJ : over rolls
+DOBJ : divide pork - over rolls
 

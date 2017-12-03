@@ -3,35 +3,33 @@ title : marlenes-beef-stroganoff
 SENT_ID :0
 SENTENCE : spray a large skillet with cooking spray , and cook the flank steak and green peppers over medium heat until the steak pieces have begun to brown , about 10 minutes .
 PRED : cook
-NON_INGREDIENT_SPAN_VERB : cook
-NON_INGREDIENT_SPAN_VERB : have
 NON_INGREDIENT_SPAN_VERB : have
 NON_INGREDIENT_SPAN_VERB : begun
-NON_INGREDIENT_SPAN_VERB : begun
-NON_INGREDIENT_SPAN_VERB : brown
 NON_INGREDIENT_SPAN_VERB : brown
 INGREDIENTS : spray
-INGREDIENT_SPAN : with with cooking cooking spray
-INGREDIENTS : flank flank steak steak steak steak
-INGREDIENT_SPAN : the the flank flank steak steak steak steak
-INGREDIENTS : green green peppers peppers
-INGREDIENT_SPAN : and and green green peppers peppers
-INGREDIENT_SPAN : over over until until the the flank flank steak steak steak steak
+INGREDIENT_SPAN : cooking spray
+INGREDIENTS : steak
+INGREDIENT_SPAN : over until the steak
+INGREDIENTS : flank steak
+INGREDIENT_SPAN : the flank steak
+INGREDIENTS : green peppers
+INGREDIENT_SPAN : and green peppers
 INGREDIENTS : pieces
 PARG : skillet
 NON_INGREDIENT_SPAN : large skillet
-DOBJ : with with cooking cooking spray - the the flank flank steak steak steak steak - and and green green peppers peppers - over over until until the the flank flank steak steak steak steak
+DOBJ : cooking spray - over until the steak - the flank steak - and green peppers
 
 SENT_ID :1
 SENTENCE : transfer steak and peppers into a large saucepan , and stir in the beef consomme and french onion soup .
 PRED : transfer
-INGREDIENTS : steak beef
+INGREDIENTS : beef
+INGREDIENT_SPAN : large and in the beef
+INGREDIENTS : steak
 INGREDIENTS : peppers
 INGREDIENT_SPAN : and peppers
 INGREDIENTS : into
-INGREDIENT_SPAN : large and in the steak beef
 PARG : pan
-DOBJ : and peppers - large and in the steak beef
+DOBJ : large and in the beef - and peppers
 
 SENT_ID :2
 SENTENCE : bring to a boil , reduce heat to a simmer , and cover pan .

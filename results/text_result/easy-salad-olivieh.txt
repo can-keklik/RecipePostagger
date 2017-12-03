@@ -24,13 +24,12 @@ NON_INGREDIENT_SPAN_VERB : allow
 SENT_ID :3
 SENTENCE : place the diced potatoes into a large mixing bowl and refrigerate until cold .
 PRED : place
-NON_INGREDIENT_SPAN_VERB : place
 INGREDIENTS : potatoes
-INGREDIENT_SPAN : the the diced diced potatoes
+INGREDIENT_SPAN : the diced potatoes
 PARG : mixing bowl
 NON_INGREDIENT_SPAN : into large mixing bowl
 PARG : bowl
-DOBJ : the the diced diced potatoes
+DOBJ : the diced potatoes
 
 SENT_ID :4
 SENTENCE : once cold , fold in the mayonnaise , celery , eggs , chicken , mustard , olives , salt , and pickles .

@@ -1,17 +1,15 @@
 digraph G {
 "heat 0" [style=filled, fillcolor=red];
-heat [style=filled, fillcolor="#42e2f4"];
-heat -> "heat 0";
 oil [style=filled, fillcolor=green];
 oil -> "heat 0";
-"the the oil" [style=filled, fillcolor="#01DFA5"];
-"the the oil" -> "heat 0";
+"the oil" [style=filled, fillcolor="#01DFA5"];
+"the oil" -> "heat 0";
 skillet [style=filled, fillcolor="#0000ff"];
 skillet -> "heat 0";
 "a 10-inch skillet" [style=filled, fillcolor="#ffff66"];
 "a 10-inch skillet" -> "heat 0";
-"the the oil" [style=filled, fillcolor="#FFBF00"];
-"the the oil" -> "heat 0";
+"the oil" [style=filled, fillcolor="#FFBF00"];
+"the oil" -> "heat 0";
 "add 1" [style=filled, fillcolor=red];
 "until 's" [style=filled, fillcolor="#42e2f4"];
 "until 's" -> "add 1";

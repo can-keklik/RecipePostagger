@@ -26,7 +26,6 @@ PARG : oven
 SENT_ID :3
 SENTENCE : grease and flour two 10 inch cake pans .
 PRED : grease
-NON_INGREDIENT_SPAN_VERB : grease
 INGREDIENTS : flour
 PARG : cake pan
 NON_INGREDIENT_SPAN : two 10 inch cake pan

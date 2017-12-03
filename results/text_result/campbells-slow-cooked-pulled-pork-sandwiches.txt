@@ -3,12 +3,11 @@ title : campbells-slow-cooked-pulled-pork-sandwiches
 SENT_ID :0
 SENTENCE : heat the oil in a 10-inch skillet over medium-high heat .
 PRED : heat
-NON_INGREDIENT_SPAN_VERB : heat
 INGREDIENTS : oil
-INGREDIENT_SPAN : the the oil
+INGREDIENT_SPAN : the oil
 PARG : skillet
 NON_INGREDIENT_SPAN : a 10-inch skillet
-DOBJ : the the oil
+DOBJ : the oil
 
 SENT_ID :1
 SENTENCE : add the pork and cook until it 's well browned on all sides .

@@ -26,10 +26,11 @@ INGREDIENTS : black pepper
 INGREDIENT_SPAN : the ground black pepper
 INGREDIENTS : garlic salt
 INGREDIENTS : tomato sauce
-INGREDIENTS : chili seasoning mix
-INGREDIENT_SPAN : salsa chili seasoning mix
+INGREDIENTS : mix
+INGREDIENTS : chili seasoning
+INGREDIENT_SPAN : salsa chili seasoning
 INGREDIENTS : kidney beans
-DOBJ : the ground black pepper - salsa chili seasoning mix
+DOBJ : the ground black pepper - salsa chili seasoning
 
 SENT_ID :3
 SENTENCE : mix well , reduce heat to low and simmer for at least an hour .

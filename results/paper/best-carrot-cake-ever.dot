@@ -23,8 +23,6 @@ raisins -> "set aside 1";
 oven [style=filled, fillcolor="#0000ff"];
 oven -> "preheat 2";
 "grease 3" [style=filled, fillcolor=red];
-grease [style=filled, fillcolor="#42e2f4"];
-grease -> "grease 3";
 flour [style=filled, fillcolor=green];
 flour -> "grease 3";
 "cake pan" [style=filled, fillcolor="#0000ff"];

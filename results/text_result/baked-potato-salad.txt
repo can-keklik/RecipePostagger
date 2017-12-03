@@ -34,16 +34,13 @@ NON_INGREDIENT_SPAN_VERB : cooled
 SENT_ID :4
 SENTENCE : place the bacon in a large , deep skillet , and cook over medium-high heat , turning occasionally , until evenly browned , about 10 minutes .
 PRED : place
-NON_INGREDIENT_SPAN_VERB : place
 NON_INGREDIENT_SPAN_VERB : over turning
-NON_INGREDIENT_SPAN_VERB : turning
 NON_INGREDIENT_SPAN_VERB : until browned
-NON_INGREDIENT_SPAN_VERB : browned
 INGREDIENTS : bacon
-INGREDIENT_SPAN : the the bacon
+INGREDIENT_SPAN : the bacon
 PARG : skillet
 NON_INGREDIENT_SPAN : in large deep skillet
-DOBJ : the the bacon
+DOBJ : the bacon
 
 SENT_ID :5
 SENTENCE : drain the bacon slices on a paper towel-lined plate .

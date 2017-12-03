@@ -32,15 +32,15 @@ SENTENCE : melt butter in a large pot over medium heat ; cook and stir onion and
 PRED : melt
 NON_INGREDIENT_SPAN_VERB : is
 INGREDIENTS : butter
+INGREDIENT_SPAN : in the hot butter
 INGREDIENTS : onion
 INGREDIENT_SPAN : over and stir onion
+INGREDIENT_SPAN : until onion
 INGREDIENTS : garlic
 INGREDIENT_SPAN : and garlic
-INGREDIENT_SPAN : in the hot butter
-INGREDIENT_SPAN : until onion
 PARG : pot
 NON_INGREDIENT_SPAN : in large pot
-DOBJ : over and stir onion - and garlic - in the hot butter - until onion
+DOBJ : in the hot butter - over and stir onion - until onion - and garlic
 
 SENT_ID :4
 SENTENCE : place flour , milk , and half-and-half in a jar with a lid and shake until flour has smoothly mixed with milk and half-and-half .
@@ -50,8 +50,8 @@ NON_INGREDIENT_SPAN_VERB : has
 NON_INGREDIENT_SPAN_VERB : smoothly
 NON_INGREDIENT_SPAN_VERB : mixed
 INGREDIENTS : flour
-INGREDIENTS : milk
 INGREDIENT_SPAN : until flour
+INGREDIENTS : milk
 INGREDIENT_SPAN : with milk
 PARG : lid
 NON_INGREDIENT_SPAN : half-and-half in jar with a lid
@@ -60,12 +60,9 @@ DOBJ : until flour - with milk
 SENT_ID :5
 SENTENCE : pour mixture into skillet and whisk until smooth and thick , about 5 minutes .
 PRED : pour
-NON_INGREDIENT_SPAN_VERB : pour
-NON_INGREDIENT_SPAN_VERB : pour
 PARG : skillet
 NON_INGREDIENT_SPAN : mixture into skillet
 PARG : whisk
-NON_INGREDIENT_SPAN : skillet and whisk
 
 SENT_ID :6
 SENTENCE : gradually whisk chicken broth into sauce and bring to a simmer , whisking constantly .
@@ -83,10 +80,13 @@ NON_INGREDIENT_SPAN_VERB : serve
 INGREDIENTS : chicken
 INGREDIENTS : sour cream
 INGREDIENT_SPAN : and sour cream
-INGREDIENTS : salt black pepper to
-INGREDIENT_SPAN : into with salt black pepper to
-INGREDIENT_SPAN : and salt black pepper to
+INGREDIENTS : black
+INGREDIENT_SPAN : and black
+INGREDIENTS : pepper
+INGREDIENTS : to
+INGREDIENTS : salt
+INGREDIENT_SPAN : into with salt
 INGREDIENTS : noodles
 INGREDIENT_SPAN : and with cooked noodles
-DOBJ : and sour cream - into with salt black pepper to - and salt black pepper to - and with cooked noodles
+DOBJ : and sour cream - and black - into with salt - and with cooked noodles
 

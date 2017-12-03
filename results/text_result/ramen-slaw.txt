@@ -3,7 +3,8 @@ title : ramen-slaw
 SENT_ID :0
 SENTENCE : combine broccoli coleslaw mix , sunflower seeds , almonds , and ramen noodles together in a bowl .
 PRED : combine
-INGREDIENTS : broccoli coleslaw mix
+INGREDIENTS : mix
+INGREDIENTS : broccoli coleslaw
 INGREDIENTS : sunflower seeds
 INGREDIENTS : almonds
 INGREDIENTS : ramen noodles
@@ -32,9 +33,8 @@ DOBJ : in green onions
 SENT_ID :3
 SENTENCE : chill in refrigerator for 1 1/2 hours before serving .
 PRED : chill
-NON_INGREDIENT_SPAN_VERB : chill
+PRED_PREP : chill in
 NON_INGREDIENT_SPAN_VERB : before serving
-NON_INGREDIENT_SPAN_VERB : serving
 PARG : refrigerator
 NON_INGREDIENT_SPAN : in refrigerator
 

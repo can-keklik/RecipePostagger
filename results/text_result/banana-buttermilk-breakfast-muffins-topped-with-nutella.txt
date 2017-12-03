@@ -1,84 +1,30 @@
 title : banana-buttermilk-breakfast-muffins-topped-with-nutella
 
 SENT_ID :0
+SENTENCE : preheat oven to 350 degrees f ( 180 degrees c ) .
 PRED : preheat
 PARG : oven
-NON_INGREDIENT_SPAN : the oven
 
 SENT_ID :1
-PRED : mix
-PRED_PREP : mix together
-NON_INGREDIENT_SPAN_VERB : until blended
-INGREDIENTS : beef
-INGREDIENT_SPAN : ground beef
-INGREDIENTS : crackers
-INGREDIENT_SPAN : crushed crackers
-INGREDIENTS : onion
-INGREDIENTS : eggs
-INGREDIENTS : ketchup
-INGREDIENT_SPAN : 3/4 cup ketchup
-INGREDIENTS : brown sugar
-INGREDIENT_SPAN : 1/4 cup brown sugar
-PARG : bowl
-NON_INGREDIENT_SPAN : in a medium bowl
-DOBJ : ground beef - crushed crackers - 3/4 cup ketchup - 1/4 cup brown sugar
+SENTENCE : spray non-stick muffin pan with cooking spray .
+PRED : spray
+PRED_PREP : spray non-stick
+PARG : muffin pan
+NON_INGREDIENT_SPAN : non-stick muffin pan
+PARG : pan
 
 SENT_ID :2
-PRED : press
-PRED_PREP : press into
-PARG : pan
-NON_INGREDIENT_SPAN : into pan
-NON_INGREDIENT_SPAN : 9x5 inch loaf pan
-
-SENT_ID :3
-PRED : lay
-INGREDIENTS : bacon
-INGREDIENT_SPAN : the two slices of bacon
-DOBJ : the two slices of bacon
-
-SENT_ID :4
-PRED : bake
-PRED_PREP : bake for
-NON_INGREDIENT_SPAN_VERB : until cooked
-PARG : oven
-NON_INGREDIENT_SPAN : for hour in the oven
-
-SENT_ID :5
-PRED : mix
-PRED_PREP : mix together
-NON_INGREDIENT_SPAN_VERB : the remaining
-INGREDIENTS : ketchup
-INGREDIENT_SPAN : 1 cup ketchup
-INGREDIENTS : vinegar
-INGREDIENTS : salt
-INGREDIENTS : mustard
-INGREDIENTS : brown sugar
-INGREDIENT_SPAN : 1/2 cup brown sugar
-DOBJ : 1 cup ketchup - 1/2 cup brown sugar
-
-SENT_ID :6
-PRED : spread
-PRED_PREP : spread over
-
-SENT_ID :7
-PRED : preheat
-PARG : oven
-
-SENT_ID :8
-PRED : spray
-NON_INGREDIENT_SPAN_VERB : spray
-PARG : muffin pan
-PARG : pan
-
-SENT_ID :9
+SENTENCE : in a large bowl , combine flours , oats , baking powder and baking soda .
 PRED : combine
 INGREDIENTS : oats
-INGREDIENTS : baking powder baking
+INGREDIENTS : baking
+INGREDIENTS : baking powder
 INGREDIENTS : soda
 PARG : bowl
-NON_INGREDIENT_SPAN : in a bowl
+NON_INGREDIENT_SPAN : in large bowl
 
-SENT_ID :10
+SENT_ID :3
+SENTENCE : in another bowl , whisk together bananas , eggs , sugar , applesauce , buttermilk and vanilla .
 PRED : whisk
 PRED_PREP : whisk together
 INGREDIENTS : bananas
@@ -90,19 +36,22 @@ INGREDIENTS : vanilla
 PARG : bowl
 NON_INGREDIENT_SPAN : in another bowl
 
-SENT_ID :11
+SENT_ID :4
+SENTENCE : pour over dry ingredients and stir until just combined .
 PRED : pour
 PRED_PREP : pour over
 NON_INGREDIENT_SPAN_VERB : over until combined
 
-SENT_ID :12
+SENT_ID :5
+SENTENCE : spoon into prepared muffin pan .
 PRED : spoon
-NON_INGREDIENT_SPAN_VERB : spoon
+PRED_PREP : spoon into
 PARG : muffin pan
-NON_INGREDIENT_SPAN : into muffin pan
+NON_INGREDIENT_SPAN : into prepared muffin pan
 PARG : pan
 
-SENT_ID :13
+SENT_ID :6
+SENTENCE : bake for 20 to 25 minutes or until a tester inserted into the center of a muffin comes out clean .
 PRED : bake
 PRED_PREP : bake for
 NON_INGREDIENT_SPAN_VERB : until a inserted
@@ -111,21 +60,22 @@ INGREDIENTS : or
 INGREDIENT_SPAN : for 20 25 or
 DOBJ : for 20 25 or
 
-SENT_ID :14
+SENT_ID :7
+SENTENCE : let cool in pan for 10 minutes .
 PRED : let
 PARG : pan
 NON_INGREDIENT_SPAN : cool in pan
 
-SENT_ID :15
+SENT_ID :8
+SENTENCE : transfer to rack to cool completely .
 PRED : transfer
 PRED_PREP : transfer to
 NON_INGREDIENT_SPAN_VERB : rack
 NON_INGREDIENT_SPAN_VERB : cool
 
-SENT_ID :16
+SENT_ID :9
+SENTENCE : spread each muffin with 1 tablespoon ( 15 ml ) of nutella® .
 PRED : spread
-NON_INGREDIENT_SPAN_VERB : spread
-NON_INGREDIENT_SPAN_VERB : spread
 PARG : tablespoon
 NON_INGREDIENT_SPAN : each muffin with tablespoon
 PARG : spoon

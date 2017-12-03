@@ -8,7 +8,6 @@ PARG : oven
 SENT_ID :1
 SENTENCE : lightly grease a baking pan .
 PRED : grease
-NON_INGREDIENT_SPAN_VERB : grease
 PARG : baking pan
 PARG : pan
 
@@ -31,7 +30,8 @@ PRED : mix
 PRED_PREP : mix by
 INGREDIENTS : seasoning blend
 INGREDIENT_SPAN : by with salt-free seasoning blend
-INGREDIENTS : garlic powder powder
+INGREDIENTS : powder
+INGREDIENTS : garlic powder
 INGREDIENTS : onion
 INGREDIENTS : salt
 INGREDIENTS : pepper
@@ -40,11 +40,11 @@ DOBJ : by with salt-free seasoning blend
 SENT_ID :4
 SENTENCE : form into a loaf shape , and place on the prepared baking pan .
 PRED : form
-NON_INGREDIENT_SPAN_VERB : form
+PRED_PREP : form into
 PARG : baking pan
 NON_INGREDIENT_SPAN : into baking pan
 PARG : pan
-NON_INGREDIENT_SPAN : loaf shape place on the prepared baking pan
+NON_INGREDIENT_SPAN : shape place on the prepared baking pan
 
 SENT_ID :5
 SENTENCE : drizzle with remaining 1/4 cup ketchup .

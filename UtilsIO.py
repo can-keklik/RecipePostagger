@@ -195,10 +195,10 @@ def readPaperDataForGraph(full_path):
                 params.append(("DOBJ", tmp[1]))
             elif "NON-INGREDIENT SPAN" in str(param):
                 tmp = param.split("NON-INGREDIENT SPAN:")
-                params.append(("NON-INGREDIENT SPAN", tmp[1]))
+                params.append(("NON_INGREDIENT_SPAN", tmp[1]))
             elif "INGREDIENT SPAN" in str(param):
                 tmp = param.split("INGREDIENT SPAN:")
-                params.append(("INGREDIENT SPAN", tmp[1]))
+                params.append(("INGREDIENT_SPAN", tmp[1]))
             elif "INGREDIENTS" in str(param):
                 tmp = param.split("INGREDIENTS:")
                 params.append(("INGREDIENTS", tmp[1]))
@@ -212,7 +212,7 @@ def readPaperDataForGraph(full_path):
         arr.append(params)
     return arr
 
-#print readPaperDataForGraph("")
+print readPaperDataForGraph("")
 
 # readPaperData(13)
 # writePaperDataToCvsFile()

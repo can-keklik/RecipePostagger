@@ -10,10 +10,6 @@ NON_INGREDIENT_SPAN : in a soup pot
 SENT_ID :1
 SENTENCE : remove bacon with a slotted spoon , leaving drippings in the pot .
 PRED : remove
-NON_INGREDIENT_SPAN_VERB : remove
-NON_INGREDIENT_SPAN_VERB : remove
-NON_INGREDIENT_SPAN_VERB : leaving
-NON_INGREDIENT_SPAN_VERB : leaving
 NON_INGREDIENT_SPAN_VERB : leaving
 INGREDIENTS : bacon
 PARG : spoon
@@ -27,11 +23,13 @@ PRED : cook
 NON_INGREDIENT_SPAN_VERB : until softened
 INGREDIENTS : onion
 INGREDIENT_SPAN : and stir onion
-INGREDIENTS : red bell pepper pepper
-INGREDIENT_SPAN : and red bell pepper pepper
+INGREDIENTS : pepper
+INGREDIENT_SPAN : and pepper
+INGREDIENTS : red bell
+INGREDIENT_SPAN : and red bell
 INGREDIENTS : salt
 INGREDIENT_SPAN : about 5 with salt
-DOBJ : and stir onion - and red bell pepper pepper - about 5 with salt
+DOBJ : and stir onion - and pepper - and red bell - about 5 with salt
 
 SENT_ID :3
 SENTENCE : stir in garlic and seafood seasoning and cook and stir 2 more minutes .

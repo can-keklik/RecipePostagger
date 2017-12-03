@@ -7,18 +7,15 @@ PRED_PREP : beat together
 INGREDIENTS : milk
 INGREDIENTS : eggs
 INGREDIENTS : sugar
-INGREDIENTS : cocoa powder powder
+INGREDIENTS : powder
+INGREDIENTS : cocoa powder
 INGREDIENTS : baking
 INGREDIENTS : salt
 
 SENT_ID :1
 SENTENCE : heat a lightly buttered skillet or griddle over medium heat .
 PRED : heat
-NON_INGREDIENT_SPAN_VERB : heat
-NON_INGREDIENT_SPAN_VERB : heat
 NON_INGREDIENT_SPAN_VERB : a buttered
-NON_INGREDIENT_SPAN_VERB : buttered
-NON_INGREDIENT_SPAN_VERB : buttered
 PARG : skillet
 PARG : griddle
 

@@ -21,7 +21,6 @@ INGREDIENTS : noodles
 SENT_ID :3
 SENTENCE : place pork and beef in a large , deep skillet .
 PRED : place
-NON_INGREDIENT_SPAN_VERB : place
 INGREDIENTS : pork
 INGREDIENTS : beef
 PARG : skillet
@@ -58,7 +57,8 @@ NON_INGREDIENT_SPAN_VERB : over for stirring
 SENT_ID :7
 SENTENCE : in a large bowl , combine cottage cheese , eggs , parmesan cheese , parsley , salt and pepper .
 PRED : combine
-INGREDIENTS : cottage cheese cheese
+INGREDIENTS : cheese
+INGREDIENTS : cottage cheese
 INGREDIENTS : eggs
 INGREDIENTS : parmesan
 INGREDIENTS : parsley

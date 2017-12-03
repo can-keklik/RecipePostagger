@@ -1,7 +1,9 @@
 digraph G {
 "combine 0" [style=filled, fillcolor=red];
-"broccoli coleslaw mix" [style=filled, fillcolor=green];
-"broccoli coleslaw mix" -> "combine 0";
+mix [style=filled, fillcolor=green];
+mix -> "combine 0";
+"broccoli coleslaw" [style=filled, fillcolor=green];
+"broccoli coleslaw" -> "combine 0";
 "sunflower seeds" [style=filled, fillcolor=green];
 "sunflower seeds" -> "combine 0";
 almonds [style=filled, fillcolor=green];
@@ -34,18 +36,14 @@ onions -> "fold in 2";
 "in green onions" -> "fold in 2";
 "in green onions" [style=filled, fillcolor="#FFBF00"];
 "in green onions" -> "fold in 2";
-"chill 3" [style=filled, fillcolor=red];
-chill [style=filled, fillcolor="#42e2f4"];
-chill -> "chill 3";
+"chill in 3" [style=filled, fillcolor=red];
 "before serving" [style=filled, fillcolor="#42e2f4"];
-"before serving" -> "chill 3";
-serving [style=filled, fillcolor="#42e2f4"];
-serving -> "chill 3";
+"before serving" -> "chill in 3";
 refrigerator [style=filled, fillcolor="#0000ff"];
-refrigerator -> "chill 3";
+refrigerator -> "chill in 3";
 "in refrigerator" [style=filled, fillcolor="#ffff66"];
-"in refrigerator" -> "chill 3";
+"in refrigerator" -> "chill in 3";
 "combine 0" -> "whisk 1";
 "whisk 1" -> "fold in 2";
-"fold in 2" -> "chill 3";
+"fold in 2" -> "chill in 3";
 }

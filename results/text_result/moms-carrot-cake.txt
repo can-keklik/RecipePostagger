@@ -19,7 +19,6 @@ PRED_PREP : let cool
 SENT_ID :3
 SENTENCE : in a large mixing bowl , beat eggs .
 PRED : beat
-NON_INGREDIENT_SPAN_VERB : beat
 INGREDIENTS : eggs
 PARG : mixing bowl
 NON_INGREDIENT_SPAN : large mixing bowl
