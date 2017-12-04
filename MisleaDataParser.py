@@ -303,7 +303,7 @@ def getRelatedVerbs(data):
             verbs = [w for (w, t, idx) in sentence if t == PRED]
         if len(verbs) > 0:
             wholeVerbs.add(verbs[0])
-        if len(ingres) == 0:
+        if len(ingres) == 0 and len(verbs) > 0:
             tmp.add(verbs[0])
 
     if len(wholeVerbs) > 0 and len(tmp) > 0:
@@ -338,17 +338,22 @@ def createGrapWithIndexForPaper2(index):
     outFile.close()
 
 
-def run2():
-    for i in range(0, 32, 1):
-        print("i", i)
-        try:
-            createGrapWithIndexForPaper2(i)
-        except:
-            pass
-        time.sleep(5)
+def readPaperDataArgCreateGraph(title):
+    data = UtilsIO.readPaperDataForGraph("")
+    data = [arr for arr in data if len(arr) > 0]
+    for sent in data:
+        print(sent)
+    relatedVerbs = getRelatedVerbs(data)
+    print (relatedVerbs)
+    file_name = title + ".dot"
+    GraphGeneratorForPaper(data, relatedVerbs).createGraph(file_name)
+    UtilsIO.createPngFromDotFile("paper/" + file_name, "paper/" + title + ".png")
 
 
-createGrapWithIndexForPaper2(31)
+readPaperDataArgCreateGraph("trialramenslaw")
+
+
+# createGrapWithIndexForPaper2(31)
 # todo check 9. recipe for noningredient sentence...
 # bug occur in 32
 # readData2(0)

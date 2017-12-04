@@ -8,6 +8,17 @@ import unicodecsv as csv
 
 import utils
 
+PRED = "PRED"  # verb tag
+PRED_PREP = "PRED_PREP"  # verb tag with adp
+DOBJ = "DOBJ"  # obj that is not related with ingredient
+NON_INGREDIENT_SPAN = "NON_INGREDIENT_SPAN"  # obj that is not related with ingredient
+NON_INGREDIENT_SPAN_VERB = "NON_INGREDIENT_SPAN_VERB"  # obj that is not related with ingredient
+INGREDIENT_SPAN = "INGREDIENT_SPAN"  # obj that is related with ingredient
+INGREDIENTS = "INGREDIENTS"  # pure ingredient
+PARG = "PARG"  # tool
+PREP = "PREP"  # preposition
+PREDID = "PREDID"  # this id is realed with action's order
+
 
 def readFiles(fileName):
     f = open(fileName)
@@ -175,44 +186,104 @@ def readPaperData(index):
     print directions
 
 
+def getWordAsUTF8(word):
+    tmp = "uncoding"
+    try:
+        tmp = str(word).decode(encoding="utf-8")
+    except Exception as e:
+        print (e)
+
+    return tmp
+
+
 def readPaperDataForGraph(full_path):
     dummyPath = "/Users/Ozgen/Desktop/dataset/AnnotationSession/AnnotationSession-args/amish-meatloaf.txt"
     data = readFiles(dummyPath)
     array = data.split("SENTID")
     arr = []
-    for a in array:
+    for i, a in enumerate(array):
         eachSent = a.split("\n")
         params = []
         for param in eachSent:
             if "PREDID:" in str(param):
                 tmp = param.split("PREDID:")
-                params.append(("PREDID", tmp[1]))
+                params.append((getWordAsUTF8(tmp[1]), "PREDID", i))
             elif "PRED" in str(param):
                 tmp = param.split("PRED:")
-                params.append(("PRED", tmp[1]))
+                params.append((getWordAsUTF8(tmp[1]), "PRED", i))
             elif "DOBJ" in str(param):
                 tmp = param.split("DOBJ:")
-                params.append(("DOBJ", tmp[1]))
+                params.append((getWordAsUTF8(tmp[1]), "DOBJ", i))
             elif "NON-INGREDIENT SPAN" in str(param):
                 tmp = param.split("NON-INGREDIENT SPAN:")
-                params.append(("NON_INGREDIENT_SPAN", tmp[1]))
+                params.append((getWordAsUTF8(tmp[1]), "NON_INGREDIENT_SPAN", i))
             elif "INGREDIENT SPAN" in str(param):
                 tmp = param.split("INGREDIENT SPAN:")
-                params.append(("INGREDIENT_SPAN", tmp[1]))
+                params.append((getWordAsUTF8(tmp[1]), "INGREDIENTS", i))
             elif "INGREDIENTS" in str(param):
                 tmp = param.split("INGREDIENTS:")
-                params.append(("INGREDIENTS", tmp[1]))
+                params.append((getWordAsUTF8(tmp[1]), "INGREDIENT_SPAN", i))
             elif "PARG" in str(param):
                 tmp = param.split("PARG:")
-                params.append(("PARG", tmp[1]))
+                params.append((getWordAsUTF8(tmp[1]), "PARG", i))
             elif "PREP" in str(param):
                 tmp = param.split("PREP:")
-                params.append(("PREP", tmp[1]))
+                params.append((getWordAsUTF8(tmp[1]), "PREP", i))
 
         arr.append(params)
     return arr
 
-print readPaperDataForGraph("")
+
+def readTheResultFromTheAlg():
+    dummyPath = "/Users/Ozgen/Desktop/RecipeGit/results/text_result/amish-meatloaf.txt"
+    data = readFiles(dummyPath)
+    array = data.split("SENT_ID :")
+    arr = []
+    for i, a in enumerate(array):
+        eachSent = a.split("\n")
+        params = []
+        for param in eachSent:
+            if PRED in str(param) and PRED_PREP not in str(param):
+                tmp = param.split(str(PRED) + " :")
+                params.append((getWordAsUTF8(tmp[1]), PRED, i))
+            elif DOBJ in str(param):
+                tmp = param.split(str(DOBJ) + " :")
+                params.append((getWordAsUTF8(tmp[1]), DOBJ, i))
+            elif NON_INGREDIENT_SPAN in str(param) and NON_INGREDIENT_SPAN_VERB not in str(param):
+                tmp = param.split(str(NON_INGREDIENT_SPAN) + " :")
+                params.append((getWordAsUTF8(tmp[1]), NON_INGREDIENT_SPAN, i))
+            elif INGREDIENT_SPAN in str(param) and NON_INGREDIENT_SPAN not in str(
+                    param) and NON_INGREDIENT_SPAN_VERB not in str(param):
+                tmp = param.split(str(INGREDIENT_SPAN) + " :")
+                params.append((getWordAsUTF8(tmp[1]), INGREDIENT_SPAN, i))
+            elif INGREDIENTS in str(param):
+                tmp = param.split(str(INGREDIENTS) + " :")
+                params.append((getWordAsUTF8(tmp[1]), INGREDIENTS, i))
+            elif PARG in str(param):
+                tmp = param.split(str(PARG) + " :")
+                params.append((getWordAsUTF8(tmp[1]), PARG, i))
+            elif PRED_PREP in str(param):
+                tmp = param.split(str(PRED_PREP) + " :")
+                params.append((getWordAsUTF8(tmp[1]), PRED_PREP, i))
+            elif NON_INGREDIENT_SPAN_VERB in str(param):
+                tmp = param.split(str(NON_INGREDIENT_SPAN_VERB) + " :")
+                params.append((getWordAsUTF8(tmp[1]), NON_INGREDIENT_SPAN_VERB, i))
+        if len(params) > 0:
+            arr.append(params)
+    return arr
+
+
+def getcompareResult(folder):
+    return os.listdir(folder)
+
+
+arr1 = readTheResultFromTheAlg()
+arr2=readPaperDataForGraph("")
+for b in arr1:
+    print b
+for b in arr2:
+    print b
+# print readPaperDataForGraph("")
 
 # readPaperData(13)
 # writePaperDataToCvsFile()
