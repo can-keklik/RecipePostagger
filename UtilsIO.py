@@ -207,7 +207,7 @@ def readPaperDataForGraph(full_path):
         for param in eachSent:
             if "PREDID:" in str(param):
                 tmp = param.split("PREDID:")
-                params.append((getWordAsUTF8(tmp[1]), "PREDID", i))
+                #params.append((getWordAsUTF8(tmp[1]), "PREDID", i))
             elif "PRED" in str(param):
                 tmp = param.split("PRED:")
                 params.append((getWordAsUTF8(tmp[1]), "PRED", i))
