@@ -70,10 +70,15 @@ After Domain Adaptaion:
 ![alt tag](https://github.com/ozgen/RecipePostagger/blob/master/results/result121-3.png)
 
 latest results:
-![alt tag](https://github.com/ozgen/RecipePostagger/blob/master/results/paper/result0.png)
-![alt tag](https://github.com/ozgen/RecipePostagger/blob/master/results/paper/result20.png)
+![alt tag](https://github.com/ozgen/RecipePostagger/blob/master/results/paper/beas-mashed-potato-salad.png)
+![alt tag](https://github.com/ozgen/RecipePostagger/blob/master/results/paper/taco-soup-iv.png)
 
 
+### DataSet Tagger WebSite 
+the algorithm works on 28 tagged recipes which are from Kiddon. its accuracy proportion is % 76,9713529622 
+
+
+    
 
 
 
