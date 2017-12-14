@@ -65,7 +65,11 @@ NON_INGREDIENT_SPAN : in salad bowl
 DOBJ : the lettuce
 
 SENT_ID :8
-SENTENCE : pour dressing over salad ; toss and serve .
+SENTENCE : pour dressing over salad
 PRED : pour
 NON_INGREDIENT_SPAN_VERB : dressing
+
+SENT_ID :9
+SENTENCE : toss and serve .
+PRED : toss
 

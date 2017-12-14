@@ -72,6 +72,7 @@ bowl -> "combine 7";
 "pour 8" [style=filled, fillcolor=red];
 dressing [style=filled, fillcolor="#42e2f4"];
 dressing -> "pour 8";
+"toss 9" [style=filled, fillcolor=red];
 "marinate 0" -> "preheat 1";
 "preheat 1" -> "marinate 0";
 "remove 2" -> "place 3";
@@ -80,4 +81,5 @@ dressing -> "pour 8";
 "whisk together 5" -> "allow 6";
 "allow 6" -> "combine 7";
 "combine 7" -> "pour 8";
+"pour 8" -> "marinate 0";
 }

@@ -21,23 +21,26 @@ INGREDIENTS : pepper
 DOBJ : in 1/4 cup shredded cheese
 
 SENT_ID :3
-SENTENCE : spoon into greased 1-1/2-l baking dish ; top with remaining shredded cheese , then combined cracker crumbs and margarine .
+SENTENCE : spoon into greased 1-1/2-l baking dish
 PRED : spoon
 PRED_PREP : spoon into
-NON_INGREDIENT_SPAN_VERB : into with remaining
+
+SENT_ID :4
+SENTENCE : top with remaining shredded cheese , then combined cracker crumbs and margarine .
+PRED : remaining
 NON_INGREDIENT_SPAN_VERB : combined
 INGREDIENTS : shredded cheese
 INGREDIENTS : cracker
 INGREDIENTS : margarine
 
-SENT_ID :4
+SENT_ID :5
 SENTENCE : bake 20 minutes let stand 5 minutes before serving .
 PRED : bake
 NON_INGREDIENT_SPAN_VERB : let
 NON_INGREDIENT_SPAN_VERB : stand
 NON_INGREDIENT_SPAN_VERB : before serving
 
-SENT_ID :5
+SENT_ID :6
 SENTENCE : serve with peas .
 PRED : serve
 PRED_PREP : serve with

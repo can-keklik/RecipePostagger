@@ -1,22 +1,27 @@
 title : napa-slaw
 
 SENT_ID :0
-SENTENCE : melt butter in a large skillet over medium heat ; cook and stir sunflower kernels and ramen noodles in hot butter until sunflower kernels are lightly browned and fragrant , 3 to 5 minutes .
+SENTENCE : melt butter in a large skillet over medium heat
 PRED : melt
+INGREDIENTS : butter
+PARG : skillet
+NON_INGREDIENT_SPAN : in large skillet
+
+SENT_ID :1
+SENTENCE : cook and stir sunflower kernels and ramen noodles in hot butter until sunflower kernels are lightly browned and fragrant , 3 to 5 minutes .
+PRED : cook
 NON_INGREDIENT_SPAN_VERB : are
 NON_INGREDIENT_SPAN_VERB : browned
-INGREDIENTS : butter
-INGREDIENT_SPAN : in hot butter
 INGREDIENTS : sunflower
 INGREDIENT_SPAN : until sunflower
 INGREDIENTS : kernels
 INGREDIENTS : sunflower kernels
 INGREDIENTS : ramen noodles
-PARG : skillet
-NON_INGREDIENT_SPAN : in large skillet
-DOBJ : in hot butter - until sunflower
+INGREDIENTS : butter
+INGREDIENT_SPAN : in hot butter
+DOBJ : until sunflower - in hot butter
 
-SENT_ID :1
+SENT_ID :2
 SENTENCE : remove from heat and transfer into a bowl to cool .
 PRED : remove
 PRED_PREP : remove from
@@ -26,7 +31,7 @@ INGREDIENTS : into
 PARG : bowl
 NON_INGREDIENT_SPAN : a bowl
 
-SENT_ID :2
+SENT_ID :3
 SENTENCE : stir sunflower seeds and ramen noodles with napa cabbage and spring onions in a large salad bowl .
 PRED : stir
 INGREDIENTS : sunflower
@@ -39,12 +44,11 @@ NON_INGREDIENT_SPAN : in salad bowl
 PARG : bowl
 DOBJ : with napa cabbage
 
-SENT_ID :3
-SENTENCE : whisk vinegar , vegetable oil , sugar , and soy sauce together in a separate bowl until sugar has dissolved ; pour dressing over salad and toss .
+SENT_ID :4
+SENTENCE : whisk vinegar , vegetable oil , sugar , and soy sauce together in a separate bowl until sugar has dissolved
 PRED : whisk
 NON_INGREDIENT_SPAN_VERB : has
 NON_INGREDIENT_SPAN_VERB : dissolved
-NON_INGREDIENT_SPAN_VERB : dressing
 INGREDIENTS : vinegar
 INGREDIENTS : vegetable oil
 INGREDIENTS : sugar
@@ -53,4 +57,9 @@ INGREDIENTS : soy sauce
 PARG : bowl
 NON_INGREDIENT_SPAN : in separate bowl
 DOBJ : until sugar
+
+SENT_ID :5
+SENTENCE : pour dressing over salad and toss .
+PRED : pour
+NON_INGREDIENT_SPAN_VERB : dressing
 

@@ -39,6 +39,7 @@ PRED: combine
      PREP: in
       NON-INGREDIENT SPAN: a separate bowl
 
+SENTID: 3
 PREDID: 147
 PRED: mix
    DOBJ: NULL
@@ -47,7 +48,7 @@ PRED: mix
       NON-INGREDIENT SPAN: mashed potato mixture
 
 
-SENTID: 3
+SENTID: 4
 SENT: I would season to taste with salt and pepper and celery seed if using .
 PREDID: 174
 PRED: season

@@ -14,7 +14,6 @@ import WordToVecFunctions
 import utils
 from GraphGeneratorForPaperAnnotated import GraphGeneratorForPaper
 import math
-import time
 
 FALSE_VERB = "FV"
 INGRE_TAGS = ["NAME", "UNIT"]
@@ -51,7 +50,8 @@ class ParsedDirection:
     VERB_TAG = ["ADP", "DET"]
 
     def __init__(self, direction):
-        self.direction = direction
+        clean = filter(None, direction)
+        self.direction = clean
 
     def checkTwoNubsIsConsecutive(self, num1, num2):
         return math.fabs((num1 - num2)) == 1
@@ -101,7 +101,7 @@ class ParsedDirection:
             verbs = [(word, k) for k, (word, tag, idx) in enumerate(self.direction[i]) if
                      tag == "VERB" and len(word) > 1]
             length_of_sent = len(self.direction[i])
-            print(self.direction[i])
+            # print(self.direction[i])
             if len(verbs) > 0:
                 (word, k) = verbs[0]
                 sentence.append((word, self.PRED, i))
@@ -178,7 +178,7 @@ class ParsedDirection:
                 if (dobj_str, self.DOBJ, i) not in sentence:
                     sentence.append((dobj_str, self.DOBJ, i))
             self.newDirection.append(sentence)
-            print('sentence', sentence)
+            # print('sentence', sentence)
         return self.newDirection
 
 
@@ -271,11 +271,11 @@ def readData2(index):
     wholeVerbs = []
     taggedNewDire = []
     for i in xrange(len(direWithNewTAG)):
-        print(direWithNewTAG[i])
-        print("*---------------------*")
+        # print(direWithNewTAG[i])
+        # print("*---------------------*")
         toolList = isTool([wt for (wt, _, idx) in direWithNewTAG[i] if 'NOUN' == _ or 'ADV' == _])
         direWithNewTAG[i] = updateForTools(direWithNewTAG[i], toolList)
-        print("tool updated", direWithNewTAG[i])
+        # print("tool updated", direWithNewTAG[i])
         ingArr = [w2 for (w2, t2, ix2) in direWithNewTAG[i] if t2 == "NAME"]
         tmp = [w for (w, t, ix) in direWithNewTAG[i] if t == "VERB"]
         if len(tmp) == 0:
@@ -285,9 +285,9 @@ def readData2(index):
         if len(ingArr) == 0 and len(tmp) > 0:
             verbArr.append(tmp[0])
         taggedNewDire.append(direWithNewTAG[i])
-        print("*---------------------*")
-        print(direWithNewTAG[i])
-        print("*---------------------*")
+        # print("*---------------------*")
+        # print(direWithNewTAG[i])
+        # print("*---------------------*")
     return (ParsedDirection(direWithNewTAG).convertTagsAccordingToPaper(), title, sentences)
 
 
@@ -316,7 +316,7 @@ def createGrapWithIndexForPaper2(index):
     relatedVerbs = getRelatedVerbs(data)
     file_name = title + ".dot"
     print(relatedVerbs)
-    print("---------------------------------")
+    print("---------------------------------   " + title)
     for i in xrange(len(data)):
         print(data[i])
     GraphGeneratorForPaper(data, relatedVerbs).createGraph(file_name)
@@ -344,16 +344,16 @@ def readPaperDataArgCreateGraph(title):
     for sent in data:
         print(sent)
     relatedVerbs = getRelatedVerbs(data)
-    print (relatedVerbs)
+    print(relatedVerbs)
     file_name = title + ".dot"
     GraphGeneratorForPaper(data, relatedVerbs).createGraph(file_name)
     UtilsIO.createPngFromDotFile("paper/" + file_name, "paper/" + title + ".png")
 
 
-readPaperDataArgCreateGraph("trialramenslaw")
+# readPaperDataArgCreateGraph("trialramenslaw")
 
-
-# createGrapWithIndexForPaper2(31)
-# todo check 9. recipe for noningredient sentence...
+#readData2(18)
+createGrapWithIndexForPaper2(4)
+# todo check 27. recipe for noningredient sentence...
 # bug occur in 32
 # readData2(0)

@@ -19,6 +19,10 @@ PARG = "PARG"  # tool
 PREP = "PREP"  # preposition
 PREDID = "PREDID"  # this id is realed with action's order
 
+TAGGED_ARRAY = [PRED, PRED_PREP, NON_INGREDIENT_SPAN_VERB, INGREDIENT_SPAN, INGREDIENTS,
+                PARG]
+
+
 
 def readFiles(fileName):
     f = open(fileName)
@@ -197,17 +201,18 @@ def getWordAsUTF8(word):
 
 
 def readPaperDataForGraph(full_path):
-    dummyPath = "/Users/Ozgen/Desktop/dataset/AnnotationSession/AnnotationSession-args/amish-meatloaf.txt"
-    data = readFiles(dummyPath)
+    dummyPath = "/Users/Ozgen/Desktop/dataset/AnnotationSession/AnnotationSession-args/home-baked-macaroni--cheese.txt"
+    data = readFiles(full_path)
     array = data.split("SENTID")
     arr = []
     for i, a in enumerate(array):
-        eachSent = a.split("\n")
+        tm = a.split("\n")
+        eachSent = [t for t in tm if len(t) != 0]
         params = []
         for param in eachSent:
             if "PREDID:" in str(param):
                 tmp = param.split("PREDID:")
-                #params.append((getWordAsUTF8(tmp[1]), "PREDID", i))
+                # params.append((getWordAsUTF8(tmp[1]), "PREDID", i))
             elif "PRED" in str(param):
                 tmp = param.split("PRED:")
                 params.append((getWordAsUTF8(tmp[1]), "PRED", i))
@@ -229,13 +234,15 @@ def readPaperDataForGraph(full_path):
             elif "PREP" in str(param):
                 tmp = param.split("PREP:")
                 params.append((getWordAsUTF8(tmp[1]), "PREP", i))
-
-        arr.append(params)
+        if len(params) > 0:
+            arr.append(params)
     return arr
 
 
-def readTheResultFromTheAlg():
-    dummyPath = "/Users/Ozgen/Desktop/RecipeGit/results/text_result/amish-meatloaf.txt"
+#   ===> data type (word, tag, index)
+
+def readTheResultFromTheAlg(dummyPath):
+    # dummyPath = "/Users/Ozgen/Desktop/RecipeGit/results/text_result/amish-meatloaf.txt"
     data = readFiles(dummyPath)
     array = data.split("SENT_ID :")
     arr = []
@@ -273,16 +280,7 @@ def readTheResultFromTheAlg():
     return arr
 
 
-def getcompareResult(folder):
-    return os.listdir(folder)
 
-
-arr1 = readTheResultFromTheAlg()
-arr2=readPaperDataForGraph("")
-for b in arr1:
-    print b
-for b in arr2:
-    print b
 # print readPaperDataForGraph("")
 
 # readPaperData(13)

@@ -106,7 +106,7 @@ def tokenizeText(text):
     for i in xrange(len(sents)):
         tokenizedSentence = tokenize(sents[i])
         arr.append(tokenizedSentence)
-
+    arr = updateTextWithSemicolon(arr)
     return arr
 
 
@@ -122,8 +122,6 @@ def posTaggText(text):
     returnArray = []
     arr = tokenizeText(text)
     for i in xrange(len(arr)):
-        # if (i == 0):
-        #    returnArray.append()
         returnArray.append(imperative_pos_tag(arr[i]))  # , tagset='universal'))
     for i in xrange(len(returnArray)):
         for (wt, _) in returnArray[i]:
@@ -132,6 +130,34 @@ def posTaggText(text):
                     returnArray[i][0] = (wt, 'VERB')
 
     return returnArray
+
+
+def updateTextWithSemicolon(textArr):
+    retArr = []
+    for eachSent in textArr:
+        tmp = [w for w in eachSent if ";" in w]
+        if len(tmp) > 0:
+            tmpSent = splitSentenceWithSemiColon(eachSent)
+            if len(tmpSent) > 0:
+                for s in tmpSent:
+                    retArr.append(s)
+        else:
+            retArr.append(eachSent)
+    return retArr
+
+
+def splitSentenceWithSemiColon(sentence):
+    retArr = []
+    tmp = []
+    for word in sentence:
+        if ";" not in word:
+            tmp.append(word)
+        else:
+            retArr.append(tmp)
+            tmp = []
+    if len(tmp) > 0:
+        retArr.append(tmp)
+    return retArr
 
 
 def imperative_pos_tag(sent):

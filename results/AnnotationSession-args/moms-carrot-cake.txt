@@ -109,6 +109,7 @@ PRED: place
      PREP: on
       NON-INGREDIENT SPAN: a plate
 
+SENTID: 9
 PREDID: 414
 PRED: allow
    DOBJ: NULL

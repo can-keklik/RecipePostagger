@@ -8,8 +8,13 @@ PARG : pan
 NON_INGREDIENT_SPAN : in pan
 
 SENT_ID :1
-SENTENCE : bring water to a boil and cook until tender , about 15 minutes .
+SENTENCE : bring water to a boil .
 PRED : bring
+
+SENT_ID :2
+SENTENCE : cook until tender , about 15 minutes .
+PRED : cook
+PRED_PREP : until tender
 
 SENT_ID :2
 SENTENCE : let cool and mash .
@@ -70,10 +75,15 @@ PRED_PREP : bake at
 NON_INGREDIENT_SPAN_VERB : for until done
 
 SENT_ID :9
-SENTENCE : place cake on a plate , and allow to cool completely before frosting .
+SENTENCE : place cake on a plate .
 PRED : place
-NON_INGREDIENT_SPAN_VERB : on allow
+PARG : a plate
 NON_INGREDIENT_SPAN_VERB : cool
+
+SENT_ID :9
+SENTENCE : allow to cool completely before frosting .
+PRED : allow
+
 
 SENT_ID :10
 SENTENCE : to make frosting : combine cream cheese , melted butter , 1 teaspoon vanilla extract , and confectioners ' sugar .

@@ -18,20 +18,27 @@ PARG : pot
 NON_INGREDIENT_SPAN : drippings in the pot
 
 SENT_ID :2
-SENTENCE : cook and stir onion and red bell pepper until softened , about 5 minutes ; season with salt and pepper .
+SENTENCE : cook and stir onion and red bell pepper until softened , about 5 minutes
 PRED : cook
 NON_INGREDIENT_SPAN_VERB : until softened
 INGREDIENTS : onion
 INGREDIENT_SPAN : and stir onion
 INGREDIENTS : pepper
-INGREDIENT_SPAN : and pepper
 INGREDIENTS : red bell
 INGREDIENT_SPAN : and red bell
-INGREDIENTS : salt
-INGREDIENT_SPAN : about 5 with salt
-DOBJ : and stir onion - and pepper - and red bell - about 5 with salt
+DOBJ : and stir onion - and red bell
 
 SENT_ID :3
+SENTENCE : season with salt and pepper .
+PRED : season
+PRED_PREP : season with
+INGREDIENTS : salt
+INGREDIENT_SPAN : with salt
+INGREDIENTS : pepper
+INGREDIENT_SPAN : and pepper
+DOBJ : with salt - and pepper
+
+SENT_ID :4
 SENTENCE : stir in garlic and seafood seasoning and cook and stir 2 more minutes .
 PRED : stir
 PRED_PREP : stir in
@@ -42,31 +49,40 @@ INGREDIENTS : seafood seasoning
 INGREDIENT_SPAN : and seafood seasoning
 DOBJ : in garlic - and seafood seasoning
 
-SENT_ID :4
-SENTENCE : pour in chicken broth and stir in potatoes and corn ; add water if needed to cover vegetables .
+SENT_ID :5
+SENTENCE : pour in chicken broth and stir in potatoes and corn
 PRED : pour
 PRED_PREP : pour in
-NON_INGREDIENT_SPAN_VERB : add
 INGREDIENTS : chicken broth
 INGREDIENT_SPAN : in chicken broth
 INGREDIENTS : potatoes
 INGREDIENT_SPAN : and in potatoes
 INGREDIENTS : corn
 INGREDIENT_SPAN : and corn
-INGREDIENTS : water
 DOBJ : in chicken broth - and in potatoes - and corn
 
-SENT_ID :5
-SENTENCE : bring to a boil and reduce heat to low ; simmer until potatoes are tender , about 15 minutes .
+SENT_ID :6
+SENTENCE : add water if needed to cover vegetables .
+PRED : add
+INGREDIENTS : water
+
+SENT_ID :7
+SENTENCE : bring to a boil and reduce heat to low
 PRED : bring
 NON_INGREDIENT_SPAN_VERB : reduce
+NON_INGREDIENT_SPAN_VERB : low
+
+SENT_ID :8
+SENTENCE : simmer until potatoes are tender , about 15 minutes .
+PRED : simmer
+PRED_PREP : simmer until
 NON_INGREDIENT_SPAN_VERB : are
 INGREDIENTS : potatoes
-INGREDIENT_SPAN : to low until potatoes
-DOBJ : to low until potatoes
+INGREDIENT_SPAN : until potatoes
+DOBJ : until potatoes
 
-SENT_ID :6
-SENTENCE : stir in milk and butter until butter has melted ; mix in reserved bacon .
+SENT_ID :9
+SENTENCE : stir in milk and butter until butter has melted
 PRED : stir
 PRED_PREP : stir in
 NON_INGREDIENT_SPAN_VERB : has
@@ -76,15 +92,25 @@ INGREDIENT_SPAN : in milk
 INGREDIENTS : butter
 INGREDIENT_SPAN : and butter
 INGREDIENT_SPAN : until butter
+DOBJ : in milk - and butter - until butter
+
+SENT_ID :10
+SENTENCE : mix in reserved bacon .
+PRED : mix
+PRED_PREP : mix in
 INGREDIENTS : bacon
 INGREDIENT_SPAN : in reserved bacon
-DOBJ : in milk - and butter - until butter - in reserved bacon
+DOBJ : in reserved bacon
 
-SENT_ID :7
-SENTENCE : bring the soup just to the boiling point and stir in cod and parsley ; cook , stirring occasionally , until fish flakes easily , 5 to 8 minutes .
+SENT_ID :11
+SENTENCE : bring the soup just to the boiling point and stir in cod and parsley
 PRED : bring
-NON_INGREDIENT_SPAN_VERB : stirring
 INGREDIENTS : parsley
 INGREDIENT_SPAN : the to the and in cod and parsley
 DOBJ : the to the and in cod and parsley
+
+SENT_ID :12
+SENTENCE : cook , stirring occasionally , until fish flakes easily , 5 to 8 minutes .
+PRED : cook
+NON_INGREDIENT_SPAN_VERB : stirring
 

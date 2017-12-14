@@ -1,7 +1,7 @@
 title : beer-and-bourbon-pulled-pork-sandwiches
 
 SENT_ID :0
-SENTENCE : combine paprika , onion powder , garlic powder , oregano , thyme , and salt in a small bowl ; season with black pepper .
+SENTENCE : combine paprika , onion powder , garlic powder , oregano , thyme , and salt in a small bowl
 PRED : combine
 INGREDIENTS : paprika
 INGREDIENTS : powder
@@ -10,13 +10,18 @@ INGREDIENTS : garlic
 INGREDIENTS : oregano
 INGREDIENTS : thyme
 INGREDIENTS : salt
-INGREDIENTS : black pepper
-INGREDIENT_SPAN : with black pepper
 PARG : bowl
 NON_INGREDIENT_SPAN : in small bowl
-DOBJ : with black pepper
 
 SENT_ID :1
+SENTENCE : season with black pepper .
+PRED : season
+PRED_PREP : season with
+INGREDIENTS : black pepper
+INGREDIENT_SPAN : with black pepper
+DOBJ : with black pepper
+
+SENT_ID :2
 SENTENCE : blot pork chops dry with paper towels , then rub with paprika mixture .
 PRED : blot
 NON_INGREDIENT_SPAN_VERB : with rub
@@ -25,7 +30,7 @@ INGREDIENTS : paprika
 INGREDIENT_SPAN : with paprika
 DOBJ : with paprika
 
-SENT_ID :2
+SENT_ID :3
 SENTENCE : heat about 2 tablespoons canola oil in a non-stick skillet over medium-high heat .
 PRED : heat
 PRED_PREP : heat about
@@ -35,44 +40,49 @@ PARG : skillet
 NON_INGREDIENT_SPAN : in a non-stick skillet
 DOBJ : about 2 tablespoons canola oil
 
-SENT_ID :3
+SENT_ID :4
 SENTENCE : fry pork chops in batches until browned , about 5 minutes per side .
 PRED : fry
 NON_INGREDIENT_SPAN_VERB : in until browned
 INGREDIENTS : pork
 
-SENT_ID :4
+SENT_ID :5
 SENTENCE : transfer browned pork chops to a slow cooker .
 PRED : transfer
 NON_INGREDIENT_SPAN_VERB : browned
 INGREDIENTS : pork
 
-SENT_ID :5
-SENTENCE : wipe skillet clean and heat remaining 1 1/2 teaspoon canola oil and butter over medium heat ; cook and stir onions , 1/2 bottle beer , and a pinch of salt until onion is tender and slightly browned , about 10 minutes .
+SENT_ID :6
+SENTENCE : wipe skillet clean and heat remaining 1 1/2 teaspoon canola oil and butter over medium heat
 PRED : remaining
-NON_INGREDIENT_SPAN_VERB : is
-NON_INGREDIENT_SPAN_VERB : browned
 INGREDIENTS : canola oil
 INGREDIENT_SPAN : 1 1/2 teaspoon canola oil
 INGREDIENTS : butter
+PARG : skillet
+NON_INGREDIENT_SPAN : wipe skillet
+DOBJ : 1 1/2 teaspoon canola oil
+
+SENT_ID :7
+SENTENCE : cook and stir onions , 1/2 bottle beer , and a pinch of salt until onion is tender and slightly browned , about 10 minutes .
+PRED : cook
+NON_INGREDIENT_SPAN_VERB : is
+NON_INGREDIENT_SPAN_VERB : browned
 INGREDIENTS : onions
-INGREDIENT_SPAN : over stir onions
+INGREDIENT_SPAN : stir onions
 INGREDIENTS : beer
 INGREDIENT_SPAN : 1/2 bottle beer
 INGREDIENTS : salt
 INGREDIENT_SPAN : a pinch of salt
 INGREDIENTS : onion
 INGREDIENT_SPAN : until onion
-PARG : skillet
-NON_INGREDIENT_SPAN : wipe skillet
-DOBJ : 1 1/2 teaspoon canola oil - over stir onions - 1/2 bottle beer - a pinch of salt - until onion
+DOBJ : stir onions - 1/2 bottle beer - a pinch of salt - until onion
 
-SENT_ID :6
+SENT_ID :8
 SENTENCE : add liquid smoke .
 PRED : add
 INGREDIENTS : liquid smoke
 
-SENT_ID :7
+SENT_ID :9
 SENTENCE : spread onions over pork .
 PRED : spread
 INGREDIENTS : onions
@@ -80,8 +90,8 @@ INGREDIENTS : pork
 INGREDIENT_SPAN : over pork
 DOBJ : over pork
 
-SENT_ID :8
-SENTENCE : mix barbeque sauce , remaining beer , worcestershire sauce , garlic , bourbon , and hot sauce in a bowl ; pour over pork .
+SENT_ID :10
+SENTENCE : mix barbeque sauce , remaining beer , worcestershire sauce , garlic , bourbon , and hot sauce in a bowl
 PRED : mix
 NON_INGREDIENT_SPAN_VERB : remaining
 INGREDIENTS : sauce
@@ -91,18 +101,23 @@ INGREDIENTS : worcestershire
 INGREDIENTS : garlic
 INGREDIENTS : bourbon
 INGREDIENTS : hot
-INGREDIENTS : pork
-INGREDIENT_SPAN : over pork
 PARG : bowl
 NON_INGREDIENT_SPAN : in a bowl
+
+SENT_ID :11
+SENTENCE : pour over pork .
+PRED : pour
+PRED_PREP : pour over
+INGREDIENTS : pork
+INGREDIENT_SPAN : over pork
 DOBJ : over pork
 
-SENT_ID :9
+SENT_ID :12
 SENTENCE : cook pork on low until very tender , about 8 hours .
 PRED : cook
 INGREDIENTS : pork
 
-SENT_ID :10
+SENT_ID :13
 SENTENCE : shred and divide pork over rolls to make sandwiches .
 PRED : shred
 NON_INGREDIENT_SPAN_VERB : make
