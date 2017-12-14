@@ -75,7 +75,7 @@ latest results:
 
 
 ### DataSet Tagger WebSite 
-the algorithm works on 28 tagged recipes which are from Kiddon. its accuracy proportion is % 76,9713529622 
+The algorithm works on 28 tagged recipes which are from Kiddon. Its accuracy proportion is % 76,9713529622 
 
 
     
