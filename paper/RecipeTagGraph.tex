@@ -86,6 +86,9 @@
 % have to be run twice to clear warning/error messages.
 
 
+ % \usepackage[turkish]{babel}
+   \usepackage[latin5]{inputenc}
+  % \usepackage[T1]{fontenc}
 
 
 
@@ -308,9 +311,6 @@
 % to submit to, of course. )
 
 
-% correct bad hyphenation here
-\hyphenation{op-tical net-works semi-conduc-tor}
-
 
 \begin{document}
 %
@@ -326,12 +326,16 @@
 % author names and affiliations
 % use a multiple column layout for up to three different
 % affiliations
-\author{\IEEEauthorblockN{---}
-\IEEEauthorblockA{Computer Engineering Department\\
+\author{\IEEEauthorblockN{Mehmet Özgen\IEEEauthorrefmark{1},
+{\.I}brahim Ard{\i}ç\IEEEauthorrefmark{2}, Gönenç Ercan\IEEEauthorrefmark{3} and
+P{\i}nar Duygulu {\c{S}}ahin\IEEEauthorrefmark{4}}
+\IEEEauthorblockA{Department of Computer Science,
 Hacettepe University\\
 Ankara\\
-Email: ---@hacettepe.edu.tr}
-}
+Email: \IEEEauthorrefmark{1}mehmet.ozgen@hacettepe.edu.tr,
+\IEEEauthorrefmark{2}ibrahim.ardic@hacettepe.edu.tr,
+\IEEEauthorrefmark{3}gonenc.ercan@hacettepe.edu.tr,
+\IEEEauthorrefmark{4}pduygulu@hacettepe.edu.tr}}
 
 % conference papers do not typically use \thanks and this command
 % is locked out in conference mode. If really needed, such as for
@@ -370,14 +374,7 @@ Email: ---@hacettepe.edu.tr}
 % As a general rule, do not put math, special symbols or citations
 % in the abstract
 \begin{abstract}
-The instruction list is a key for a success of doing any task correctly. The validation of correction of the
-task by examined only the result of the performed instructions, actions. But on the other hand, when
-performing the actions according to the instructions under the supervision of domain expert, there is high
-probability to detect disruptions and errors without waiting the result of the task. In this context, mapping
-instructions to actions is getting high importance when the domain is one of safety-critical systems,
-physiotherapy exercises, food recipes, chemical experiments, etc. In this work, any written instructions in
-a specific domain are learned using natural language processing techniques and will generate a model to
-use this information for mapping recognized actions from video sources.
+In this work, we proposed a model that extracts the cooking recipe instructions to action graphs. We used a semi-supervised learning to learn 
 \end{abstract}
 
 % no keywords
@@ -406,7 +403,7 @@ probability to detect disruptions and errors without waiting the result of the t
 instructions to actions is getting high importance when the domain is one of safety-critical systems,
 physiotherapy exercises, food recipes, chemical experiments, etc. In this work, any written instructions in
 a specific domain are learned using natural language processing techniques and will generate a model to
-use this information for mapping recognized actions from video sources.
+use this information for mapping recognised actions from video sources.
 
 
 
