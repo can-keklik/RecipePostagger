@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.10.28)  17 DEC 2017 18:18
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.10.28)  20 DEC 2017 00:43
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -121,7 +121,11 @@ Package: inputenc 2015/03/17 v1.2c Input encoding file
 (/usr/local/texlive/2015/texmf-dist/tex/latex/base/latin5.def
 File: latin5.def 2015/03/17 v1.2c Input encoding file
 ))
-No file RecipeTagGraph.aux.
+(./RecipeTagGraph.aux
+
+LaTeX Warning: Label `my-label' multiply defined.
+
+)
 \openout1 = `RecipeTagGraph.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 315.
@@ -136,6 +140,7 @@ LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 315.
 LaTeX Font Info:    ... okay on input line 315.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 315.
 LaTeX Font Info:    ... okay on input line 315.
+
 -- Lines per column: 56 (exact).
 LaTeX Font Info:    Calculating math sizes for size <11> on input line 372.
 LaTeX Font Info:    External font `cmex10' loaded for size
@@ -167,6 +172,19 @@ Overfull \hbox (41.63875pt too wide) in paragraph at lines 372--372
  [] 
  []
 
+[1{/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
+
+
+]
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `tbp') on input line 462.
+
+[2]
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `tbp') on input line 496.
+
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -178,34 +196,29 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
-[1{/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
+[3] (./RecipeTagGraph.aux)
 
-
-
-]
-(./RecipeTagGraph.aux)
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 1094 strings out of 493089
- 19986 string characters out of 6134841
- 77340 words of memory out of 5000000
- 4639 multiletter control sequences out of 15000+600000
- 39073 words of font info for 75 fonts, out of 8000000 for 9000
+ 1101 strings out of 493089
+ 20068 string characters out of 6134841
+ 82337 words of memory out of 5000000
+ 4643 multiletter control sequences out of 15000+600000
+ 40797 words of font info for 77 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 33i,11n,27p,209b,321s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 33i,11n,27p,1231b,321s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
 exlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/tex
 live/2015/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2015/
 texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/local/texlive/2015/texmf-dis
 t/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2015/texmf-dist/fonts/ty
 pe1/urw/times/utmri8a.pfb>
-Output written on RecipeTagGraph.pdf (1 page, 55756 bytes).
+Output written on RecipeTagGraph.pdf (3 pages, 76501 bytes).
 PDF statistics:
- 29 PDF objects out of 1000 (max. 8388607)
- 20 compressed objects within 1 object stream
+ 35 PDF objects out of 1000 (max. 8388607)
+ 24 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
