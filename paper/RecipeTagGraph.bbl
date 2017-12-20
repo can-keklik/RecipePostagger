@@ -1,0 +1,10 @@
+\begin{thebibliography}{1}
+
+\bibitem{coreNlp}
+Christopher~D. Manning, Mihai Surdeanu, John Bauer, Jenny Finkel, Steven~J.
+  Bethard, and David McClosky.
+\newblock The {Stanford} {CoreNLP} natural language processing toolkit.
+\newblock In {\em Association for Computational Linguistics (ACL) System
+  Demonstrations}, pages 55--60, 2014.
+
+\end{thebibliography}
