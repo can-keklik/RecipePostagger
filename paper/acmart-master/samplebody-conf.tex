@@ -1,14 +1,23 @@
-\section{Introduction}
 
-The \textit{proceedings} are the records of a conference.\footnote{This
-  is a footnote}  ACM seeks
-to give these conference by-products a uniform, high-quality
-appearance.  To do this, ACM has some rigid requirements for the
-format of the proceedings documents: there is a specified format
-(balanced double columns), a specified set of fonts (Arial or
-Helvetica and Times Roman) in certain specified sizes, a specified
-live area, centered on the page, specified size of margins, specified
-column width and gutter size.
+\section{Introduction}
+Part of speech (POS) tagging is the key topic for information retrieval area to extract the valuable information that is used for classification, clustering etc. from any natural languages. 
+
+
+In this paper, it is aimed to automatically model the steps of a certain task by using text data which is easily accessible from the internet and to create methods and tool that can help people since there are many recipe documents and videos available on the internet,  in this paper, working area is selected as cooking recipes. POS tagging is important that  it constructs a description a set of instructions of a recipes which forms content based text analysis of our work.
+
+In this paper we describe a rule-based tagger which
+performs as well as taggers based upon probabilistic
+models. The rule-based tagger overcomes the limitations
+common in rule-based approaches to language processing:
+it is robust, and the rules are automatically acquired.
+In addition, the tagger has many advantages
+over stochastic taggers, including: a vast reduction in
+stored information required, the perspicuity of a small
+set of meaningful rules as opposed to the large tables
+of statistics needed for stochastic taggers, ease of finding
+and implementing improvements to the tagger, and
+better portability from one tag set or corpus genre to
+another. 
 
 \section{Related Works}
 Algorithmic processing of training texts and / or commands expressed in natural language has long been an interesting question (Harnad, 1990). In this problem, the artificial intelligence agent (such as a robot) is trying to learn the operations corresponding to symbols that are expressed in a field. The system is expected to automatically interact with definitions in the physical world as symbols to interact with objects and objects. We obtained through www.allrecipes.com
@@ -43,6 +52,67 @@ It is intended to remove them as to which action is associated with the material
 As seen in the literature, there are many methods aiming at revealing the relationship between the description texts and the contents of the description texts, the sequence of the process flow and the situations that occur during the actions and showing them with the models by many different methods. The texts should be easily perceivable by the computer by passing 1830 recipes we obtained through www.alrecipes.com through certain operations.
 
 Using NLTK libraries, each of the recipes was first converted into a clean text by separating individual recipes and separating them into words, punctuation, and meaningless words.  (names, categories, contents, descriptions, and comments). Then each recipe is divided into sentences for labelling.
+
+\begin{algorithm}
+\caption{Data Retrieval and Preprocessing Overview}
+\label{alg:generator}
+\SetKwProg{ReadProcessData}{Function \emph{ReadProcessData}}{}{end}
+
+\ReadProcessData{CvsFiles data}{
+     \ForAll{eachRecipe $c$ in data}{
+(ingredients, direction) = readDataFromCSVfile($c$)
+ingredientsNewTag = calculateTAGWithCRF(ingredients)
+tokenizeddirection = tokenizesentence(direction)
+taggedDirection = calculateTagsWithPOSTag(tokenizedDirection)
+taggedDirection = updateTagAfterCRF(taggedDirection, ingredientsNewTag)
+      
+     }
+     build pivot's fieldContext $fc$\;
+     EmitClassName\;
+     EmitFields($fc$)\;
+     EmitMethods($fc$)\;
+}
+\end{algorithm}
+
+
+\begin{algorithm}
+\caption{Pos Tagging Overview}
+\label{alg:generator}
+\SetKwProg{generate}{Function \emph{generate}}{}{end}
+
+Map store=new Map(obj, queue)\;
+\generate{Object pivot}{
+     \ForAll{child $c$ in pivot}{
+     \If{ $c$'s FieldContext is not set and $c$ is fusible}{
+          generate($c$)\;
+      }
+     }
+     build pivot's fieldContext $fc$\;
+     EmitClassName\;
+     EmitFields($fc$)\;
+     EmitMethods($fc$)\;
+}
+\end{algorithm}
+
+
+\begin{algorithm}
+\caption{Graph Generation and Validation}
+\label{alg:generator}
+\SetKwProg{generate}{Function \emph{generate}}{}{end}
+
+Map store=new Map(obj, queue)\;
+\generate{Object pivot}{
+     \ForAll{child $c$ in pivot}{
+     \If{ $c$'s FieldContext is not set and $c$ is fusible}{
+          generate($c$)\;
+      }
+     }
+     build pivot's fieldContext $fc$\;
+     EmitClassName\;
+     EmitFields($fc$)\;
+     EmitMethods($fc$)\;
+}
+\end{algorithm}
 
 \subsection{Labelling}
 Using the NLTK library, labeling was done according to the culled state (VB, NN, ADJ, etc.) that each of the belts passed. As a result of the labeling made, "I can chopped green chile peppers" in the table of contents is labeled as below in TABLE 1.
