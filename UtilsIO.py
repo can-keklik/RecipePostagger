@@ -187,7 +187,7 @@ def readPaperData(index):
     ingredients = (utils.convertArrayToPureStr(ingredients))
     directions = df.ix[index, :].directions.encode('utf8')
 
-    print directions
+    print (directions)
 
 
 def getWordAsUTF8(word):

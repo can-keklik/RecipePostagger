@@ -5,8 +5,8 @@ import numpy as np
 from scipy import spatial
 
 model = gensim.models.Word2Vec.load('SmallerFile', mmap='r')
-type(model.syn0)
-model.syn0.shape
+type(model.wv.syn0)
+model.wv.syn0.shape
 
 
 def makeFeatureVec(words, model, num_features):
@@ -20,7 +20,7 @@ def makeFeatureVec(words, model, num_features):
     #
     # Index2word is a list that contains the names of the words in
     # the model's vocabulary. Convert it to a set, for speed
-    index2word_set = set(model.index2word)
+    index2word_set = set(model.wv.index2word)
     #
     # Loop over each word in the review and, if it is in the model's
     # vocaublary, add its feature vector to the total

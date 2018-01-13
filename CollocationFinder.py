@@ -87,7 +87,7 @@ def convertTools_fromcsv():
     removedPunctiationsData = directions.translate(None, string.punctuation)
     titleTokens = nltk.word_tokenize(removedPunctiationsData.decode('utf-8'))
     stops = [w.lower() for w in titleTokens if w not in ignored_words and len(w) > 2]
-    print unionToolWords(stops)
+    print (unionToolWords(stops))
 
 
 def unionToolWords(directionToken):
