@@ -61,61 +61,20 @@ Using NLTK libraries, each of the recipes was first converted into a clean text 
 \ReadProcessData{CvsFiles data}{
      \ForAll{eachRecipe $c$ in data}{
 (ingredients, direction) = readDataFromCSVfile($c$)
-ingredientsNewTag = calculateTAGWithCRF(ingredients)
-tokenizeddirection = tokenizesentence(direction)
-taggedDirection = calculateTagsWithPOSTag(tokenizedDirection)
-taggedDirection = updateTagAfterCRF(taggedDirection, ingredientsNewTag)
+
+ingreNewTag = calculateTAGWithCRF(ingredients)
+
+tokenizedD = tokenizeSentence(direction)
+
+taggedD = calculateTagsWithPOSTag(tokenizedD)
+
+taggedDirection = updateTag(taggedD, ingreNewTag)
       
      }
-     build pivot's fieldContext $fc$\;
-     EmitClassName\;
-     EmitFields($fc$)\;
-     EmitMethods($fc$)\;
 }
 \end{algorithm}
 
-
-\begin{algorithm}
-\caption{Pos Tagging Overview}
-\label{alg:generator}
-\SetKwProg{generate}{Function \emph{generate}}{}{end}
-
-Map store=new Map(obj, queue)\;
-\generate{Object pivot}{
-     \ForAll{child $c$ in pivot}{
-     \If{ $c$'s FieldContext is not set and $c$ is fusible}{
-          generate($c$)\;
-      }
-     }
-     build pivot's fieldContext $fc$\;
-     EmitClassName\;
-     EmitFields($fc$)\;
-     EmitMethods($fc$)\;
-}
-\end{algorithm}
-
-
-\begin{algorithm}
-\caption{Graph Generation and Validation}
-\label{alg:generator}
-\SetKwProg{generate}{Function \emph{generate}}{}{end}
-
-Map store=new Map(obj, queue)\;
-\generate{Object pivot}{
-     \ForAll{child $c$ in pivot}{
-     \If{ $c$'s FieldContext is not set and $c$ is fusible}{
-          generate($c$)\;
-      }
-     }
-     build pivot's fieldContext $fc$\;
-     EmitClassName\;
-     EmitFields($fc$)\;
-     EmitMethods($fc$)\;
-}
-\end{algorithm}
-
-\subsection{Labelling}
-Using the NLTK library, labeling was done according to the culled state (VB, NN, ADJ, etc.) that each of the belts passed. As a result of the labeling made, "I can chopped green chile peppers" in the table of contents is labeled as below in TABLE 1.
+This section we prepare data for the process, firstly, read data from csv file which is generated before and divide data into two parts, direction and ingredients. Using the NLTK library, labeling was done according to the culled state (VB, NN, ADJ, etc.) that each of the belts passed. As a result of the labeling made, "I can chopped green chile peppers" in the table of contents is labeled as below in TABLE 1. It was observed that 450 of 171.224 labeled samples were separated and tested and 89 percentage correctly tagged.
 
 \begin{table}[]
 \centering
@@ -123,8 +82,8 @@ Using the NLTK library, labeling was done according to the culled state (VB, NN,
 \label{my-label}
 \begin{tabular}{|l|l|l|l|l|l|}
 \hline
-I   & can & chopped & green & chile & peppers \\ \hline
-ADJ & NN  & VB      & NN    & NN    & NN      \\ \hline
+ chop & green & chile & peppers \\ \hline
+ VB      & NN    & NN    & NN      \\ \hline
 \end{tabular}
 \end{table}
 
@@ -145,9 +104,25 @@ p (UNIT QUANTITY QUANTITY "1 teaspoon sugar")
 p (QUANTITY QUANTITY QUANTITY | "1 teaspoon sugar")
 
 p (UNIT QUANTITY NAME| "1 teaspoon sugar")
+Secondly, tag direction and ingredients wtih the help of NLTK and CRF++ libraries. Tagging direction according to NLTK libraries is not satisfied in order to generate  action graph. For this reason, update and change tags after NLTK process is finished. 
 
-...
+\begin{algorithm}
+\caption{Pos Tagging Overview}
+\label{alg:generator}
+\SetKwProg{updateTags}{Function \emph{updateTags}}{}{end}
 
+\updateTags{Direction taggedDirection}{
+     \ForAll{sentence in taggedDirection}{
+     
+   updateVerbs(sentence)
+   
+   updateTools(sentence)
+  
+   updateIngredients(sentence)   
+     }
+    findRelatedVerbsPair(direction) 
+    }
+\end{algorithm}
 As mentioned above, it calculates all the probabilities that can be labeled "1 teaspoon sugar". The beauty of the linear-chain CRF model makes some conditional independence assumptions that allow us to use dynamic programming to efficiently search the area of all possible label sequences. As a result, we have re-tagged our data with Erica Greene (2016), and the result is shown in TABLE 2. The results are shown in Table 2, which shows the best label sequence at a time that is linear with the number of second.
 
 
@@ -157,12 +132,61 @@ As mentioned above, it calculates all the probabilities that can be labeled "1 t
 \label{my-label}
 \begin{tabular}{|l|l|l|l|l|l|}
 \hline
-I   & can & chopped & green & chile & peppers \\ \hline
-QT & UNIT  & CMMT      & CMMT    & NAME    & NAME      \\ \hline
+chop & green & chile & peppers \\ \hline
+VB     & CMMT    & NAME    & NAME      \\ \hline
 \end{tabular}
 \end{table}
 
-It was observed that 450 of 171.224 labeled samples were separated and tested and 76 percentage correctly tagged.
+ After, tags are updated according to neighbor tags, if the tag is "VB" and the neighbor tag is "DET" (determiners), two words are concatenated by the algorithm and tagged by "PRED" . The CRF++ algorithm is tagged each word separately but  the same tag,    these are concatenated. That is depicted on the TABLE 3 and TABLE 4. 
+ 
+ \begin{table}[]
+\centering
+\caption{Tags}
+\label{my-label}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+put    & the     &  peppers  & into  & the    & pan \\ \hline
+VB    & DET   & NAME     & ADP & DET & TOOLS      \\ \hline
+\end{tabular}
+\end{table}
+
+ \begin{table}[]
+\centering
+\caption{Tags}
+\label{my-label}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+put       &  the peppers       & into  the pan \\ \hline
+PRED  & INGEDIENTS & NON IGRE SPAN  \\ \hline
+\end{tabular}
+\end{table}
+
+Finding action pairs with proximity values are required for graph generation. Generally, actions are sequential in the recipes, however, actions can be done  parallel or some actions take duration while doing. So that, "preheat- PRED" is related with "bake for- PRED". This results show the relation between "preheat- PRED" and "bake for- PRED". In order to link "preheat- PRED"  and  "bake for- PRED" in the graph,  we look at the similarity of the cosine with the actions. 
+
+
+\begin{algorithm}
+\caption{Graph Generation and Validation}
+\label{alg:generateGraph}
+\SetKwProg{generateGraph}{Function \emph{generateGraph}}{}{end}
+
+Map store=new Map(obj, queue)\;
+\generateGraph{taggedRecipe recipe, verbPairs, pairs}{
+actionNodeList =[]
+
+     \ForAll{sentence  in recipe}{
+     	actionN = generateSentNode(sentence)
+	actionNodeList.append(actionN)
+    
+     }
+     
+     \ForAll{action in actionNodeList}{
+    	linkTheAction(action, pairs)
+     }
+}
+\end{algorithm}
+
+
+
 
 
 \subsection{Calculation of Proximity}
@@ -170,7 +194,7 @@ Kiddon et al. (2015), some words are not in the table of contents, but more than
 
 Using the Word2Vec library that displays 3.5 billion words created by a working group led by Tomas Mikolov (Google) as a 300-dimensional vector vocabulary, the words that pass through the intellectual part and are labeled 'NAME' have been converted into a 300-dimensional vector.
 
-In the recipe sentence set, phrases without any word labeled 'NAME' are removed. When the words labeled as 'VB' are extracted, all the words are converted into 300 dimensional vectors and the averages are taken. Because the other words around the word tagged by "VB" can also provide us with information about what materials the hidden object contains. If you only go through the actions, you will be made a comment by looking at the similarity of only two calves. However, the sentence can sometimes contain words that characterize the words in the contents. Let's take a look at "Cook the mixture until caramelized". It is labeled as "cook-VB". When we look at the similarity of the cosine with the contents, it is seen that almost all of them resemble to each other. However, when the complex average of sentence is taken, "caramelized" word is included. And the result is more similar to "Onion" and "sugar". Taking the average of the blame for this reason actually brings us closer to the right conclusion.
+In the recipe sentence set, phrases without any word labeled 'NAME' are removed. When the words labeled as 'PRED' are extracted, all the words are converted into 300 dimensional vectors and the averages are taken. Because the other words around the word tagged by "VB" can also provide us with information about what materials the hidden object contains. If you only go through the actions, you will be made a comment by looking at the similarity of only two calves. However, the sentence can sometimes contain words that characterize the words in the contents. Let's take a look at "Cook the mixture until caramelized". It is labeled as "cook-PRED". When we look at the similarity of the cosine with the contents, it is seen that almost all of them resemble to each other. However, when the complex average of sentence is taken, "caramelized" word is included. And the result is more similar to "Onion" and "sugar". Taking the average of the blame for this reason actually brings us closer to the right conclusion. On the other hand, actions are generally sequential,  
 
 \subsubsection{Inline (In-text) Equations}
 A formula that appears in the running text is called an
@@ -237,7 +261,7 @@ The details of the construction of the \texttt{.bib} file
 are beyond the scope of this sample document, but more
 information can be found in the \textit{Author's Guide},
 and exhaustive details in the \textit{\LaTeX\ User's
-Guide} by Lamport~\shortcite{Lamport:LaTeX}.
+Guide} by Lamport.
 
 This article shows only the plainest form
 of the citation command, using \texttt{{\char'134}cite}.
