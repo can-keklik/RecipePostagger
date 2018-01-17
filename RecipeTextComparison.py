@@ -72,7 +72,11 @@ def compareTwoArray(taggedA, resultA):
 
 
 def compareTwoWords(word_res, word_tag):
-    word_res_arr = str(word_res).split(" ")
+    word_res_arr = []
+    try:
+        word_res_arr = str(word_res).split(" ")
+    except:
+        pass
     retVAl = False
     cnt = 0
     if len(word_res_arr) > 0:
@@ -81,7 +85,6 @@ def compareTwoWords(word_res, word_tag):
                 cnt = cnt + 1
         if cnt > (len(word_res_arr) / 2):
             retVAl = True
-
     return retVAl
 
 
@@ -100,6 +103,8 @@ def compareTwoDirection(result, taggedRes):
 def calculateResult():
     total = 0.0
     cnt = 0
+    cnt2 = 0
+    total2 = 0.0
     filenames = os.listdir(RESULTS_URL)
     for i, file_name in enumerate(filenames):
         annotatedFilePath = os.path.join(ANNOTATED_URL, file_name)
@@ -112,15 +117,24 @@ def calculateResult():
                 print len(resultData), "respath"
                 print len(taggedData), "annotated path"
             value = compareTwoDirection(resultData, taggedData)
+            precision = compareTwoDirection(taggedData, resultData)
             if value != None:
                 total = total + value
                 cnt = cnt + 1
-    print "counter : ", cnt
-    return total / cnt
+            if precision != None:
+                total2 = total2 + precision
+                cnt2 = cnt2 + 1
 
+    recall = (total / cnt) * 100
+    precision = (total2 / cnt2) * 100
+    f1 = 2 / ((1 / recall) + (1 / precision))
+
+    print "counter : ", cnt, "counter 2 : ", cnt2
+    return [("f1", f1), ("precision", precision), ("recall", recall)]
 
 
 print calculateResult()
 
-"""   counter :  28
-       result :  0.769713529622        """
+"""   counter :  29
+       result :  0.764708013822
+        """
