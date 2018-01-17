@@ -1,23 +1,11 @@
 
 \section{Introduction}
 %Duzenleme laz?m
-Computers have become increasingly more ambitious and popular, along with improvements in artificial intelligence and machine learning, to extract new information from sources such as text and video for people, or even to learn new tasks. These tasks are far more important than being taught, for example, when a robot is taught, when the need for care is directed or when the detail and ordering of the work is very important (such as the repair of an airplane part). However, an event in each of these texts, how the work is done, the workflow can have various differences or mistakes in the final reading and understanding of formal differences in texts.  Part of speech (POS) tagging is the key topic for information retrieval for extracting the valuable information that is used for classification, clustering etc. from any natural languages. 
+Computers have become increasingly more ambitious and popular, along with improvements in artificial intelligence and machine learning, to extract new information from sources such as text and video for people, or even to learn new tasks. Maintaining a safety critical hardware components must be done by step by step according to technical orders. Extracting tasks in these areas, especially sequential tasks, are sin qua none for teaching to a robot or a computer which needs to be directed by humans.  Part of speech (POS) tagging is the key topic for information retrieval for extracting the valuable information that is used for classification, clustering etc. from any natural languages. 
 
-In this paper, it is aimed to automatically model the steps of a certain task by using text data which is easily accessible from the internet and to create methods and tool that can help people since there are many recipe documents and videos available on the internet,  in this paper, working area is selected as cooking recipes. POS tagging is important that  it constructs a description a set of instructions of a recipes which forms content based text analysis of our work.
+In this work, it is aimed to automatically model the steps of a certain task by using text data which is easily accessible from the internet and to create methods and tool that can help people. Since there are many recipe documents and videos available on the internet,  working area is selected as cooking recipes. POS tagging is significant that  it constructs a description a set of instructions of a recipes which forms content based text analysis of our work. We describe a rule-based tagger which
+performs as well as taggers based upon probabilistic models. The rule-based tagger overcomes the limitations common in rule-based approaches to language processing: it is robust, and the rules are automatically acquired.
 
-In this paper we describe a rule-based tagger which
-performs as well as taggers based upon probabilistic
-models. The rule-based tagger overcomes the limitations
-common in rule-based approaches to language processing:
-it is robust, and the rules are automatically acquired.
-In addition, the tagger has many advantages
-over stochastic taggers, including: a vast reduction in
-stored information required, the perspicuity of a small
-set of meaningful rules as opposed to the large tables
-of statistics needed for stochastic taggers, ease of finding
-and implementing improvements to the tagger, and
-better portability from one tag set or corpus genre to
-another. 
 
 \section{Related Works}
 
@@ -57,7 +45,7 @@ It is intended to remove them as to which action is associated with the material
 
 As seen in the literature, there are many methods aiming at revealing the relationship between the description texts and the contents of the description texts, the sequence of the process flow and the situations that occur during the actions and showing them with the models by many different methods. The texts should be easily perceivable by the computer by passing about 18000 recipes we obtained through www.alrecipes.com through certain operations.
 
-Using NLTK libraries, each of the recipes was first converted into a clean text by separating individual recipes and separating them into words, punctuation, and meaningless words.  (names, categories, contents, descriptions, and comments). Then each recipe is divided into sentences for labelling.
+Using NLTK\cite{nltk} libraries, each of the recipes was first converted into a clean text by separating individual recipes and separating them into words, punctuation, and meaningless words.  (names, categories, contents, descriptions, and comments). Then each recipe is divided into sentences for labelling.
 
 \begin{algorithm}
 \caption{Data Retrieval and Preprocessing Overview}
@@ -80,7 +68,7 @@ taggedDirection = updateTag(taggedD, ingreNewTag)
 }
 \end{algorithm}
 
-This section we prepare data for the process, firstly, read data from csv file which is generated before and divide data into two parts, direction and ingredients. Using the NLTK library, labeling was done according to the culled state (VB, NN, ADJ, etc.) that each of the belts passed. As a result of the labeling made, "I can chopped green chile peppers" in the table of contents is labeled as below in TABLE 1. It was observed that 450 of 171.224 labeled samples were separated and tested and 89 percentage correctly tagged.
+This section we prepare data for the process, firstly, read data from csv file which is generated before and divide data into two parts, direction and ingredients. Using the NLTK \cite{nltk} library, labeling was done according to the culled state (VB, NN, ADJ, etc.) that each of the belts passed. As a result of the labeling made, "I can chopped green chile peppers" in the table of contents is labeled as below in TABLE 1. It was observed that 450 of 171.224 labeled samples were separated and tested and 89 percentage correctly tagged.
 
 \begin{table}[]
 \centering
@@ -95,7 +83,7 @@ This section we prepare data for the process, firstly, read data from csv file w
 
 As can be seen in Table 1, it does not allow me to know that the word "life" is a unit of measure, "1" actually tells the quantity, and that the words "green" and "choped" are actually interpretations of a "papers" word.
 
-The challenge of parsing the recipe is to be able to distinguish content components from component cues. Erica Greene (2016) has trained 171,244 sets (labeled as UNIT, QUANTITY, COMMENT and OTHER) with the very specific set of CRF ++ (Conditional Random Fields) method she has created to solve this problem and has been able to label the contents portion probabilistically with a newly given description. Let us have the sentence "1 teaspoon sugar". The model is using 171,224 tagged data to learn a model that can predict the tag sequence for any sentence we have given to it, even though we have never seen this component count before. It approaches this by modeling the conditional probability of a set of labels.
+The challenge of parsing the recipe is to be able to distinguish content components from component cues. Erica Greene (2016) has trained 171,244 sets (labeled as UNIT, QUANTITY, COMMENT and OTHER) with the very specific set of CRF ++\cite{crf} (Conditional Random Fields) method she has created to solve this problem and has been able to label the contents portion probabilistically with a newly given description. Let us have the sentence "1 teaspoon sugar". The model is using 171,224 tagged data to learn a model that can predict the tag sequence for any sentence we have given to it, even though we have never seen this component count before. It approaches this by modeling the conditional probability of a set of labels.
 
 p (UNIT UNIT UNIT| "1 teaspoon sugar")
 
@@ -111,7 +99,7 @@ p (QUANTITY QUANTITY QUANTITY | "1 teaspoon sugar")
 
 p (UNIT QUANTITY NAME| "1 teaspoon sugar")
 
-Secondly, tag direction and ingredients wtih the help of NLTK and CRF++ libraries. Tagging direction according to NLTK libraries is not satisfied in order to generate  action graph. For this reason, update and change tags after NLTK process is finished. 
+Secondly, tag direction and ingredients wtih the help of NLTK \cite{nltk} and CRF++\cite{crf} libraries. Tagging direction according to NLTK \cite{nltk} libraries is not satisfied in order to generate  action graph. For this reason, update and change tags after NLTK \cite{nltk} process is finished. 
 
 \begin{algorithm}
 \caption{Pos Tagging Overview}
@@ -176,7 +164,7 @@ Finding action pairs with proximity values are required for graph generation. Ge
 \subsection{Calculation of Proximity}
 \cite{kiddon2015mise}, some words are not in the table of contents, but more than one is meant. (Eg mixture, them) Kiddon et.\cite{kiddon2015mise} defines this as a hidden object. He has created a probabilistic model to make hidden objects clear. In order to reveal these hidden objects, we present a relationship between the words 'NAME' in this action and its contents. In fact, each word is represented as a vector and we calculate the cosine similarity between them.
 
-Using the Word2Vec library that displays 3.5 billion words created by a working group led by Tomas Mikolov (Google) as a 300-dimensional vector vocabulary, the words that pass through the intellectual part and are labeled 'NAME' have been converted into a 300-dimensional vector.
+Using the Word2Vec \cite{word2vec} library that displays 3.5 billion words created by a working group led by Tomas Mikolov (Google) as a 300-dimensional vector vocabulary, the words that pass through the intellectual part and are labeled 'NAME' have been converted into a 300-dimensional vector.
 
 In the recipe sentence set, phrases without any word labeled 'NAME' are removed. When the words labeled as 'PRED' are extracted, all the words are converted into 300 dimensional vectors and the averages are taken. Because the other words around the word tagged by "VB" can also provide us with information about what materials the hidden object contains. If you only go through the actions, you will be made a comment by looking at the similarity of only two calves. However, the sentence can sometimes contain words that characterize the words in the contents. Let's take a look at "Cook the mixture until caramelized". It is labeled as "cook-PRED". When we look at the similarity of the cosine with the contents, it is seen that almost all of them resemble to each other. However, when the complex average of sentence is taken, "caramelized" word is included. And the result is more similar to "Onion" and "sugar". Taking the average of the blame for this reason actually brings us closer to the right conclusion. On the other hand, actions are generally sequential, some actions related with other actions. "preheat" is the action which is related with "bake for" action. Because after "preheat the oven" , "bake for the mixture". this "preheat" action should be before the "bake for" action. "preheat" action  result is related with "bake for" action. In order to find this relation and similarity about whole actions in the direction, we use Word2Vec library for finding cosine similarity between the actions. If the similarity bigger that threshold value that we select, the pairs and the similarity value are held  in the list. Then the list is used for linking the action nodes in the graph. This process is expressed in the following algorithm Graph Generation and Validation.
 
@@ -203,18 +191,69 @@ actionNodeList =[]
 
 \section{Results}
 
-%TODO Grafikler ornekler burada %76 y? aç?klad???m?z yer buras?
+33 hand labelled recipes, which is used byKiddon et. al \cite{kiddon2015mise},  are used  in the algorithm. POS Tagging results are more promising than Kiddon et. al \cite{kiddon2015mise} that is depicted Table 7. When we look at an example on a "hot chicken salat" recipe, full text is in the Table 5, finding actions in Imperative sentences are really problematic to tag. For this reason we add "I WOULD" prefix to sentences before tagging. 
+
+
+
+    
+\begin{table}[]
+\centering
+\caption{Hot Chicken Salad}
+\label{my-label}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{No} & \textbf{Direction}                                                                                                                                 \\ \hline
+1           & Preheat oven to 350 degrees F (175 degrees C).                                                                                                     \\ \hline
+2           & \begin{tabular}[c]{@{}l@{}}Combine the chicken, celery, almonds,\\ bell pepper, onion, pimento, salt, \\ lemon juice, and mayonnaise.\end{tabular} \\ \hline
+3           & Mix well and pour into a 1 1/2 quart casserole dish.                                                                                               \\ \hline
+4           & Top with grated cheese and the crushed potato chips.                                                                                               \\ \hline
+5           & Bake for 25 minutes or until cheese is melted.                                                                                                     \\ \hline
+\end{tabular}
+\end{table}
+
+After standard tagging in NLTK\cite{nltk}, we rename tags which we define, and concatenate words which are related to each others that is shown on the Table 6. Ingredients tagging with the help of CRF++ \cite{crf} is satisfiable especially when we compare to hand labelled data. 
+
+ Supervised learning methods as CRF++ \cite{crf} is implemented our method for extracting ingredients since we are using previously tagged data from NYTimes \cite{greene}, The result of correctly tagged data is shown in the Table 7.  The results are promising than the other works because of supervised learning. We describe a rule-based tagger which
+performs as well as taggers based upon probabilistic models. The rule-based tagger overcomes the limitations common in rule-based approaches especially using supervised learning in language processing: it is upstanding, and the results is 88.64  as regards with F1 measurement. 
+
+As a result the, action graph of the given recipes described in Table 5 is depicted on Figure 1.  
+
+\begin{table}[]
+\centering
+\caption{Tagged Sentence Example}
+\label{my-label}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Our Tagged Data}                                                                                                                                                                                                                                                                                                                                                                                                                                                  & \textbf{Hand Labelled Data}                                                                                                                                                                                                                                                                                                                                                                                                                                                     \\ \hline
+\begin{tabular}[c]{@{}l@{}}SENT : combine the chicken ,\\  celery , almonds , bell pepper,\\  onion , pimento , salt , \\ lemon juice , and mayonnaise .\\ PRED : combine\\ INGREDIENTS : chicken\\ INGREDIENTS : celery\\ INGREDIENTS : almonds\\ INGREDIENTS : bell pepper\\ INGREDIENTS : onion\\ INGREDIENTS : pimento\\ INGREDIENTS : salt\\ INGREDIENTS : lemon juice\\ INGREDIENTS : mayonnaise\\ DOBJ : the chicken\end{tabular} & \begin{tabular}[c]{@{}l@{}}SENT: combine the chicken , \\ celery , almonds , bell pepper , \\ onion , pimento , salt ,\\ lemon juice , and mayonnaise.\\ PRED: combine\\ INGREDIENTS: chopped salted \\ almonds\\ INGREDIENTS: salt\\ INGREDIENTS: chopped green \\ bell pepper,\\ INGREDIENTS: mayonnaise,\\ INGREDIENTS: chopped celery,\\ INGREDIENTS: minced onion,\\ INGREDIENTS: lemon juice,\\ INGREDIENTS: chopped pimento\\  peppers\\ DOBJ : the chicken\end{tabular} \\ \hline
+\end{tabular}
+\end{table}
+
+
+\begin{figure*}
+  \centering \includegraphics[width=\textwidth]{hot-chicken-salad.png}
+  \caption{Hot-Chicken Salad Action Graph}
+\end{figure*}
+
+
+ \begin{table}[]
+\centering
+\caption{Experiment Results}
+\label{my-label}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+ .    & \textbf{Precision}     &  \textbf{Recall}  & \textbf{F1} \\ \hline
+\textbf{Our work}    &  88.64    & 76.47 & 82.10      \\ \hline
+Kiddon et. al \cite{kiddon2015mise}   & 68.7& 65.0 & 66.8 \\ \hline
+\end{tabular}
+\end{table}
+
 
 \section{Conclusions}
-This paragraph will end the body of this sample document.
-Remember that you might still have Acknowledgments or
-Appendices; brief samples of these
-follow.  There is still the Bibliography to deal with; and
-we will make a disclaimer about that here: with the exception
-of the reference to the \LaTeX\ book, the citations in
-this paper are to articles which have nothing to
-do with the present subject and are used as
-examples only.
+We presented semi-supervised methods for segmenting to tag actions and ingredients in recipe text. Our model uses CRF models to identify tags and uses Word2Vec \cite{word2vec} model to keep the ordering of actions to achieve a complete graph. This graph  can convert to a computer readable format that any automation software  use it easily. 
+
+Our model outperformed a strong linear baseline, while learning a variety of domain knowledge, such as verb signatures and probable ingredient components for different composites. Future work includes learning a more comprehensive model of locations (e.g., identify- ing nested locations such as an oven and a pan in the oven), enriching action graphs with greater se- mantic coverage (e.g., durations, tools, amounts), and training and evaluating on larger datasets. We also plan to use our techniques to support related tasks, such as instructional recipe generation.
+
 
 %\end{document}  % This is where a 'short' article might terminate
 
