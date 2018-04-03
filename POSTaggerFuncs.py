@@ -92,7 +92,7 @@ def updateDireTagsAfterCRF2(dire, ingre):
 
 
 def tokenize(sentence):
-    removedPunctiationsData = sentence.translate(None, string.punctuation)
+    #removedPunctiationsData = sentence.translate(None, string.punctuation)
     # lemma = []
 
     titleTokens = nltk.word_tokenize(sentence)
