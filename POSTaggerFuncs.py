@@ -7,6 +7,20 @@ from nltk import WordNetLemmatizer
 
 import utils
 
+import pandas as pd
+import numpy as np
+
+
+
+
+def readTaggedData():
+    data = pd.read_csv("nyt-ingredients-snapshot-2015.csv", encoding="utf-8")
+    data = data.fillna(method="ffill")
+    data.tail(10)
+
+
+"""functions below  are used for only crf tagging """
+
 lemmatizer = WordNetLemmatizer()
 
 
@@ -178,3 +192,6 @@ def getNameEntityInIngre(data):
         if (len(arr) > 0):
             returnArr.extend(arr)
     return returnArr
+
+
+readTaggedData()

@@ -3,8 +3,9 @@ from operator import itemgetter
 import gensim
 import numpy as np
 from scipy import spatial
+import os
 
-model = gensim.models.Word2Vec.load('SmallerFile', mmap='r')
+model = gensim.models.Word2Vec.load(os.path.join("trained", "direction2vec.w2v"), mmap='r')
 type(model.wv.syn0)
 model.wv.syn0.shape
 

@@ -101,7 +101,7 @@ bowl -> "place 7";
 "place 0" -> "bring to 1";
 "bring to 1" -> "allow to 6";
 "drain 2" -> "dice once 3";
-"dice once 3" -> "refrigerate overnight 8";
+"dice once 3" -> "place 4";
 "place 4" -> "drain 5";
 "drain 5" -> "allow to 6";
 "allow to 6" -> "place 7";

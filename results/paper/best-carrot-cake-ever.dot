@@ -113,7 +113,7 @@ pan -> "cool for 11";
 "stir in 6" -> "combine 7";
 "combine 7" -> "stir in 8";
 "stir in 8" -> "pour evenly 9";
-"pour evenly 9" -> "cooled 12";
+"pour evenly 9" -> "preheat 2";
 "bake for 10" -> "cool for 11";
 "cool for 11" -> "cooled 12";
 }

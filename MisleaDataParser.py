@@ -353,7 +353,7 @@ def readPaperDataArgCreateGraph(title):
 # readPaperDataArgCreateGraph("trialramenslaw")
 
 #readData2(18)
-createGrapWithIndexForPaper2(6)
+createGrapWithIndexForPaper2(0)
 # todo check 27. recipe for noningredient sentence...
 # bug occur in 32
 # readData2(0)

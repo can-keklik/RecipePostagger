@@ -80,12 +80,12 @@ spoon -> "spread 9";
 "15 ml of spoon" [style=filled, fillcolor="#ffff66"];
 "15 ml of spoon" -> "spread 9";
 "preheat 0" -> "spray non-stick 1";
-"spray non-stick 1" -> "combine 2";
+"spray non-stick 1" -> "bake for 6";
 "combine 2" -> "whisk together 3";
 "whisk together 3" -> "pour over 4";
-"pour over 4" -> "bake for 6";
-"spoon into 5" -> "whisk together 3";
+"pour over 4" -> "spoon into 5";
+"spoon into 5" -> "bake for 6";
 "bake for 6" -> "let 7";
-"let 7" -> "pour over 4";
-"transfer to 8" -> "combine 2";
+"let 7" -> "transfer to 8";
+"transfer to 8" -> "bake for 6";
 }

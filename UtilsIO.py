@@ -23,7 +23,6 @@ TAGGED_ARRAY = [PRED, PRED_PREP, NON_INGREDIENT_SPAN_VERB, INGREDIENT_SPAN, INGR
                 PARG]
 
 
-
 def readFiles(fileName):
     f = open(fileName)
     globalData = f.read()
@@ -280,7 +279,52 @@ def readTheResultFromTheAlg(dummyPath):
     return arr
 
 
+def changeCSVFileForLSTMCRF():
+    data = pd.read_csv("nyt-ingredients-snapshot-2015.csv", encoding="utf-8")
+    data = data.fillna('ffill')
+    dataArr = []
+    for index, row in data.iterrows():
 
+        arr = []
+        """
+        word = "ingredient " + str(index)
+        tag = "INDEX"
+        arr.append((word,tag))
+        """
+
+        try:
+            word = str(row["qty"]).lower()
+            tag = "QTY"
+            if len(word) > 0 and float(word) > 0:
+                arr.append((word, tag))
+        except:
+            pass
+        try:
+            word = str(row["unit"]).lower()
+            tag = "UNIT"
+            if len(word) > 0:
+                arr.append((word, tag))
+        except:
+            pass
+        try:
+            word = str(row["name"]).lower()
+            tag = "NAME"
+            if len(word) > 0:
+                arr.append((word, tag))
+        except:
+            pass
+        try:
+            word = str(row["comment"]).lower()
+            tag = "COMMENT"
+            if len(word) > 0:
+                arr.append((word, tag))
+        except:
+            pass
+        dataArr.append(arr)
+    return dataArr
+
+
+changeCSVFileForLSTMCRF()
 # print readPaperDataForGraph("")
 
 # readPaperData(13)

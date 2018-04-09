@@ -74,10 +74,10 @@ mustard -> "mix together 5";
 "1 cup ketchup - 1/2 cup brown sugar" [style=filled, fillcolor="#FFBF00"];
 "1 cup ketchup - 1/2 cup brown sugar" -> "mix together 5";
 "spread over 6" [style=filled, fillcolor=red];
-"preheat 0" -> "lay 3";
+"preheat 0" -> "bake for 4";
 "mix together 1" -> "press into 2";
-"press into 2" -> "preheat 0";
+"press into 2" -> "lay 3";
 "lay 3" -> "bake for 4";
-"bake for 4" -> "preheat 0";
+"bake for 4" -> "mix together 5";
 "mix together 5" -> "spread over 6";
 }
