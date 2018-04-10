@@ -321,6 +321,8 @@ def changeCSVFileForLSTMCRF():
         except:
             pass
         dataArr.append(arr)
+        if index ==100000:
+            break
     return dataArr
 
 

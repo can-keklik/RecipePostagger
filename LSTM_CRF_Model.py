@@ -12,6 +12,7 @@ from keras_contrib.layers import CRF
 import numpy as np
 import pandas as pd
 
+
 def trainAndSaveModel():
     arr = UtilsIO.changeCSVFileForLSTMCRF()
 
@@ -82,3 +83,34 @@ def loadTrainedModel():
     print("Loaded model from disk")
     return loaded_model
 
+
+arr = UtilsIO.changeCSVFileForLSTMCRF()
+
+arr = arr[0:10000]
+words = []
+tags = []
+
+for ingre in arr:
+    for w, t in ingre:
+        words.append(w)
+        tags.append(t)
+
+testData = ["1", "cup", "brown sugar","fillna"]
+
+word2idx = {w: i for i, w in enumerate(words)}
+tag2idx = {t: i for i, t in enumerate(tags)}
+
+X = [[word2idx[w[0]] for w in s] for s in arr]
+
+max_len = max([len(x) for x in X])
+
+x_testData = pad_sequences(sequences=[[word2idx.get(w, 0) for w in testData]],
+                            padding="post", value=0, maxlen=max_len)
+
+loadedModel = loadTrainedModel()
+p = loadedModel.predict(np.array([x_testData[0]]))
+p = np.argmax(p, axis=-1)
+print("{:15}||{}".format("Word", "Prediction"))
+print(30 * "=")
+for w, pred in zip(testData, p[0]):
+    print("{:15}: {:5}".format(w, tags[pred]))
