@@ -108,14 +108,10 @@ def predictIngredientTag(ingredient):
     loadedModel = loadTrainedModel()
     p = loadedModel.predict(np.array([x_testData[0]]))
     p = np.argmax(p, axis=-1)
-    retArr = []
-    print(len(tokens), len(p[0]))
-    p2 = p[0]
-    p2 = p2[0:int(len(tokens) + 1)]
-    for w, pred in zip(tokens, p2):
+    retArr =[]
+    for w, pred in zip(tokens, p[0]):
         print("{:15}: {:5}".format(w, tags[pred]))
-        retArr.append((w, tags[pred]))
+        retArr.append((w,tags[pred]))
     return retArr
-
 
 print(predictIngredientTag("1 cup light corn syrup"))
