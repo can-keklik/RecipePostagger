@@ -6,17 +6,24 @@ from keras.layers import LSTM, Embedding, TimeDistributed, Bidirectional
 from keras.models import Sequential
 from keras.layers.core import Dense
 from keras.models import model_from_json
-
-from keras_contrib.layers import CRF
-
 import numpy as np
-import pandas as pd
+import utils
+
+arr = UtilsIO.readIngredientData()
+
+arr = arr[0:5000]
+words = []
+tags = []
+
+for ingre in arr:
+    for w, t in ingre:
+        words.append(w)
+        tags.append(t)
 
 
 def trainAndSaveModel():
-    arr = UtilsIO.changeCSVFileForLSTMCRF()
-
-    arr = arr[0:10000]
+    arr = UtilsIO.readIngredientData()
+    arr = arr[0:5000]
     words = []
     tags = []
 
@@ -84,33 +91,31 @@ def loadTrainedModel():
     return loaded_model
 
 
-arr = UtilsIO.changeCSVFileForLSTMCRF()
+# testData = ["1", "cup", "brown sugar","fillna"]
 
-arr = arr[0:10000]
-words = []
-tags = []
+def predictIngredientTag(ingredient):
+    display_input = utils.cleanUnicodeFractions(ingredient)
 
-for ingre in arr:
-    for w, t in ingre:
-        words.append(w)
-        tags.append(t)
+    tokens = utils.tokenizeWithoutPunctuation(display_input)
+    word2idx = {w: i for i, w in enumerate(words)}
+    X = [[word2idx[w[0]] for w in s] for s in arr]
 
-testData = ["1", "cup", "brown sugar","fillna"]
+    max_len = max([len(x) for x in X])
+    print("maxle")
+    x_testData = pad_sequences(sequences=[[word2idx.get(w, 0) for w in tokens]],
+                               padding="post", value=0, maxlen=max_len)
 
-word2idx = {w: i for i, w in enumerate(words)}
-tag2idx = {t: i for i, t in enumerate(tags)}
+    loadedModel = loadTrainedModel()
+    p = loadedModel.predict(np.array([x_testData[0]]))
+    p = np.argmax(p, axis=-1)
+    retArr = []
+    print(len(tokens), len(p[0]))
+    p2 = p[0]
+    p2 = p2[0:int(len(tokens) + 1)]
+    for w, pred in zip(tokens, p2):
+        print("{:15}: {:5}".format(w, tags[pred]))
+        retArr.append((w, tags[pred]))
+    return retArr
 
-X = [[word2idx[w[0]] for w in s] for s in arr]
 
-max_len = max([len(x) for x in X])
-
-x_testData = pad_sequences(sequences=[[word2idx.get(w, 0) for w in testData]],
-                            padding="post", value=0, maxlen=max_len)
-
-loadedModel = loadTrainedModel()
-p = loadedModel.predict(np.array([x_testData[0]]))
-p = np.argmax(p, axis=-1)
-print("{:15}||{}".format("Word", "Prediction"))
-print(30 * "=")
-for w, pred in zip(testData, p[0]):
-    print("{:15}: {:5}".format(w, tags[pred]))
+print(predictIngredientTag("1 cup light corn syrup"))

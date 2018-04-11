@@ -1,4 +1,6 @@
+import decimal
 import os
+import re
 import shutil
 import sys
 
@@ -284,14 +286,7 @@ def changeCSVFileForLSTMCRF():
     data = data.fillna('ffill')
     dataArr = []
     for index, row in data.iterrows():
-
         arr = []
-        """
-        word = "ingredient " + str(index)
-        tag = "INDEX"
-        arr.append((word,tag))
-        """
-
         try:
             word = str(row["qty"]).lower()
             tag = "QTY"
@@ -320,13 +315,134 @@ def changeCSVFileForLSTMCRF():
                 arr.append((word, tag))
         except:
             pass
-        dataArr.append(arr)
-        if index ==100000:
+        dataArr.append(reSortArray(str(row["input"]).lower(), arr))
+        if index == 10:
             break
     return dataArr
 
 
-changeCSVFileForLSTMCRF()
+def reSortArray(input, arr):
+    input = str(input).split(" ")
+    print("---------- input")
+
+    print(input)
+    print("---------- arr")
+    print(arr)
+    retArr = []
+    for index, i in enumerate(input):
+        word = ""
+        if str(i).__contains__("/"):
+            word = parseNumbers(i)
+            print("word", word, input[index - 1])
+        for w, t in arr:
+            if str(i) in str(w) and (w, t) not in retArr:
+                retArr.append((w, t))
+            elif (i, "O") not in retArr:
+                retArr.append((i, "O"))
+    print("---------- retArr")
+    print(retArr)
+    return retArr
+
+
+def parseNumbers(s):
+    """
+    Parses a string that represents a number into a decimal data type so that
+    we can match the quantity field in the db with the quantity that appears
+    in the display name. Rounds the result to 2 places.
+    """
+    ss = utils.unclump(s)
+
+    m3 = re.match('^\d+$', ss)
+    if m3 is not None:
+        return decimal.Decimal(round(float(ss), 2))
+
+    m1 = re.match(r'(\d+)\s+(\d)/(\d)', ss)
+    if m1 is not None:
+        num = int(m1.group(1)) + (float(m1.group(2)) / float(m1.group(3)))
+        return decimal.Decimal(str(round(num, 2)))
+
+    m2 = re.match(r'^(\d)/(\d)$', ss)
+    if m2 is not None:
+        num = float(m2.group(1)) / float(m2.group(2))
+        return decimal.Decimal(str(round(num, 2)))
+
+    return None
+
+
+def matchUp(token, ingredientRow):
+    """
+    Returns our best guess of the match between the tags and the
+    words from the display text.
+    This problem is difficult for the following reasons:
+        * not all the words in the display name have associated tags
+        * the quantity field is stored as a number, but it appears
+          as a string in the display name
+        * the comment is often a compilation of different comments in
+          the display name
+    """
+    ret = []
+
+    # strip parens from the token, since they often appear in the
+    # display_name, but are removed from the comment.
+    token = utils.normalizeToken(token)
+    decimalToken = parseNumbers(token)
+
+    for key, val in ingredientRow.iteritems():
+        if isinstance(val, basestring):
+
+            for n, vt in enumerate(utils.tokenize(val)):
+                if utils.normalizeToken(vt) == token:
+                    ret.append(key.upper())
+        elif decimalToken is not None:
+            try:
+                if val == decimalToken:
+                    ret.append(key.upper())
+            except:
+                pass
+
+    return ret
+
+
+def readIngredientData():
+    df = pd.read_csv("nyt-ingredients-snapshot-2015.csv")
+    df = df.fillna("fillna")
+    retArr =[]
+    for index, row in df.iterrows():
+        try:
+            # extract the display name
+            display_input = utils.cleanUnicodeFractions(row["input"])
+
+            tokens = utils.tokenizeWithoutPunctuation(display_input)
+            del (row["input"])
+            rowData = [(t, matchUp(t, row)) for t in tokens]
+            tupleData = convertTupleArray(rowData, tokens)
+            retArr.append(tupleData)
+
+        # ToDo: deal with this
+        except UnicodeDecodeError:
+            pass
+        if index == 5000:
+            break
+    return retArr
+
+
+def convertTupleArray(rowData, tokens):
+    returnData = []
+    for token1 in tokens:
+        for index, (token2, tags) in enumerate(rowData):
+            if token1 == token2:
+                if len(tags) > 1:
+                    tags = [t for t in tags if str(t) != "INDEX"]
+                    if (token1, tags[0]) not in returnData:
+                        returnData.append((token1, tags[0]))
+                        tags.pop(0)
+                        rowData[index] = (token2, tags)
+                elif len(tags) == 1 and (token1, tags[0]) not in returnData:
+                    returnData.append((token1, tags[0]))
+    return returnData
+
+
+readIngredientData()
 # print readPaperDataForGraph("")
 
 # readPaperData(13)
