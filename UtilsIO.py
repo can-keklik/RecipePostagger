@@ -68,6 +68,32 @@ def getFileList():
     return files
 
 
+def getFileListWithFolderName(foldername):
+    files = []
+    reload(sys)
+    sys.setdefaultencoding('utf8')
+    if not os.path.exists(foldername):
+        print("Folder not exist")
+        return
+    else:
+        for file in os.listdir(foldername):
+            files.append(foldername + "/" + file)
+        return files
+
+
+def getFileNameList(foldername):
+    files = []
+    reload(sys)
+    sys.setdefaultencoding('utf8')
+    if not os.path.exists(foldername):
+        print("Folder not exist")
+        return
+    else:
+        for file in os.listdir(foldername):
+            files.append(file)
+        return files
+
+
 def getDataFromPath(filepath):
     returnArr = []
     pathArray = filepath.split('/')
@@ -119,10 +145,6 @@ def getFileList(folderPath, contained_word):
         for filename in [f for f in filenames if str(os.path.join(dirpath, f)).__contains__(contained_word)]:
             retArr.append(os.path.join(dirpath, filename))
     return retArr;
-
-
-def readMisleaDataFromPath(file_path):
-    file_path = file_path
 
 
 def writePaperDataToCvsFile():
@@ -406,7 +428,7 @@ def matchUp(token, ingredientRow):
 def readIngredientData():
     df = pd.read_csv("nyt-ingredients-snapshot-2015.csv")
     df = df.fillna("fillna")
-    retArr =[]
+    retArr = []
     for index, row in df.iterrows():
         try:
             # extract the display name
@@ -441,8 +463,6 @@ def convertTupleArray(rowData, tokens):
                     returnData.append((token1, tags[0]))
     return returnData
 
-
-readIngredientData()
 # print readPaperDataForGraph("")
 
 # readPaperData(13)

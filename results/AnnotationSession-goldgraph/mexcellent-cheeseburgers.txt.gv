@@ -1,0 +1,100 @@
+digraph recipe {
+E0[label="divide
+0", shape=oval, style=filled, fillcolor=azure]
+E1[label="ball
+1", shape=oval, style=filled, fillcolor=azure]
+E2[label="poke
+2", shape=oval, style=filled, fillcolor=azure]
+E3[label="fill
+3", shape=oval, style=filled, fillcolor=azure]
+E4[label="flatten
+4", shape=oval, style=filled, fillcolor=azure]
+E5[label="cover
+5", shape=oval, style=filled, fillcolor=azure]
+E6[label="cook
+6", shape=oval, style=filled, fillcolor=azure]
+E7[label="cover
+7", shape=oval, style=filled, fillcolor=azure]
+E8[label="turn
+8", shape=oval, style=filled, fillcolor=azure]
+E9[label="arrange
+9", shape=oval, style=filled, fillcolor=azure]
+E10[label="spread
+10", shape=oval, style=filled, fillcolor=azure]
+E11[label="place
+11", shape=oval, style=filled, fillcolor=azure]
+E12[label="use
+12", shape=oval, style=filled, fillcolor=azure]
+E13[label="place
+13", shape=oval, style=filled, fillcolor=azure]
+E14[label="top
+14", shape=oval, style=filled, fillcolor=azure]
+E15[label="plop
+15", shape=oval, style=filled, fillcolor=azure]
+E16[label="serve and enjoy
+16", shape=oval, style=filled, fillcolor=azure]
+D0[label="DOBJ: ground beef chuck", shape=box, style=filled, fillcolor=peachpuff]
+D0 -> E0
+P0_0[label="LOCOROBJ:into three even portions", shape=box, style=filled, fillcolor=white]
+P0_0 -> E0
+E0 -> E1 [label="the meat"]
+O1_0_0[label="OTHER: up", shape=box, style=filled, fillcolor=white]
+O1_0_0 -> E1
+D2_0[label="DOBJ: my finger", shape=box, style=filled, fillcolor=white]
+D2_0 -> E2
+E1 -> E2 [label="LOCOROBJ:into it"]
+D3_0[label="DOBJ: the hole", shape=box, style=filled, fillcolor=white]
+D3_0 -> E3
+E2 -> E3 [label="IMPLICIT PREP"]
+P3_1_ing[label="COOBJECT: with hot pepper sauce or to taste", shape=box, style=filled, fillcolor=peachpuff]
+P3_1_ing -> E3
+E3 -> E4 [label="IMPLICIT DOBJ"]
+P4_1_0[label="LOCOROBJ:into patties", shape=box, style=filled, fillcolor=white]
+P4_1_0 -> E4
+P4_2_0[label="OTHER:just a little larger", shape=box, style=filled, fillcolor=white]
+P4_2_0 -> E4
+P4_3_0[label="OTHER:than the english muffins", shape=box, style=filled, fillcolor=white]
+P4_3_0 -> E4
+E4 -> E5 [label="IMPLICIT DOBJ"]
+E5 -> E6 [label="IMPLICIT DOBJ"]
+O6_0_0[label="OTHER: the beef patties for about 4 minutes per side ", shape=box, style=filled, fillcolor=white]
+O6_0_0 -> E6
+O6_0_1[label="OTHER:  or until well done", shape=box, style=filled, fillcolor=white]
+O6_0_1 -> E6
+E6 -> E7 [label="IMPLICIT DOBJ"]
+D8_0[label="DOBJ: the heat", shape=box, style=filled, fillcolor=white]
+D8_0 -> E8
+E7 -> E8 [label="IMPLICIT PREP"]
+O8_0_0[label="OTHER: off", shape=box, style=filled, fillcolor=white]
+O8_0_0 -> E8
+D9_ing[label="DOBJ: jumbo english muffins", shape=box, style=filled, fillcolor=peachpuff]
+D9_ing -> E9
+E8 -> E9 [label="IMPLICIT PREP"]
+P9_1_0[label="LOCOROBJ:on a serving plate", shape=box, style=filled, fillcolor=white]
+P9_1_0 -> E9
+D10_0[label="DOBJ: the bottom half", shape=box, style=filled, fillcolor=white]
+D10_0 -> E10
+E9 -> E10 [label="IMPLICIT PREP"]
+P10_1_ing[label="COOBJECT: with dijon mustard", shape=box, style=filled, fillcolor=peachpuff]
+P10_1_ing -> E10
+D11_ing[label="DOBJ: avocado pitted", shape=box, style=filled, fillcolor=peachpuff]
+D11_ing -> E11
+E10 -> E11 [label="LOCOROBJ:over the mustard"]
+D12_0[label="DOBJ: a fork", shape=box, style=filled, fillcolor=white]
+D12_0 -> E12
+E11 -> E12 [label="LOCOROBJ:to mash"]
+P12_2_0[label="LOCOROBJ:into the nooks", shape=box, style=filled, fillcolor=white]
+P12_2_0 -> E12
+P12_2_1[label="LOCOROBJ:into  crannies", shape=box, style=filled, fillcolor=white]
+P12_2_1 -> E12
+D13_0[label="DOBJ: the beef patties", shape=box, style=filled, fillcolor=white]
+D13_0 -> E13
+E12 -> E13 [label="LOCOROBJ:on top of the avocado"]
+E13 -> E14 [label="IMPLICIT DOBJ"]
+P14_1_ing[label="COOBJECT: with diced green chile peppers", shape=box, style=filled, fillcolor=peachpuff]
+P14_1_ing -> E14
+E14 -> E15 [label="the other halves of the English muffins on top"]
+E15 -> E16 [label="IMPLICIT DOBJ"]
+EOR[label="Bon", shape=oval, style=filled, fillcolor=plum]
+E16 -> EOR
+}

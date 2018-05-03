@@ -1,0 +1,20 @@
+digraph recipe {
+E0[label="preheat
+0", shape=oval, style=filled, fillcolor=azure]
+E1[label="beat
+1", shape=oval, style=filled, fillcolor=azure]
+E2[label="allow
+2", shape=oval, style=filled, fillcolor=azure]
+D0[label="DOBJ: oven to 350 degrees F -LRB- 175 degrees C", shape=box, style=filled, fillcolor=white]
+D0 -> E0
+D1_ing[label="DOBJ: melted butter, eggs, dark corn syrup, white sugar, vanilla extract", shape=box, style=filled, fillcolor=peachpuff]
+D1_ing -> E1
+E0 -> E1 [label="IMPLICIT PREP"]
+O1_0_0[label="OTHER: together", shape=box, style=filled, fillcolor=white]
+O1_0_0 -> E1
+E1 -> E2 [label="IMPLICIT DOBJ"]
+O2_0_0[label="OTHER: to cool before slicing", shape=box, style=filled, fillcolor=white]
+O2_0_0 -> E2
+EOR[label="Bon", shape=oval, style=filled, fillcolor=plum]
+E2 -> EOR
+}

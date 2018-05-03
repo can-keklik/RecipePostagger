@@ -1,0 +1,22 @@
+digraph recipe {
+E0[label="remove
+0", shape=oval, style=filled, fillcolor=azure]
+E1[label="place
+1", shape=oval, style=filled, fillcolor=azure]
+E2[label="refrigerate
+2", shape=oval, style=filled, fillcolor=azure]
+D1[label="DOBJ: yolks", shape=box, style=filled, fillcolor=white]
+D1 -> E1
+P1_0[label="LOCOROBJ:into a bowl", shape=box, style=filled, fillcolor=white]
+P1_0 -> E1
+D0[label="DOBJ: yolks", shape=box, style=filled, fillcolor=white]
+D0 -> E0
+P0_0[label="COOBJECT:from hardcooked eggs cut lengthwise", shape=box, style=filled, fillcolor=peachpuff]
+P0_0 -> E0
+E1 -> E2 [label="IMPLICIT DOBJ"]
+E0 -> E2 [label="IMPLICIT PREP"]
+P2_1_0[label="DURATION:until serving time", shape=box, style=filled, fillcolor=white]
+P2_1_0 -> E2
+EOR[label="Bon", shape=oval, style=filled, fillcolor=plum]
+E2 -> EOR
+}

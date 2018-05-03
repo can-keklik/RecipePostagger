@@ -1,0 +1,22 @@
+digraph recipe {
+E0[label="whisk
+0", shape=oval, style=filled, fillcolor=azure]
+E1[label="combine
+1", shape=oval, style=filled, fillcolor=azure]
+E2[label="cover and refrigerate
+2", shape=oval, style=filled, fillcolor=azure]
+D0[label="DOBJ: mayonnaise, salt, vanilla yogurt, white pepper, grated fresh ginger, grated lime zest", shape=box, style=filled, fillcolor=peachpuff]
+D0 -> E0
+O0_0[label="OTHER: together", shape=box, style=filled, fillcolor=white]
+O0_0 -> E0
+D1_ing[label="DOBJ: sliced water chestnuts, boneless chicken breast halves, diced red onion, chopped snow peas", shape=box, style=filled, fillcolor=peachpuff]
+D1_ing -> E1
+E0 -> E1 [label="IMPLICIT PREP"]
+P1_1_0[label="LOCOROBJ:in a mixing bowl", shape=box, style=filled, fillcolor=white]
+P1_1_0 -> E1
+E1 -> E2 [label="IMPLICIT DOBJ"]
+P2_1_0[label="OTHER:until chilled", shape=box, style=filled, fillcolor=white]
+P2_1_0 -> E2
+EOR[label="Bon", shape=oval, style=filled, fillcolor=plum]
+E2 -> EOR
+}

@@ -124,11 +124,11 @@ def initModel():
     num_workers = multiprocessing.cpu_count()
 
     # Context window length.
-    context_size = 7
+    context_size = 2
 
     # Downsample setting for frequent words.
     # 0 - 1e-5 is good for this
-    downsampling = 1e-3
+    downsampling = 1e-5
 
     # Seed for the RNG, to make the results reproducible.
     # random number generator
@@ -141,7 +141,7 @@ def initModel():
         size=num_features,
         min_count=min_word_count,
         window=context_size,
-        sample=downsampling
+        negative=10
     )
 
     direction2Vec.build_vocab(sentences)

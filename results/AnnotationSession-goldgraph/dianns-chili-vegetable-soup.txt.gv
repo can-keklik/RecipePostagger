@@ -1,0 +1,52 @@
+digraph recipe {
+E0[label="saute
+0", shape=oval, style=filled, fillcolor=azure]
+E1[label="drain
+1", shape=oval, style=filled, fillcolor=azure]
+E2[label="add
+2", shape=oval, style=filled, fillcolor=azure]
+E3[label="bring
+3", shape=oval, style=filled, fillcolor=azure]
+E4[label="reduce
+4", shape=oval, style=filled, fillcolor=azure]
+E5[label="cover
+5", shape=oval, style=filled, fillcolor=azure]
+E6[label="add
+6", shape=oval, style=filled, fillcolor=azure]
+D0[label="DOBJ: ground beef", shape=box, style=filled, fillcolor=peachpuff]
+D0 -> E0
+P0_0[label="LOCOROBJ:in a large soup pot", shape=box, style=filled, fillcolor=white]
+P0_0 -> E0
+P0_1[label="DURATION:until brown", shape=box, style=filled, fillcolor=white]
+P0_1 -> E0
+E0 -> E1 [label="excess fat"]
+D2_ing[label="DOBJ: fluid ounces tomatovegetable juice cocktail, kidney beans, whole kernel corn, fluid ounce can tomato juice, onion, stalks celery chopped, chili powder, small head cabbage, diced tomatoes, green bell pepper", shape=box, style=filled, fillcolor=peachpuff]
+D2_ing -> E2
+E1 -> E2 [label="IMPLICIT PREP"]
+E2 -> E3 [label="IMPLICIT DOBJ"]
+P3_1_0[label="LOCOROBJ:to a boil", shape=box, style=filled, fillcolor=white]
+P3_1_0 -> E3
+O3_0_0[label="OTHER: then", shape=box, style=filled, fillcolor=white]
+O3_0_0 -> E3
+D4_0[label="DOBJ: heat", shape=box, style=filled, fillcolor=white]
+D4_0 -> E4
+E3 -> E4 [label="IMPLICIT PREP"]
+P4_1_0[label="LOCOROBJ:to low", shape=box, style=filled, fillcolor=white]
+P4_1_0 -> E4
+D5_0[label="DOBJ: pot", shape=box, style=filled, fillcolor=white]
+D5_0 -> E5
+D5_1[label="DOBJ:  let simmer", shape=box, style=filled, fillcolor=white]
+D5_1 -> E5
+E4 -> E5 [label="IMPLICIT PREP"]
+P5_1_0[label="DURATION:about one hour", shape=box, style=filled, fillcolor=white]
+P5_1_0 -> E5
+P5_2_0[label="DURATION:until celery is tender", shape=box, style=filled, fillcolor=white]
+P5_2_0 -> E5
+D6_ing[label="DOBJ: garlic powder, salt, pepper to taste", shape=box, style=filled, fillcolor=peachpuff]
+D6_ing -> E6
+E5 -> E6 [label="IMPLICIT PREP"]
+P6_1_0[label="LOCOROBJ:to taste", shape=box, style=filled, fillcolor=white]
+P6_1_0 -> E6
+EOR[label="Bon", shape=oval, style=filled, fillcolor=plum]
+E6 -> EOR
+}

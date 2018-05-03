@@ -353,7 +353,9 @@ def readPaperDataArgCreateGraph(title):
 # readPaperDataArgCreateGraph("trialramenslaw")
 
 #readData2(18)
-createGrapWithIndexForPaper2(0)
+#createGrapWithIndexForPaper2(0)
+filename ="amish-meatloaf.gv"
+UtilsIO.createPngFromDotFile("AnnotationSession-goldgraph/" + filename, "paper/" + "amish-meatloaf" + ".png")
 # todo check 27. recipe for noningredient sentence...
 # bug occur in 32
 # readData2(0)

@@ -1,0 +1,25 @@
+digraph recipe {
+E0[label="preheat
+0", shape=oval, style=filled, fillcolor=azure]
+E1[label="shape
+1", shape=oval, style=filled, fillcolor=azure]
+E2[label="place
+2", shape=oval, style=filled, fillcolor=azure]
+E3[label="bake
+3", shape=oval, style=filled, fillcolor=azure]
+D0[label="DOBJ: oven to 375 degrees F -LRB- 190 degrees C", shape=box, style=filled, fillcolor=white]
+D0 -> E0
+E0 -> E1 [label="IMPLICIT DOBJ"]
+O1_0_0[label="OTHER: to form six 4x2 inch loaves", shape=box, style=filled, fillcolor=white]
+O1_0_0 -> E1
+E1 -> E2 [label="IMPLICIT DOBJ"]
+P2_1_0[label="LOCOROBJ:in a large shallow pan", shape=box, style=filled, fillcolor=white]
+P2_1_0 -> E2
+E2 -> E3 [label="IMPLICIT DOBJ"]
+P3_1_0[label="DURATION:for about 25 to 30 minutes ", shape=box, style=filled, fillcolor=white]
+P3_1_0 -> E3
+P3_1_1[label="DURATION:for  or until done", shape=box, style=filled, fillcolor=white]
+P3_1_1 -> E3
+EOR[label="Bon", shape=oval, style=filled, fillcolor=plum]
+E3 -> EOR
+}

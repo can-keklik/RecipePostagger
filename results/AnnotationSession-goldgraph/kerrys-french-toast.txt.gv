@@ -1,0 +1,35 @@
+digraph recipe {
+E0[label="blend
+0", shape=oval, style=filled, fillcolor=azure]
+E1[label="dip
+1", shape=oval, style=filled, fillcolor=azure]
+E2[label="milk
+2", shape=oval, style=filled, fillcolor=azure]
+E3[label="cook
+3", shape=oval, style=filled, fillcolor=azure]
+D0[label="DOBJ: softened cream cheese", shape=box, style=filled, fillcolor=peachpuff]
+D0 -> E0
+P0_0[label="LOCOROBJ:in a medium bowl", shape=box, style=filled, fillcolor=white]
+P0_0 -> E0
+P0_1[label="COOBJECT:with brown sugar, ground allspice, ground nutmeg, ground cinnamon", shape=box, style=filled, fillcolor=peachpuff]
+P0_1 -> E0
+D1_ing[label="DOBJ: inch slices egg bread", shape=box, style=filled, fillcolor=peachpuff]
+D1_ing -> E1
+E0 -> E1 [label="IMPLICIT PREP"]
+P1_1_ing[label="COOBJECT: into extra large eggs", shape=box, style=filled, fillcolor=peachpuff]
+P1_1_ing -> E1
+E1 -> E2 [label="IMPLICIT DOBJ"]
+P2_1_0[label="LOCOROBJ:to coat", shape=box, style=filled, fillcolor=white]
+P2_1_0 -> E2
+O2_0_0[label="OTHER: thoroughly", shape=box, style=filled, fillcolor=white]
+O2_0_0 -> E2
+E2 -> E3 [label="IMPLICIT DOBJ"]
+P3_1_0[label="DURATION:for 2 to 4 minutes on each side ", shape=box, style=filled, fillcolor=white]
+P3_1_0 -> E3
+P3_1_1[label="DURATION:for  or until golden brown", shape=box, style=filled, fillcolor=white]
+P3_1_1 -> E3
+O3_0_0[label="OTHER: coated bread slices", shape=box, style=filled, fillcolor=white]
+O3_0_0 -> E3
+EOR[label="Bon", shape=oval, style=filled, fillcolor=plum]
+E3 -> EOR
+}

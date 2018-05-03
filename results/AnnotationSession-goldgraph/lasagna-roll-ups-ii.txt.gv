@@ -1,0 +1,80 @@
+digraph recipe {
+E0[label="cook and stir
+0", shape=oval, style=filled, fillcolor=azure]
+E1[label="add
+1", shape=oval, style=filled, fillcolor=azure]
+E2[label="is heated
+2", shape=oval, style=filled, fillcolor=azure]
+E3[label="drain
+3", shape=oval, style=filled, fillcolor=azure]
+E4[label="preheat
+4", shape=oval, style=filled, fillcolor=azure]
+E5[label="grease
+5", shape=oval, style=filled, fillcolor=azure]
+E6[label="place
+6", shape=oval, style=filled, fillcolor=azure]
+E7[label="top
+7", shape=oval, style=filled, fillcolor=azure]
+E8[label="roll
+8", shape=oval, style=filled, fillcolor=azure]
+E9[label="place
+9", shape=oval, style=filled, fillcolor=azure]
+E10[label="spread
+10", shape=oval, style=filled, fillcolor=azure]
+E11[label="top
+11", shape=oval, style=filled, fillcolor=azure]
+E12[label="bake
+12", shape=oval, style=filled, fillcolor=azure]
+D0[label="DOBJ: garlic powder, dried oregano, ground beef, white onion", shape=box, style=filled, fillcolor=peachpuff]
+D0 -> E0
+P0_0[label="LOCOROBJ:in a large skillet over medium heat", shape=box, style=filled, fillcolor=white]
+P0_0 -> E0
+P0_1[label="DURATION:until onion is tender, beef is browned", shape=box, style=filled, fillcolor=white]
+P0_1 -> E0
+P0_2[label="DURATION:for about 10 minutes", shape=box, style=filled, fillcolor=white]
+P0_2 -> E0
+D6[label="DOBJ: lasagna noodles", shape=box, style=filled, fillcolor=peachpuff]
+D6 -> E6
+P6_0[label="LOCOROBJ:on a work surface", shape=box, style=filled, fillcolor=white]
+P6_0 -> E6
+D1_ing[label="DOBJ: white sugar, jar chunky tomato sauce such ragu", shape=box, style=filled, fillcolor=peachpuff]
+D1_ing -> E1
+E0 -> E1 [label="IMPLICIT PREP"]
+E1 -> E2 [label="IMPLICIT DOBJ"]
+P2_1_0[label="DURATION:about 10 minutes", shape=box, style=filled, fillcolor=white]
+P2_1_0 -> E2
+O2_0_0[label="OTHER: through", shape=box, style=filled, fillcolor=white]
+O2_0_0 -> E2
+E2 -> E3 [label="IMPLICIT DOBJ"]
+D4_0[label="DOBJ: oven to 375 degrees F -LRB- 190 degrees C", shape=box, style=filled, fillcolor=white]
+D4_0 -> E4
+E3 -> E4 [label="IMPLICIT PREP"]
+D5_0[label="DOBJ: a 9x13-inch casserole dish", shape=box, style=filled, fillcolor=white]
+D5_0 -> E5
+E4 -> E5 [label="IMPLICIT PREP"]
+E6 -> E7 [label="IMPLICIT DOBJ"]
+P7_1_0[label="LOCOROBJ:with another lasagna noodle", shape=box, style=filled, fillcolor=white]
+P7_1_0 -> E7
+E7 -> E8 [label="the stuffed lasagna noodles in the jelly-roll style"]
+O8_0_0[label="OTHER: up", shape=box, style=filled, fillcolor=white]
+O8_0_0 -> E8
+E8 -> E9 [label="IMPLICIT DOBJ"]
+E5 -> E9 [label="LOCOROBJ:in the prepared casserole dish"]
+E9 -> E10 [label="a spoonful of meat sauce"]
+P10_1_0[label="OTHER:atop each lasagna roll", shape=box, style=filled, fillcolor=white]
+P10_1_0 -> E10
+E10 -> E11 [label="IMPLICIT DOBJ"]
+P11_1_ing[label="COOBJECT: with package mozzarella cheese or needed, grated parmesan cheese", shape=box, style=filled, fillcolor=peachpuff]
+P11_1_ing -> E11
+E11 -> E12 [label="IMPLICIT DOBJ"]
+P12_1_0[label="LOCOROBJ:in the preheated oven", shape=box, style=filled, fillcolor=white]
+P12_1_0 -> E12
+P12_2_0[label="DURATION:until cheese is melted", shape=box, style=filled, fillcolor=white]
+P12_2_0 -> E12
+P12_2_1[label="DURATION:until  bubbling", shape=box, style=filled, fillcolor=white]
+P12_2_1 -> E12
+P12_3_0[label="DURATION:for 30 to 35 minutes", shape=box, style=filled, fillcolor=white]
+P12_3_0 -> E12
+EOR[label="Bon", shape=oval, style=filled, fillcolor=plum]
+E12 -> EOR
+}

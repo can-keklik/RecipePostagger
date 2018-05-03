@@ -1,0 +1,89 @@
+digraph recipe {
+E0[label="cook
+0", shape=oval, style=filled, fillcolor=azure]
+E1[label="drain
+1", shape=oval, style=filled, fillcolor=azure]
+E2[label="melt
+2", shape=oval, style=filled, fillcolor=azure]
+E3[label="add
+3", shape=oval, style=filled, fillcolor=azure]
+E4[label="stir
+4", shape=oval, style=filled, fillcolor=azure]
+E5[label="cook
+5", shape=oval, style=filled, fillcolor=azure]
+E6[label="put
+6", shape=oval, style=filled, fillcolor=azure]
+E7[label="pour
+7", shape=oval, style=filled, fillcolor=azure]
+E8[label="stir
+8", shape=oval, style=filled, fillcolor=azure]
+E9[label="melt
+9", shape=oval, style=filled, fillcolor=azure]
+E10[label="add
+10", shape=oval, style=filled, fillcolor=azure]
+E11[label="spread
+11", shape=oval, style=filled, fillcolor=azure]
+E12[label="sprinkle
+12", shape=oval, style=filled, fillcolor=azure]
+E13[label="serve
+13", shape=oval, style=filled, fillcolor=azure]
+D0[label="DOBJ: uncooked elbow macaroni", shape=box, style=filled, fillcolor=peachpuff]
+D0 -> E0
+P0_0[label="OTHER:according to the package directions", shape=box, style=filled, fillcolor=white]
+P0_0 -> E0
+E0 -> E1 [label="IMPLICIT DOBJ"]
+D2_ing[label="DOBJ: butter", shape=box, style=filled, fillcolor=peachpuff]
+D2_ing -> E2
+E1 -> E2 [label="IMPLICIT PREP"]
+P2_1_0[label="LOCOROBJ:in a saucepan", shape=box, style=filled, fillcolor=white]
+P2_1_0 -> E2
+P2_2_0[label="LOCOROBJ:over medium heat", shape=box, style=filled, fillcolor=white]
+P2_2_0 -> E2
+D3_ing[label="DOBJ: milk", shape=box, style=filled, fillcolor=peachpuff]
+D3_ing -> E3
+E2 -> E3 [label="IMPLICIT PREP"]
+O3_0_0[label="OTHER: to roux slowly", shape=box, style=filled, fillcolor=white]
+O3_0_0 -> E3
+O3_1_0[label="OTHER: stirring constantly", shape=box, style=filled, fillcolor=white]
+O3_1_0 -> E3
+E3 -> E4 [label="IMPLICIT DOBJ"]
+P4_1_ing[label="COOBJECT: in shredded sharp cheddar cheese", shape=box, style=filled, fillcolor=peachpuff]
+P4_1_ing -> E4
+E4 -> E5 [label="IMPLICIT DOBJ"]
+P5_1_0[label="LOCOROBJ:over low heat", shape=box, style=filled, fillcolor=white]
+P5_1_0 -> E5
+P5_2_0[label="DURATION:until cheese is melted", shape=box, style=filled, fillcolor=white]
+P5_2_0 -> E5
+P5_2_1[label="DURATION:until  the sauce is a little thick", shape=box, style=filled, fillcolor=white]
+P5_2_1 -> E5
+E5 -> E6 [label="macaroni"]
+P6_1_0[label="LOCOROBJ:in large casserole dish", shape=box, style=filled, fillcolor=white]
+P6_1_0 -> E6
+D7_0[label="DOBJ: sauce", shape=box, style=filled, fillcolor=white]
+D7_0 -> E7
+E6 -> E7 [label="LOCOROBJ:over macaroni"]
+E7 -> E8 [label="IMPLICIT DOBJ"]
+O8_0_0[label="OTHER: well", shape=box, style=filled, fillcolor=white]
+O8_0_0 -> E8
+E8 -> E9 [label="butter or margarine"]
+P9_1_0[label="LOCOROBJ:in a skillet over medium heat", shape=box, style=filled, fillcolor=white]
+P9_1_0 -> E9
+D10_ing[label="DOBJ: bread crumbs", shape=box, style=filled, fillcolor=peachpuff]
+D10_ing -> E10
+D10_0[label="DOBJ:  brown", shape=box, style=filled, fillcolor=white]
+D10_0 -> E10
+E9 -> E10 [label="IMPLICIT PREP"]
+E10 -> E11 [label="IMPLICIT DOBJ"]
+P11_1_ing[label="COOBJECT: over grated parmesan cheese", shape=box, style=filled, fillcolor=peachpuff]
+P11_1_ing -> E11
+P11_1_0[label="COOBJECT:over the macaroni", shape=box, style=filled, fillcolor=white]
+P11_1_0 -> E11
+O11_0_0[label="OTHER: to cover", shape=box, style=filled, fillcolor=white]
+O11_0_0 -> E11
+E11 -> E12 [label="IMPLICIT DOBJ"]
+P12_1_ing[label="COOBJECT: with paprika", shape=box, style=filled, fillcolor=peachpuff]
+P12_1_ing -> E12
+E12 -> E13 [label="IMPLICIT DOBJ"]
+EOR[label="Bon", shape=oval, style=filled, fillcolor=plum]
+E13 -> EOR
+}

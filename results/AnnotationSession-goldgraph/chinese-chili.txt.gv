@@ -1,0 +1,63 @@
+digraph recipe {
+E0[label="cook
+0", shape=oval, style=filled, fillcolor=azure]
+E1[label="cover and simmer
+1", shape=oval, style=filled, fillcolor=azure]
+E2[label="stir
+2", shape=oval, style=filled, fillcolor=azure]
+E3[label="mix
+3", shape=oval, style=filled, fillcolor=azure]
+E4[label="pour
+4", shape=oval, style=filled, fillcolor=azure]
+E5[label="stir
+5", shape=oval, style=filled, fillcolor=azure]
+E6[label="cover
+6", shape=oval, style=filled, fillcolor=azure]
+E7[label="reduce
+7", shape=oval, style=filled, fillcolor=azure]
+E8[label="simmer
+8", shape=oval, style=filled, fillcolor=azure]
+E9[label="stir
+9", shape=oval, style=filled, fillcolor=azure]
+P0_0[label="DURATION:until the vegetables have given up their juice", shape=box, style=filled, fillcolor=white]
+P0_0 -> E0
+E0 -> E1 [label="IMPLICIT DOBJ"]
+P1_1_0[label="DURATION:until the vegetables are tender ", shape=box, style=filled, fillcolor=white]
+P1_1_0 -> E1
+P1_1_1[label="DURATION:until  about 20 minutes", shape=box, style=filled, fillcolor=white]
+P1_1_1 -> E1
+E1 -> E2 [label="IMPLICIT DOBJ"]
+P2_1_ing[label="COOBJECT: in sliced water chestnuts, beef broth, chili powder or to taste, ground black pepper, sliced bamboo shoots", shape=box, style=filled, fillcolor=peachpuff]
+P2_1_ing -> E2
+D3_ing[label="DOBJ: soy sauce, cornstarch", shape=box, style=filled, fillcolor=peachpuff]
+D3_ing -> E3
+E2 -> E3 [label="IMPLICIT PREP"]
+P3_1_0[label="DURATION:until smooth", shape=box, style=filled, fillcolor=white]
+P3_1_0 -> E3
+D4_0[label="DOBJ: it", shape=box, style=filled, fillcolor=white]
+D4_0 -> E4
+E3 -> E4 [label="LOCOROBJ:into the soup"]
+E4 -> E5 [label="IMPLICIT DOBJ"]
+P5_1_0[label="DURATION:until the soup thickens ", shape=box, style=filled, fillcolor=white]
+P5_1_0 -> E5
+P5_1_1[label="DURATION:until  about 1 minute", shape=box, style=filled, fillcolor=white]
+P5_1_1 -> E5
+E5 -> E6 [label="the chili"]
+D7_0[label="DOBJ: heat", shape=box, style=filled, fillcolor=white]
+D7_0 -> E7
+E6 -> E7 [label="IMPLICIT PREP"]
+P7_1_0[label="LOCOROBJ:to a simmer", shape=box, style=filled, fillcolor=white]
+P7_1_0 -> E7
+E7 -> E8 [label="IMPLICIT DOBJ"]
+P8_1_0[label="DURATION:until the meat is very tender", shape=box, style=filled, fillcolor=white]
+P8_1_0 -> E8
+E8 -> E9 [label="IMPLICIT DOBJ"]
+P9_1_0[label="OTHER:before serving", shape=box, style=filled, fillcolor=white]
+P9_1_0 -> E9
+P9_2_ing[label="COOBJECT: in fresh bean sprouts, sliced fresh mushrooms", shape=box, style=filled, fillcolor=peachpuff]
+P9_2_ing -> E9
+O9_0_0[label="OTHER: about 5 minutes", shape=box, style=filled, fillcolor=white]
+O9_0_0 -> E9
+EOR[label="Bon", shape=oval, style=filled, fillcolor=plum]
+E9 -> EOR
+}

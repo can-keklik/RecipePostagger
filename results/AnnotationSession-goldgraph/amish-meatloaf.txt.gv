@@ -1,0 +1,29 @@
+digraph recipe {
+E0[label="preheat
+0", shape=oval, style=filled, fillcolor=azure]
+E1[label="lay
+1", shape=oval, style=filled, fillcolor=azure]
+E2[label="mix
+2", shape=oval, style=filled, fillcolor=azure]
+E3[label="spread
+3", shape=oval, style=filled, fillcolor=azure]
+D0[label="DOBJ: the oven to 350 degrees F -LRB- 175 degrees C", shape=box, style=filled, fillcolor=white]
+D0 -> E0
+D1_ing[label="DOBJ: slices bacon", shape=box, style=filled, fillcolor=peachpuff]
+D1_ing -> E1
+E0 -> E1 [label="IMPLICIT PREP"]
+D2_ing[label="DOBJ: brown sugar, prepared yellow mustard, salt or to taste, vinegar, ketchup", shape=box, style=filled, fillcolor=peachpuff]
+D2_ing -> E2
+E1 -> E2 [label="IMPLICIT PREP"]
+P2_1_0[label="DURATION:while the loaf bakes", shape=box, style=filled, fillcolor=white]
+P2_1_0 -> E2
+O2_0_0[label="OTHER: together", shape=box, style=filled, fillcolor=white]
+O2_0_0 -> E2
+E2 -> E3 [label="the top of the meat loaf"]
+P3_1_0[label="DURATION:for the last 15 minutes of baking", shape=box, style=filled, fillcolor=white]
+P3_1_0 -> E3
+O3_0_0[label="OTHER: over", shape=box, style=filled, fillcolor=white]
+O3_0_0 -> E3
+EOR[label="Bon", shape=oval, style=filled, fillcolor=plum]
+E3 -> EOR
+}
