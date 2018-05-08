@@ -39,7 +39,7 @@ class GraphGeneratorForPaper:
                 self.addEdgeToActionNode(node_detailed=node_detailed)
         path = os.getcwd()
         if dotFileName:
-            path = path + "/results/paper/"
+            path = path + "/results/paper2/"
             self.graph.write(path + dotFileName)
 
     def addEdgeToActionNode(self, node_detailed):
@@ -84,28 +84,59 @@ class GraphGeneratorForPaper:
     def get_word_to_link(self, sentenceNode):
         (actionNode, word, ingre_is) = sentenceNode
         w_to_link = ""
-        w_p = 0
-        word = str(word).split("-")[0]
-        next_node = self.getNexTuple(actionNode)
-        next_word = ""
-        for (word_we_search, word_we_link_to, p) in self.relatedVerbs:
-            if str(word) in str(word_we_search):
-                if len(w_to_link) == 0:
-                    w_to_link = word_we_link_to
-                    w_p = p
-                    if next_node:
-                        (n_f, w_f, isIngre_f) = next_node
-                        next_word = w_f
-                        if str(w_to_link) in str(next_word):
-                            w_to_link = next_word
-
-                elif p > w_p:
-                    if not str(w_to_link) in str(next_word):
+        recipe = self.getRelationWithPaperdGraph()
+        if len(recipe) > 0:
+            tmp_dest = ""
+            for (source, dest) in recipe:
+                if word == source:
+                    tmp_dest = dest
+            recipe = [(s, d) for (s, d) in recipe if (s, d) != (word, tmp_dest)]
+            for (s, d) in recipe:
+                if d == tmp_dest:
+                    w_to_link = s
+        if len(w_to_link) == 0:
+            w_p = 0
+            word = str(word).split("-")[0]
+            next_node = self.getNexTuple(actionNode)
+            next_word = ""
+            for (word_we_search, word_we_link_to, p) in self.relatedVerbs:
+                if str(word) in str(word_we_search):
+                    if len(w_to_link) == 0:
                         w_to_link = word_we_link_to
-                elif p < w_p:
-                    if str(word) in str(next_word):
-                        w_to_link = next_word
+                        w_p = p
+                        if next_node:
+                            (n_f, w_f, isIngre_f) = next_node
+                            next_word = w_f
+                            if str(w_to_link) in str(next_word):
+                                w_to_link = next_word
 
+                    elif p > w_p:
+                        if not str(w_to_link) in str(next_word):
+                            w_to_link = word_we_link_to
+                    elif p < w_p:
+                        if str(word) in str(next_word):
+                            w_to_link = next_word
+                elif str(word) in str(word_we_link_to):
+                    if len(w_to_link) == 0:
+                        w_to_link = word_we_search
+                        w_p = p
+                        if next_node:
+                            (n_f, w_f, isIngre_f) = next_node
+                            next_word = w_f
+                            if str(w_to_link) in str(next_word):
+                                w_to_link = next_word
+
+                    elif p > w_p:
+                        if not str(w_to_link) in str(next_word):
+                            w_to_link = word_we_link_to
+                    elif p < w_p:
+                        if str(word) in str(next_word):
+                            w_to_link = next_word
+            tmp = [(word_we_search, word_we_link_to, p) for (word_we_search, word_we_link_to, p) in
+                   self.relatedVerbs if
+                   word_we_search != w_to_link and word_we_link_to != w_to_link and word_we_search != word and word_we_link_to != word]
+            self.relatedVerbs = []
+            self.relatedVerbs = tmp
         return w_to_link
 
     def createSentenceNode(self, sentence):
@@ -133,7 +164,7 @@ class GraphGeneratorForPaper:
             for (word, tag, idx) in others:
                 if len(word) > 0:
                     node = self.createNode(word=word, TAG=tag, idx=idx)
-                    if node:
+                    if node and self.checkDoubleLink(word_return, word):
                         self.addEdge(node1=node, nodeAction=action_node)
         return (action_node, word_return + "-" + str(idx), is_Ingre)
 
@@ -167,6 +198,32 @@ class GraphGeneratorForPaper:
             self.graph.add_node(node)
             return node
             # todo implement probable ingredients here
+
+    def getRelationWithPaperdGraph(self):
+
+        graph = self.graph
+
+        recipe = []
+        for edge in graph.get_edge_list():
+            destination = edge.get_destination()
+            source = edge.get_source()
+
+            if len(destination) > 0 and len(source) > 0:
+                if (source, destination) not in recipe:
+                    recipe.append((source, destination))
+        return recipe
+
+    def checkDoubleLink(self, action_word, other_word):
+
+        graph = self.graph
+
+        retVal = True
+        for edge in graph.get_edge_list():
+            destination = edge.get_destination()
+            source = edge.get_source()
+            if str(action_word) in str(destination) and str(other_word) in str(source):
+                retVal = False
+        return retVal
 
     def createActionNode(self, word):
         return pydot.Node(word, style="filled", fillcolor="red")

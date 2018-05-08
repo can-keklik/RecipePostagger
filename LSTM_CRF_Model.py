@@ -114,4 +114,4 @@ def predictIngredientTag(ingredient):
         retArr.append((w,tags[pred]))
     return retArr
 
-print(predictIngredientTag("1 tomato"))
+#print(predictIngredientTag("1 tomato"))

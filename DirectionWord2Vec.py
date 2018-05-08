@@ -168,6 +168,14 @@ def nearest_similarity_cosmul(start1, end1, end2):
     print("{start1} is related to {end1}, as {start2} is related to {end2}".format(**locals()))
     return start2
 
+def nearest_similarity_cosmul2(start1, end1, end2):
+    similarities = dire2Vec.similar_by_word(
+       start1
+    )
+    start2 = similarities
+    print("{start1} is related to {start2}.".format(**locals()))
+    return start2
+
 dire2Vec = loadModel()
 
-print(nearest_similarity_cosmul("preheat", "bake", "mix"))
+print(nearest_similarity_cosmul2("preheat", "bake", "mix"))

@@ -320,7 +320,7 @@ def createGrapWithIndexForPaper2(index):
     for i in xrange(len(data)):
         print(data[i])
     GraphGeneratorForPaper(data, relatedVerbs).createGraph(file_name)
-    UtilsIO.createPngFromDotFile("paper/" + file_name, "paper/" + title + ".png")
+    UtilsIO.createPngFromDotFile("paper2/" + file_name, "paper2/" + title + ".png")
     str_value = "title : " + title + "\n" + "\n"
 
     for i in xrange(len(data)):
@@ -330,7 +330,7 @@ def createGrapWithIndexForPaper2(index):
             str_value = str_value + str(tag) + " : " + str(word) + "\n"
 
         str_value = str_value + "\n"
-    completeName = os.path.join(os.getcwd() + "/results/text_result/", title + ".txt")
+    completeName = os.path.join(os.getcwd() + "/results/text_result2/", title + ".txt")
     outFile = open(completeName, 'w')
     # print fileName
     outFile.truncate()
@@ -352,10 +352,11 @@ def readPaperDataArgCreateGraph(title):
 
 # readPaperDataArgCreateGraph("trialramenslaw")
 
+createGrapWithIndexForPaper2(27)
+
 #readData2(18)
-#createGrapWithIndexForPaper2(0)
-filename ="amish-meatloaf.gv"
-UtilsIO.createPngFromDotFile("AnnotationSession-goldgraph/" + filename, "paper/" + "amish-meatloaf" + ".png")
+#filename ="amish-meatloaf.gv"
+#UtilsIO.createPngFromDotFile("AnnotationSession-goldgraph/" + filename, "paper/" + "amish-meatloaf" + ".png")
 # todo check 27. recipe for noningredient sentence...
 # bug occur in 32
 # readData2(0)
