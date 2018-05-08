@@ -1,0 +1,75 @@
+title : teriyaki-chicken-salad
+
+SENT_ID :0
+SENTENCE : marinate chicken in the orange juice , soy sauce and lemon-lime carbonated beverage for several hours or overnight .
+PRED : marinate
+INGREDIENTS : chicken
+INGREDIENTS : orange juice
+INGREDIENT_SPAN : in the orange juice
+INGREDIENTS : soy sauce
+DOBJ : in the orange juice
+
+SENT_ID :1
+SENTENCE : preheat grill to medium-high heat .
+PRED : preheat
+
+SENT_ID :2
+SENTENCE : remove chicken from marinade and drain .
+PRED : remove
+INGREDIENTS : chicken
+
+SENT_ID :3
+SENTENCE : place chicken on hot grill and cook for 6 to 8 minutes on each side , or until juices run clear .
+PRED : place
+NON_INGREDIENT_SPAN_VERB : for on each until run
+INGREDIENTS : chicken
+
+SENT_ID :4
+SENTENCE : remove , cool , and cut into strips .
+PRED : remove
+NON_INGREDIENT_SPAN_VERB : cut
+
+SENT_ID :5
+SENTENCE : whisk together the lemon juice , vegetable oil , salt , pepper and garlic cloves .
+PRED : whisk
+PRED_PREP : whisk together
+INGREDIENTS : lemon
+INGREDIENT_SPAN : the lemon
+INGREDIENTS : juice
+INGREDIENTS : vegetable oil
+INGREDIENTS : salt
+INGREDIENTS : pepper
+INGREDIENTS : garlic
+DOBJ : the lemon
+
+SENT_ID :6
+SENTENCE : allow garlic cloves to sit in dressing for a few hours and remove before pouring on the salad .
+PRED : allow
+NON_INGREDIENT_SPAN_VERB : sit
+NON_INGREDIENT_SPAN_VERB : dressing
+NON_INGREDIENT_SPAN_VERB : for a remove
+NON_INGREDIENT_SPAN_VERB : before pouring
+INGREDIENTS : garlic
+
+SENT_ID :7
+SENTENCE : in a salad bowl , combine the lettuce , tomatoes , mozzarella , parmesan and marinated chicken strips .
+PRED : combine
+NON_INGREDIENT_SPAN_VERB : marinated
+INGREDIENTS : lettuce
+INGREDIENT_SPAN : the lettuce
+INGREDIENTS : tomatoes
+INGREDIENTS : mozzarella
+INGREDIENTS : chicken
+PARG : bowl
+NON_INGREDIENT_SPAN : in salad bowl
+DOBJ : the lettuce
+
+SENT_ID :8
+SENTENCE : pour dressing over salad
+PRED : pour
+NON_INGREDIENT_SPAN_VERB : dressing
+
+SENT_ID :9
+SENTENCE : toss and serve .
+PRED : toss
+

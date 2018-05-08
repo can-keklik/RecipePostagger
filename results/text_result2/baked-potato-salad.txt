@@ -1,0 +1,87 @@
+title : baked-potato-salad
+
+SENT_ID :0
+SENTENCE : place the potatoes into a large pot and cover with lightly salted water .
+PRED : place
+NON_INGREDIENT_SPAN_VERB : with salted
+INGREDIENTS : potatoes
+INGREDIENT_SPAN : the potatoes
+PARG : pot
+NON_INGREDIENT_SPAN : into large pot
+DOBJ : the potatoes
+
+SENT_ID :1
+SENTENCE : bring to a boil over high heat , then reduce heat to medium-low , cover , and simmer until just tender , about 15 minutes .
+PRED : bring
+PRED_PREP : bring to
+NON_INGREDIENT_SPAN_VERB : a over reduce
+
+SENT_ID :2
+SENTENCE : drain the potatoes , and allow to cool to room temperature .
+PRED : drain
+NON_INGREDIENT_SPAN_VERB : allow
+NON_INGREDIENT_SPAN_VERB : cool
+INGREDIENTS : potatoes
+INGREDIENT_SPAN : the potatoes
+DOBJ : the potatoes
+
+SENT_ID :3
+SENTENCE : dice once cooled .
+PRED : dice
+PRED_PREP : dice once
+NON_INGREDIENT_SPAN_VERB : cooled
+
+SENT_ID :4
+SENTENCE : place the bacon in a large , deep skillet , and cook over medium-high heat , turning occasionally , until evenly browned , about 10 minutes .
+PRED : place
+NON_INGREDIENT_SPAN_VERB : over turning
+NON_INGREDIENT_SPAN_VERB : until browned
+INGREDIENTS : bacon
+INGREDIENT_SPAN : the bacon
+PARG : skillet
+NON_INGREDIENT_SPAN : in large deep skillet
+DOBJ : the bacon
+
+SENT_ID :5
+SENTENCE : drain the bacon slices on a paper towel-lined plate .
+PRED : drain
+INGREDIENTS : bacon
+INGREDIENT_SPAN : the bacon
+DOBJ : the bacon
+
+SENT_ID :6
+SENTENCE : allow to cool , and crumble the bacon into a large bowl .
+PRED : allow
+PRED_PREP : allow to
+NON_INGREDIENT_SPAN_VERB : cool
+NON_INGREDIENT_SPAN_VERB : crumble
+INGREDIENTS : bacon
+INGREDIENT_SPAN : the bacon
+PARG : bowl
+NON_INGREDIENT_SPAN : into large bowl
+DOBJ : the bacon
+
+SENT_ID :7
+SENTENCE : place the cooled potatoes into the bowl with the bacon , and mix in the sour cream , mayonnaise , cheddar cheese , chives , salt , and pepper .
+PRED : place
+NON_INGREDIENT_SPAN_VERB : the cooled
+INGREDIENTS : potatoes
+INGREDIENTS : bacon
+INGREDIENT_SPAN : with the bacon
+INGREDIENTS : sour cream
+INGREDIENT_SPAN : in the sour cream
+INGREDIENTS : mayonnaise
+INGREDIENTS : cheddar cheese
+INGREDIENTS : chives
+INGREDIENTS : salt
+INGREDIENTS : pepper
+PARG : bowl
+NON_INGREDIENT_SPAN : into the bowl
+DOBJ : with the bacon - in the sour cream
+
+SENT_ID :8
+SENTENCE : refrigerate overnight before serving .
+PRED : refrigerate
+PRED_PREP : refrigerate overnight
+NON_INGREDIENT_SPAN_VERB : before serving
+

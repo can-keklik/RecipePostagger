@@ -1,0 +1,44 @@
+title : taco-soup-iv
+
+SENT_ID :0
+SENTENCE : in a medium stock pot brown beef and onion , about 10 minutes
+PRED : stock
+INGREDIENTS : beef
+INGREDIENT_SPAN : brown beef
+INGREDIENTS : onion
+INGREDIENT_SPAN : and onion
+PARG : pot
+DOBJ : brown beef - and onion
+
+SENT_ID :1
+SENTENCE : drain grease if needed .
+PRED : drain
+NON_INGREDIENT_SPAN_VERB : if needed
+
+SENT_ID :2
+SENTENCE : add tomatoes , tomato sauce , water , beans , corn and taco seasoning .
+PRED : add
+INGREDIENTS : tomato
+INGREDIENTS : sauce
+INGREDIENTS : water
+INGREDIENTS : beans
+INGREDIENTS : corn
+INGREDIENTS : taco seasoning
+INGREDIENT_SPAN : and taco seasoning
+DOBJ : and taco seasoning
+
+SENT_ID :3
+SENTENCE : bring to boil , reduce heat and simmer for 5 minutes .
+PRED : bring
+PRED_PREP : bring to
+NON_INGREDIENT_SPAN_VERB : boil
+NON_INGREDIENT_SPAN_VERB : reduce
+
+SENT_ID :4
+SENTENCE : top with cheese , corn chips , sour cream and olives .
+PRED : top
+PRED_PREP : top with
+INGREDIENTS : corn
+INGREDIENT_SPAN : with cheese corn
+DOBJ : with cheese corn
+

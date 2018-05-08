@@ -1,0 +1,69 @@
+title : amish-meatloaf
+
+SENT_ID :0
+SENTENCE : preheat the oven to 350 degrees f ( 175 degrees c ) .
+PRED : preheat
+PARG : oven
+NON_INGREDIENT_SPAN : the oven
+
+SENT_ID :1
+SENTENCE : in a medium bowl , mix together ground beef , crushed crackers , onion , eggs , 3/4 cup ketchup , and 1/4 cup brown sugar until well blended .
+PRED : mix
+PRED_PREP : mix together
+NON_INGREDIENT_SPAN_VERB : until blended
+INGREDIENTS : beef
+INGREDIENT_SPAN : ground beef
+INGREDIENTS : crackers
+INGREDIENT_SPAN : crushed crackers
+INGREDIENTS : onion
+INGREDIENTS : eggs
+INGREDIENTS : ketchup
+INGREDIENT_SPAN : 3/4 cup ketchup
+INGREDIENTS : brown sugar
+INGREDIENT_SPAN : 1/4 cup brown sugar
+PARG : bowl
+NON_INGREDIENT_SPAN : in a medium bowl
+DOBJ : ground beef - crushed crackers - 3/4 cup ketchup - 1/4 cup brown sugar
+
+SENT_ID :2
+SENTENCE : press into a 9x5 inch loaf pan .
+PRED : press
+PRED_PREP : press into
+PARG : pan
+NON_INGREDIENT_SPAN : into pan
+NON_INGREDIENT_SPAN : 9x5 inch loaf pan
+
+SENT_ID :3
+SENTENCE : lay the two slices of bacon over the top .
+PRED : lay
+INGREDIENTS : bacon
+INGREDIENT_SPAN : the two slices of bacon
+DOBJ : the two slices of bacon
+
+SENT_ID :4
+SENTENCE : bake for 1 hour in the preheated oven , or until cooked through .
+PRED : bake
+PRED_PREP : bake for
+NON_INGREDIENT_SPAN_VERB : until cooked
+PARG : oven
+NON_INGREDIENT_SPAN : for hour in the preheated oven
+
+SENT_ID :5
+SENTENCE : while the loaf bakes , mix together the remaining 1 cup ketchup , vinegar , salt , mustard and 1/2 cup brown sugar .
+PRED : mix
+PRED_PREP : mix together
+NON_INGREDIENT_SPAN_VERB : the remaining
+INGREDIENTS : ketchup
+INGREDIENT_SPAN : 1 cup ketchup
+INGREDIENTS : vinegar
+INGREDIENTS : salt
+INGREDIENTS : mustard
+INGREDIENTS : brown sugar
+INGREDIENT_SPAN : 1/2 cup brown sugar
+DOBJ : 1 cup ketchup - 1/2 cup brown sugar
+
+SENT_ID :6
+SENTENCE : spread over the top of the meat loaf for the last 15 minutes of baking .
+PRED : spread
+PRED_PREP : spread over
+

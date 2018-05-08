@@ -1,0 +1,169 @@
+title : olivier-salad
+
+SENT_ID :0
+SENTENCE : place the potatoes into a large pot and cover with salted water .
+PRED : place
+INGREDIENTS : potatoes
+INGREDIENT_SPAN : the potatoes
+PARG : pot
+NON_INGREDIENT_SPAN : into large pot
+DOBJ : the potatoes
+
+SENT_ID :1
+SENTENCE : bring to a boil over high heat , then reduce heat to medium-low , cover , and simmer until tender , about 20 minutes .
+PRED : bring
+NON_INGREDIENT_SPAN_VERB : a over reduce
+
+SENT_ID :2
+SENTENCE : drain and allow to steam dry for a minute or two .
+PRED : drain
+NON_INGREDIENT_SPAN_VERB : allow
+NON_INGREDIENT_SPAN_VERB : steam
+
+SENT_ID :3
+SENTENCE : place the potatoes into the refrigerator to cool .
+PRED : place
+INGREDIENTS : potatoes
+INGREDIENT_SPAN : the potatoes
+PARG : refrigerator
+NON_INGREDIENT_SPAN : into the refrigerator
+DOBJ : the potatoes
+
+SENT_ID :4
+SENTENCE : when the potatoes are cool , grate them into a large bowl .
+PRED : are
+PRED_PREP : are cool
+NON_INGREDIENT_SPAN_VERB : grate
+INGREDIENTS : potatoes
+PARG : bowl
+NON_INGREDIENT_SPAN : into large bowl
+
+SENT_ID :5
+SENTENCE : while the potatoes are boiling , place the eggs into a saucepan in a single layer and fill with water to cover the eggs by 1 inch .
+PRED : are
+NON_INGREDIENT_SPAN_VERB : boiling
+NON_INGREDIENT_SPAN_VERB : with cover
+INGREDIENTS : potatoes
+INGREDIENTS : eggs
+INGREDIENT_SPAN : the eggs
+PARG : pan
+NON_INGREDIENT_SPAN : into pan
+NON_INGREDIENT_SPAN : saucepan in pan
+DOBJ : the eggs
+
+SENT_ID :6
+SENTENCE : cover the saucepan and bring the water to a boil over high heat .
+PRED : cover
+NON_INGREDIENT_SPAN_VERB : the bring
+PARG : pan
+NON_INGREDIENT_SPAN : the water to pan
+
+SENT_ID :7
+SENTENCE : once the water is boiling , remove from the heat and let the eggs stand in the hot water for 15 minutes .
+PRED : is
+NON_INGREDIENT_SPAN_VERB : boiling
+NON_INGREDIENT_SPAN_VERB : remove
+NON_INGREDIENT_SPAN_VERB : from the let
+NON_INGREDIENT_SPAN_VERB : stand
+INGREDIENTS : eggs
+INGREDIENT_SPAN : the eggs
+DOBJ : the eggs
+
+SENT_ID :8
+SENTENCE : pour out the hot water , then cool the eggs under cold running water in the sink .
+PRED : pour
+PRED_PREP : pour out
+NON_INGREDIENT_SPAN_VERB : the cool
+INGREDIENTS : eggs
+INGREDIENT_SPAN : the eggs
+DOBJ : the eggs
+
+SENT_ID :9
+SENTENCE : peel once cold .
+PRED : peel
+PRED_PREP : peel once
+
+SENT_ID :10
+SENTENCE : dice the cooked eggs and dill pickles .
+PRED : dice
+INGREDIENTS : eggs
+INGREDIENT_SPAN : the cooked eggs
+INGREDIENTS : dill pickles
+DOBJ : the cooked eggs
+
+SENT_ID :11
+SENTENCE : place the eggs and 2/3 of the dill pickles into the salad bowl with the potatoes
+PRED : place
+INGREDIENTS : eggs
+INGREDIENT_SPAN : the eggs
+INGREDIENTS : dill pickles
+INGREDIENT_SPAN : 2/3 of the dill pickles
+INGREDIENTS : potatoes
+INGREDIENT_SPAN : with the potatoes
+PARG : bowl
+NON_INGREDIENT_SPAN : into the salad bowl
+DOBJ : the eggs - 2/3 of the dill pickles - with the potatoes
+
+SENT_ID :12
+SENTENCE : reserve the rest of the pickles .
+PRED : reserve
+INGREDIENTS : pickles
+INGREDIENT_SPAN : the of the pickles
+DOBJ : the of the pickles
+
+SENT_ID :13
+SENTENCE : place 3/4 of the peas into the bowl , and reserve the rest .
+PRED : place
+NON_INGREDIENT_SPAN_VERB : reserve
+INGREDIENTS : peas
+INGREDIENT_SPAN : 3/4 of the peas
+PARG : bowl
+NON_INGREDIENT_SPAN : into the bowl
+DOBJ : 3/4 of the peas
+
+SENT_ID :14
+SENTENCE : place the chicken breast meat into the bowl .
+PRED : place
+INGREDIENTS : meat
+INGREDIENTS : chicken breast
+INGREDIENT_SPAN : the chicken breast
+PARG : bowl
+NON_INGREDIENT_SPAN : into the bowl
+DOBJ : the chicken breast
+
+SENT_ID :15
+SENTENCE : add 1/2 cup of mayonnaise and black pepper , and very lightly stir the mixture together so that the ingredients are well coated , but the peas stay whole .
+PRED : add
+NON_INGREDIENT_SPAN_VERB : stir
+NON_INGREDIENT_SPAN_VERB : that the are
+NON_INGREDIENT_SPAN_VERB : coated
+NON_INGREDIENT_SPAN_VERB : stay
+INGREDIENTS : mayonnaise
+INGREDIENT_SPAN : 1/2 cup of mayonnaise
+INGREDIENTS : black pepper
+INGREDIENTS : very
+INGREDIENTS : peas
+INGREDIENT_SPAN : the peas
+DOBJ : 1/2 cup of mayonnaise - the peas
+
+SENT_ID :16
+SENTENCE : place the salad in an attractive mound on a platter , and spread 1/2 cup of mayonnaise over the salad in a layer .
+PRED : place
+NON_INGREDIENT_SPAN_VERB : spread
+INGREDIENTS : mayonnaise
+INGREDIENT_SPAN : 1/2 cup of mayonnaise
+PARG : platter
+NON_INGREDIENT_SPAN : the salad in an attractive mound on platter
+NON_INGREDIENT_SPAN : over the salad in platter
+DOBJ : 1/2 cup of mayonnaise
+
+SENT_ID :17
+SENTENCE : arrange tomato slices over the salad , and decorate with reserved diced pickle and peas .
+PRED : arrange
+NON_INGREDIENT_SPAN_VERB : over the with reserved
+INGREDIENTS : tomato
+INGREDIENTS : pickle
+INGREDIENT_SPAN : diced pickle
+INGREDIENTS : peas
+DOBJ : diced pickle
+

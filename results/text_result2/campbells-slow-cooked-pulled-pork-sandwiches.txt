@@ -1,0 +1,83 @@
+title : campbells-slow-cooked-pulled-pork-sandwiches
+
+SENT_ID :0
+SENTENCE : heat the oil in a 10-inch skillet over medium-high heat .
+PRED : heat
+INGREDIENTS : oil
+INGREDIENT_SPAN : the oil
+PARG : skillet
+NON_INGREDIENT_SPAN : a 10-inch skillet
+DOBJ : the oil
+
+SENT_ID :1
+SENTENCE : add the pork and cook until it 's well browned on all sides .
+PRED : add
+NON_INGREDIENT_SPAN_VERB : until 's
+NON_INGREDIENT_SPAN_VERB : browned
+INGREDIENTS : pork
+INGREDIENT_SPAN : the pork
+DOBJ : the pork
+
+SENT_ID :2
+SENTENCE : stir the soup , ketchup , vinegar and brown sugar in a 5-quart slow cooker .
+PRED : stir
+INGREDIENTS : soup
+INGREDIENT_SPAN : the soup
+INGREDIENTS : ketchup
+INGREDIENTS : vinegar
+INGREDIENTS : brown sugar
+DOBJ : the soup
+
+SENT_ID :3
+SENTENCE : add the pork and turn to coat .
+PRED : add
+NON_INGREDIENT_SPAN_VERB : coat
+INGREDIENTS : pork
+INGREDIENT_SPAN : the pork
+DOBJ : the pork
+
+SENT_ID :4
+SENTENCE : cover and cook on low for 8 to 9 hours* or until the pork is fork-tender .
+PRED : cover
+NON_INGREDIENT_SPAN_VERB : cook
+NON_INGREDIENT_SPAN_VERB : is
+INGREDIENTS : pork
+INGREDIENT_SPAN : on low for 8 9 or until the pork
+DOBJ : on low for 8 9 or until the pork
+
+SENT_ID :5
+SENTENCE : remove the pork from the cooker to a cutting board and let stand for 10 minutes .
+PRED : remove
+NON_INGREDIENT_SPAN_VERB : from the a cutting
+NON_INGREDIENT_SPAN_VERB : let
+NON_INGREDIENT_SPAN_VERB : stand
+INGREDIENTS : pork
+INGREDIENT_SPAN : the pork
+DOBJ : the pork
+
+SENT_ID :6
+SENTENCE : using 2 forks , shred the pork .
+PRED : using
+NON_INGREDIENT_SPAN_VERB : shred
+INGREDIENTS : pork
+INGREDIENT_SPAN : the pork
+PARG : fork
+NON_INGREDIENT_SPAN : 2 fork
+DOBJ : the pork
+
+SENT_ID :7
+SENTENCE : return the pork to the cooker .
+PRED : return
+INGREDIENTS : pork
+INGREDIENT_SPAN : the pork
+DOBJ : the pork
+
+SENT_ID :8
+SENTENCE : divide the pork and sauce mixture among the rolls .
+PRED : divide
+INGREDIENTS : pork
+INGREDIENT_SPAN : the pork
+INGREDIENTS : rolls
+INGREDIENT_SPAN : sauce among the rolls
+DOBJ : the pork - sauce among the rolls
+

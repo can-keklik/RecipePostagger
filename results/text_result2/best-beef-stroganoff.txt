@@ -1,0 +1,119 @@
+title : best-beef-stroganoff
+
+SENT_ID :0
+SENTENCE : bring a large pot of lightly salted water to a boil .
+PRED : bring
+NON_INGREDIENT_SPAN_VERB : of salted
+INGREDIENTS : water
+PARG : pot
+NON_INGREDIENT_SPAN : large pot
+
+SENT_ID :1
+SENTENCE : add noodles and cook 5 to 7 minutes or until al dente
+PRED : add
+NON_INGREDIENT_SPAN_VERB : cook
+INGREDIENTS : noodles
+
+SENT_ID :2
+SENTENCE : drain .
+PRED : drain
+
+SENT_ID :3
+SENTENCE : melt butter in a large saucepan over medium-high heat .
+PRED : melt
+INGREDIENTS : butter
+PARG : pan
+NON_INGREDIENT_SPAN : in pan
+
+SENT_ID :4
+SENTENCE : stir in onions and garlic , and cook until slightly tender .
+PRED : stir
+PRED_PREP : stir in
+INGREDIENTS : onions
+INGREDIENT_SPAN : in onions
+INGREDIENTS : garlic
+DOBJ : in onions
+
+SENT_ID :5
+SENTENCE : mix in mushrooms , and continue cooking 2 minutes .
+PRED : mix
+PRED_PREP : mix in
+NON_INGREDIENT_SPAN_VERB : continue
+NON_INGREDIENT_SPAN_VERB : cooking
+INGREDIENTS : mushrooms
+INGREDIENT_SPAN : in mushrooms
+DOBJ : in mushrooms
+
+SENT_ID :6
+SENTENCE : place steak strips in saucepan and cook about 1 minute .
+PRED : place
+INGREDIENTS : steak
+
+SENT_ID :7
+SENTENCE : mix in consomme , burgundy and lemon juice .
+PRED : mix
+PRED_PREP : mix in
+INGREDIENTS : consomme
+INGREDIENT_SPAN : in consomme
+INGREDIENTS : burgundy
+INGREDIENTS : lemon juice
+DOBJ : in consomme
+
+SENT_ID :8
+SENTENCE : bring to a boil .
+PRED : bring
+PRED_PREP : bring to
+
+SENT_ID :9
+SENTENCE : in a small bowl , thoroughly blend flour with cold water until smooth .
+PRED : blend
+INGREDIENTS : flour
+INGREDIENTS : water
+INGREDIENT_SPAN : with cold water
+PARG : bowl
+NON_INGREDIENT_SPAN : in small bowl
+DOBJ : with cold water
+
+SENT_ID :10
+SENTENCE : reduce saucepan heat to low .
+PRED : reduce
+NON_INGREDIENT_SPAN_VERB : low
+
+SENT_ID :11
+SENTENCE : while stirring constantly , slowly pour flour mixture into saucepan .
+PRED : stirring
+PRED_PREP : stirring constantly
+INGREDIENTS : flour
+INGREDIENT_SPAN : pour flour
+DOBJ : pour flour
+
+SENT_ID :12
+SENTENCE : gradually return to boil while stirring rapidly , until sauce is thick and smooth .
+PRED : return
+PRED_PREP : return to
+NON_INGREDIENT_SPAN_VERB : boil
+NON_INGREDIENT_SPAN_VERB : while stirring
+NON_INGREDIENT_SPAN_VERB : until is
+
+SENT_ID :13
+SENTENCE : cover saucepan and continue cooking 5 minutes , stirring occasionally .
+PRED : cover
+NON_INGREDIENT_SPAN_VERB : continue
+NON_INGREDIENT_SPAN_VERB : cooking
+NON_INGREDIENT_SPAN_VERB : stirring
+
+SENT_ID :14
+SENTENCE : remove from heat , let cool slightly and stir in sour cream .
+PRED : remove
+PRED_PREP : remove from
+NON_INGREDIENT_SPAN_VERB : from let
+NON_INGREDIENT_SPAN_VERB : stir
+
+SENT_ID :15
+SENTENCE : serve over cooked egg noodles .
+PRED : serve
+PRED_PREP : serve over
+INGREDIENTS : egg noodles
+INGREDIENT_SPAN : over cooked egg noodles
+DOBJ : over cooked egg noodles
+

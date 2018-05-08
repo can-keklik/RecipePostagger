@@ -18,7 +18,7 @@ PREDID = "PREDID"  # this id is realed with action's order
 TAGGED_ARRAY = [PRED, PRED_PREP, NON_INGREDIENT_SPAN_VERB, INGREDIENT_SPAN, INGREDIENTS,
                 PARG]
 
-RESULTS_URL = "/Users/Ozgen/Desktop/RecipeGit/results/text_result"
+RESULTS_URL = "/Users/Ozgen/Desktop/RecipeGit/results/text_result2"
 ANNOTATED_URL = "/Users/Ozgen/Desktop/RecipeGit/results/AnnotationSession-args"
 
 

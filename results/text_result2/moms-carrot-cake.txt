@@ -1,0 +1,99 @@
+title : moms-carrot-cake
+
+SENT_ID :0
+SENTENCE : in a small saucepan , cover carrots with water .
+PRED : cover
+INGREDIENTS : carrots
+PARG : pan
+NON_INGREDIENT_SPAN : in pan
+
+SENT_ID :1
+SENTENCE : bring water to a boil and cook until tender , about 15 minutes .
+PRED : bring
+
+SENT_ID :2
+SENTENCE : let cool and mash .
+PRED : let
+PRED_PREP : let cool
+
+SENT_ID :3
+SENTENCE : in a large mixing bowl , beat eggs .
+PRED : beat
+INGREDIENTS : eggs
+PARG : mixing bowl
+NON_INGREDIENT_SPAN : large mixing bowl
+PARG : bowl
+
+SENT_ID :4
+SENTENCE : add vegetable oil , buttermilk , 2 cups white sugar and 2 teaspoons vanilla .
+PRED : add
+INGREDIENTS : vegetable oil
+INGREDIENTS : buttermilk
+INGREDIENTS : white sugar
+INGREDIENT_SPAN : 2 cups white sugar
+INGREDIENTS : vanilla
+INGREDIENT_SPAN : 2 teaspoons vanilla
+DOBJ : 2 cups white sugar - 2 teaspoons vanilla
+
+SENT_ID :5
+SENTENCE : add flour , baking soda , ground cinnamon and salt .
+PRED : add
+INGREDIENTS : flour
+INGREDIENTS : baking soda
+INGREDIENTS : cinnamon
+INGREDIENT_SPAN : ground cinnamon
+INGREDIENTS : salt
+DOBJ : ground cinnamon
+
+SENT_ID :6
+SENTENCE : mix in pineapple , 2 cups mashed carrots , nuts and coconut .
+PRED : mix
+PRED_PREP : mix in
+NON_INGREDIENT_SPAN_VERB : mashed
+INGREDIENTS : pineapple
+INGREDIENT_SPAN : in pineapple
+INGREDIENTS : carrots
+INGREDIENTS : coconut
+DOBJ : in pineapple
+
+SENT_ID :7
+SENTENCE : pour into paper towel-lined 13 x 9 x 2-1/2 inch pan .
+PRED : pour
+PRED_PREP : pour into
+PARG : pan
+NON_INGREDIENT_SPAN : into paper towel-lined 13 9 x 2-1/2 inch pan
+
+SENT_ID :8
+SENTENCE : bake at 350 degrees f ( 175 degrees c ) for 55 minutes , or until cake tests done .
+PRED : bake
+PRED_PREP : bake at
+NON_INGREDIENT_SPAN_VERB : for until done
+
+SENT_ID :9
+SENTENCE : place cake on a plate , and allow to cool completely before frosting .
+PRED : place
+NON_INGREDIENT_SPAN_VERB : on allow
+NON_INGREDIENT_SPAN_VERB : cool
+
+SENT_ID :10
+SENTENCE : to make frosting : combine cream cheese , melted butter , 1 teaspoon vanilla extract , and confectioners ' sugar .
+PRED : make
+NON_INGREDIENT_SPAN_VERB : melted
+INGREDIENTS : cream cheese
+INGREDIENTS : butter
+INGREDIENTS : vanilla extract
+INGREDIENT_SPAN : 1 teaspoon vanilla extract
+INGREDIENTS : confectioners
+INGREDIENTS : sugar
+DOBJ : 1 teaspoon vanilla extract
+
+SENT_ID :11
+SENTENCE : spread on cooled cake .
+PRED : spread
+PRED_PREP : spread on
+
+SENT_ID :12
+SENTENCE : cake tastes best after refrigerating overnight .
+PRED : cake
+NON_INGREDIENT_SPAN_VERB : after refrigerating
+
