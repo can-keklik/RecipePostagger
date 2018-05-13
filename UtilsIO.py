@@ -490,7 +490,7 @@ def convertTupleArray(rowData, tokens):
     return returnData
 
 # print readPaperDataForGraph("")
-readIngredientDataForExtract()
+#readIngredientDataForExtract()
 
 
 # readPaperData(13)
