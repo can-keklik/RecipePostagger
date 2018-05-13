@@ -2,6 +2,7 @@ import decimal
 import os
 import re
 import shutil
+import string
 import sys
 
 import pandas as pd
@@ -447,6 +448,31 @@ def readIngredientData():
             break
     return retArr
 
+def readIngredientDataForExtract():
+    df = pd.read_csv("nyt-ingredients-snapshot-2015.csv")
+    df = df.fillna("fillna")
+    retArr = []
+    for index, row in df.iterrows():
+        try:
+            # extract the display name
+            display_input = utils.cleanUnicodeFractions(row["name"])
+            display_input = str(re.sub(r'[^\w\s]', '', display_input)).lower()
+            retArr.append(display_input)
+        # ToDo: deal with this
+        except UnicodeDecodeError:
+            pass
+    retArr2 =[]
+    if len(retArr)>0:
+        for word in retArr:
+            length = len([w for w in retArr if w == word])
+            if (word, length) not in retArr2:
+                retArr2.append((word, length))
+        sorted(retArr2,key=lambda x: x[1])
+    if len(retArr2)>0:
+        with open('ingredients.txt', 'a') as the_file:
+            for (word, count) in retArr2:
+                the_file.write(word +" "+ str(count)+'\n')
+            the_file.close()
 
 def convertTupleArray(rowData, tokens):
     returnData = []
@@ -464,6 +490,8 @@ def convertTupleArray(rowData, tokens):
     return returnData
 
 # print readPaperDataForGraph("")
+#readIngredientDataForExtract()
+
 
 # readPaperData(13)
 # writePaperDataToCvsFile()
