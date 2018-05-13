@@ -492,11 +492,3 @@ def convertTupleArray(rowData, tokens):
 # print readPaperDataForGraph("")
 #readIngredientDataForExtract()
 
-
-
-# readPaperData(13)
-# writePaperDataToCvsFile()
-# getPaperDataFromPath("")
-# print getFileList("/Users/Ozgen/Desktop/dataset/AnnotationSession","fulltext")[0]
-
-# print readMisleaDataFromPath("/Users/Ozgen/Desktop/dataset/BananaMuffins/BananaMuffins-steps/vegan-banana-muffins.txt")
