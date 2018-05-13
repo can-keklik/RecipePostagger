@@ -489,6 +489,5 @@ def convertTupleArray(rowData, tokens):
                     returnData.append((token1, tags[0]))
     return returnData
 
-# print readPaperDataForGraph("")
 #readIngredientDataForExtract()
 
