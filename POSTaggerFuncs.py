@@ -125,8 +125,11 @@ def tokenizeText(text):
 
 
 def posTaggSent(sent):
-    return imperative_pos_tag(tokenize(sent))  # , tagset='universal')
-
+    res = imperative_pos_tag(tokenize(sent))  # , tagset='universal')
+    (wt, _)= res[0]
+    if _ == 'NOUN':
+        res[0] = (wt, 'VERB')
+    return res
 
 def posTagIngre(sent):
     return nltk.pos_tag(tokenize(sent), tagset='universal')

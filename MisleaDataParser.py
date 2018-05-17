@@ -34,7 +34,7 @@ PREDID = "PREDID"  # this id is realed with action's order
 
 
 class ParsedDirection:
-    newDirection = []
+    #newDirection = []
     PRED = "PRED"  # verb tag
     PRED_PREP = "PRED_PREP"  # verb tag with adp
     DOBJ = "DOBJ"  # obj that is not related with ingredient
@@ -57,6 +57,7 @@ class ParsedDirection:
         return math.fabs((num1 - num2)) == 1
 
     def convertTagsAccordingToPaper(self):
+        newDirection =[]
         for i in xrange(len(self.direction)):
             # each sentence
             if (self.direction is None):
@@ -177,9 +178,11 @@ class ParsedDirection:
             if len(dobj_str) > 5:
                 if (dobj_str, self.DOBJ, i) not in sentence:
                     sentence.append((dobj_str, self.DOBJ, i))
-            self.newDirection.append(sentence)
+            newDirection.append(sentence)
             # print('sentence', sentence)
-        return self.newDirection
+        return newDirection
+
+
 
 
 def isTool(words):
@@ -265,7 +268,6 @@ def readData2(index):
     dire = POSTaggerFuncs.tokenizeText(directions)
     sentences = convertDirectionToSentenceArray(direction=dire)
     ingreWithNewTAG = POSTaggerFuncs.parse_ingredientForCRF(ingredients)
-    parsData = POSTaggerFuncs.getNameEntityInIngre(ingreWithNewTAG)
     direWithNewTAG = POSTaggerFuncs.updateDireTagsAfterCRF2(arr, ingreWithNewTAG)
     verbArr = []
     wholeVerbs = []
@@ -349,14 +351,14 @@ def readPaperDataArgCreateGraph(title):
     GraphGeneratorForPaper(data, relatedVerbs).createGraph(file_name)
     UtilsIO.createPngFromDotFile("paper/" + file_name, "paper/" + title + ".png")
 
-
 # readPaperDataArgCreateGraph("trialramenslaw")
+# def parseRecipeDataAndWriteTxtFile():
 
-createGrapWithIndexForPaper2(27)
+# createGrapWithIndexForPaper2(27)
 
-#readData2(18)
-#filename ="amish-meatloaf.gv"
-#UtilsIO.createPngFromDotFile("AnnotationSession-goldgraph/" + filename, "paper/" + "amish-meatloaf" + ".png")
+# readData2(18)
+# filename ="amish-meatloaf.gv"
+# UtilsIO.createPngFromDotFile("AnnotationSession-goldgraph/" + filename, "paper/" + "amish-meatloaf" + ".png")
 # todo check 27. recipe for noningredient sentence...
 # bug occur in 32
 # readData2(0)

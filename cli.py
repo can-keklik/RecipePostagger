@@ -34,7 +34,6 @@ class Cli:
 
                 tokens = utils.tokenize(display_input)
                 del (row["input"])
-                print(row)
                 rowData = self.addPrefixes([(t, self.matchUp(t, row)) for t in tokens])
 
                 for i, (token, tags) in enumerate(rowData):

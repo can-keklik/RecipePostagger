@@ -45,4 +45,4 @@ def readData(index):
         print(s)
 
 
-readData(1)
+readData(0)

@@ -148,12 +148,12 @@ def getFileList(folderPath, contained_word):
     return retArr;
 
 
-def writePaperDataToCvsFile():
-    with open("paper.csv", 'wb') as resultFile:
+def writePaperDataToCvsFile(filename, fileList):
+    with open(filename, 'wb') as resultFile:
         writer = csv.DictWriter(resultFile, fieldnames=["index", "title", "ingredients", "directions"])
         writer.writeheader()
         wr = csv.writer(resultFile)
-        fileList = getFileList("/Users/Ozgen/Desktop/dataset/AnnotationSession", "fulltext")
+        # fileList = getFileList("/Users/Ozgen/Desktop/dataset/AnnotationSession", "fulltext")
         if len(fileList) > 0:
             data = []
             cnt = 0;
@@ -203,6 +203,27 @@ def getPaperDataFromPath(filepath):
     return returnArr
 
 
+def getIngredientDataFromPath(filepath):
+    ingredientStartPoint = "Ingredients"
+    ingredientEndPoint = "Data Parsed from this"
+    dummyPath = "/Users/Ozgen/Desktop/dataset/AnnotationSession/AnnotationSession-fulltext/beer-and-bourbon-pulled-pork-sandwiches.txt"
+    data = readFiles(filepath)
+    output = data.split('\n')
+    # output = [w for w in output if len(w)>0]
+    startPointOfIngre = 0
+    endPointOfIngre = 0
+    for i in xrange(len(output)):
+        if output[i] == ingredientStartPoint:
+            startPointOfIngre = i
+        elif output[i].__contains__(ingredientEndPoint):
+            endPointOfIngre = i
+
+    ingredients = output[startPointOfIngre + 1:endPointOfIngre]
+    ingredients = [w for w in ingredients if len(w) > 0]
+
+    return ingredients
+
+
 def readPaperData(index):
     df = pd.read_csv("/Users/Ozgen/Desktop/RecipeGit/csv/paper.csv", encoding='utf8')
     # names=["index", "title", "ingredients", "directions"])
@@ -228,6 +249,7 @@ def readPaperDataForGraph(full_path):
     dummyPath = "/Users/Ozgen/Desktop/dataset/AnnotationSession/AnnotationSession-args/home-baked-macaroni--cheese.txt"
     data = readFiles(full_path)
     array = data.split("SENTID")
+    print(array)
     arr = []
     for i, a in enumerate(array):
         tm = a.split("\n")
@@ -263,6 +285,25 @@ def readPaperDataForGraph(full_path):
     return arr
 
 
+def readPaperRecipeForDirection(full_path):
+    dummyPath = "/Users/Ozgen/Desktop/dataset/AnnotationSession/AnnotationSession-args/home-baked-macaroni--cheese.txt"
+    data = readFiles(full_path)
+    array = data.split("SENTID")
+
+    arr = []
+    for i, a in enumerate(array):
+        tm = a.split("\n")
+        eachSent = [t for t in tm if len(t) != 0]
+        if len(eachSent) > 1:
+            tmp = str(eachSent[1]).split("SENT: ")
+
+            if len(tmp)>1 and len(str(tmp[1]))>1:
+                arr.append(tmp[1])
+            elif len(tmp)==1:
+                arr.append(tmp[0])
+    return arr
+
+
 #   ===> data type (word, tag, index)
 
 def readTheResultFromTheAlg(dummyPath):
@@ -270,6 +311,7 @@ def readTheResultFromTheAlg(dummyPath):
     data = readFiles(dummyPath)
     array = data.split("SENT_ID :")
     arr = []
+    print(array)
     for i, a in enumerate(array):
         eachSent = a.split("\n")
         params = []
@@ -448,6 +490,7 @@ def readIngredientData():
             break
     return retArr
 
+
 def readIngredientDataForExtract():
     df = pd.read_csv("nyt-ingredients-snapshot-2015.csv")
     df = df.fillna("fillna")
@@ -461,18 +504,19 @@ def readIngredientDataForExtract():
         # ToDo: deal with this
         except UnicodeDecodeError:
             pass
-    retArr2 =[]
-    if len(retArr)>0:
+    retArr2 = []
+    if len(retArr) > 0:
         for word in retArr:
             length = len([w for w in retArr if w == word])
             if (word, length) not in retArr2:
                 retArr2.append((word, length))
-        sorted(retArr2,key=lambda x: x[1])
-    if len(retArr2)>0:
+        sorted(retArr2, key=lambda x: x[1])
+    if len(retArr2) > 0:
         with open('ingredients.txt', 'a') as the_file:
             for (word, count) in retArr2:
-                the_file.write(word +" "+ str(count)+'\n')
+                the_file.write(word + " " + str(count) + '\n')
             the_file.close()
+
 
 def convertTupleArray(rowData, tokens):
     returnData = []
@@ -489,5 +533,28 @@ def convertTupleArray(rowData, tokens):
                     returnData.append((token1, tags[0]))
     return returnData
 
-#readIngredientDataForExtract()
 
+def getGeneralPaperDataPaths():
+    current_path = os.getcwd()
+    retVal = []
+    for root, dirs, files in os.walk(os.path.join(current_path, "results/paper_general_data")):
+        for file in files:
+            if file.endswith(".txt"):
+                pth = os.path.join(root, file)
+                if str(pth).__contains__("-fulltext") and pth not in retVal:
+                    retVal.append(pth)
+
+    return retVal
+
+
+# writePaperDataToCvsFile("paper_general.csv", getGeneralPaperDataPaths())
+
+# print readPaperDataForGraph("")
+# readIngredientDataForExtract()
+#print(readPaperRecipeForDirection(""))
+# readPaperData(13)
+# writePaperDataToCvsFile()
+# getPaperDataFromPath("")
+# print getFileList("/Users/Ozgen/Desktop/dataset/AnnotationSession","fulltext")[0]
+
+# print readMisleaDataFromPath("/Users/Ozgen/Desktop/dataset/BananaMuffins/BananaMuffins-steps/vegan-banana-muffins.txt")

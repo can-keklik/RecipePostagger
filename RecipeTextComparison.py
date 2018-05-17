@@ -21,6 +21,11 @@ TAGGED_ARRAY = [PRED, PRED_PREP, NON_INGREDIENT_SPAN_VERB, INGREDIENT_SPAN, INGR
 RESULTS_URL = "/Users/Ozgen/Desktop/RecipeGit/results/text_result2"
 ANNOTATED_URL = "/Users/Ozgen/Desktop/RecipeGit/results/AnnotationSession-args"
 
+RESULTS_URL2 = "/Users/Ozgen/Desktop/RecipeGit/results/paper_general_data/BananaMuffins/BananaMuffins-chunked"
+RESULTS_URL3 = "/Users/Ozgen/Desktop/RecipeGit/results/paper_general_data/BananaMuffins/our_model_result"
+ANNOTATED_URL2 = "/Users/Ozgen/Desktop/RecipeGit/results/paper_general_data/BananaMuffins/BananaMuffins-args"
+
+
 
 def compareTwoSameSentence(sentenceResult, sentenceTaggedData):
     tmp_res = []
@@ -133,7 +138,45 @@ def calculateResult():
     return [("f1", f1), ("precision", precision), ("recall", recall)]
 
 
-print calculateResult()
+def calculateResult(result_url, annotated_url, Ispaper):
+    total = 0.0
+    cnt = 0
+    cnt2 = 0
+    total2 = 0.0
+    filenames = os.listdir(result_url)
+    for i, file_name in enumerate(filenames):
+        annotatedFilePath = os.path.join(annotated_url, file_name)
+        resultFilePath = os.path.join(result_url, file_name)
+        if os.path.isfile(resultFilePath) and os.path.isfile(annotatedFilePath):
+
+            taggedData = UtilsIO.readPaperDataForGraph(annotatedFilePath)
+            if Ispaper:
+                resultData = UtilsIO.readPaperDataForGraph(resultFilePath)
+            else:
+                resultData = UtilsIO.readTheResultFromTheAlg(resultFilePath)
+
+            if len(resultData) != len(taggedData):
+                print len(resultData), "respath"
+                print len(taggedData), "annotated path"
+                print i, "i", file_name
+            value = compareTwoDirection(resultData, taggedData)
+            precision = compareTwoDirection(taggedData, resultData)
+            if value != None:
+                total = total + value
+                cnt = cnt + 1
+            if precision != None:
+                total2 = total2 + precision
+                cnt2 = cnt2 + 1
+
+    recall = (total / cnt) * 100
+    precision = (total2 / cnt2) * 100
+    f1 = 2 / ((1 / recall) + (1 / precision))
+
+    print "counter : ", cnt, "counter 2 : ", cnt2
+    return [("f1", f1), ("precision", precision), ("recall", recall)]
+
+
+print calculateResult(RESULTS_URL2, ANNOTATED_URL2,True)
 
 """   counter :  29
        result :  0.764708013822
