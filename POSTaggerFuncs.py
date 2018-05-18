@@ -125,6 +125,7 @@ def tokenizeText(text):
 
 
 def posTaggSent(sent):
+    sent = str(sent).replace("I would ","")
     res = imperative_pos_tag(tokenize(sent))  # , tagset='universal')
     (wt, _)= res[0]
     if _ == 'NOUN':

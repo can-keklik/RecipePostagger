@@ -7,13 +7,12 @@ import MisleaDataParser
 import POSTaggerFuncs
 import UtilsIO
 import utils
-
-RESULTS_URL = "/Users/Ozgen/Desktop/RecipeGit/results/paper_general_data/BananaMuffins/BananaMuffins-chunked"
-FULLTEXT_URL = "/Users/Ozgen/Desktop/RecipeGit/results/paper_general_data/BananaMuffins/BananaMuffins-fulltext"
+#todo check paths
+RESULTS_URL = "/Users/Ozgen/Desktop/RecipeGit/results/paper_general_data/CheeseBurger/CheeseBurger-args"
+FULLTEXT_URL = "/Users/Ozgen/Desktop/RecipeGit/results/paper_general_data/CheeseBurger/CheeseBurger-fulltext"
 
 
 def parseRecipeDataFromFile(recipe_txt, fulltext_url=FULLTEXT_URL, result_url=RESULTS_URL):
-    directions_not_tokenized = []
     ingredients = []
     ingreWithNewTAG = []
     direWithNewTAG = []
@@ -32,9 +31,28 @@ def parseRecipeDataFromFile(recipe_txt, fulltext_url=FULLTEXT_URL, result_url=RE
     directions = df.ix[index, :].directions.encode('utf8').lower()"""
     path_full = os.path.join(fulltext_url, recipe_txt)
     path_res = os.path.join(result_url, recipe_txt)
+    [title, ingredients, directions] = UtilsIO.getPaperDataFromPath(path_full)
+    arr =[]
+    try:
+        arr = POSTaggerFuncs.posTaggText(directions)
+    except:
+        pass
+    if len(arr)==0:
+        return
+    #dire = POSTaggerFuncs.tokenizeText(directions)
+    #sentences = MisleaDataParser.convertDirectionToSentenceArray(direction=dire)
     directions_not_tokenized = UtilsIO.readPaperRecipeForDirection(path_res)
-    ingredients = UtilsIO.getIngredientDataFromPath(path_full)
+    #ingredients = UtilsIO.getIngredientDataFromPath(path_full)
     ingredients = (utils.convertArrayToPureStr(str(ingredients)))
+    ingreWithNewTAG = POSTaggerFuncs.parse_ingredientForCRF(ingredients)
+    direWithNewTAG = POSTaggerFuncs.updateDireTagsAfterCRF2(arr, ingreWithNewTAG)
+    for i in xrange(len(direWithNewTAG)):
+        toolList = MisleaDataParser.isTool([wt for (wt, _, idx) in direWithNewTAG[i] if 'NOUN' == _ or 'ADV' == _])
+        direWithNewTAG[i] = MisleaDataParser.updateForTools(direWithNewTAG[i], toolList)
+        tmp = [w for (w, t, ix) in direWithNewTAG[i] if t == "VERB"]
+        if len(tmp) == 0:
+            direWithNewTAG[i] = MisleaDataParser.findAndUpdateVerbTagInSent(direWithNewTAG[i])
+
 
     arr = []
     for sentence in directions_not_tokenized:
@@ -50,8 +68,7 @@ def parseRecipeDataFromFile(recipe_txt, fulltext_url=FULLTEXT_URL, result_url=RE
         tmp = [w for (w, t, ix) in direWithNewTAG[i] if t == "VERB"]
         if len(tmp) == 0:
             direWithNewTAG[i] = MisleaDataParser.findAndUpdateVerbTagInSent(direWithNewTAG[i])
-    str_value = ""
-    data = []
+
     parsedDirection = MisleaDataParser.ParsedDirection(direWithNewTAG)
     data = parsedDirection.convertTagsAccordingToPaper()
     recipe_name = str(recipe_txt).split(".txt")[0]
@@ -81,6 +98,7 @@ def parseRecipeDataFromFile(recipe_txt, fulltext_url=FULLTEXT_URL, result_url=RE
 
 def runParser(result_url):
     filenames = os.listdir(result_url)
+    filenames = [f for f in filenames if str(f).__contains__(".txt")]
     for filename in filenames:
         print(filename)
         parseRecipeDataFromFile(filename)

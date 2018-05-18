@@ -21,10 +21,9 @@ TAGGED_ARRAY = [PRED, PRED_PREP, NON_INGREDIENT_SPAN_VERB, INGREDIENT_SPAN, INGR
 RESULTS_URL = "/Users/Ozgen/Desktop/RecipeGit/results/text_result2"
 ANNOTATED_URL = "/Users/Ozgen/Desktop/RecipeGit/results/AnnotationSession-args"
 
-RESULTS_URL2 = "/Users/Ozgen/Desktop/RecipeGit/results/paper_general_data/BananaMuffins/BananaMuffins-chunked"
-RESULTS_URL3 = "/Users/Ozgen/Desktop/RecipeGit/results/paper_general_data/BananaMuffins/our_model_result"
-ANNOTATED_URL2 = "/Users/Ozgen/Desktop/RecipeGit/results/paper_general_data/BananaMuffins/BananaMuffins-args"
-
+RESULTS_URL2 = "/Users/Ozgen/Desktop/RecipeGit/results/paper_general_data/CheeseBurger/CheeseBurger-chunked"
+RESULTS_URL3 = "/Users/Ozgen/Desktop/RecipeGit/results/paper_general_data/CheeseBurger/our_model_result"
+ANNOTATED_URL2 = "/Users/Ozgen/Desktop/RecipeGit/results/paper_general_data/CheeseBurger/CheeseBurger-args"
 
 
 def compareTwoSameSentence(sentenceResult, sentenceTaggedData):
@@ -93,12 +92,42 @@ def compareTwoWords(word_res, word_tag):
     return retVAl
 
 
+def getRelatedSentenceArr(sentence, sentenceArr):
+    preds = [str(w).lower() for (w, t, idx) in sentence if t == "PRED" or t == "NON_INGREDIENT_SPAN_VERB"]
+    ingres = [str(w).lower() for (w, t, idx) in sentence if t == "INGREDIENTS"]
+    retSent = []
+    for sent in sentenceArr:
+        boolSame = False
+        cnt = 0
+        preds2 = [str(w).lower() for (w, t, idx) in sent if t == "PRED" or t == "NON_INGREDIENT_SPAN_VERB"]
+        ingres2 = [str(w).lower() for (w, t, idx) in sent if t == "INGREDIENTS"]
+        for pred in preds2:
+            tmp = [w for w in preds if w == pred]
+            if (len(tmp)) > 0:
+                boolSame = True
+        if boolSame:
+            if len(ingres2) > 0:
+                for ing in ingres2:
+                    tmp = [w for w in ingres if w == ing]
+                    if len(tmp) > 0:
+                        cnt = cnt + 1
+        if (cnt > 0 and boolSame) or (len(ingres2) == 0 and boolSame):
+            retSent = sent
+            cnt = 0
+    return retSent
+
+
 def compareTwoDirection(result, taggedRes):
     tmp = 0.0
     if len(taggedRes) == len(result):
         for i in xrange(len(taggedRes)):
             tmp = tmp + compareTwoSameSentence(sentenceResult=result[i], sentenceTaggedData=taggedRes[i])
-
+    """ else:
+        for i in xrange(len(taggedRes)):
+            relatedSent = getRelatedSentenceArr(taggedRes[i], result)
+            if len(relatedSent) > 0:
+                tmp = tmp + compareTwoSameSentence(sentenceResult=relatedSent, sentenceTaggedData=taggedRes[i])
+    """
     if tmp != 0:
         return tmp / len(result)
     else:
@@ -134,7 +163,7 @@ def calculateResult():
     precision = (total2 / cnt2) * 100
     f1 = 2 / ((1 / recall) + (1 / precision))
 
-    print "counter : ", cnt, "counter 2 : ", cnt2
+    print "counter 1 : ", cnt, "counter 2 : ", cnt2
     return [("f1", f1), ("precision", precision), ("recall", recall)]
 
 
@@ -149,16 +178,13 @@ def calculateResult(result_url, annotated_url, Ispaper):
         resultFilePath = os.path.join(result_url, file_name)
         if os.path.isfile(resultFilePath) and os.path.isfile(annotatedFilePath):
 
-            taggedData = UtilsIO.readPaperDataForGraph(annotatedFilePath)
             if Ispaper:
-                resultData = UtilsIO.readPaperDataForGraph(resultFilePath)
+                taggedData = UtilsIO.readPaperDataForGraph_chunked(annotatedFilePath)
+                resultData = UtilsIO.readPaperDataForGraph_chunked(resultFilePath)
             else:
+                taggedData = UtilsIO.readPaperDataForGraph(annotatedFilePath)
                 resultData = UtilsIO.readTheResultFromTheAlg(resultFilePath)
 
-            if len(resultData) != len(taggedData):
-                print len(resultData), "respath"
-                print len(taggedData), "annotated path"
-                print i, "i", file_name
             value = compareTwoDirection(resultData, taggedData)
             precision = compareTwoDirection(taggedData, resultData)
             if value != None:
@@ -176,7 +202,11 @@ def calculateResult(result_url, annotated_url, Ispaper):
     return [("f1", f1), ("precision", precision), ("recall", recall)]
 
 
-print calculateResult(RESULTS_URL2, ANNOTATED_URL2,True)
+print calculateResult(RESULTS_URL2, ANNOTATED_URL2, True)
+print("-------------------------")
+print calculateResult(RESULTS_URL3, ANNOTATED_URL2, False)
+print("-------------------------")
+print calculateResult(RESULTS_URL, ANNOTATED_URL, False)
 
 """   counter :  29
        result :  0.764708013822

@@ -249,7 +249,6 @@ def readPaperDataForGraph(full_path):
     dummyPath = "/Users/Ozgen/Desktop/dataset/AnnotationSession/AnnotationSession-args/home-baked-macaroni--cheese.txt"
     data = readFiles(full_path)
     array = data.split("SENTID")
-    print(array)
     arr = []
     for i, a in enumerate(array):
         tm = a.split("\n")
@@ -285,6 +284,48 @@ def readPaperDataForGraph(full_path):
     return arr
 
 
+def readPaperDataForGraph_chunked(full_path):
+    dummyPath = "/Users/Ozgen/Desktop/dataset/AnnotationSession/AnnotationSession-args/home-baked-macaroni--cheese.txt"
+    data = readFiles(full_path)
+    array = data.split("SENTID")
+    arr = []
+    for i, a in enumerate(array):
+        tm = a.split("\n")
+        eachSent = [t for t in tm if len(t) != 0]
+        params = []
+        for param in eachSent:
+            if "PREDID:" in str(param):
+                tmp = param.split("PREDID:")
+                # params.append((getWordAsUTF8(tmp[1]), "PREDID", i))
+            elif "PRED" in str(param):
+                tmp = param.split("PRED:")
+                params.append((getWordAsUTF8(tmp[1]), "PRED", i))
+            elif "DOBJ" in str(param):
+                tmp = param.split("DOBJ:")
+                params.append((getWordAsUTF8(tmp[1]), "DOBJ", i))
+            elif "NON-INGREDIENT SPAN" in str(param):
+                tmp = param.split("NON-INGREDIENT SPAN:")
+                params.append((getWordAsUTF8(tmp[1]), "NON_INGREDIENT_SPAN", i))
+            elif "INGREDIENT SPAN" in str(param):
+                tmp = param.split("INGREDIENT SPAN:")
+                params.append((getWordAsUTF8(tmp[1]), "INGREDIENTS", i))
+            elif "INGREDIENTS" in str(param):
+                tmp = param.split("INGREDIENTS:")
+                params.append((getWordAsUTF8(tmp[1]), "INGREDIENT_SPAN", i))
+            elif "PARG" in str(param):
+                tmp = param.split("PARG:")
+                params.append((getWordAsUTF8(tmp[1]), "PARG", i))
+            elif "PREP" in str(param):
+                tmp = param.split("PREP:")
+                params.append((getWordAsUTF8(tmp[1]), "PREP", i))
+        if len(params) > 0:
+            arr.append(params)
+        else:
+            params.append((getWordAsUTF8("NULL"), "PRED", i))
+            arr.append(params)
+
+    return arr
+
 def readPaperRecipeForDirection(full_path):
     dummyPath = "/Users/Ozgen/Desktop/dataset/AnnotationSession/AnnotationSession-args/home-baked-macaroni--cheese.txt"
     data = readFiles(full_path)
@@ -294,6 +335,7 @@ def readPaperRecipeForDirection(full_path):
     for i, a in enumerate(array):
         tm = a.split("\n")
         eachSent = [t for t in tm if len(t) != 0]
+
         if len(eachSent) > 1:
             tmp = str(eachSent[1]).split("SENT: ")
 
@@ -311,7 +353,6 @@ def readTheResultFromTheAlg(dummyPath):
     data = readFiles(dummyPath)
     array = data.split("SENT_ID :")
     arr = []
-    print(array)
     for i, a in enumerate(array):
         eachSent = a.split("\n")
         params = []

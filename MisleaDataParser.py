@@ -319,8 +319,6 @@ def createGrapWithIndexForPaper2(index):
     file_name = title + ".dot"
     print(relatedVerbs)
     print("---------------------------------   " + title)
-    for i in xrange(len(data)):
-        print(data[i])
     GraphGeneratorForPaper(data, relatedVerbs).createGraph(file_name)
     UtilsIO.createPngFromDotFile("paper2/" + file_name, "paper2/" + title + ".png")
     str_value = "title : " + title + "\n" + "\n"
