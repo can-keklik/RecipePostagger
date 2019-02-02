@@ -353,7 +353,7 @@ def readPaperDataArgCreateGraph(title):
 # readPaperDataArgCreateGraph("trialramenslaw")
 # def parseRecipeDataAndWriteTxtFile():
 
-createGrapWithIndexForPaper2(0)
+createGrapWithIndexForPaper2(26)
 
 # readData2(18)
 # filename ="amish-meatloaf.gv"

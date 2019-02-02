@@ -1,0 +1,33 @@
+Graph Results
+---------------------------------
+
+our word2vec Result :
+
+('Recall : ', 0.6593714397576702)
+('Pecision : ', 0.7929172230435996)
+('f1 : ', 0.7200042035148149)
+
+Google Word2Vec Result :
+
+('Recall : ', 0.6626565668483073)
+('Pecision : ', 0.7945821208165096)
+('f1 : ', 0.7226476550702514)
+
+Kiddon Result After EM:
+
+('Recall : ', 65.0)
+('Pecision : ', 68.7)
+('f1 : ',  66.8)
+-----------------------------------
+
+Automatic Segmentation Results:
+-----------------------------------
+
+Our model Result:
+
+[('f1', 85.05464176791398), ('precision', 93.32912708221772), ('recall', 78.12788623607952)]
+
+Kiddon Result After EM:
+
+[('f1', 80.0), ('precision', 81.6), ('recall', 78.5)]
+

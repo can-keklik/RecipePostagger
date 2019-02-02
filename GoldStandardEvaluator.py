@@ -80,14 +80,42 @@ def compareSourceAndDest(paper_src, paper_dest, gold_recipe):
     return retVal
 
 
-def compareTwoGraph(gold_recipe, paper_recipe):
+def compareSourceAndDestRecall(paper_src, paper_dest, gold_recipe):
+    paper_src_list = str(paper_src).split(" ")
+    paper_dest_list = str(paper_dest).split(" ")
+    retVal = False
+    gold_recipe = [(src, dest) for (src, dest) in gold_recipe if not "bon appetit" in dest]
+    for i, (gold_src, gold_dest) in enumerate(gold_recipe):
+        gold_dest = str(gold_dest).split("\n")
+        if len(gold_dest) > 0:
+            gold_dest = gold_dest[0]
+            gold_dest = removepunc(gold_dest)
+        for src in paper_src_list:
+            src = removepunc(src)
+            if src in gold_src:
+                for dest in paper_dest_list:
+                    dest = removepunc(dest)
+                    if dest in gold_dest:
+                        retVal = True
+    return retVal
+
+
+def compareTwoGraph(gold_recipe, paper_recipe, isPrescision):
     cnt = 0
-    for i, (paper_source, paper_dest) in enumerate(paper_recipe):
-        retVal = compareSourceAndDest(paper_source, paper_dest, gold_recipe)
-        if retVal:
-            cnt = cnt + 1
-    if cnt > 0:
-        return float(cnt) / float(len(paper_recipe))
+    if isPrescision:
+        for i, (paper_source, paper_dest) in enumerate(paper_recipe):
+            retVal = compareSourceAndDest(paper_source, paper_dest, gold_recipe)
+            if retVal:
+                cnt = cnt + 1
+        if cnt > 0:
+            return float(cnt) / float(len(paper_recipe))
+    else:
+        for i, (paper_source, paper_dest) in enumerate(paper_recipe):
+            retVal = compareSourceAndDestRecall(paper_source, paper_dest, gold_recipe)
+            if retVal:
+                cnt = cnt + 1
+        if cnt > 0:
+            return float(cnt) / float(len(paper_recipe))
 
 
 current_path = os.getcwd()
@@ -99,7 +127,7 @@ filename_list = UtilsIO.getFileNameList(gold_standart_folder_path)
 filename_list = [file for file in filename_list if ".svg" not in str(file)]
 filename_list = [str(file).split(".gv")[0] for file in filename_list]
 
-paper_result_folder_path = os.path.join(current_path, "results/"+utils.FOLDER_NAME)
+paper_result_folder_path = os.path.join(current_path, "results/" + utils.FOLDER_NAME)
 paper_result_file_list = UtilsIO.getFileListWithFolderName(paper_result_folder_path)
 paper_result_file_list = [file for file in paper_result_file_list if ".png" not in str(file)]
 paper_result_filename_list = [str(file).split(".dot")[0] for file in filename_list]
@@ -107,6 +135,8 @@ paper_result_filename_list = [str(file).split(".dot")[0] for file in filename_li
 graph = pydot.graph_from_dot_file(paper_result_file_list[0])
 total = 0.0
 cnt = 0
+precisions = 0.0
+cnt2 = 0
 for i, filename in enumerate(paper_result_filename_list):
     gold_standard_file = [file for file in gold_standard_file_list if filename in file]
     paper_result_file = [file for file in paper_result_file_list if filename in file]
@@ -116,13 +146,19 @@ for i, filename in enumerate(paper_result_filename_list):
             paper_graph = pydot.graph_from_dot_file(paper_result_file[0])
             gold_standard_recipe = getRelationWithGoldGraph(gold_graph)
             paper_recipe = getRelationWithPaperdGraph(paper_graph)
-            res = compareTwoGraph(gold_standard_recipe, paper_recipe)
-            print(cnt, filename, res)
-            total = total + res
+            recall = compareTwoGraph(gold_standard_recipe, paper_recipe, False)
+            precision = compareTwoGraph(gold_standard_recipe, paper_recipe, True)
+            print(cnt, filename, recall, precision)
+            total = total + recall
             cnt = cnt + 1
-
+            precisions = precisions + precision
+            cnt2 = cnt2 + 1
         except:
             print("file name error", filename)
             pass
-print(len(paper_result_filename_list), cnt)
-print("Result : ", float(total) / float(cnt))
+recall_value = float(total) / float(cnt)
+precision_value = float(precisions) / float(cnt2)
+f1 = 2 / ((1 / recall_value) + (1 / precision_value))
+print("Recall : ", recall_value, cnt)
+print("Pecision : ", precision_value, cnt2)
+print("f1 : ", f1)
