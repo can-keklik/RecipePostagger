@@ -1,0 +1,45 @@
+title : ramen-slaw
+
+SENT_ID :0
+SENTENCE : combine broccoli coleslaw mix , sunflower seeds , almonds , and ramen noodles together in a bowl .
+PRED : combine
+INGREDIENTS : mix
+INGREDIENTS : broccoli coleslaw
+INGREDIENTS : sunflower seeds
+INGREDIENTS : almonds
+INGREDIENTS : ramen noodles
+PARG : bowl
+NON_INGREDIENT_SPAN : in a bowl
+
+SENT_ID :1
+SENTENCE : whisk canola oil , sugar , ramen noodle seasoning packet , and vinegar together in a separate bowl
+PRED : whisk
+NON_INGREDIENT_SPAN_VERB : seasoning
+INGREDIENTS : canola oil
+INGREDIENTS : sugar
+INGREDIENTS : ramen noodle
+INGREDIENTS : vinegar
+PARG : bowl
+NON_INGREDIENT_SPAN : in separate bowl
+
+SENT_ID :2
+SENTENCE : pour over slaw mixture .
+PRED : pour
+PRED_PREP : pour over
+
+SENT_ID :3
+SENTENCE : fold in green onions .
+PRED : fold
+PRED_PREP : fold in
+INGREDIENTS : onions
+INGREDIENT_SPAN : in green onions
+DOBJ : in green onions
+
+SENT_ID :4
+SENTENCE : chill in refrigerator for 1 1/2 hours before serving .
+PRED : chill
+PRED_PREP : chill in
+NON_INGREDIENT_SPAN_VERB : before serving
+PARG : refrigerator
+NON_INGREDIENT_SPAN : in refrigerator
+

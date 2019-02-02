@@ -1,0 +1,45 @@
+title : corn-cheese-chowder
+
+SENT_ID :0
+SENTENCE : using a saute pan over medium heat , saute onion in butter until tender .
+PRED : using
+INGREDIENTS : onion
+INGREDIENT_SPAN : over saute onion
+INGREDIENTS : butter
+INGREDIENT_SPAN : in butter
+PARG : pan
+NON_INGREDIENT_SPAN : saute pan
+DOBJ : over saute onion - in butter
+
+SENT_ID :1
+SENTENCE : add flour and stir , it will form a paste like consistency .
+PRED : add
+NON_INGREDIENT_SPAN_VERB : will
+NON_INGREDIENT_SPAN_VERB : form
+INGREDIENTS : flour
+
+SENT_ID :2
+SENTENCE : add milk and stir until thickened .
+PRED : add
+NON_INGREDIENT_SPAN_VERB : until thickened
+INGREDIENTS : milk
+
+SENT_ID :3
+SENTENCE : add corn , cheese and season with salt and pepper .
+PRED : add
+INGREDIENTS : corn
+INGREDIENTS : cheese
+INGREDIENTS : salt
+INGREDIENT_SPAN : with salt
+INGREDIENTS : pepper
+DOBJ : with salt
+
+SENT_ID :4
+SENTENCE : heat through , until the cheese melts and then serve hot .
+PRED : heat
+PRED_PREP : heat through
+NON_INGREDIENT_SPAN_VERB : serve
+INGREDIENTS : cheese
+INGREDIENT_SPAN : through until the cheese
+DOBJ : through until the cheese
+

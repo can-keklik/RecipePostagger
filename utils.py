@@ -2,6 +2,9 @@
 import re
 import string
 
+FOLDER_NAME = "paper3"
+TEXT_FOLDER_NAME = "text_result3"
+
 
 def tokenize(s):
     """
@@ -20,6 +23,7 @@ def tokenize(s):
         s = s.replace(unit + 's/', unit + 's ')
 
     return filter(None, re.split(r'([,\(\)])?\s*', clumpFractions(s)))
+
 
 def tokenizeWithoutPunctuation(s):
     """
@@ -198,9 +202,9 @@ def displayIngredient(ingredient):
     """
 
     return "".join([
-                       "<span class='%s'>%s</span>" % (tag, " ".join(tokens))
-                       for tag, tokens in ingredient
-                       ])
+        "<span class='%s'>%s</span>" % (tag, " ".join(tokens))
+        for tag, tokens in ingredient
+    ])
 
 
 # HACK: fix this
@@ -311,7 +315,7 @@ def import_data(lines):
         dict([(k, smartJoin(tokens)) for k, tokens in ingredient.iteritems()])
         for ingredient in data
         if len(ingredient)
-        ]
+    ]
     # Add the marked-up display data
     for i, v in enumerate(output):
         output[i]["display"] = displayIngredient(display[i])

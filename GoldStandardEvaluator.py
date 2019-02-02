@@ -1,5 +1,7 @@
 import string
 
+import utils
+
 import UtilsIO
 import os
 import pydot
@@ -73,8 +75,7 @@ def compareSourceAndDest(paper_src, paper_dest, gold_recipe):
                         retVal = True
                         return retVal
             elif src in gold_dest:
-                retVal =True
-
+                retVal = True
 
     return retVal
 
@@ -86,7 +87,7 @@ def compareTwoGraph(gold_recipe, paper_recipe):
         if retVal:
             cnt = cnt + 1
     if cnt > 0:
-        return float(cnt)/float(len(paper_recipe))
+        return float(cnt) / float(len(paper_recipe))
 
 
 current_path = os.getcwd()
@@ -98,14 +99,14 @@ filename_list = UtilsIO.getFileNameList(gold_standart_folder_path)
 filename_list = [file for file in filename_list if ".svg" not in str(file)]
 filename_list = [str(file).split(".gv")[0] for file in filename_list]
 
-paper_result_folder_path = os.path.join(current_path, "results/paper2")
+paper_result_folder_path = os.path.join(current_path, "results/"+utils.FOLDER_NAME)
 paper_result_file_list = UtilsIO.getFileListWithFolderName(paper_result_folder_path)
 paper_result_file_list = [file for file in paper_result_file_list if ".png" not in str(file)]
 paper_result_filename_list = [str(file).split(".dot")[0] for file in filename_list]
 
 graph = pydot.graph_from_dot_file(paper_result_file_list[0])
 total = 0.0
-cnt =0
+cnt = 0
 for i, filename in enumerate(paper_result_filename_list):
     gold_standard_file = [file for file in gold_standard_file_list if filename in file]
     paper_result_file = [file for file in paper_result_file_list if filename in file]
@@ -116,12 +117,12 @@ for i, filename in enumerate(paper_result_filename_list):
             gold_standard_recipe = getRelationWithGoldGraph(gold_graph)
             paper_recipe = getRelationWithPaperdGraph(paper_graph)
             res = compareTwoGraph(gold_standard_recipe, paper_recipe)
-            print(cnt,filename, res)
-            total = total+res
-            cnt = cnt+1
+            print(cnt, filename, res)
+            total = total + res
+            cnt = cnt + 1
 
         except:
             print("file name error", filename)
             pass
 print(len(paper_result_filename_list), cnt)
-print("Result : ",float(total)/float(cnt))
+print("Result : ", float(total) / float(cnt))

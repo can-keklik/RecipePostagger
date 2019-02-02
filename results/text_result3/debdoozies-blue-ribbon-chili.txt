@@ -1,0 +1,39 @@
+title : debdoozies-blue-ribbon-chili
+
+SENT_ID :0
+SENTENCE : in a large saucepan over medium heat , combine the ground beef and the onion and saute for 10 minutes , or until meat is browned and onion is tender .
+PRED : combine
+NON_INGREDIENT_SPAN_VERB : for until is
+NON_INGREDIENT_SPAN_VERB : browned
+NON_INGREDIENT_SPAN_VERB : is
+INGREDIENTS : beef
+INGREDIENT_SPAN : the ground beef
+INGREDIENTS : onion
+INGREDIENT_SPAN : the onion
+PARG : pan
+NON_INGREDIENT_SPAN : in pan
+DOBJ : the ground beef - the onion
+
+SENT_ID :1
+SENTENCE : drain grease , if desired .
+PRED : drain
+NON_INGREDIENT_SPAN_VERB : if desired
+
+SENT_ID :2
+SENTENCE : add the ground black pepper , garlic salt , tomato sauce , salsa , chili seasoning mix and kidney beans .
+PRED : add
+INGREDIENTS : black pepper
+INGREDIENT_SPAN : the ground black pepper
+INGREDIENTS : garlic salt
+INGREDIENTS : tomato sauce
+INGREDIENTS : mix
+INGREDIENTS : chili seasoning
+INGREDIENT_SPAN : salsa chili seasoning
+INGREDIENTS : kidney beans
+DOBJ : the ground black pepper - salsa chili seasoning
+
+SENT_ID :3
+SENTENCE : mix well , reduce heat to low and simmer for at least an hour .
+PRED : reduce
+INGREDIENTS : mix
+

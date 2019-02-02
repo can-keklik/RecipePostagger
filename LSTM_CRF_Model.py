@@ -8,6 +8,54 @@ from keras.layers.core import Dense
 from keras.models import model_from_json
 import numpy as np
 import utils
+import keras.backend as K
+
+
+def f1_score(y_true, y_pred):
+    # Count positive samples.
+    c1 = K.sum(K.round(K.clip(y_true * y_pred, 0, 1)))
+    c2 = K.sum(K.round(K.clip(y_pred, 0, 1)))
+    c3 = K.sum(K.round(K.clip(y_true, 0, 1)))
+
+    # If there are no true samples, fix the F1 score at 0.
+    if c3 == 0:
+        return 0
+
+    # How many selected items are relevant?
+    precision = c1 / c2
+
+    # How many relevant items are selected?
+    recall = c1 / c3
+
+    # Calculate f1_score
+    f1_score = 2 * (precision * recall) / (precision + recall)
+    return f1_score
+
+
+def precision_val(y_true, y_pred):
+    # Count positive samples.
+    c1 = K.sum(K.round(K.clip(y_true * y_pred, 0, 1)))
+    c2 = K.sum(K.round(K.clip(y_pred, 0, 1)))
+    # How many selected items are relevant?
+    precision = c1 / c2
+
+    return precision
+
+
+def recall_val(y_true, y_pred):
+    # Count positive samples.
+    c1 = K.sum(K.round(K.clip(y_true * y_pred, 0, 1)))
+    c3 = K.sum(K.round(K.clip(y_true, 0, 1)))
+
+    # If there are no true samples, fix the F1 score at 0.
+    if c3 == 0:
+        return 0
+
+    recall = c1 / c3
+
+    # Calculate f1_score
+    return recall
+
 
 arr = UtilsIO.readIngredientData()
 
@@ -57,9 +105,10 @@ def trainAndSaveModel():
 
     model.summary()
 
-    model.compile(optimizer="rmsprop", loss="categorical_crossentropy", metrics=["accuracy"])
+    model.compile(optimizer="rmsprop", loss="categorical_crossentropy",
+                  metrics=['accuracy', f1_score, precision_val, recall_val])
 
-    history = model.fit(np.array(X_tr), np.array(y_tr), batch_size=32, epochs=5, verbose=1)
+    history = model.fit(np.array(X_tr), np.array(y_tr), batch_size=32, epochs=3, verbose=1)
 
     i = 50
     p = model.predict(np.array([X_te[i]]))
@@ -69,13 +118,13 @@ def trainAndSaveModel():
         print("{:15}: {}".format(words[w], tags[pred]))
     scores = model.evaluate(np.array(X_te), np.array(y_te), verbose=1)
     print("%s: %.2f%%" % (model.metrics_names[1], scores[1] * 100))
-
+    print("scores", scores)
     # serialize model to JSON
     model_json = model.to_json()
-    with open("model.json", "w") as json_file:
+    with open("model1.json", "w") as json_file:
         json_file.write(model_json)
     # serialize weights to HDF5
-    model.save_weights("model.h5")
+    model.save_weights("model1.h5")
     print("Saved model to disk")
 
 
@@ -108,10 +157,46 @@ def predictIngredientTag(ingredient):
     loadedModel = loadTrainedModel()
     p = loadedModel.predict(np.array([x_testData[0]]))
     p = np.argmax(p, axis=-1)
-    retArr =[]
+    retArr = []
     for w, pred in zip(tokens, p[0]):
         print("{:15}: {:5}".format(w, tags[pred]))
-        retArr.append((w,tags[pred]))
+        retArr.append((w, tags[pred]))
     return retArr
 
-#print(predictIngredientTag("1 tomato"))
+
+def testmodel():
+    trained_model = loadTrainedModel()
+    arr = UtilsIO.readIngredientData()
+    arr = arr[0:5000]
+    words = []
+    tags = []
+
+    for ingre in arr:
+        for w, t in ingre:
+            words.append(w)
+            tags.append(t)
+
+    n_words = len(words);
+    n_tags = len(tags);
+
+    word2idx = {w: i for i, w in enumerate(words)}
+    tag2idx = {t: i for i, t in enumerate(tags)}
+
+    X = [[word2idx[w[0]] for w in s] for s in arr]
+    max_len = max([len(x) for x in X])
+    X = pad_sequences(maxlen=max_len, sequences=X, padding="post", value=n_words - 1)
+
+    y = [[tag2idx[w[1]] for w in s] for s in arr]
+
+    y = pad_sequences(maxlen=max_len, sequences=y, padding="post")
+
+    y = [to_categorical(i, num_classes=n_tags) for i in y]
+
+    X_tr, X_te, y_tr, y_te = train_test_split(X, y, test_size=0.1)
+    scores = trained_model.evaluate(np.array(X_te), np.array(y_te), verbose=1)
+    return scores
+
+
+# print(predictIngredientTag("3/4 pound cooked chicken breast meat, very finely chopped"))
+trainAndSaveModel()
+# print(testmodel())

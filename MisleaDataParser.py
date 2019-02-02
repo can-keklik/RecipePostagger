@@ -314,13 +314,14 @@ def getRelatedVerbs(data):
 
 
 def createGrapWithIndexForPaper2(index):
+    print("index is ", index)
     (data, title, directionSentenceArray) = readData2(index=index)
     relatedVerbs = getRelatedVerbs(data)
     file_name = title + ".dot"
     print(relatedVerbs)
     print("---------------------------------   " + title)
     GraphGeneratorForPaper(data, relatedVerbs).createGraph(file_name)
-    UtilsIO.createPngFromDotFile("paper2/" + file_name, "paper2/" + title + ".png")
+    UtilsIO.createPngFromDotFile(utils.FOLDER_NAME+"/" + file_name, utils.FOLDER_NAME+"/" + title + ".png")
     str_value = "title : " + title + "\n" + "\n"
 
     for i in xrange(len(data)):
@@ -330,7 +331,7 @@ def createGrapWithIndexForPaper2(index):
             str_value = str_value + str(tag) + " : " + str(word) + "\n"
 
         str_value = str_value + "\n"
-    completeName = os.path.join(os.getcwd() + "/results/text_result2/", title + ".txt")
+    completeName = os.path.join(os.getcwd() + "/results/"+utils.TEXT_FOLDER_NAME +"/", title + ".txt")
     outFile = open(completeName, 'w')
     # print fileName
     outFile.truncate()
@@ -352,7 +353,7 @@ def readPaperDataArgCreateGraph(title):
 # readPaperDataArgCreateGraph("trialramenslaw")
 # def parseRecipeDataAndWriteTxtFile():
 
-# createGrapWithIndexForPaper2(27)
+createGrapWithIndexForPaper2(0)
 
 # readData2(18)
 # filename ="amish-meatloaf.gv"

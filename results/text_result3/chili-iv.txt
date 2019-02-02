@@ -1,0 +1,62 @@
+title : chili-iv
+
+SENT_ID :0
+SENTENCE : in a deep skillet or large saucepan , cook beef with oil and salt over medium heat until brown .
+PRED : cook
+INGREDIENTS : beef
+INGREDIENTS : oil
+INGREDIENT_SPAN : with oil
+INGREDIENTS : salt
+PARG : pan
+NON_INGREDIENT_SPAN : in pan
+PARG : skillet
+NON_INGREDIENT_SPAN : deep skillet
+DOBJ : with oil
+
+SENT_ID :1
+SENTENCE : meanwhile , puree french onion soup in a blender until smooth .
+PRED : smooth
+INGREDIENTS : onion soup
+PARG : blender
+NON_INGREDIENT_SPAN : in a blender
+
+SENT_ID :2
+SENTENCE : drain meat .
+PRED : drain
+
+SENT_ID :3
+SENTENCE : stir pureed soup into meat , reduce heat and simmer 5 minutes .
+PRED : stir
+NON_INGREDIENT_SPAN_VERB : pureed
+NON_INGREDIENT_SPAN_VERB : into reduce
+INGREDIENTS : soup
+
+SENT_ID :4
+SENTENCE : stir in chili powder , cumin , pepper , tomato paste , tomato sauce , and beans until well combined .
+PRED : stir
+PRED_PREP : stir in
+NON_INGREDIENT_SPAN_VERB : until combined
+INGREDIENTS : chili powder
+INGREDIENT_SPAN : in chili powder
+INGREDIENTS : cumin
+INGREDIENTS : pepper
+INGREDIENTS : tomato
+INGREDIENTS : tomato paste
+INGREDIENTS : sauce
+INGREDIENTS : beans
+DOBJ : in chili powder
+
+SENT_ID :5
+SENTENCE : stir in cocoa and cola .
+PRED : stir
+PRED_PREP : stir in
+INGREDIENTS : cocoa
+INGREDIENT_SPAN : in cocoa
+DOBJ : in cocoa
+
+SENT_ID :6
+SENTENCE : heat through and serve .
+PRED : heat
+PRED_PREP : heat through
+NON_INGREDIENT_SPAN_VERB : through serve
+

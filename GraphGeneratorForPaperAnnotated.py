@@ -1,6 +1,7 @@
 import os
 
 import pydot
+import utils
 
 
 class GraphGeneratorForPaper:
@@ -39,7 +40,7 @@ class GraphGeneratorForPaper:
                 self.addEdgeToActionNode(node_detailed=node_detailed)
         path = os.getcwd()
         if dotFileName:
-            path = path + "/results/paper2/"
+            path = path + "/results/"+utils.FOLDER_NAME+"/"
             self.graph.write(path + dotFileName)
 
     def addEdgeToActionNode(self, node_detailed):

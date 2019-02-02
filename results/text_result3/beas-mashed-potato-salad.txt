@@ -1,0 +1,47 @@
+title : beas-mashed-potato-salad
+
+SENT_ID :0
+SENTENCE : prepare idahoan baby reds following package instructions .
+PRED : prepare
+NON_INGREDIENT_SPAN_VERB : following
+
+SENT_ID :1
+SENTENCE : stir in pickles , radishes , hard-boiled egg , celery and red onion .
+PRED : stir
+PRED_PREP : stir in
+INGREDIENTS : radishes
+INGREDIENT_SPAN : in radishes
+INGREDIENTS : egg
+INGREDIENT_SPAN : hard-boiled egg
+INGREDIENTS : celery
+INGREDIENTS : and
+INGREDIENTS : red onion
+DOBJ : in radishes - hard-boiled egg
+
+SENT_ID :2
+SENTENCE : combine mayo and mustards in a separate bowl .
+PRED : combine
+INGREDIENTS : and
+PARG : bowl
+NON_INGREDIENT_SPAN : mustards in separate bowl
+
+SENT_ID :3
+SENTENCE : mix into mashed potato mixture .
+PRED : mix
+PRED_PREP : mix into
+INGREDIENTS : potato
+INGREDIENT_SPAN : into mashed potato
+DOBJ : into mashed potato
+
+SENT_ID :4
+SENTENCE : season to taste with salt and pepper and celery seed if using .
+PRED : season
+NON_INGREDIENT_SPAN_VERB : if using
+INGREDIENTS : pepper
+INGREDIENTS : and
+INGREDIENTS : salt and
+INGREDIENT_SPAN : to taste with salt and
+INGREDIENTS : celery
+INGREDIENTS : seed
+DOBJ : to taste with salt and
+

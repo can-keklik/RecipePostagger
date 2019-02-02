@@ -8,8 +8,8 @@ import POSTaggerFuncs
 import UtilsIO
 import utils
 #todo check paths
-RESULTS_URL = "/Users/Ozgen/Desktop/RecipeGit/results/paper_general_data/CheeseBurger/CheeseBurger-args"
-FULLTEXT_URL = "/Users/Ozgen/Desktop/RecipeGit/results/paper_general_data/CheeseBurger/CheeseBurger-fulltext"
+RESULTS_URL = "/Users/Ozgen/Desktop/RecipeGit/results/paper_general_data/ChickenSalad/ChickenSalad-args"
+FULLTEXT_URL = "/Users/Ozgen/Desktop/RecipeGit/results/paper_general_data/ChickenSalad/ChickenSalad-fulltext"
 
 
 def parseRecipeDataFromFile(recipe_txt, fulltext_url=FULLTEXT_URL, result_url=RESULTS_URL):

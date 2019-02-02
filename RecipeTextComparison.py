@@ -2,6 +2,8 @@ from __future__ import division
 
 import os
 
+import utils
+
 import UtilsIO
 
 PRED = "PRED"  # verb tag
@@ -18,12 +20,12 @@ PREDID = "PREDID"  # this id is realed with action's order
 TAGGED_ARRAY = [PRED, PRED_PREP, NON_INGREDIENT_SPAN_VERB, INGREDIENT_SPAN, INGREDIENTS,
                 PARG]
 
-RESULTS_URL = "/Users/Ozgen/Desktop/RecipeGit/results/text_result2"
+RESULTS_URL = "/Users/Ozgen/Desktop/RecipeGit/results/"+utils.TEXT_FOLDER_NAME
 ANNOTATED_URL = "/Users/Ozgen/Desktop/RecipeGit/results/AnnotationSession-args"
 
-RESULTS_URL2 = "/Users/Ozgen/Desktop/RecipeGit/results/paper_general_data/CheeseBurger/CheeseBurger-chunked"
-RESULTS_URL3 = "/Users/Ozgen/Desktop/RecipeGit/results/paper_general_data/CheeseBurger/our_model_result"
-ANNOTATED_URL2 = "/Users/Ozgen/Desktop/RecipeGit/results/paper_general_data/CheeseBurger/CheeseBurger-args"
+RESULTS_URL2 = "/Users/Ozgen/Desktop/RecipeGit/results/paper_general_data/ChickenSalad/ChickenSalad-chunked"
+RESULTS_URL3 = "/Users/Ozgen/Desktop/RecipeGit/results/paper_general_data/ChickenSalad/our_model_result"
+ANNOTATED_URL2 = "/Users/Ozgen/Desktop/RecipeGit/results/paper_general_data/ChickenSalad/ChickenSalad-args"
 
 
 def compareTwoSameSentence(sentenceResult, sentenceTaggedData):
