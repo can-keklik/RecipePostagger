@@ -40,7 +40,7 @@ class GraphGeneratorForPaper:
                 self.addEdgeToActionNode(node_detailed=node_detailed)
         path = os.getcwd()
         if dotFileName:
-            path = path + "/results/"+utils.FOLDER_NAME+"/"
+            path = path + "/results/" + utils.FOLDER_NAME + "/"
             self.graph.write(path + dotFileName)
 
     def addEdgeToActionNode(self, node_detailed):
@@ -227,28 +227,36 @@ class GraphGeneratorForPaper:
         return retVal
 
     def createActionNode(self, word):
-        return pydot.Node(word, style="filled", fillcolor="red")
+        # return pydot.Node(word, style="filled", fillcolor="red")
+        return pydot.Node(word, style="filled", shape="circle", fillcolor="white")
 
     def createIngredientNode(self, word):
-        return pydot.Node(word, style="filled", fillcolor="green")
+        # return pydot.Node(word, style="filled", fillcolor="green")
+        return pydot.Node(word, style="filled", shape="hexagon", fillcolor="white")
 
     def createToolNode(self, word):
-        return pydot.Node(word, style="filled", fillcolor="#0000ff")
+        # return pydot.Node(word, style="filled", fillcolor="#0000ff")
+        return pydot.Node(word, style="filled", shape="box", fillcolor="white")
 
     def createCommentNode(self, word):
-        return pydot.Node(word, style="filled", fillcolor="#976856")
+        # return pydot.Node(word, style="filled", fillcolor="#976856")
+        return pydot.Node(word, style="filled", shape="trapezium", fillcolor="white")
 
     def createProbableIngreNode(self, words):
-        return pydot.Node(words, style="filled", fillcolor="#ffff66")
+        # return pydot.Node(words, style="filled", fillcolor="#ffff66")
+        return pydot.Node(words, style="filled", shape="rectangle", fillcolor="white")
 
     def createSubActionNode(self, word):
-        return pydot.Node(word, style="filled", fillcolor="#42e2f4")
+        # return pydot.Node(word, style="filled", fillcolor="#42e2f4")
+        return pydot.Node(word, style="filled", shape="ellipse", fillcolor="white")
 
     def createDOBJNode(self, word):
-        return pydot.Node(word, style="filled", fillcolor="#FFBF00")
+        # return pydot.Node(word, style="filled", fillcolor="#FFBF00")
+        return pydot.Node(word, style="filled", shape="parallelogram", fillcolor="white")
 
     def createINGRESPANNode(self, word):
-        return pydot.Node(word, style="filled", fillcolor="#01DFA5")
+        # return pydot.Node(word, style="filled", fillcolor="#01DFA5")
+        return pydot.Node(word, style="filled", shape="hexagon", fillcolor="white")
 
     def getFistIngreActionNode(self):
         for i in xrange(len(self.action_nodes)):
