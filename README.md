@@ -41,10 +41,6 @@ On OSX:
 * Repo owner or admin
 * Other community or team contact
 
-### DataSet Tagger WebSite
- * In order to generate precise dataset for evaluation we developed a website which repository is [here][recipePosMean] 
- * If you want to tag our dataset you can reach our website from [here][web] 
-
 
 
 ### Example Graph ###
