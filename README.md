@@ -41,37 +41,13 @@ On OSX:
 * Repo owner or admin
 * Other community or team contact
 
-### DataSet Tagger WebSite
- * In order to generate precise dataset for evaluation we developed a website which repository is [here][recipePosMean] 
- * If you want to tag our dataset you can reach our website from [here][web] 
-
 
 
 ### Example Graph ###
-Old code result:
-![alt tag](https://github.com/ozgen/RecipePostagger/blob/master/results/result232.png)
 
-After domain adaptation:
-
-![alt tag](https://github.com/ozgen/RecipePostagger/blob/master/results/result232-2.png)
-
-
-After optimization:
-
-![alt tag](https://github.com/ozgen/RecipePostagger/blob/master/results/result232-3.png)
-
-
-Other Result with Hidden Igredients:
-
-![alt tag](https://github.com/ozgen/RecipePostagger/blob/master/results/result121.png)
-
-After Domain Adaptaion:
-
-![alt tag](https://github.com/ozgen/RecipePostagger/blob/master/results/result121-3.png)
 
 latest results:
-![alt tag](https://github.com/ozgen/RecipePostagger/blob/master/results/paper/beas-mashed-potato-salad.png)
-![alt tag](https://github.com/ozgen/RecipePostagger/blob/master/results/paper/taco-soup-iv.png)
+![alt tag](https://github.com/ozgen/RecipePostagger/blob/master/results/paper3/hot-chicken-salad.png)
 
 
 ### DataSet Tagger WebSite 
