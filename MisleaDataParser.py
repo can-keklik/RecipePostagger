@@ -1,7 +1,4 @@
 from __future__ import print_function
-from __future__ import print_function
-from __future__ import print_function
-from __future__ import print_function
 
 import os
 
@@ -255,7 +252,7 @@ def convertDirectionToSentenceArray(direction):
 
 
 def readData2(index):
-    df = pd.read_csv("/Users/Ozgen/Desktop/RecipeGit/csv/paper.csv", encoding='utf8')
+    df = pd.read_csv("/Users/Ozgen/Desktop/RecipePostagger/csv/paper.csv", encoding='utf8')
     # names=["index", "title", "ingredients", "directions"])
 
     ingredients = df.ix[index, :].ingredients.encode('utf8').lower()
@@ -353,7 +350,7 @@ def readPaperDataArgCreateGraph(title):
 # readPaperDataArgCreateGraph("trialramenslaw")
 # def parseRecipeDataAndWriteTxtFile():
 
-createGrapWithIndexForPaper2(21)
+createGrapWithIndexForPaper2(25)
 
 # readData2(18)
 # filename ="amish-meatloaf.gv"
