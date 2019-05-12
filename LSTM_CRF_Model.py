@@ -9,6 +9,7 @@ from keras.models import model_from_json
 import numpy as np
 import utils
 import keras.backend as K
+import matplotlib.pyplot as plt
 
 
 def f1_score(y_true, y_pred):
@@ -71,7 +72,7 @@ for ingre in arr:
 
 def trainAndSaveModel():
     arr = UtilsIO.readIngredientData()
-    arr = arr[0:5000]
+    arr = arr[0:180000]
     words = []
     tags = []
 
@@ -108,7 +109,25 @@ def trainAndSaveModel():
     model.compile(optimizer="rmsprop", loss="categorical_crossentropy",
                   metrics=['accuracy', f1_score, precision_val, recall_val])
 
-    history = model.fit(np.array(X_tr), np.array(y_tr), batch_size=32, epochs=3, verbose=1)
+    history = model.fit(np.array(X_tr), np.array(y_tr), batch_size=32, epochs=10, verbose=1)
+
+    print(history.history.keys())
+    # summarize history for accuracy
+    plt.plot(history.history['acc'])
+    plt.plot(history.history['acc'][0])
+    plt.title('model accuracy')
+    plt.ylabel('accuracy')
+    plt.xlabel('epoch')
+    plt.legend(['train', 'test'], loc='upper left')
+    plt.show()
+    # summarize history for loss
+    plt.plot(history.history['loss'])
+    plt.plot(history.history['loss'][0])
+    plt.title('model loss')
+    plt.ylabel('loss')
+    plt.xlabel('epoch')
+    plt.legend(['train', 'test'], loc='upper left')
+    plt.show()
 
     i = 50
     p = model.predict(np.array([X_te[i]]))
@@ -197,6 +216,6 @@ def testmodel():
     return scores
 
 
-# print(predictIngredientTag("3/4 pound cooked chicken breast meat, very finely chopped"))
-trainAndSaveModel()
+print(predictIngredientTag("3/4 pound cooked chicken breast meat, very finely chopped"))
+#trainAndSaveModel()
 # print(testmodel())
