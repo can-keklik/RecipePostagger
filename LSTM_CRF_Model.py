@@ -109,25 +109,22 @@ def trainAndSaveModel():
     model.compile(optimizer="rmsprop", loss="categorical_crossentropy",
                   metrics=['accuracy', f1_score, precision_val, recall_val])
 
-    history = model.fit(np.array(X_tr), np.array(y_tr), batch_size=32, epochs=10, verbose=1)
+    history = model.fit(np.array(X_tr), np.array(y_tr),validation_split=0.33, batch_size=32, epochs=6, verbose=1)
 
     print(history.history.keys())
+
     # summarize history for accuracy
-    plt.plot(history.history['acc'])
-    plt.plot(history.history['acc'][0])
-    plt.title('model accuracy')
-    plt.ylabel('accuracy')
-    plt.xlabel('epoch')
-    plt.legend(['train', 'test'], loc='upper left')
-    plt.show()
+    plt.title('Loss')
+    plt.plot(history.history['loss'], label='train')
+    plt.plot(history.history['val_loss'], label='test')
+    plt.legend()
+    plt.show();
     # summarize history for loss
-    plt.plot(history.history['loss'])
-    plt.plot(history.history['loss'][0])
-    plt.title('model loss')
-    plt.ylabel('loss')
-    plt.xlabel('epoch')
-    plt.legend(['train', 'test'], loc='upper left')
-    plt.show()
+    plt.title('Accuracy')
+    plt.plot(history.history['acc'], label='train')
+    plt.plot(history.history['val_acc'], label='test')
+    plt.legend()
+    plt.show();
 
     i = 50
     p = model.predict(np.array([X_te[i]]))
@@ -169,7 +166,7 @@ def predictIngredientTag(ingredient):
     X = [[word2idx[w[0]] for w in s] for s in arr]
 
     max_len = max([len(x) for x in X])
-    print("maxle")
+ #   print("maxle")
     x_testData = pad_sequences(sequences=[[word2idx.get(w, 0) for w in tokens]],
                                padding="post", value=0, maxlen=max_len)
 
@@ -216,6 +213,7 @@ def testmodel():
     return scores
 
 
-print(predictIngredientTag("3/4 pound cooked chicken breast meat, very finely chopped"))
+#print(predictIngredientTag("3/4 pound cooked chicken breast meat, very finely chopped"))
 #trainAndSaveModel()
 # print(testmodel())
+trainAndSaveModel()

@@ -62,10 +62,6 @@ class ParsedDirection:
             sentence = []
             tmp = [(word, k, idx) for k, (word, tag, idx) in enumerate(self.direction[i]) if tag == "NAME"]
             ingredients = []
-            tools = []
-            verbs = []
-            a = []
-            b = []
             if (len(tmp)):
                 for c, (word, k, idx) in enumerate(tmp):
                     a = [(word2, k2) for k3, (word2, k2, idx2) in enumerate(tmp) if idx == idx2]
