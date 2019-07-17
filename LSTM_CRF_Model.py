@@ -98,7 +98,6 @@ def trainAndSaveModel():
     y = [to_categorical(i, num_classes=n_tags) for i in y]
 
     X_tr, X_te, y_tr, y_te = train_test_split(X, y, test_size=0.1)
-
     model = Sequential()
     model.add(Embedding(input_dim=n_words, output_dim=50, input_length=max_len))
     model.add(Bidirectional(LSTM(units=100, return_sequences=True, recurrent_dropout=0.1)))
