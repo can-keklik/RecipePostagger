@@ -248,7 +248,7 @@ def convertDirectionToSentenceArray(direction):
 
 
 def readData2(index):
-    df = pd.read_csv("/Users/Ozgen/Desktop/RecipePostagger/csv/paper.csv", encoding='utf8')
+    df = pd.read_csv("./csv/paper.csv", encoding='utf8')
     # names=["index", "title", "ingredients", "directions"])
 
     ingredients = df.ix[index, :].ingredients.encode('utf8').lower()

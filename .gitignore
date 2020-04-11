@@ -1,2 +1,8 @@
 .idea
 *.pyc
+SmallerFile
+*.npy
+*.log
+results
+*.bin
+.vagrant
