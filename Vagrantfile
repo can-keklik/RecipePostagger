@@ -14,9 +14,12 @@ Vagrant.configure("2") do |config|
   # boxes at https://vagrantcloud.com/search.
   config.vm.box = "ubuntu/bionic64"
   config.vm.provider "virtualbox" do |v|
-    v.memory = 8192
-    v.cpus = 6
+    v.memory = 12384
+    v.cpus = 10
   end
+
+  config.vm.network "forwarded_port", guest: 5000, host: 8080
+
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
   # `vagrant box outdated`. This is not recommended.
