@@ -1,24 +1,19 @@
 from __future__ import print_function
 
 import os
-
 import pandas as pd
+import math
+from optparse import OptionParser
+from datetime import datetime
 
-
-import POSTaggerFuncs
 import UtilsIO
 import utils
-from GraphGeneratorForPaperAnnotated import GraphGeneratorForPaper
-import math
-
-from optparse import OptionParser
-
-from datetime import datetime
 
 parser = OptionParser()
 
-parser.add_option("-o", "--optimize", default="collocation,word2vec,postagger")
+parser.add_option("-p", "--optimize", default="collocation,word2vec,postagger,graph")
 parser.add_option("-g", "--save_graph", default=0)
+parser.add_option("-i", "--recipes", default="./csv/allrecipes.csv")
 
 (options, args) = parser.parse_args()
 
@@ -41,6 +36,12 @@ if "postagger" in optimization_flags:
     print("Using optimized postagger")
 else:
     import POSTaggerFuncs
+
+if "graph" in optimization_flags:
+    from GraphGeneratorForPaperAnnotatedOptimized import GraphGeneratorForPaper
+    print("Using optimized graph")
+else:
+    from GraphGeneratorForPaperAnnotated import GraphGeneratorForPaper
 
 FALSE_VERB = "FV"
 INGRE_TAGS = ["NAME", "UNIT"]
