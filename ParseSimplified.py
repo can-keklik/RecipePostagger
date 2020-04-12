@@ -17,7 +17,7 @@ from datetime import datetime
 
 parser = OptionParser()
 
-parser.add_option("-o", "--optimize", default="collocation,word2vec,lemmatize")
+parser.add_option("-o", "--optimize", default="collocation,word2vec,postagger")
 parser.add_option("-g", "--save_graph", default=0)
 
 (options, args) = parser.parse_args()
@@ -35,6 +35,12 @@ if "word2vec" in optimization_flags:
     print("Using optimized word2vec")
 else:
     import WordToVecFunctions
+
+if "postagger" in optimization_flags:
+    import POSTaggerFuncsOptimized as POSTaggerFuncs
+    print("Using optimized postagger")
+else:
+    import POSTaggerFuncs
 
 FALSE_VERB = "FV"
 INGRE_TAGS = ["NAME", "UNIT"]
