@@ -47,6 +47,7 @@ def createCosSim(verbArray, wholeVerbs):
             if len(vsArr) > 1:
                 verb2 = makeFeatureVec(vsArr, model=model, num_features=300)
             else:
+                # print(wholeVerbs, secondVerbArr, v_s)
                 verb2 = model[v_s]
             try:
                 # cosSim = numpy.dot(verb1, verb2) / (

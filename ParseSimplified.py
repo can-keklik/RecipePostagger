@@ -5,17 +5,27 @@ import pandas as pd
 import math
 from optparse import OptionParser
 from datetime import datetime
+from tqdm import tqdm
 
 import UtilsIO
 import utils
 
 parser = OptionParser()
 
-parser.add_option("-p", "--optimize", default="collocation,word2vec,postagger,graph")
-parser.add_option("-S", "--save_graph", default=0, type=int)
-parser.add_option("-P", "--print_graph", default=0, type=int)
+# Input
 parser.add_option("-i", "--recipes_file", default="./csv/allrecipes.csv")
+
+# Output
+parser.add_option("-S", "--save_graph", default=1, type=int)
+parser.add_option("-P", "--print_graph", default=0, type=int)
+
+# Performance
+parser.add_option("-p", "--optimize", default="collocation,word2vec,postagger,graph")
 parser.add_option("-b", "--benchmark_mode", default=1, type=int)
+
+# Process
+parser.add_option("-f", "--rfrom", default=0, type=int)
+parser.add_option("-t", "--rto", default=-1, type=int)
 
 (options, args) = parser.parse_args()
 
@@ -339,14 +349,14 @@ def getRelatedVerbs(data):
 
 
 def createGrapWithIndexForPaper2(index, df):
-    print("index is ", index)
+    # print("index is ", index)
     (data, title, directionSentenceArray) = readData2(index, df)
     relatedVerbs = getRelatedVerbs(data)
     file_name = title + ".dot"
-    print(relatedVerbs)
+    # print(relatedVerbs)
     GraphGeneratorForPaper(data, relatedVerbs).createGraph(file_name)
 
-    print("---------------------------------   " + title)
+    # print("---------------------------------   " + title)
     if options.print_graph == 1:
         UtilsIO.createPngFromDotFile(utils.FOLDER_NAME+"/" + file_name, utils.FOLDER_NAME+"/" + title + ".png")
     str_value = "title : " + title + "\n" + "\n"
@@ -370,12 +380,22 @@ def createGrapWithIndexForPaper2(index, df):
 
 df = pd.read_csv(options.recipes_file, encoding='utf8')
 
+def measure_time(cb):
+    start_time = datetime.now()
+    cb()
+    print('Time elapsed (hh:mm:ss.ms) {}'.format(datetime.now() - start_time))
 
 if options.benchmark_mode == 1:
     for item in range(10):
-        start_time = datetime.now()
-        print("step " + str(item))
-        createGrapWithIndexForPaper2(36, df)
-        print('Time elapsed (hh:mm:ss.ms) {}'.format(datetime.now() - start_time))
+        def callback():
+            print("step " + str(item))
+            createGrapWithIndexForPaper2(36, df)
+        measure_time(callback)
 else:
-    createGrapWithIndexForPaper2(36, df)
+    rfrom, rto = options.rfrom, options.rto
+
+    if rto == -1:
+        rto = len(df)
+
+    for item in tqdm(range(rfrom, rto)):
+        createGrapWithIndexForPaper2(item, df)

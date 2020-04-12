@@ -5,8 +5,6 @@ import utils
 
 
 class GraphGeneratorForPaper:
-    graph = pydot.Dot(graph_type='digraph')
-    action_nodes = []
     # todo generate a graph like the papers'
 
     PRED = "PRED"  # verb tag
@@ -23,6 +21,8 @@ class GraphGeneratorForPaper:
     def __init__(self, taggedRecipe, relatedVerbs):
         self.taggedRecipe = taggedRecipe
         self.relatedVerbs = relatedVerbs
+        self.graph = pydot.Dot(graph_type='digraph')
+        self.action_nodes = []
 
     def addHiddenEdge(self, node1, node2):
         self.graph.add_edge(

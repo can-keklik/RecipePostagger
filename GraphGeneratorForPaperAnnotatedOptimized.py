@@ -21,14 +21,20 @@ class GraphGeneratorForPaper:
         self.relatedVerbs = relatedVerbs
         self.graph = pydot.Dot(graph_type='digraph')
         self.action_nodes = []
+        self.par_edges_list = []
+
+    def getEdges(self):
+        return self.par_edges_list
 
     def addHiddenEdge(self, node1, node2):
-        self.graph.add_edge(
-            pydot.Edge(node1, node2, label="Probable Ingredients", labelfontcolor="#009933", fontsize="10.0",
-                       color="blue"))
+        new_edge = pydot.Edge(node1, node2, label="Probable Ingredients", labelfontcolor="#009933", fontsize="10.0", color="blue")
+        self.par_edges_list.append(new_edge)
+        self.graph.add_edge(new_edge)
 
     def addEdge(self, node1, nodeAction):
-        self.graph.add_edge(pydot.Edge(node1, nodeAction))
+        new_edge = pydot.Edge(node1, nodeAction)
+        self.par_edges_list.append(new_edge)
+        self.graph.add_edge(new_edge)
 
     def createGraph(self, dotFileName):
         for i in xrange(len(self.taggedRecipe)):
@@ -210,7 +216,7 @@ class GraphGeneratorForPaper:
         graph = self.graph
 
         recipe = []
-        for edge in graph.get_edge_list():
+        for edge in self.getEdges(): #graph.get_edge_list():
             destination = edge.get_destination()
             source = edge.get_source()
 
@@ -224,7 +230,7 @@ class GraphGeneratorForPaper:
         graph = self.graph
 
         retVal = True
-        for edge in graph.get_edge_list():
+        for edge in self.getEdges(): #graph.get_edge_list():
             destination = edge.get_destination()
             source = edge.get_source()
             if str(action_word) in str(destination) and str(other_word) in str(source):
