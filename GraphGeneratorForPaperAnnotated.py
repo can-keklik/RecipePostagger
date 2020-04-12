@@ -165,7 +165,6 @@ class GraphGeneratorForPaper:
             except:
                 print(sentence)
                 print("createSentenceNode warning")
-                exit()
                 return None
 
         others = [(word, tag, idx) for (word, tag, idx) in sentence if tag != self.PRED_PREP and tag != self.PRED]

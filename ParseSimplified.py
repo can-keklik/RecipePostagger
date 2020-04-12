@@ -4,13 +4,37 @@ import os
 
 import pandas as pd
 
-import CollocationFinder
+
 import POSTaggerFuncs
 import UtilsIO
-import WordToVecFunctions
 import utils
 from GraphGeneratorForPaperAnnotated import GraphGeneratorForPaper
 import math
+
+from optparse import OptionParser
+
+from datetime import datetime
+
+parser = OptionParser()
+
+parser.add_option("-o", "--optimize", default="collocation,word2vec,lemmatize")
+parser.add_option("-g", "--save_graph", default=0)
+
+(options, args) = parser.parse_args()
+
+optimization_flags = set([item.strip() for item in options.optimize.split(',')])
+
+if "collocation" in optimization_flags:
+    import CollocationFinderOptimized as CollocationFinder
+    print("Using optimized collocation")
+else:
+    import CollocationFinder
+
+if "word2vec" in optimization_flags:
+    import WordToVecFunctionsOptimized as WordToVecFunctions
+    print("Using optimized word2vec")
+else:
+    import WordToVecFunctions
 
 FALSE_VERB = "FV"
 INGRE_TAGS = ["NAME", "UNIT"]
@@ -311,9 +335,14 @@ def createGrapWithIndexForPaper2(index, df):
     relatedVerbs = getRelatedVerbs(data)
     file_name = title + ".dot"
     print(relatedVerbs)
+    start_time = datetime.now()
     GraphGeneratorForPaper(data, relatedVerbs).createGraph(file_name)
+    time_elapsed = datetime.now() - start_time
+    print('Time elapsed (hh:mm:ss.ms) {}'.format(time_elapsed))
+
     print("---------------------------------   " + title)
-    UtilsIO.createPngFromDotFile(utils.FOLDER_NAME+"/" + file_name, utils.FOLDER_NAME+"/" + title + ".png")
+    if options.save_graph == "1":
+        UtilsIO.createPngFromDotFile(utils.FOLDER_NAME+"/" + file_name, utils.FOLDER_NAME+"/" + title + ".png")
     str_value = "title : " + title + "\n" + "\n"
 
     for i in xrange(len(data)):
@@ -332,11 +361,7 @@ def createGrapWithIndexForPaper2(index, df):
 
 
 
-from datetime import datetime
-
 df = pd.read_csv("./csv/allrecipes.csv", encoding='utf8')
-start_time = datetime.now()
-for item in [7]:
+
+for item in [36]:
     createGrapWithIndexForPaper2(item, df)
-time_elapsed = datetime.now() - start_time
-print('Time elapsed (hh:mm:ss.ms) {}'.format(time_elapsed))
