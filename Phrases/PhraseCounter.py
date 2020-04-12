@@ -51,7 +51,7 @@ def parse_ingredientForCRF(ingredients):
 
 def readIngredient(index):
     #:todo change file path according to your file
-    df = pd.read_csv("/Users/Ozgen/Desktop/RecipeGit/csv/output.csv", encoding='utf8')
+    df = pd.read_csv("./csv/allrecipes.csv", encoding='utf8')
 
     ingredients = df.ix[index, :].ingredients.encode('utf8')
     ingredients = (utils.convertArrayToPureStr(ingredients))

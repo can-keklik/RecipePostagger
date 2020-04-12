@@ -247,8 +247,7 @@ def convertDirectionToSentenceArray(direction):
     return retArr
 
 
-def readData2(index):
-    df = pd.read_csv("./csv/paper.csv", encoding='utf8')
+def readData2(index, df):
     # names=["index", "title", "ingredients", "directions"])
 
     ingredients = df.ix[index, :].ingredients.encode('utf8').lower()
@@ -306,14 +305,14 @@ def getRelatedVerbs(data):
     return relatedVerbs
 
 
-def createGrapWithIndexForPaper2(index):
+def createGrapWithIndexForPaper2(index, df):
     print("index is ", index)
-    (data, title, directionSentenceArray) = readData2(index=index)
+    (data, title, directionSentenceArray) = readData2(index, df)
     relatedVerbs = getRelatedVerbs(data)
     file_name = title + ".dot"
     print(relatedVerbs)
-    print("---------------------------------   " + title)
     GraphGeneratorForPaper(data, relatedVerbs).createGraph(file_name)
+    print("---------------------------------   " + title)
     UtilsIO.createPngFromDotFile(utils.FOLDER_NAME+"/" + file_name, utils.FOLDER_NAME+"/" + title + ".png")
     str_value = "title : " + title + "\n" + "\n"
 
@@ -332,25 +331,12 @@ def createGrapWithIndexForPaper2(index):
     outFile.close()
 
 
-def readPaperDataArgCreateGraph(title):
-    data = UtilsIO.readPaperDataForGraph("")
-    data = [arr for arr in data if len(arr) > 0]
-    for sent in data:
-        print(sent)
-    relatedVerbs = getRelatedVerbs(data)
-    print(relatedVerbs)
-    file_name = title + ".dot"
-    GraphGeneratorForPaper(data, relatedVerbs).createGraph(file_name)
-    UtilsIO.createPngFromDotFile("paper/" + file_name, "paper/" + title + ".png")
 
-# readPaperDataArgCreateGraph("trialramenslaw")
-# def parseRecipeDataAndWriteTxtFile():
+from datetime import datetime
 
-createGrapWithIndexForPaper2(27)
-
-# readData2(18)
-# filename ="amish-meatloaf.gv"
-# UtilsIO.createPngFromDotFile("AnnotationSession-goldgraph/" + filename, "paper/" + "amish-meatloaf" + ".png")
-# todo check 27. recipe for noningredient sentence...
-# bug occur in 32
-# readData2(0)
+df = pd.read_csv("./csv/allrecipes.csv", encoding='utf8')
+start_time = datetime.now()
+for item in [7]:
+    createGrapWithIndexForPaper2(item, df)
+time_elapsed = datetime.now() - start_time
+print('Time elapsed (hh:mm:ss.ms) {}'.format(time_elapsed))

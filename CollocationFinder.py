@@ -59,7 +59,7 @@ def calculateCollocationFromPaper(word):
 
 
 def readWholeDirections():
-    df = pd.read_csv("/Users/Ozgen/Desktop/RecipeGit/csv/output.csv", encoding='utf8')
+    df = pd.read_csv("./csv/allrecipes.csv", encoding='utf8')
     for i in xrange(1, 10426):
         directions = df.ix[i, :].directions.encode('utf8')
         removedPunctiationsData = directions.translate(None, string.punctuation)
@@ -81,7 +81,7 @@ def readWholeDirectionsFromPaper():
 
 
 def convertTools_fromcsv():
-    df = pd.read_csv("/Users/Ozgen/Desktop/RecipeGit/csv/output.csv", encoding='utf8')
+    df = pd.read_csv("./csv/allrecipes.csv", encoding='utf8')
 
     directions = df.ix[121, :].directions.encode('utf8')
     removedPunctiationsData = directions.translate(None, string.punctuation)

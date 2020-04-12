@@ -34,7 +34,9 @@ class GraphGeneratorForPaper:
 
     def createGraph(self, dotFileName):
         for i in xrange(len(self.taggedRecipe)):
-            self.action_nodes.append(self.createSentenceNode(sentence=self.taggedRecipe[i]))
+            snode = self.createSentenceNode(sentence=self.taggedRecipe[i])
+            if snode != None:
+                self.action_nodes.append(snode)
         if len(self.action_nodes) > 0:
             for node_detailed in self.action_nodes:
                 self.addEdgeToActionNode(node_detailed=node_detailed)
@@ -154,11 +156,17 @@ class GraphGeneratorForPaper:
                 action_node = self.createNode(word=word, TAG=tag, idx=idx)
                 word_return = word
         else:
-            pred = [(word, tag, idx) for (word, tag, idx) in sentence if tag == self.PRED]
-            (word, tag, idx) = pred[0]
-            if len(word) > 0:
-                action_node = self.createNode(word=word, TAG=tag, idx=idx)
-                word_return = word
+            try:
+                pred = [(word, tag, idx) for (word, tag, idx) in sentence if tag == self.PRED]
+                (word, tag, idx) = pred[0]
+                if len(word) > 0:
+                    action_node = self.createNode(word=word, TAG=tag, idx=idx)
+                    word_return = word
+            except:
+                print(sentence)
+                print("createSentenceNode warning")
+                exit()
+                return None
 
         others = [(word, tag, idx) for (word, tag, idx) in sentence if tag != self.PRED_PREP and tag != self.PRED]
         if len(others) > 0:

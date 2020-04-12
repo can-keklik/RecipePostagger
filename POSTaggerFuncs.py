@@ -198,6 +198,6 @@ def getNameEntityInIngre(data):
     return returnArr
 
 
-print(parse_ingredientForCRF(["3/4 pound cooked chicken breast meat very finely chopped"]))
-print(parse_ingredientForCRF(["2 tomatoes sliced"]))
-print(parse_ingredientForCRF(["1/4 cup chopped pecans"]))
+# print(parse_ingredientForCRF(["3/4 pound cooked chicken breast meat very finely chopped"]))
+# print(parse_ingredientForCRF(["2 tomatoes sliced"]))
+# print(parse_ingredientForCRF(["1/4 cup chopped pecans"]))

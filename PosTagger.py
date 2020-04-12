@@ -365,8 +365,9 @@ def optimizeTagWithCollocation(param):
         return param
 
 
-def readData(index):
-    df = pd.read_csv("/Users/Ozgen/Desktop/RecipeGit/csv/output.csv", encoding='utf8')
+def readData(index, df=None):
+    if df == None:
+        df = pd.read_csv("./csv/allrecipes.csv", encoding='utf8')
     # names=["index", "title", "ingredients", "directions"])
 
     ingredients = df.ix[index, :].ingredients.encode('utf8')
