@@ -12,8 +12,10 @@ import utils
 parser = OptionParser()
 
 parser.add_option("-p", "--optimize", default="collocation,word2vec,postagger,graph")
-parser.add_option("-g", "--save_graph", default=0)
-parser.add_option("-i", "--recipes", default="./csv/allrecipes.csv")
+parser.add_option("-S", "--save_graph", default=0, type=int)
+parser.add_option("-P", "--print_graph", default=0, type=int)
+parser.add_option("-i", "--recipes_file", default="./csv/allrecipes.csv")
+parser.add_option("-b", "--benchmark_mode", default=1, type=int)
 
 (options, args) = parser.parse_args()
 
@@ -342,15 +344,15 @@ def createGrapWithIndexForPaper2(index, df):
     relatedVerbs = getRelatedVerbs(data)
     file_name = title + ".dot"
     print(relatedVerbs)
-    start_time = datetime.now()
     GraphGeneratorForPaper(data, relatedVerbs).createGraph(file_name)
-    time_elapsed = datetime.now() - start_time
-    print('Time elapsed (hh:mm:ss.ms) {}'.format(time_elapsed))
 
     print("---------------------------------   " + title)
-    if options.save_graph == "1":
+    if options.print_graph == 1:
         UtilsIO.createPngFromDotFile(utils.FOLDER_NAME+"/" + file_name, utils.FOLDER_NAME+"/" + title + ".png")
     str_value = "title : " + title + "\n" + "\n"
+
+    if options.save_graph == 0:
+        return
 
     for i in xrange(len(data)):
         str_value = str_value + "SENT_ID :" + str(i) + "\n"
@@ -366,9 +368,14 @@ def createGrapWithIndexForPaper2(index, df):
     outFile.write(str_value)
     outFile.close()
 
+df = pd.read_csv(options.recipes_file, encoding='utf8')
 
 
-df = pd.read_csv("./csv/allrecipes.csv", encoding='utf8')
-
-for item in [36]:
-    createGrapWithIndexForPaper2(item, df)
+if options.benchmark_mode == 1:
+    for item in range(10):
+        start_time = datetime.now()
+        print("step " + str(item))
+        createGrapWithIndexForPaper2(36, df)
+        print('Time elapsed (hh:mm:ss.ms) {}'.format(datetime.now() - start_time))
+else:
+    createGrapWithIndexForPaper2(36, df)
